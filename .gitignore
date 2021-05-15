@@ -61,3 +61,14 @@ docs/deploying-spring-boot-apps/
 # Docker
 Dockerfile
 docker-compose.yml
+
+# react native
+.expo/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
