@@ -11,8 +11,9 @@ import { SafeAreaView } from "react-native";
 import ContainerStyle from "../styles/ContainerStyle";
 import * as eva from "@eva-design/eva";
 import i18n from "i18n-js";
+import { connect } from "react-redux";
 
-export default class DetailsScreen extends React.Component {
+class ConditionsGeneralesScreen extends React.Component {
   state = {
     test: i18n.t("TRL0001", { user: "anah" }),
   };
@@ -29,6 +30,7 @@ export default class DetailsScreen extends React.Component {
           <TopNavigation title="Conditions Generales" alignment="center" />
           <Divider />
           <Text>{this.state.test}</Text>
+
           <Layout
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >
@@ -39,3 +41,8 @@ export default class DetailsScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return state;
+};
+export default connect(mapStateToProps)(ConditionsGeneralesScreen);
