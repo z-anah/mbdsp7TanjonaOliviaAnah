@@ -28,13 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            this.loginUserControl1 = new pari.src.dao.view.LoginUserControl();
+            this.SuspendLayout();
+            // 
+            // loginUserControl1
+            // 
+            this.loginUserControl1.Location = new System.Drawing.Point(12, 12);
+            this.loginUserControl1.Name = "loginUserControl1";
+            this.loginUserControl1.Size = new System.Drawing.Size(299, 321);
+            this.loginUserControl1.TabIndex = 0;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(375, 368);
+            this.Controls.Add(this.loginUserControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "Form1";
+            this.Text = "Pari";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private src.dao.view.LoginUserControl loginUserControl1;
     }
 }
 
