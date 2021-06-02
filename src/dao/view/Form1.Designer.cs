@@ -29,15 +29,32 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.login1 = new pari.src.dao.view.Login();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pariSideBar1 = new pari.src.dao.view.user_control.panel.PariSideBar();
             this.SuspendLayout();
             // 
-            // panel1
+            // login1
             // 
-            this.panel1.Location = new System.Drawing.Point(8, 8);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(240, 512);
-            this.panel1.TabIndex = 0;
+            this.login1.Location = new System.Drawing.Point(12, 12);
+            this.login1.Name = "login1";
+            this.login1.Size = new System.Drawing.Size(290, 271);
+            this.login1.TabIndex = 0;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(249, 12);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(644, 513);
+            this.flowLayoutPanel1.TabIndex = 1;
+            // 
+            // pariSideBar1
+            // 
+            this.pariSideBar1.Location = new System.Drawing.Point(10, 13);
+            this.pariSideBar1.Name = "pariSideBar1";
+            this.pariSideBar1.Size = new System.Drawing.Size(240, 512);
+            this.pariSideBar1.TabIndex = 2;
+            this.pariSideBar1.Load += new System.EventHandler(this.pariSideBar1_Load);
             // 
             // Form1
             // 
@@ -45,7 +62,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(905, 533);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.pariSideBar1);
+            this.Controls.Add(this.flowLayoutPanel1);
+            this.Controls.Add(this.login1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Pari";
@@ -55,7 +74,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
+        private src.dao.view.Login login1;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private src.dao.view.user_control.panel.PariSideBar pariSideBar1;
     }
 }
 

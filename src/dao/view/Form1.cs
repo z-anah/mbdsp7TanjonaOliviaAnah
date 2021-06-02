@@ -16,24 +16,28 @@ namespace pari
         public Form1()
         {
             InitializeComponent();
-            MyInitializeComponent();
+            //LoginInit();
+            WelcomeInit();
         }
-        private void MyInitializeComponent()
+        private void WelcomeInit()
+        {
+        }
+        private void LoginInit()
         {
             this.Size = new Size(320, 400);
 
-            this.pariLogin.TextBox.Label.Text = "Email";
-            this.pariLogin.TextBox.TextBox.PlaceholderText = "Email";
-            this.pariLogin.TextBox.LabelError.Text = "";
+            this.login1.TextBox.Label.Text = "Email";
+            this.login1.TextBox.TextBox.PlaceholderText = "Email";
+            this.login1.TextBox.LabelError.Text = "";
 
-            this.pariLogin.MotPasse.Label.Text = "Mot de passe";
-            this.pariLogin.MotPasse.TextBox.PlaceholderText = "Mot de passe";
-            this.pariLogin.MotPasse.LabelError.Text = "";
-            this.pariLogin.MotPasse.TextBox.PasswordChar = '*';
+            this.login1.MotPasse.Label.Text = "Mot de passe";
+            this.login1.MotPasse.TextBox.PlaceholderText = "Mot de passe";
+            this.login1.MotPasse.LabelError.Text = "";
+            this.login1.MotPasse.TextBox.PasswordChar = '*';
 
             //this.pariLogin.TextBox
 
-            this.pariLogin.LabelError.Text = "";
+            this.login1.LabelError.Text = "";
 
             /*DialogResult res = MessageBox.Show("Are you sure you want to Delete", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (res == DialogResult.OK)
@@ -46,6 +50,11 @@ namespace pari
                 MessageBox.Show("You have clicked Cancel Button");
                 //Some task…  
             }*/
+        }
+
+        private void pariSideBar1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

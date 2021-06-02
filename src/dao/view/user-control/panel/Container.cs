@@ -8,16 +8,11 @@ using System.Windows.Forms;
 
 namespace pari.src.dao.view.user_control.panel
 {
-    public partial class PariSideBar : UserControl
+    public partial class Container : UserControl
     {
-        public PariSideBar()
+        public Container()
         {
             InitializeComponent();
-        }
-
-        private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }
