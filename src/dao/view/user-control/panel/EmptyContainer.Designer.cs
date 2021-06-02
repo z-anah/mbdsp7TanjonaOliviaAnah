@@ -1,7 +1,7 @@
 ﻿
 namespace pari.src.dao.view.user_control.panel
 {
-    partial class Container
+    partial class EmptyContainer
     {
         /// <summary> 
         /// Required designer variable.
@@ -35,7 +35,7 @@ namespace pari.src.dao.view.user_control.panel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Name = "Container";
+            this.Name = "EmptyContainer";
             this.Size = new System.Drawing.Size(634, 513);
             this.ResumeLayout(false);
 

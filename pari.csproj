@@ -14,4 +14,10 @@
     <Folder Include="src\dao\controller\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="src\dao\view\user-control\panel\Competition.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+  </ItemGroup>
+
 </Project>

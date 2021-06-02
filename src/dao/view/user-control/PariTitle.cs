@@ -6,11 +6,11 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 
-namespace pari.src.dao.view.user_control.panel
+namespace pari.src.dao.view.user_control
 {
-    public partial class Container : UserControl
+    public partial class PariTitle : UserControl
     {
-        public Container()
+        public PariTitle()
         {
             InitializeComponent();
         }
