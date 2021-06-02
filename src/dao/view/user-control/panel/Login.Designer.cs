@@ -1,7 +1,7 @@
 ﻿
 namespace pari.src.dao.view
 {
-    partial class LoginUserControl
+    partial class Login
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,39 +29,41 @@ namespace pari.src.dao.view
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBoxLabeledMessagedUserControl1 = new pari.src.dao.view.user_control.TextBoxLabeledMessagedUserControl();
-            this.textBoxLabeledMessagedUserControl2 = new pari.src.dao.view.user_control.TextBoxLabeledMessagedUserControl();
+            this.textBoxEmail = new pari.src.dao.view.user_control.PariTextBox();
+            this.textBoxPassword = new pari.src.dao.view.user_control.PariTextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.pariLabelError1 = new pari.src.dao.view.user_control.PariLabelError();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBoxLabeledMessagedUserControl1
+            // textBoxEmail
             // 
-            this.textBoxLabeledMessagedUserControl1.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxLabeledMessagedUserControl1.Location = new System.Drawing.Point(3, 3);
-            this.textBoxLabeledMessagedUserControl1.Name = "textBoxLabeledMessagedUserControl1";
-            this.textBoxLabeledMessagedUserControl1.Size = new System.Drawing.Size(271, 79);
-            this.textBoxLabeledMessagedUserControl1.TabIndex = 12;
+            this.textBoxEmail.Location = new System.Drawing.Point(3, 3);
+            this.textBoxEmail.Name = "textBoxEmail";
+            this.textBoxEmail.Size = new System.Drawing.Size(287, 79);
+            this.textBoxEmail.TabIndex = 12;
             // 
-            // textBoxLabeledMessagedUserControl2
+            // textBoxPassword
             // 
-            this.textBoxLabeledMessagedUserControl2.BackColor = System.Drawing.SystemColors.Window;
-            this.textBoxLabeledMessagedUserControl2.Location = new System.Drawing.Point(3, 88);
-            this.textBoxLabeledMessagedUserControl2.Name = "textBoxLabeledMessagedUserControl2";
-            this.textBoxLabeledMessagedUserControl2.Size = new System.Drawing.Size(271, 74);
-            this.textBoxLabeledMessagedUserControl2.TabIndex = 13;
+            this.textBoxPassword.BackColor = System.Drawing.SystemColors.Window;
+            this.textBoxPassword.Location = new System.Drawing.Point(3, 88);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.Size = new System.Drawing.Size(287, 74);
+            this.textBoxPassword.TabIndex = 13;
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.textBoxLabeledMessagedUserControl1);
-            this.flowLayoutPanel1.Controls.Add(this.textBoxLabeledMessagedUserControl2);
+            this.flowLayoutPanel1.Controls.Add(this.textBoxEmail);
+            this.flowLayoutPanel1.Controls.Add(this.textBoxPassword);
             this.flowLayoutPanel1.Controls.Add(this.checkBox1);
             this.flowLayoutPanel1.Controls.Add(this.button1);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Controls.Add(this.pariLabelError1);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(274, 265);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(290, 271);
             this.flowLayoutPanel1.TabIndex = 14;
             // 
             // checkBox1
@@ -83,13 +85,20 @@ namespace pari.src.dao.view
             this.button1.Text = "Se connecter";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // LoginUserControl
+            // pariLabelError1
+            // 
+            this.pariLabelError1.Location = new System.Drawing.Point(3, 222);
+            this.pariLabelError1.Name = "pariLabelError1";
+            this.pariLabelError1.Size = new System.Drawing.Size(351, 25);
+            this.pariLabelError1.TabIndex = 17;
+            // 
+            // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Name = "LoginUserControl";
-            this.Size = new System.Drawing.Size(320, 271);
+            this.Name = "Login";
+            this.Size = new System.Drawing.Size(290, 271);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -97,10 +106,11 @@ namespace pari.src.dao.view
         }
 
         #endregion
-        private user_control.TextBoxLabeledMessagedUserControl textBoxLabeledMessagedUserControl1;
-        private user_control.TextBoxLabeledMessagedUserControl textBoxLabeledMessagedUserControl2;
+        private user_control.PariTextBox textBoxEmail;
+        private user_control.PariTextBox textBoxPassword;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button1;
+        private user_control.PariLabelError pariLabelError1;
     }
 }

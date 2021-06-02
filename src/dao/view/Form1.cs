@@ -20,15 +20,22 @@ namespace pari
         }
         private void MyInitializeComponent()
         {
-            this.loginUserControl1.TextBox.Label.Text = "Email";
-            this.loginUserControl1.TextBox.TextBox.PlaceholderText = "Email";
-            this.loginUserControl1.TextBox.MessageErreurLabel.Text = "";
-            this.loginUserControl1.MotPasse.Label.Text = "Mot de passe";
-            this.loginUserControl1.MotPasse.TextBox.PlaceholderText = "Mot de passe";
-            this.loginUserControl1.MotPasse.MessageErreurLabel.Text = "";
-            this.loginUserControl1.MotPasse.TextBox.PasswordChar = '*';
+            this.Size = new Size(320, 400);
 
-            DialogResult res = MessageBox.Show("Are you sure you want to Delete", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+            this.pariLogin.TextBox.Label.Text = "Email";
+            this.pariLogin.TextBox.TextBox.PlaceholderText = "Email";
+            this.pariLogin.TextBox.LabelError.Text = "";
+
+            this.pariLogin.MotPasse.Label.Text = "Mot de passe";
+            this.pariLogin.MotPasse.TextBox.PlaceholderText = "Mot de passe";
+            this.pariLogin.MotPasse.LabelError.Text = "";
+            this.pariLogin.MotPasse.TextBox.PasswordChar = '*';
+
+            //this.pariLogin.TextBox
+
+            this.pariLogin.LabelError.Text = "";
+
+            /*DialogResult res = MessageBox.Show("Are you sure you want to Delete", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
             if (res == DialogResult.OK)
             {
                 MessageBox.Show("You have clicked Ok Button");
@@ -38,7 +45,7 @@ namespace pari
             {
                 MessageBox.Show("You have clicked Cancel Button");
                 //Some task…  
-            }
+            }*/
         }
     }
 }

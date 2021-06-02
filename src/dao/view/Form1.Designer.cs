@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.loginUserControl1 = new pari.src.dao.view.LoginUserControl();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // loginUserControl1
+            // panel1
             // 
-            this.loginUserControl1.Location = new System.Drawing.Point(12, 12);
-            this.loginUserControl1.Name = "loginUserControl1";
-            this.loginUserControl1.Size = new System.Drawing.Size(299, 321);
-            this.loginUserControl1.TabIndex = 0;
+            this.panel1.Location = new System.Drawing.Point(8, 8);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(240, 512);
+            this.panel1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(375, 368);
-            this.Controls.Add(this.loginUserControl1);
+            this.ClientSize = new System.Drawing.Size(905, 533);
+            this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Pari";
@@ -55,7 +55,7 @@
 
         #endregion
 
-        private src.dao.view.LoginUserControl loginUserControl1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

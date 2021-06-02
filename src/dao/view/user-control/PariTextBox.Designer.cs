@@ -1,7 +1,7 @@
 ﻿
 namespace pari.src.dao.view.user_control
 {
-    partial class TextBoxLabeledMessagedUserControl
+    partial class PariTextBox
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,8 +31,8 @@ namespace pari.src.dao.view.user_control
         {
             this.labelPari = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.MessageErreurLabelPari = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pariLabelError1 = new pari.src.dao.view.user_control.PariLabelError();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,37 +53,36 @@ namespace pari.src.dao.view.user_control
             this.textBox1.Location = new System.Drawing.Point(3, 18);
             this.textBox1.Name = "textBox1";
             this.textBox1.PlaceholderText = "Nom";
-            this.textBox1.Size = new System.Drawing.Size(168, 23);
+            this.textBox1.Size = new System.Drawing.Size(253, 23);
             this.textBox1.TabIndex = 1;
-            // 
-            // MessageErreurLabelPari
-            // 
-            this.MessageErreurLabelPari.AutoSize = true;
-            this.MessageErreurLabelPari.ForeColor = System.Drawing.Color.Red;
-            this.MessageErreurLabelPari.Location = new System.Drawing.Point(3, 44);
-            this.MessageErreurLabelPari.Name = "MessageErreurLabelPari";
-            this.MessageErreurLabelPari.Size = new System.Drawing.Size(161, 15);
-            this.MessageErreurLabelPari.TabIndex = 2;
-            this.MessageErreurLabelPari.Text = "Exemple de message d\'erreur";
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Controls.Add(this.labelPari);
             this.flowLayoutPanel1.Controls.Add(this.textBox1);
-            this.flowLayoutPanel1.Controls.Add(this.MessageErreurLabelPari);
+            this.flowLayoutPanel1.Controls.Add(this.pariLabelError1);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(176, 67);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(226, 74);
             this.flowLayoutPanel1.TabIndex = 3;
+            this.flowLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanel1_Paint);
             // 
-            // TextBoxLabeledMessagedUserControl
+            // pariLabelError1
+            // 
+            this.pariLabelError1.Location = new System.Drawing.Point(3, 47);
+            this.pariLabelError1.Name = "pariLabelError1";
+            this.pariLabelError1.Size = new System.Drawing.Size(351, 25);
+            this.pariLabelError1.TabIndex = 2;
+            // 
+            // PariTextBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Name = "TextBoxLabeledMessagedUserControl";
-            this.Size = new System.Drawing.Size(177, 68);
+            this.Name = "PariTextBox";
+            this.Size = new System.Drawing.Size(226, 74);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -95,7 +94,7 @@ namespace pari.src.dao.view.user_control
         private System.Windows.Forms.Label title;
         private System.Windows.Forms.Label labelPari;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label MessageErreurLabelPari;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private PariLabelError pariLabelError1;
     }
 }

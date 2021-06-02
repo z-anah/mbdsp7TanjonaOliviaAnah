@@ -8,12 +8,12 @@ using System.Windows.Forms;
 
 namespace pari.src.dao.view.user_control
 {
-    public partial class TextBoxLabeledMessagedUserControl : UserControl
+    public partial class PariTextBox : UserControl
     {
         private Label label;
         private TextBox textBox;
-        private Label messageErreurLabel;
-        public TextBoxLabeledMessagedUserControl()
+        private Label labelError;
+        public PariTextBox()
         {
             InitializeComponent();
         }
@@ -38,14 +38,19 @@ namespace pari.src.dao.view.user_control
             }
         }
 
-        public Label MessageErreurLabel
+        public Label LabelError
         {
-            get => MessageErreurLabelPari;
+            get => pariLabelError1.Label;
             set
             {
-                messageErreurLabel = value;
-                MessageErreurLabelPari = value;
+                pariLabelError1.Label = value;
+                labelError = value;
             }
+        }
+
+        private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
