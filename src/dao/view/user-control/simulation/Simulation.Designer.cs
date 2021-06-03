@@ -31,14 +31,14 @@ namespace pari.src.dao.view.user_control.panel
         {
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.pariTitle1 = new pari.src.dao.view.user_control.PariTitle();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.equipeSimulation1 = new pari.src.dao.view.user_control.simulation.EquipeSimulation();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.equipeSimulation2 = new pari.src.dao.view.user_control.simulation.EquipeSimulation();
-            this.pariTitle1 = new pari.src.dao.view.user_control.PariTitle();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -66,19 +66,26 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel4.Size = new System.Drawing.Size(628, 72);
             this.flowLayoutPanel4.TabIndex = 2;
             // 
+            // pariTitle1
+            // 
+            this.pariTitle1.Location = new System.Drawing.Point(3, 3);
+            this.pariTitle1.Name = "pariTitle1";
+            this.pariTitle1.Size = new System.Drawing.Size(200, 23);
+            this.pariTitle1.TabIndex = 0;
+            // 
             // flowLayoutPanel2
             // 
             this.flowLayoutPanel2.Controls.Add(this.equipeSimulation1);
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 81);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(311, 311);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(311, 253);
             this.flowLayoutPanel2.TabIndex = 0;
             // 
             // equipeSimulation1
             // 
             this.equipeSimulation1.Location = new System.Drawing.Point(3, 3);
             this.equipeSimulation1.Name = "equipeSimulation1";
-            this.equipeSimulation1.Size = new System.Drawing.Size(307, 312);
+            this.equipeSimulation1.Size = new System.Drawing.Size(307, 250);
             this.equipeSimulation1.TabIndex = 0;
             // 
             // flowLayoutPanel3
@@ -86,22 +93,24 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel3.Controls.Add(this.equipeSimulation2);
             this.flowLayoutPanel3.Location = new System.Drawing.Point(320, 81);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(311, 311);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(311, 253);
             this.flowLayoutPanel3.TabIndex = 1;
             // 
             // equipeSimulation2
             // 
             this.equipeSimulation2.Location = new System.Drawing.Point(3, 3);
             this.equipeSimulation2.Name = "equipeSimulation2";
-            this.equipeSimulation2.Size = new System.Drawing.Size(307, 312);
+            this.equipeSimulation2.Size = new System.Drawing.Size(307, 250);
             this.equipeSimulation2.TabIndex = 0;
             // 
-            // pariTitle1
+            // flowLayoutPanel5
             // 
-            this.pariTitle1.Location = new System.Drawing.Point(3, 3);
-            this.pariTitle1.Name = "pariTitle1";
-            this.pariTitle1.Size = new System.Drawing.Size(200, 23);
-            this.pariTitle1.TabIndex = 0;
+            this.flowLayoutPanel5.Controls.Add(this.button1);
+            this.flowLayoutPanel5.Controls.Add(this.button2);
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 340);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(200, 29);
+            this.flowLayoutPanel5.TabIndex = 5;
             // 
             // button1
             // 
@@ -120,15 +129,6 @@ namespace pari.src.dao.view.user_control.panel
             this.button2.TabIndex = 4;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
-            // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.Controls.Add(this.button1);
-            this.flowLayoutPanel5.Controls.Add(this.button2);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 398);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(200, 29);
-            this.flowLayoutPanel5.TabIndex = 5;
             // 
             // Simulation
             // 
