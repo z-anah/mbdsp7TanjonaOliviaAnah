@@ -1,0 +1,11 @@
+.nav-item :hover
+{
+  font-weight: bold;
+  font-size: 20px;
+
+}
+.sidebar .nav-item.active .nav-link{
+  font-weight: 700;
+  border-radius: 1px;
+  font-size: 15px;
+}

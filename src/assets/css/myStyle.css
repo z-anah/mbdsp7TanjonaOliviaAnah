@@ -1,0 +1,150 @@
+.action{
+    margin-left: 40%;
+    margin-top: 5px;
+    display: flex;
+    color: #224abe;
+    cursor: pointer;
+}
+
+.detail ,.delete{
+    margin-left: 10px;
+}
+.detail:hover{
+    font-size: xx-large;
+}
+.delete:hover{
+    font-size: xx-large;
+}
+.edit:hover{
+    font-size: xx-large;
+}
+.titre:hover{
+    background-color: #224abe;
+    border-radius: 10px 100px / 120px;
+    max-width: max-content;
+    text-decoration: none;
+    color: white;
+    padding: 10px 5px 2px 5px;
+}
+.titre>a{
+    text-decoration: none;
+}
+.valeur_annonce{
+    font-size: medium;
+    color: black;
+}
+.block_contenu{
+    margin-left: 10px;
+}
+.illustration{
+    max-width: 200px;
+    border-radius: 3px;
+}
+.illustrations{
+    max-width: 200px;
+    float : right;
+    border-radius: 3px;
+}
+.illustrationmodif{
+    padding-top: 10px;
+    max-width: 350px;
+    max-height:254px;
+    border-radius: 3px;
+}
+.row_annonce{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.mypagination{
+    width : max-content;
+    margin-left: 30%;
+    padding: 10px 1px 10px 1px;
+    display:flex;
+    border-radius : 5px;
+}
+a:-webkit-any-link {
+    color: #0056b3;
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 10px;
+}
+.step:hover {
+    background-color: #dee2e6;
+    text-decoration: none;
+}
+.prevLink:hover {
+    background-color: #dee2e6;
+    text-decoration: none;
+}
+
+.nextLink:hover {
+    background-color: #dee2e6;
+    text-decoration: none;
+}
+
+.step {
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.nextLink {
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.prevLink {
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.currentStep {
+    padding: 10px;
+    background-color:#224abe;
+    color: white;
+    border: 1px solid gainsboro;
+    border-radius: 10px;
+}
+
+.step.gap {
+    display: none;
+}
+
+.bs-example{
+    margin: 50px;
+}
+.bs-example a{
+    font-size: 22px;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.header-action{
+    margin-top: 8px;
+}
+.deconnexion:hover{
+    cursor: pointer;
+}
+
+.result {
+    margin-top: 6px;
+    padding-right: 5px;
+}
+.nbParPage{
+    margin-right: 10px;
+    border-radius: 10px;
+}
+.swal-wide{
+    width:850px !important;
+}
