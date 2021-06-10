@@ -15,7 +15,7 @@
                                   <div class="text-center">
                                       <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                   </div>
-                                  <form class="user">
+                                  <form class="user" (submit)="auth()" method="post">
                                       <div class="form-group">
                                           <input type="email" class="form-control form-control-user"
                                               id="exampleInputEmail" aria-describedby="emailHelp"
@@ -32,9 +32,9 @@
                                                   Me</label>
                                           </div>
                                       </div>
-                                      <a routerLink="/back" class="btn btn-primary btn-user btn-block">
+                                      <button class="btn btn-primary btn-user btn-block" type="submit">
                                           Login
-                                      </a>
+                                      </button>
                                       <hr>
                                   </form>
                                   <hr>
