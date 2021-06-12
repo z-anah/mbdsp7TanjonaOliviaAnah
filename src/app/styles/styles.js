@@ -1,4 +1,7 @@
-import { widthPercentageToDP } from "react-native-responsive-screen";
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from "react-native-responsive-screen";
 
 const colors = {
   red: "#EC2379",
@@ -9,6 +12,44 @@ const colors = {
 };
 
 export default {
+  colors: {
+    red: "#EC2379",
+    blue: "#0070FF",
+    gray: "#777777",
+    white: "#ffffff",
+    black: "#000000",
+  },
+  controlContainer: {
+    borderRadius: 4,
+    margin: 4,
+    padding: 4,
+  },
+  fontContDescMesParis: {
+    width: widthPercentageToDP("38%"),
+    paddingHorizontal: widthPercentageToDP("1%"),
+  },
+  fontDescMesParis1: {
+    fontSize: widthPercentageToDP("3%"),
+  },
+  fontDescMesParis2: {
+    fontSize: widthPercentageToDP("3%"),
+    textAlign: "right",
+  },
+  fontDescMesParis3: {
+    fontSize: widthPercentageToDP("3%"),
+    textAlign: "center",
+  },
+  descriptionMesParis: {
+    width: widthPercentageToDP("90%"),
+    justifyContent: "space-between",
+    flexDirection: "row",
+    padding: widthPercentageToDP("5%"),
+  },
+  descriptionMesParis1: {
+    width: widthPercentageToDP("90%"),
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
   bold: { fontWeight: "bold" },
   italic: { fontStyle: "italic" },
   underline: { textDecorationLine: "underline" },
@@ -123,5 +164,17 @@ export default {
       justifyContent: "center",
       marginTop: 20,
     },
+  },
+  cardMesParis: {
+    paddingHorizontal: widthPercentageToDP("5%"),
+    paddingVertical: heightPercentageToDP("0.5%"),
+  },
+  iconContainerMesParis: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  iconMesParis: {
+    width: widthPercentageToDP("15%"),
+    height: widthPercentageToDP("15%"),
   },
 };

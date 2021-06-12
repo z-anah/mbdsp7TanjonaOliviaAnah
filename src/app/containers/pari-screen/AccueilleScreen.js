@@ -2,19 +2,20 @@ import {
   ApplicationProvider,
   Avatar,
   Card,
-  Divider,
   Icon,
-  Spinner,
   Text,
 } from "@ui-kitten/components";
 import * as React from "react";
 import Slider from "@react-native-community/slider";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 import * as eva from "@eva-design/eva";
 import ContainerStyle from "../../styles/ContainerStyle";
 import styles from "../../styles/styles";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Swiper from "react-native-deck-swiper";
+import LottieView from "lottie-react-native";
+import TopNavigatorMiniProfileLayout from "../../components/layout/TopNavigatorMiniProfileLayout";
+import data from "../../temp/dataAccueilleScreen";
 
 class AccueilleScreen extends React.Component {
   constructor(props) {
@@ -31,35 +32,21 @@ class AccueilleScreen extends React.Component {
       },
     };
   }
-  // TODO SWIPE ACTION
-  // TODO LOTTIE
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={styles.loginContainer}>
-          <Spinner size="giant" />
-        </View>
+        <LottieView
+          source={require("../../../../assets/lottie/7929-run-man-run.json")}
+        />
       );
     } else {
       return (
         <ApplicationProvider {...eva} theme={eva.light}>
           <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
-            {/* top navigator */}
-            <View style={[styles.topNav]}>
-              <View style={styles.topNavContent}>
-                <Text style={styles.topNavTitle}>Profile</Text>
-                <Text>{this.state.nomComplet}</Text>
-              </View>
-              <View style={styles.topNavContent}>
-                <Text style={[styles.topNavTitle, { textAlign: "right" }]}>
-                  Balance (Jetons)
-                </Text>
-                <Text style={{ textAlign: "right" }}>{this.state.jeton}</Text>
-              </View>
-            </View>
-            {/* end top navigator */}
-
-            <Divider />
+            <TopNavigatorMiniProfileLayout
+              jeton={this.state.jeton}
+              nomComplet={this.state.nomComplet}
+            />
 
             {/* card */}
             <View style={styles.contentUnderTopNav}>
@@ -173,6 +160,8 @@ class AccueilleScreen extends React.Component {
       nomComplet: data.nomComplet,
       jeton: data.jeton,
       pay: data.pay,
+    });
+    this.setState({
       isLoading: false,
     });
   }
@@ -203,32 +192,5 @@ class AccueilleScreen extends React.Component {
     });
   };
 }
-
-const data = {
-  data: [
-    {
-      id: 1,
-      competition: "Ligue des champions 1",
-      date: "Mardi 10 Octobre 2021",
-      heure: "22h30",
-      linkCompetition: "je.suis/un-lien/competition",
-      equipes: [
-        {
-          id: 1,
-          logo: require("../../../../assets/adaptive-icon.png"),
-          nom: "Chelsea F.C",
-        },
-        {
-          id: 2,
-          logo: require("../../../../assets/adaptive-icon.png"),
-          nom: "Chelsea F.C",
-        },
-      ],
-    },
-  ],
-  nomComplet: "Tanjona",
-  jeton: "1.980",
-  pay: 340,
-};
 
 export default AccueilleScreen;

@@ -1,19 +1,27 @@
-import { ApplicationProvider, Text } from "@ui-kitten/components";
+import { ApplicationProvider } from "@ui-kitten/components";
 import * as React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet, View, Text } from "react-native";
 import * as eva from "@eva-design/eva";
 import ContainerStyle from "../styles/ContainerStyle";
+import styles from "../styles/styles";
+import LottieView from "lottie-react-native";
 
 class Test extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isLoading: true,
+    };
   }
+
   render() {
-    if (this.state.isLoading) {
+    if (!this.state.isLoading) {
       return (
-        <ApplicationProvider {...eva} theme={eva.light}>
-          <Text>Wait</Text>
-        </ApplicationProvider>
+        <LottieView
+          autoPlay={true}
+          loop={false}
+          source={require("../../../assets/lottie/7929-run-man-run.json")}
+        />
       );
     } else {
       return (
@@ -27,7 +35,11 @@ class Test extends React.Component {
     }
   }
 
-  async componentDidMount() {}
+  async componentDidMount() {
+    await this.setState({
+      isLoading: false,
+    });
+  }
 }
 
 const data = {};

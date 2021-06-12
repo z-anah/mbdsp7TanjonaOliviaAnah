@@ -35,8 +35,8 @@ class NavigationBottom extends React.Component {
 
 const TabNavigator = () => (
   <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-    <Screen name="AccueilleScreen" component={AccueilleScreen} />
     <Screen name="MesParisScreen" component={MesParisScreen} />
+    <Screen name="AccueilleScreen" component={AccueilleScreen} />
     <Screen name="RechercheScreen" component={RechercheScreen} />
     <Screen name="MonProfilScreen" component={MonProfilScreen} />
     <Screen name="MonPorteFeuilleScreen" component={MonPorteFeuilleScreen} />
