@@ -5,4 +5,8 @@ export default {
     flex: 1,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight / 2 : 0,
   },
+  AndroidSafeAreaClean: {
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  },
 };

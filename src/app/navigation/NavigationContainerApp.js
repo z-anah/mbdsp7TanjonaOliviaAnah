@@ -7,11 +7,13 @@ import LangageScreen from "../containers/LangageScreen";
 import IdentificationScreen from "../containers/auth-screen/IdentificationScreen";
 import AccueilleScreen from "../containers/pari-screen/AccueilleScreen";
 import NavigationBottom from "./NavigationBottom";
+import Test from "../containers/Test";
 
 const { Navigator, Screen } = createStackNavigator();
 
 const HomeNavigator = () => (
   <Navigator headerMode="none">
+    {/* <Screen name="Teste" component={Test} /> */}
     <Screen name="NavigationBottom" component={NavigationBottom} />
     {/* <Screen name="AccueilleScreen" component={AccueilleScreen} /> */}
     {/* <Screen name="Identification" component={IdentificationScreen} /> */}

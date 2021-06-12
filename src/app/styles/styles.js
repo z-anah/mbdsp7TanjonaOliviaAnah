@@ -1,5 +1,13 @@
 import { widthPercentageToDP } from "react-native-responsive-screen";
 
+const colors = {
+  red: "#EC2379",
+  blue: "#0070FF",
+  gray: "#777777",
+  white: "#ffffff",
+  black: "#000000",
+};
+
 export default {
   bold: { fontWeight: "bold" },
   italic: { fontStyle: "italic" },
@@ -32,10 +40,11 @@ export default {
   },
   contentUnderTopNav: {
     flex: 1,
+    flexDirection: "column",
+    justifyContent: "flex-end",
   },
   card: {
     paddingHorizontal: 10,
-    paddingVertical: 10,
   },
   cardFootEquipe: { textAlign: "center" },
   cardFootLogo: {
@@ -66,7 +75,53 @@ export default {
   sliderPay: {
     alignItems: "center",
     justifyContent: "center",
-    paddingBottom: 30,
-    paddingTop: 30,
+    paddingVertical: 5,
+  },
+  swipeRight: {
+    label: {
+      backgroundColor: colors.blue,
+      borderColor: colors.blue,
+      color: colors.white,
+      borderWidth: 1,
+      fontSize: 24,
+    },
+    wrapper: {
+      flexDirection: "column",
+      alignItems: "flex-start",
+      justifyContent: "flex-start",
+      marginTop: 20,
+      marginLeft: 20,
+    },
+  },
+  swipeLeft: {
+    label: {
+      backgroundColor: colors.red,
+      borderColor: colors.red,
+      color: colors.white,
+      borderWidth: 1,
+      fontSize: 24,
+    },
+    wrapper: {
+      flexDirection: "column",
+      alignItems: "flex-end",
+      justifyContent: "flex-start",
+      marginTop: 20,
+      marginLeft: -20,
+    },
+  },
+  swipeTop: {
+    label: {
+      backgroundColor: colors.black,
+      borderColor: colors.black,
+      color: colors.white,
+      borderWidth: 1,
+      fontSize: 24,
+    },
+    wrapper: {
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 20,
+    },
   },
 };
