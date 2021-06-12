@@ -33,6 +33,7 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTitle1 = new pari.src.dao.view.user_control.PariTitle();
             this.pariTextBox1 = new pari.src.dao.view.user_control.PariTextBox();
             this.pariTextBox2 = new pari.src.dao.view.user_control.PariTextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.pariTextBox3 = new pari.src.dao.view.user_control.PariTextBox();
             this.pariTextBox4 = new pari.src.dao.view.user_control.PariTextBox();
             this.pariTitle2 = new pari.src.dao.view.user_control.PariTitle();
@@ -40,7 +41,6 @@ namespace pari.src.dao.view.user_control.panel
             this.pariLabelError1 = new pari.src.dao.view.user_control.PariLabelError();
             this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.button2 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -85,6 +85,15 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTextBox2.Size = new System.Drawing.Size(263, 74);
             this.pariTextBox2.TabIndex = 2;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(540, 32);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Importer";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // pariTextBox3
             // 
             this.pariTextBox3.BackColor = System.Drawing.SystemColors.Window;
@@ -107,6 +116,7 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTitle2.Name = "pariTitle2";
             this.pariTitle2.Size = new System.Drawing.Size(407, 23);
             this.pariTitle2.TabIndex = 4;
+            this.pariTitle2.Load += new System.EventHandler(this.pariTitle2_Load);
             // 
             // richTextBox1
             // 
@@ -129,21 +139,12 @@ namespace pari.src.dao.view.user_control.panel
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 7;
-            this.button1.Text = "button1";
+            this.button1.Text = "Ajouter";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(540, 32);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
             // 
             // Equipe
             // 

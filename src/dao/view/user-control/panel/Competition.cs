@@ -34,8 +34,8 @@ namespace pari.src.dao.view.user_control.panel
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.pariTitle3 = new pari.src.dao.view.user_control.PariTitle();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.button1 = new System.Windows.Forms.Button();
             this.pariLabelError1 = new pari.src.dao.view.user_control.PariLabelError();
+            this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -60,42 +60,51 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTitle1.Name = "pariTitle1";
             this.pariTitle1.Size = new System.Drawing.Size(200, 23);
             this.pariTitle1.TabIndex = 0;
+            this.pariTitle1.Load += new System.EventHandler(this.pariTitle1_Load);
+            this.pariTitle1.Label.Text = "haha";
             // 
             // pariTextBox1
             // 
             this.pariTextBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.pariTextBox1.Location = new System.Drawing.Point(3, 63);
+            this.pariTextBox1.Location = new System.Drawing.Point(3, 32);
             this.pariTextBox1.Name = "pariTextBox1";
             this.pariTextBox1.Size = new System.Drawing.Size(261, 74);
             this.pariTextBox1.TabIndex = 1;
             // 
             // pariTitle2
             // 
-            this.pariTitle2.Location = new System.Drawing.Point(3, 143);
+            this.pariTitle2.Location = new System.Drawing.Point(3, 112);
             this.pariTitle2.Name = "pariTitle2";
             this.pariTitle2.Size = new System.Drawing.Size(200, 23);
             this.pariTitle2.TabIndex = 5;
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(3, 172);
+            this.dateTimePicker1.Location = new System.Drawing.Point(3, 141);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 23);
             this.dateTimePicker1.TabIndex = 3;
             // 
             // pariTitle3
             // 
-            this.pariTitle3.Location = new System.Drawing.Point(3, 201);
+            this.pariTitle3.Location = new System.Drawing.Point(3, 170);
             this.pariTitle3.Name = "pariTitle3";
             this.pariTitle3.Size = new System.Drawing.Size(200, 23);
             this.pariTitle3.TabIndex = 6;
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(3, 230);
+            this.dateTimePicker2.Location = new System.Drawing.Point(3, 199);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 23);
             this.dateTimePicker2.TabIndex = 4;
+            // 
+            // pariLabelError1
+            // 
+            this.pariLabelError1.Location = new System.Drawing.Point(3, 228);
+            this.pariLabelError1.Name = "pariLabelError1";
+            this.pariLabelError1.Size = new System.Drawing.Size(351, 25);
+            this.pariLabelError1.TabIndex = 7;
             // 
             // button1
             // 
@@ -103,15 +112,8 @@ namespace pari.src.dao.view.user_control.panel
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(133, 23);
             this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
+            this.button1.Text = "Ajouter";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // pariLabelError1
-            // 
-            this.pariLabelError1.Location = new System.Drawing.Point(3, 32);
-            this.pariLabelError1.Name = "pariLabelError1";
-            this.pariLabelError1.Size = new System.Drawing.Size(351, 25);
-            this.pariLabelError1.TabIndex = 7;
             // 
             // Competition
             // 
@@ -120,6 +122,11 @@ namespace pari.src.dao.view.user_control.panel
             this.Size = new System.Drawing.Size(634, 513);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+
+        }
+
+        private void pariTitle1_Load(object sender, EventArgs e)
+        {
 
         }
     }

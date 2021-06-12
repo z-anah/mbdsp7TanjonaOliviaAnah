@@ -106,9 +106,9 @@ namespace pari.src.dao.view
         }
 
         #endregion
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private user_control.PariTextBox textBoxEmail;
         private user_control.PariTextBox textBoxPassword;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button1;
         private user_control.PariLabelError pariLabelError1;

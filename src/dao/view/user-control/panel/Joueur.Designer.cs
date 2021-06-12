@@ -39,6 +39,7 @@ namespace pari.src.dao.view.user_control.panel
             this.pariDate1 = new pari.src.dao.view.user_control.PariDate();
             this.pariTextBox3 = new pari.src.dao.view.user_control.PariTextBox();
             this.pariTextBox4 = new pari.src.dao.view.user_control.PariTextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,6 +54,7 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1.Controls.Add(this.pariDate1);
             this.flowLayoutPanel1.Controls.Add(this.pariTextBox3);
             this.flowLayoutPanel1.Controls.Add(this.pariTextBox4);
+            this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -88,7 +90,7 @@ namespace pari.src.dao.view.user_control.panel
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
+            this.button1.Text = "Importer";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // pariComboItem1
@@ -117,16 +119,25 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTextBox3.BackColor = System.Drawing.SystemColors.Window;
             this.pariTextBox3.Location = new System.Drawing.Point(227, 188);
             this.pariTextBox3.Name = "pariTextBox3";
-            this.pariTextBox3.Size = new System.Drawing.Size(170, 74);
+            this.pariTextBox3.Size = new System.Drawing.Size(265, 74);
             this.pariTextBox3.TabIndex = 7;
             // 
             // pariTextBox4
             // 
             this.pariTextBox4.BackColor = System.Drawing.SystemColors.Window;
-            this.pariTextBox4.Location = new System.Drawing.Point(403, 188);
+            this.pariTextBox4.Location = new System.Drawing.Point(3, 307);
             this.pariTextBox4.Name = "pariTextBox4";
-            this.pariTextBox4.Size = new System.Drawing.Size(226, 74);
+            this.pariTextBox4.Size = new System.Drawing.Size(264, 74);
             this.pariTextBox4.TabIndex = 8;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(273, 307);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 9;
+            this.button2.Text = "Ajouter";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // Joueur
             // 
@@ -152,5 +163,6 @@ namespace pari.src.dao.view.user_control.panel
         private PariDate pariDate1;
         private PariTextBox pariTextBox3;
         private PariTextBox pariTextBox4;
+        private System.Windows.Forms.Button button2;
     }
 }
