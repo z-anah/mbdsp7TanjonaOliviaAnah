@@ -2,6 +2,7 @@ import { Platform, StatusBar } from "react-native";
 
 export default {
   AndroidSafeArea: {
-    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+    flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight / 2 : 0,
   },
 };

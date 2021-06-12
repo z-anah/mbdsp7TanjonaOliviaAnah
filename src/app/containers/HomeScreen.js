@@ -35,10 +35,9 @@ class HomeScreen extends React.Component {
   };
 
   render() {
-    console.log(this.props);
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
-        <SafeAreaView style={[{ flex: 1 }, ContainerStyle.AndroidSafeArea]}>
+        <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
           <TopNavigation title="Home" alignment="center" />
           <Divider />
           <Text>{this.props.counter.counter}</Text>

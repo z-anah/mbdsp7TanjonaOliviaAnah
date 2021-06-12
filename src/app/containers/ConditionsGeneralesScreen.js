@@ -16,13 +16,14 @@ import * as eva from "@eva-design/eva";
 import i18n from "i18n-js";
 import { connect } from "react-redux";
 
+const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
+
 class ConditionsGeneralesScreen extends React.Component {
   render() {
-    const BackIcon = () => <Icon {...this.props} name="arrow-back" />;
     const BackAction = () => <TopNavigationAction icon={BackIcon} />;
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
-        <SafeAreaView style={[{ flex: 1 }, ContainerStyle.AndroidSafeArea]}>
+        <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
           <TopNavigation
             accessoryLeft={BackAction}
             title="Conditions Generales"

@@ -29,14 +29,13 @@ class LangageScreen extends React.Component {
   _saveLangage = () => {
     this.props.dispatch(changeLang("en-MG"));
     i18n.locale = this.props.lang;
-    console.log(this.props.lang);
     // this.props.navigation.navigate("Home");
   };
 
   render() {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
-        <SafeAreaView style={[{ flex: 1 }, ContainerStyle.AndroidSafeArea]}>
+        <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
           <TopNavigation title="Langage" alignment="center" />
           <Divider />
           <Text>{this.state.test}</Text>
