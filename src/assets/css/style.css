@@ -9,3 +9,24 @@
   border-radius: 1px;
   font-size: 15px;
 }
+
+.title
+{
+  text-align: center;
+    font-size: xx-large;
+    color: navy;
+    font-weight: bold;
+}
+.selectRole{
+  border-radius: 10rem;
+  color: black;
+}
+.selectRole [selected]{
+  color: navy;
+}
+.error_login{
+  color: #e74a3b;
+  text-align: center;
+
+}
+
