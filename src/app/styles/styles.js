@@ -112,6 +112,7 @@ export default {
   cardSlider: {
     alignItems: "center",
     justifyContent: "center",
+    padding: 2,
   },
   sliderPay: {
     alignItems: "center",

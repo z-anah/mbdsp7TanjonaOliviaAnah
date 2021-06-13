@@ -1,9 +1,11 @@
 import {
   ApplicationProvider,
   Avatar,
+  Button,
   Card,
   Icon,
   Text,
+  Tooltip,
 } from "@ui-kitten/components";
 import * as React from "react";
 import Slider from "@react-native-community/slider";
@@ -30,6 +32,7 @@ class AccueilleScreen extends React.Component {
         velocityThreshold: 0.3,
         directionalOffsetThreshold: 80,
       },
+      visible: false,
     };
   }
   render() {
@@ -147,6 +150,14 @@ class AccueilleScreen extends React.Component {
                   value={this.state.pay}
                   onValueChange={(value) => this.changePay(value)}
                 />
+                <Tooltip
+                  placement={"top"}
+                  anchor={this.renderToggleButton}
+                  visible={this.state.visible}
+                  onBackdropPress={() => this.setState({ visible: false })}
+                >
+                  {tuto}
+                </Tooltip>
               </View>
             </View>
             {/* end card */}
@@ -188,11 +199,20 @@ class AccueilleScreen extends React.Component {
     alert("Les details sont en cours de developpement");
   };
 
+  renderToggleButton = () => (
+    <Button status="basic" onPress={() => this.setState({ visible: true })}>
+      Tuto
+    </Button>
+  );
+
   changePay = (value) => {
     this.setState({
       pay: Math.trunc(value),
     });
   };
 }
+
+const tuto =
+  "Glisser la carte\n\n👆 [X] En haut pour un match nul\n👈 [X1] À gauche pour choisir l'équipe gauche\n👉 [X2] À droite pour choisir l'équipe droite\n👇 En bas pour passer\n\n✨✨Bonne chance✨✨";
 
 export default AccueilleScreen;
