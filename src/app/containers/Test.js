@@ -19,18 +19,18 @@ class Test extends React.Component {
       return (
         <LottieView
           autoPlay={true}
-          loop={false}
+          loop={true}
           source={require("../../../assets/lottie/7929-run-man-run.json")}
         />
       );
     } else {
       return (
-        <SafeAreaView style={[ContainerStyle.AndroidSafeAreaClean]}>
-          <ApplicationProvider {...eva} theme={eva.light}>
+        <ApplicationProvider {...eva} theme={eva.light}>
+          <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
             <Text>Test</Text>
             <View style={styles.container}></View>
-          </ApplicationProvider>
-        </SafeAreaView>
+          </SafeAreaView>
+        </ApplicationProvider>
       );
     }
   }

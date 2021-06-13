@@ -1,9 +1,4 @@
-import {
-  ApplicationProvider,
-  Spinner,
-  Text,
-  Avatar,
-} from "@ui-kitten/components";
+import { ApplicationProvider, Text, Avatar } from "@ui-kitten/components";
 import * as React from "react";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import * as eva from "@eva-design/eva";
@@ -14,10 +9,6 @@ import styles from "../../styles/styles";
 import { ScrollView } from "react-native-gesture-handler";
 import { Card } from "@ui-kitten/components";
 import data from "../../temp/dataMesParisScreen";
-import {
-  heightPercentageToDP,
-  widthPercentageToDP,
-} from "react-native-responsive-screen";
 
 class MesParisScreen extends React.Component {
   constructor(props) {
@@ -33,7 +24,7 @@ class MesParisScreen extends React.Component {
       return (
         <LottieView
           autoPlay={true}
-          loop={false}
+          loop={true}
           source={require("../../../../assets/lottie/7929-run-man-run.json")}
         />
       );
@@ -47,8 +38,8 @@ class MesParisScreen extends React.Component {
             />
             <ScrollView>
               {data.mesParis.map((item, i) => (
-                <View style={styles.cardMesParis}>
-                  <Card key={i}>
+                <View style={styles.cardMesParis} key={i}>
+                  <Card>
                     <View style={styles.iconContainerMesParis}>
                       <LottieView
                         style={styles.iconMesParis}

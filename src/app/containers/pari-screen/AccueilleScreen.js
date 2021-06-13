@@ -36,6 +36,8 @@ class AccueilleScreen extends React.Component {
     if (this.state.isLoading) {
       return (
         <LottieView
+          autoPlay={true}
+          loop={true}
           source={require("../../../../assets/lottie/7929-run-man-run.json")}
         />
       );
@@ -109,6 +111,7 @@ class AccueilleScreen extends React.Component {
                 onSwipedTop={(cardIndex) => {
                   this.onSwipedTop(cardIndex);
                 }}
+                onSwipedBottom={() => {}}
                 onSwiped={(cardIndex) => {
                   alert(`card index ${cardIndex}`);
                 }}
@@ -118,7 +121,6 @@ class AccueilleScreen extends React.Component {
                 cardIndex={0}
                 stackSize={3}
                 backgroundColor={"white"}
-                disableBottomSwipe
                 overlayLabels={{
                   left: {
                     title: "1X",
@@ -183,7 +185,7 @@ class AccueilleScreen extends React.Component {
   };
 
   afficherDetail = () => {
-    alert("afficher detail de la competition");
+    alert("Les details sont en cours de developpement");
   };
 
   changePay = (value) => {
