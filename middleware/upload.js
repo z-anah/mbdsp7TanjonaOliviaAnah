@@ -3,20 +3,18 @@ const cors = require("cors");
 const multer = require("multer");
 const maxSize = 2 * 1024 * 1024;
 
-
 let storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "assets/img");
   },
   filename: (req, file, cb) => {
-    cb(null, file);
-  }
+    cb(null, file.originalname);
+  },
 });
 let uploadFile = multer({
-    storage: storage,
+  storage: storage,
   //limits: { fileSize: maxSize }
 }).single("profil");
-
 
 let uploadFileMiddleware = util.promisify(uploadFile);
 module.exports = uploadFileMiddleware;
