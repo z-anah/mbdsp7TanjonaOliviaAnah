@@ -374,7 +374,7 @@ ol {
 
 .section-title.sidebar-title h5 {
 	font-size: 20px;
-	color: #151618;
+	color: #f4f7ff;
 	font-weight: 500;
 }
 
@@ -395,7 +395,7 @@ ol {
 	bottom: 0;
 	height: 3px;
 	width: 100%;
-	background: #f2f2f2;
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,24,1) 80%, rgba(0,212,255,1) 100%);
 	content: "";
 }
 
@@ -426,7 +426,7 @@ ol {
 .primary-btn {
 	font-size: 16px;
 	color: #ffffff;
-	background: #dd1515;
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,24,1) 80%, rgba(0,212,255,1) 100%);
 	font-weight: 500;
 	letter-spacing: 1px;
 	display: inline-block;
@@ -574,7 +574,9 @@ ol {
 }
 
 .header__nav {
-	background: #dd1515;
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,24,1) 80%, rgba(0,212,255,1) 100%);
+
+
 }
 
 .header__nav .logo {
@@ -603,8 +605,8 @@ ol {
 .header__nav .nav-menu .main-menu li .dropdown {
 	position: absolute;
 	left: 0;
-	top: 115px;
-	width: 180px;
+	top: 10px;
+	width: 100px;
 	background: #ffffff;
 	z-index: 99;
 	opacity: 0;
@@ -621,7 +623,7 @@ ol {
 }
 
 .header__nav .nav-menu .main-menu li .dropdown li a {
-	padding: 5px 20px;
+	padding: 5px 10px;
 	display: block;
 	color: #151618;
 	-webkit-transition: all 0.3s;
@@ -989,8 +991,7 @@ ol {
 }
 
 .section-title.latest-title ul li:hover {
-	background: #dd1515;
-	color: #ffffff;
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,24,1) 80%, rgba(0,212,255,1) 100%);
 }
 
 .news-item {
@@ -1106,7 +1107,7 @@ ol {
 	font-size: 14px;
 	color: #ffffff;
 	font-weight: 500;
-	background: #2c2d2f;
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,24,1) 100%, rgba(0,69,255,1) 100%);
 	padding: 14px 0 13px;
 }
 
@@ -1132,7 +1133,7 @@ ol {
 }
 
 .points-table table tbody tr td.team-name {
-	text-align: left;
+	text-align: center;
 	width: 130px;
 }
 
@@ -1141,12 +1142,13 @@ ol {
 	width: 36px;
 	margin-right: 6px;
 	display: inline-block;
+	text-align: center;
 }
 
 .points-table table tbody tr td.team-name span {
 	display: inline-block;
 	font-size: 14px;
-	color: #2d2d2d;
+	color: #ffffff;
 	font-weight: 500;
 }
 
@@ -1156,7 +1158,7 @@ ol {
 	text-transform: uppercase;
 	font-weight: 500;
 	letter-spacing: 1px;
-	background: #f2f2f2;
+	background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(121,9,24,1) 100%, rgba(0,69,255,1) 100%);
 	display: block;
 	text-align: center;
 	padding: 15px;
@@ -2649,7 +2651,7 @@ ol {
 	.offcanvas-menu-wrapper .header__top--canvas .ht-info ul li {
 		list-style: none;
 		color: #636363;
-		line-height: 28px;
+		line-height: 10px;
 	}
 	.offcanvas-menu-wrapper .header__top--canvas .ht-info ul li a {
 		display: block;
