@@ -3,7 +3,7 @@ let mongoose = require("mongoose");
 var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 let Schema = mongoose.Schema;
 
-let JoueurSchema = Schema({
+let JoueursSchema = Schema({
  idjoueur: Number,
  idposte: Number,
  idequipe: Number,
@@ -17,4 +17,4 @@ let JoueurSchema = Schema({
 
 JoueurSchema.plugin(aggregatePaginate);
 
-module.exports = mongoose.model("Joueur", JoueurSchema,"Joueur");
+module.exports = mongoose.model("Joueurs", JoueurSchema,"Joueurs");

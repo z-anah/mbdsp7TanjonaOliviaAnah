@@ -3,7 +3,7 @@ let mongoose = require("mongoose");
 var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 let Schema = mongoose.Schema;
 
-let FormationSchema = Schema({
+let FormationsSchema = Schema({
  idformation: Number,
  nomformation: String
 });
@@ -11,4 +11,4 @@ let FormationSchema = Schema({
 
 FormationSchema.plugin(aggregatePaginate);
 
-module.exports = mongoose.model("Formation", FormationSchema,"Formation");
+module.exports = mongoose.model("Formations", FormationsSchema,"Formations");

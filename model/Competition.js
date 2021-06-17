@@ -3,7 +3,7 @@ let mongoose = require("mongoose");
 var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 let Schema = mongoose.Schema;
 
-let CompetitionSchema = Schema({
+let CompetitionsSchema = Schema({
  idcompetition: Number,
  nomcompetition: String,
  datedebutcompetition: Date,
@@ -13,4 +13,4 @@ let CompetitionSchema = Schema({
 
 CompetitionSchema.plugin(aggregatePaginate);
 
-module.exports = mongoose.model("Competition", CompetitionSchema,"Competition");
+module.exports = mongoose.model("Competitions", CompetitionsSchema,"Competitions");

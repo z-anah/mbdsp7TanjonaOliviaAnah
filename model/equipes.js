@@ -3,7 +3,7 @@ let mongoose = require("mongoose");
 var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 let Schema = mongoose.Schema;
 
-let EquipeSchema = Schema({
+let EquipesSchema = Schema({
  idequipe: Number,
  idformation: Number,
  nomequipe: String,
@@ -15,4 +15,4 @@ let EquipeSchema = Schema({
 
 EquipeSchema.plugin(aggregatePaginate);
 
-module.exports = mongoose.model("Equipe", EquipeSchema,"Equipe");
+module.exports = mongoose.model("Equipes", EquipeSchema,"Equipes");

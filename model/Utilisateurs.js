@@ -6,15 +6,16 @@ let Schema = mongoose.Schema;
 
 let UtilisateurSchema = Schema({
  idUtilisateur: Number,
- nomComplet: String,
+ nomCompletUtilisateur: String,
  emailUtilisateur : String,
  dateNaissanceUtilisateur : Date,
  profilUtilisateur : String,
- soldeUtilisateur : Double,
+ motdepasseUtilisateur: String,
+ soldeUtilisateur : Number,
  idRole : Number
 });
 
 
 UtilisateurSchema.plugin(aggregatePaginate);
 
-module.exports = mongoose.model("Utilisateur", UtilisateurSchema,"Utilisateur");
+module.exports = mongoose.model("Utilisateurs", UtilisateurSchema,"utilisateurs");

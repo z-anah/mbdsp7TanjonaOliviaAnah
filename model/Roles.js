@@ -3,12 +3,12 @@ let mongoose = require("mongoose");
 var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 let Schema = mongoose.Schema;
 
-let RoleSchema = Schema({
+let RolesSchema = Schema({
  idRole: Number,
  nomRole: String
 });
 
 
-RoleSchema.plugin(aggregatePaginate);
+RolesSchema.plugin(aggregatePaginate);
 
-module.exports = mongoose.model("Role", RoleSchema,"Role");
+module.exports = mongoose.model("Roles", RolesSchema,"roles");
