@@ -11,4 +11,11 @@ function testDoublonMail(req,res){
 		else res.send({status : false,message : value.message});
 	});
 }
-module.exports = { signUp ,testDoublonMail }
+
+function authentification(req,res){
+	serviceUser.auth(req,res).then((value) =>{
+		if(value.auth) res.send({auth : true, token : value.token });
+		else res.send({auth : false,message : "Email ou mot de passe invalide !"});
+	});
+}
+module.exports = { signUp ,testDoublonMail , authentification}

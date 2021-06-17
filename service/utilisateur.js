@@ -58,4 +58,35 @@ function register(req,res){
         throw err;
     }
 }
-module.exports = { register , testDoublonMail }
+
+// Récupérer un utilisateur avec email et password en post
+function auth(req, res){
+    let email = req.body.emailUtilisateur;
+    let userPasssword = req.body.motdepasseUtilisateur;
+    try{
+        return new Promise((resolve, reject) => {
+            var user = new Utilisateurs();
+            Utilisateurs.findOne({emailUtilisateur: email}, (err, user) =>{
+                if(err) res.send({ auth: false, token: null});
+                else {
+                    if(user!= null){
+                        var isValidPassword = bcrypt.compareSync(userPasssword, user.motdepasseUtilisateur);
+                        if(user && isValidPassword){
+                            var token = jwt.sign({ id: user.idUtilisateur , nom:user.nomCompletUtilisateur,roles: user.idRole}, config.secret, {
+                                expiresIn: 120 // expires in 120 second
+                            });
+                            resolve({ auth: true, token: token});
+                        }
+                        else resolve({ auth: false, token:null});
+                    }
+                    else resolve({ auth: false, token: null}); 
+                }    
+            })
+        });
+    }
+    catch(err){
+        throw err;
+    }
+}
+
+module.exports = { register , testDoublonMail , auth}
