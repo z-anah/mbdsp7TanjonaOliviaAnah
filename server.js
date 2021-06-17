@@ -58,6 +58,8 @@ app.route(prefix + "/upload").post(controller.upload);
 //app.route(prefix + "/download").get(controller.download);
 // route pour matieres
 app.route(prefix + "/inscription").post(userController.signUp);
+app.route(prefix + "/testDoublonMail").post(userController.testDoublonMail);
+
 app.route(prefix + "/listRoles").get(roleController.listRoles);
 
 // On démarre le serveur

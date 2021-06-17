@@ -16,10 +16,10 @@ function getSequenceId(req,res){
         }); 
     })
 }
-function testDoublonMail(email){
+function testDoublonMail(req,res){
     try{
         return new Promise((resolve, reject) => {
-            Utilisateurs.findOne({emailUtilisateur: email}, (err, userTest) =>{
+            Utilisateurs.findOne({emailUtilisateur: req.body.emailUtilisateur}, (err, userTest) =>{
                 if(err) reject(err);
                 else{
                     if(userTest != null) resolve(true)
@@ -37,32 +37,25 @@ function register(req,res){
     try{
         return new Promise((resolve, reject) => {
             var user = new Utilisateurs();
-            testDoublonMail(req.body.emailUtilisateur).then((value) =>{
-                if(value){ // doublon
-                    resolve({status : false, message : "Email utilisateur dupliqué ."})
-                }
-                else{
-                    getSequenceId(req,res).then((value) =>{
-                        user.idUtilisateur = value;
-                        user.nomCompletUtilisateur = req.body.nomCompletUtilisateur;
-                        user.emailUtilisateur = req.body.emailUtilisateur
-                        user.dateNaissanceUtilisateur = req.body.dateNaissanceUtilisateur;
-                        user.profilUtilisateur = req.body.profilUtilisateur;
-                        user.soldeUtilisateur = 0;
-                        user.idRole = req.body.idRole;
-                        var hashedPassword = bcrypt.hashSync(req.body.motdepasseUtilisateur, 10);
-                        user.motdepasseUtilisateur = hashedPassword;
-                        user.save( (err) => {
-                            if(err) reject (err);
-                            else resolve({status: true});
-                        })
-                    })
-                }
-            });
+            getSequenceId(req,res).then((value) =>{
+                user.idUtilisateur = value;
+                user.nomCompletUtilisateur = req.body.nomCompletUtilisateur;
+                user.emailUtilisateur = req.body.emailUtilisateur
+                user.dateNaissanceUtilisateur = req.body.dateNaissanceUtilisateur;
+                user.profilUtilisateur = req.body.profilUtilisateur;
+                user.soldeUtilisateur = 0;
+                user.idRole = req.body.idRole;
+                var hashedPassword = bcrypt.hashSync(req.body.motdepasseUtilisateur, 10);
+                user.motdepasseUtilisateur = hashedPassword;
+                user.save( (err) => {
+                    if(err) reject (err);
+                    else resolve({status: true});
+                })
+            })
         });
     }
     catch(err){
         throw err;
     }
 }
-module.exports = { register }
+module.exports = { register , testDoublonMail }

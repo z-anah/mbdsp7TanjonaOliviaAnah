@@ -5,4 +5,10 @@ function signUp(req,res){
 		else res.send({status : false,message : value.message});
 	});
 }
-module.exports = { signUp }
+function testDoublonMail(req,res){
+	serviceUser.testDoublonMail(req,res).then((value) =>{
+		if(value) res.send({status : true, message : "Email utilisateur dupliqué ."});
+		else res.send({status : false,message : value.message});
+	});
+}
+module.exports = { signUp ,testDoublonMail }
