@@ -91,7 +91,6 @@ namespace pari.src.dao.view.user_control
 
         #endregion
 
-        private System.Windows.Forms.Label title;
         private System.Windows.Forms.Label labelPari;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;

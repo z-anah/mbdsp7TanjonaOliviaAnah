@@ -85,12 +85,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(905, 533);
-            this.Controls.Add(this.login1);
+            this.Controls.Add(this.competition1);
             this.Controls.Add(this.match1);
             this.Controls.Add(this.pariSideBar1);
+            this.Controls.Add(this.login1);
             this.Controls.Add(this.joueur1);
             this.Controls.Add(this.equipe1);
-            this.Controls.Add(this.competition1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Pari";

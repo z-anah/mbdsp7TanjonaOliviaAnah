@@ -16,8 +16,12 @@ namespace pari
         public Form1()
         {
             InitializeComponent();
-            //LoginInit();
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
+            MinimizeBox = false;
             WelcomeInit();
+            // LoginInit();
+            pariSideBar1Init();
         }
         private void WelcomeInit()
         {
@@ -26,41 +30,29 @@ namespace pari
             this.equipe1.Visible = false;
             this.competition1.Visible = false;
             this.pariSideBar1.Visible = false;
-            this.login1.Visible = true;
-            this.login1.Button.Click += new EventHandler(login1SeConnecter);
         }
-        private void login1SeConnecter(object sender, EventArgs e)
+        private void login1SeConnecter(object sender, EventArgs ev)
         {
-            MessageBox.Show("You have clicked Ok Button");
+            try
+            {
+                login1.isValide();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("PARI ERROR: " + e.Message);
+            }
         }
         private void LoginInit()
         {
-            this.Size = new Size(320, 400);
+            this.login1.Visible = true;
+            this.login1.Button.Click += new EventHandler(login1SeConnecter);
+        }
 
-            this.login1.TextBox.Label.Text = "Email";
-            this.login1.TextBox.TextBox.PlaceholderText = "Email";
-            this.login1.TextBox.LabelError.Text = "";
-
-            this.login1.MotPasse.Label.Text = "Mot de passe";
-            this.login1.MotPasse.TextBox.PlaceholderText = "Mot de passe";
-            this.login1.MotPasse.LabelError.Text = "";
-            this.login1.MotPasse.TextBox.PasswordChar = '*';
-
-            //this.pariLogin.TextBox
-
-            this.login1.LabelError.Text = "";
-
-            /*DialogResult res = MessageBox.Show("Are you sure you want to Delete", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-            if (res == DialogResult.OK)
-            {
-                MessageBox.Show("You have clicked Ok Button");
-                //Some task…  
-            }
-            if (res == DialogResult.Cancel)
-            {
-                MessageBox.Show("You have clicked Cancel Button");
-                //Some task…  
-            }*/
+        private void pariSideBar1Init()
+        {
+            WelcomeInit();
+            this.pariSideBar1.Visible = true;
+            this.competition1.Visible = true;
         }
 
         private void pariSideBar1_Load(object sender, EventArgs e)

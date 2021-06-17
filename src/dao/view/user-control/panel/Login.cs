@@ -1,10 +1,12 @@
-﻿using pari.src.dao.view.user_control;
+﻿using pari.src.dao.utilities;
+using pari.src.dao.view.user_control;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace pari.src.dao.view
@@ -24,8 +26,36 @@ namespace pari.src.dao.view
             textBoxEmail.LabelError.Text = "";
             textBoxPassword.Label.Text = "Mots de passe";
             textBoxPassword.TextBox.PlaceholderText = "Mots de passe";
+            textBoxPassword.TextBox.PasswordChar = '*';
             textBoxPassword.LabelError.Text = "";
             pariLabelError1.Label.Text = "";
+        }
+
+        public bool isValide()
+        {
+            try
+            {
+                textBoxEmail.LabelError.Text = "";
+                textBoxPassword.LabelError.Text = "";
+                String email = textBoxEmail.TextBox.Text;
+                MyRegex.isEmail(email);
+            }
+            catch (Exception e)
+            {
+                textBoxEmail.LabelError.Text = e.Message;
+                throw e;
+            }
+            try
+            {
+                String mdp = textBoxPassword.TextBox.Text;
+                MyRegex.isEmpty(mdp);
+                return true;
+            }
+            catch (Exception e)
+            {
+                textBoxPassword.LabelError.Text = e.Message;
+                throw e;
+            }
         }
 
         public PariTextBox TextBox

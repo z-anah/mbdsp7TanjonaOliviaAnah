@@ -61,7 +61,7 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTitle1.Size = new System.Drawing.Size(200, 23);
             this.pariTitle1.TabIndex = 0;
             this.pariTitle1.Load += new System.EventHandler(this.pariTitle1_Load);
-            this.pariTitle1.Label.Text = "haha";
+            this.pariTitle1.Label.Text = "Ajouter une compétition";
             // 
             // pariTextBox1
             // 

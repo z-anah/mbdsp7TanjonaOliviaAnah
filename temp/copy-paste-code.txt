@@ -1,0 +1,20 @@
+block try catch
+    try
+    {
+
+    }
+    catch (Exception e)
+    {
+        throw e;
+    }
+
+block try catch view
+    try
+    {
+
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine("PARI ERROR: " + e.Message);
+    }
+
