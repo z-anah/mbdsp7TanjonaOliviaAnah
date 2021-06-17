@@ -13,7 +13,6 @@ import { GestionUserComponent } from './back/pages/gestion-user/gestion-user.com
 import { AuthComponent } from './auth/auth.component';
 import { RegisterComponent } from './back/pages/gestion-moderator/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
-import { JwtModule } from '@auth0/angular-jwt';
 const routes:Routes = [
   { path: '', component: BackComponent},
   { path: 'register', component: RegisterComponent},
