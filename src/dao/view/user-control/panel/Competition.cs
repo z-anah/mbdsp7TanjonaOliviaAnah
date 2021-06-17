@@ -57,7 +57,7 @@ namespace pari.src.dao.view.user_control.panel
             // pariTitle1
             // 
             this.pariTitle1.Location = new System.Drawing.Point(3, 3);
-            this.pariTitle1.Name = "pariTitle1";
+            this.pariTitle1.Name = "Ajouter une compétition";
             this.pariTitle1.Size = new System.Drawing.Size(200, 23);
             this.pariTitle1.TabIndex = 0;
             this.pariTitle1.Load += new System.EventHandler(this.pariTitle1_Load);

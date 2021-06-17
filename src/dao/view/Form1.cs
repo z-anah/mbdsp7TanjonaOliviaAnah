@@ -21,6 +21,17 @@ namespace pari
         }
         private void WelcomeInit()
         {
+            this.match1.Visible = false;
+            this.joueur1.Visible = false;
+            this.equipe1.Visible = false;
+            this.competition1.Visible = false;
+            this.pariSideBar1.Visible = false;
+            this.login1.Visible = true;
+            this.login1.Button.Click += new EventHandler(login1SeConnecter);
+        }
+        private void login1SeConnecter(object sender, EventArgs e)
+        {
+            MessageBox.Show("You have clicked Ok Button");
         }
         private void LoginInit()
         {

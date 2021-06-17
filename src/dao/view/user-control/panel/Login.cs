@@ -19,6 +19,13 @@ namespace pari.src.dao.view
         public Login()
         {
             InitializeComponent();
+            textBoxEmail.Label.Text = "Email";
+            textBoxEmail.TextBox.PlaceholderText = "Email";
+            textBoxEmail.LabelError.Text = "";
+            textBoxPassword.Label.Text = "Mots de passe";
+            textBoxPassword.TextBox.PlaceholderText = "Mots de passe";
+            textBoxPassword.LabelError.Text = "";
+            pariLabelError1.Label.Text = "";
         }
 
         public PariTextBox TextBox

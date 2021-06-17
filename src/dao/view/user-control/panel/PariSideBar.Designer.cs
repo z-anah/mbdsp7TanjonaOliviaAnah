@@ -33,8 +33,8 @@ namespace pari.src.dao.view.user_control.panel
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -68,7 +68,7 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(240, 512);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(247, 512);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // pictureBox1
@@ -97,14 +97,6 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel3.Size = new System.Drawing.Size(168, 23);
             this.flowLayoutPanel3.TabIndex = 0;
             // 
-            // flowLayoutPanel4
-            // 
-            this.flowLayoutPanel4.Controls.Add(this.label2);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 32);
-            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
-            this.flowLayoutPanel4.Size = new System.Drawing.Size(168, 23);
-            this.flowLayoutPanel4.TabIndex = 1;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -114,6 +106,14 @@ namespace pari.src.dao.view.user_control.panel
             this.label1.Size = new System.Drawing.Size(40, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.label2);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 32);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(168, 23);
+            this.flowLayoutPanel4.TabIndex = 1;
             // 
             // label2
             // 
@@ -207,7 +207,7 @@ namespace pari.src.dao.view.user_control.panel
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanel1);
             this.Name = "PariSideBar";
-            this.Size = new System.Drawing.Size(240, 512);
+            this.Size = new System.Drawing.Size(247, 512);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.flowLayoutPanel2.ResumeLayout(false);
