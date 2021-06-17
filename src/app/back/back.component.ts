@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Service } from 'app/service/Service';
 
 @Component({
   selector: 'app-back',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BackComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service : Service) { }
 
   ngOnInit() {
+    if(this.service.isExpiredToken || this.service.loggedIn == null) {
+      this.service.logOut();
+    }
   }
-
 }

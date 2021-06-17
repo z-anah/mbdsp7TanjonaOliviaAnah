@@ -3,6 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Utilisateurs } from 'app/model/utilisateurs';
 import { Roles } from 'app/model/roles';
+//import { JwtHelperService } from  '@auth0/angular-jwt';
+import { Router } from '@angular/router';
+//var helper = new JwtHelperService();
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +13,7 @@ import { Roles } from 'app/model/roles';
 export class Service {
   private baseUrl = "http://localhost:8010/api";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router:Router) { }
 
   //upload profil
   upload(form: FormData): Observable<any> {
@@ -31,4 +34,53 @@ export class Service {
   listRole() : Observable<any> {
     return this.http.get(this.baseUrl + "/listRoles");
   }
+
+  //auth
+  auth(user: Utilisateurs): Observable<any> {
+    return this.http.post(this.baseUrl + "/authentification",user);
+  }
+
+  //decode token pour avoir les info réel
+  setInfoUserByToken(){
+    var token = localStorage.getItem('access_token');
+   /* var decodedToken = helper.decodeToken(token);
+    localStorage.setItem('id', decodedToken.idUtilisateur);
+    localStorage.setItem('nom', decodedToken.nomCompletUtilisateur);
+    localStorage.setItem('role', decodedToken.idRole);*/
+  }
+
+  //test expiration token
+  public get isExpiredToken(): boolean{
+    var token = localStorage.getItem('access_token');
+   /* var isExpired = helper.isTokenExpired(token);*/
+    return true;
+  }
+
+  //resultat appel api login si ok
+  redirectHome(reponse){
+      localStorage.setItem('access_token', reponse.token);
+      this.setInfoUserByToken()
+      this.router.navigate(["/back"])
+      .then(() => {
+        window.location.reload();
+      });
+  }
+
+  //logout
+  logOut() {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('nom');
+    localStorage.removeItem('id');
+    localStorage.removeItem('role');
+    this.router.navigate(["/authentification"])
+    .then(() => {
+      window.location.reload();
+    });
+  }
+
+  //test si connecté
+  public get loggedIn(): boolean{
+    return localStorage.getItem('access_token') !==  null;
+  }
+
 }

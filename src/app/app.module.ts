@@ -14,7 +14,7 @@ import { AuthComponent } from './auth/auth.component';
 import { RegisterComponent } from './back/pages/gestion-moderator/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 const routes:Routes = [
-  { path: '', component: AuthComponent},
+  { path: '', component: BackComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'authentification', component: AuthComponent},
   { path: 'back', component: BackComponent, children: [
