@@ -110,6 +110,7 @@ export class RegisterComponent implements OnInit {
                     this.invalid_register = false;
                     this.registerForm.reset();
                     this.valid_register_msg = res.message;
+
                   }
                   else {
                     this.invalid_register = true;
