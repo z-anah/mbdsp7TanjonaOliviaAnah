@@ -16,8 +16,6 @@ export class AuthComponent implements OnInit {
 
   title = "Authentification";
   invalid_login = false;
-  invalid_register = false;
-  valid_register = false;
 
   email : AbstractControl;
   password : AbstractControl;
@@ -33,13 +31,11 @@ export class AuthComponent implements OnInit {
 	ngOnInit() {
     this.authForm = this.formBuilder.group({
       email :['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
-      password: ['', [Validators.required, Validators.minLength(this.minLength)]],
-      role: [null, [Validators.required]]
+      password: ['', [Validators.required, Validators.minLength(this.minLength)]]
     });
 
     this.email = this.authForm.controls['email'];
     this.password = this.authForm.controls['password'];
-    this.role = this.authForm.controls['role'];
 	}
 	auth(){
     //let user = new User();
@@ -55,11 +51,16 @@ export class AuthComponent implements OnInit {
             this.invalid_login = true;
             this.router.navigate(["/login"]);
           }
-        });*/
-		this.router.navigate(["/back"])
-			.then(() => {
-				window.location.reload();
-			});
+          });*/
+          if(this.authForm.value.email !== "tanjona@gmail.com"){
+             this.invalid_login = true;
+             this.router.navigate(["/authentification"]);
+          }
+          else{
+            this.router.navigate(["/back"])
+            .then(() => {
+              window.location.reload();
+            });
+          }
 	}
-
 }

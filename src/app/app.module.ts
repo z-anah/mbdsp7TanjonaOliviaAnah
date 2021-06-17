@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { BackComponent } from './back/back.component';
@@ -12,7 +11,8 @@ import { FooterComponent } from './back/footer/footer.component';
 import { DashboardComponent } from './back/pages/dashboard/dashboard.component';
 import { GestionUserComponent } from './back/pages/gestion-user/gestion-user.component';
 import { AuthComponent } from './auth/auth.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './back/pages/gestion-moderator/register/register.component';
+import { HttpClientModule } from '@angular/common/http';
 const routes:Routes = [
   { path: '', component: AuthComponent},
   { path: 'register', component: RegisterComponent},
@@ -29,6 +29,10 @@ const routes:Routes = [
     {
       path: 'gestionUtilisateur',
       component: GestionUserComponent
+    },
+    {
+      path: 'ajoutModerateur',
+      component: RegisterComponent
     }
   ]}
 ]
@@ -48,8 +52,8 @@ const routes:Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

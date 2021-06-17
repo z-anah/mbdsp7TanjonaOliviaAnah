@@ -1,5 +1,10 @@
-<div class="container">
+<h1 class="h3 mb-2 text-gray-800">Gestion modérateur </h1>
+<p class="mb-4">Chart.js is a third party plugin that is used to generate the charts in this theme.
+		The charts below have been customized - for further customization options, please visit the <a
+				target="_blank" href="https://www.chartjs.org/docs/latest/">official Chart.js
+				documentation</a>.</p>
 
+<div class="container">
   <div class="card o-hidden border-0 shadow-lg my-5">
       <div class="card-body p-0">
           <!-- Nested Row within Card Body -->
@@ -13,13 +18,13 @@
               <div class="col-lg-7">
                   <div class="p-5">
                       <div class="text-center">
-                          <h1 class="h4 text-gray-900 mb-4">Inscription</h1>
+                          <h1 class="h4 text-gray-900 mb-4">Ajout modérateur</h1>
                       </div>
                       <form [formGroup] = "registerForm" class="user" (submit)="register()" method="post">
                           <div class="form-group">
                               <label for="">Nom complet<span class='required-indicator'>*</span></label>
                               <input [class.is-invalid] = "registerForm.get('nomComplet').invalid && registerForm.get('nomComplet').touched" formControlName = "nomComplet" type="text" class="form-control form-control-user"
-                                placeholder="Entrer nom complet">
+                                placeholder="Entrer nom complet" (change) ="onInputChange($event)">
                                 <div *ngIf="(registerForm.get('nomComplet').invalid) || registerForm.get('nomComplet').dirty">
                                   <small class="error_login" *ngIf="(registerForm.get('nomComplet').touched && registerForm.get('nomComplet').errors?.required)">Nom complet obligatoire.</small>
                                 </div>
@@ -28,7 +33,7 @@
                               <div class="col-sm-6 mb-3 mb-sm-0">
                                   <label for="">Email<span class='required-indicator'>*</span></label>
                                   <input [class.is-invalid] = "registerForm.get('email').invalid && registerForm.get('email').touched" formControlName = "email" type="email" class="form-control form-control-user"
-                                      placeholder="Entrer adresse éléctronique">
+                                      placeholder="Entrer adresse éléctronique" (change) ="onInputChange($event)">
                                       <div *ngIf="(registerForm.get('email').invalid) || registerForm.get('email').dirty">
                                         <small class="error_login" *ngIf="(registerForm.get('email').touched && registerForm.get('email').errors?.required)">Email obligatoire.</small>
                                         <small class="error_login" *ngIf="(registerForm.get('email').touched && registerForm.get('email').errors?.pattern)">Email invalide.</small>
@@ -37,7 +42,7 @@
                               <div class="col-sm-6">
                                   <label for="">Date de naissance<span class='required-indicator'>*</span></label>
                                   <input [class.is-invalid] = "registerForm.get('dateNaissance').invalid && registerForm.get('dateNaissance').touched" formControlName = "dateNaissance" type="date" class="form-control form-control-user"
-                                      placeholder="Entrer date naissance">
+                                      placeholder="Entrer date naissance" (change) ="onInputChange($event)">
                                       <div *ngIf="(registerForm.get('dateNaissance').invalid) || registerForm.get('dateNaissance').dirty">
                                         <small class="error_login" *ngIf="(registerForm.get('dateNaissance').touched && registerForm.get('dateNaissance').errors?.required)">Date naissance obligatoire.</small>
                                       </div>
@@ -47,7 +52,7 @@
                               <div class="col-sm-6 mb-3 mb-sm-0">
                                   <label for="">Mot de passe<span class='required-indicator'>*</span></label>
                                   <input [class.is-invalid] = "registerForm.get('password').invalid && registerForm.get('password').touched" formControlName = "password" type="password" class="form-control form-control-user"
-                                      placeholder="Entrer mot de passe">
+                                      placeholder="Entrer mot de passe" (change) ="onInputChange($event)">
                                       <div *ngIf="(registerForm.get('password').invalid) || registerForm.get('password').dirty">
                                         <small class="error_login" *ngIf="(registerForm.get('password').touched && registerForm.get('password').errors?.required)">Mot de passe obligatoire.</small>
                                         <small class="error_login" *ngIf="(registerForm.get('password').touched && registerForm.get('password').errors?.minlength)">Mot de passe doit supérieur {{minLength}} caractères.</small>
@@ -56,7 +61,7 @@
                               <div class="col-sm-6">
                                 <label for="">Confirmation<span class='required-indicator'>*</span></label>
                                   <input [class.is-invalid] = "registerForm.get('repassword').invalid && registerForm.get('repassword').touched" formControlName = "repassword" type="password" class="form-control form-control-user"
-                                       placeholder="Entrer confirmation">
+                                       placeholder="Entrer confirmation" (change) ="onInputChange($event)">
                                     <div *ngIf="(registerForm.get('repassword').invalid) || registerForm.get('repassword').dirty">
                                     <small class="error_login" *ngIf="(registerForm.get('repassword').touched && registerForm.get('repassword').errors?.required)">Confirmation mot de passe obligatoire.</small>
                                     <small class="error_login" *ngIf="(registerForm.get('repassword').touched && registerForm.get('repassword').errors?.minlength)">Confirmation mot de passe doit supérieur {{minLength}} caractères.</small>
@@ -67,26 +72,26 @@
                           <div class="form-group">
                             <label for="role">Rôle</label>
                             <select  formControlName="role" name="role" class="form-control selectRole">
-                              <option [value]="null" disabled>Choix rôle</option>
-                              <option *ngFor="let country of listRole" [value]="country.id">{{country.name}}</option>
+                                <option  *ngFor="let role of listRole"  [value]="role.idRole" disabled>{{role.nomRole}}</option>
                             </select>
                           </div>
                           <div class="form-group">
                             <label for="">Profil</label>
-                            <input formControlName = "profil" type="file" class="form-control form-control-user" id="exampleInputEmail"
+                            <input formControlName = "profil" type="file" class="form-control form-control-user" (change)="onFileChange($event)"
                                 placeholder="Votre profil">
                               <div *ngIf="(registerForm.get('profil').invalid) || registerForm.get('profil').dirty">
                                 <small class="error_login" *ngIf="(registerForm.get('profil').touched && registerForm.get('profil').errors?.required)">Profil obligatoire.</small>
                               </div>
                           </div>
                           <button class="btn btn-primary btn-user btn-block" [disabled] ="!registerForm.valid">
-                              S'inscrire
+                              Enregistrer
                           </button>
                           <hr>
-                          <div class="text-center">
-                            <a class="btn btn-danger btn-user btn-block" routerLink="/authentification">
-                                Se connecter
-                            </a>
+                          <div *ngIf="invalid_register" class="text-center">
+                            <h5 class="error_auth"><i class="fa fa-times"></i>  {{invalid_register_msg}} </h5>
+                          </div>
+                          <div *ngIf="valid_register" class="text-center">
+                            <h5 class="valid_register"><i class="fa fa-check" aria-hidden="true"></i> {{ valid_register_msg }} </h5>
                           </div>
                       </form>
                   </div>
@@ -94,5 +99,4 @@
           </div>
       </div>
   </div>
-
 </div>

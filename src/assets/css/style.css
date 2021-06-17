@@ -30,3 +30,9 @@
 
 }
 
+.error_auth{
+  color: red;
+}
+.valid_register{
+  color: green;
+}

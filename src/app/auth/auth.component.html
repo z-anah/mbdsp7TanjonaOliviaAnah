@@ -47,12 +47,11 @@
                                         <a class="small" href="">Mot de passe oublié!</a>
                                       </div>
                                       <hr>
-                                      <div class="text-center">
-                                        <a class="btn btn-danger btn-user btn-block" routerLink="/register">
-                                            S'inscrire
-                                        </a>
+                                      <div *ngIf="invalid_login" class="text-center">
+                                          <h5 class="error_auth"><i class="fa fa-times"></i>   Email ou mot de passe invalide</h5>
                                       </div>
                                   </form>
+
                               </div>
                           </div>
                       </div>
