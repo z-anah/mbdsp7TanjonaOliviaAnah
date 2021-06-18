@@ -3,9 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Utilisateurs } from 'app/model/utilisateurs';
 import { Roles } from 'app/model/roles';
-//import { JwtHelperService } from  '@auth0/angular-jwt';
+import { JwtHelperService } from  '@auth0/angular-jwt';
 import { Router } from '@angular/router';
-//var helper = new JwtHelperService();
+var helper = new JwtHelperService();
 
 @Injectable({
   providedIn: 'root'
@@ -43,17 +43,17 @@ export class Service {
   //decode token pour avoir les info réel
   setInfoUserByToken(){
     var token = localStorage.getItem('access_token');
-   /* var decodedToken = helper.decodeToken(token);
+    var decodedToken = helper.decodeToken(token);
     localStorage.setItem('id', decodedToken.idUtilisateur);
     localStorage.setItem('nom', decodedToken.nomCompletUtilisateur);
-    localStorage.setItem('role', decodedToken.idRole);*/
+    localStorage.setItem('role', decodedToken.idRole);
   }
 
   //test expiration token
   public get isExpiredToken(): boolean{
     var token = localStorage.getItem('access_token');
-   /* var isExpired = helper.isTokenExpired(token);*/
-    return true;
+    var isExpired = helper.isTokenExpired(token);
+    return isExpired;
   }
 
   //resultat appel api login si ok
@@ -72,15 +72,13 @@ export class Service {
     localStorage.removeItem('nom');
     localStorage.removeItem('id');
     localStorage.removeItem('role');
-    this.router.navigate(["/authentification"])
-    .then(() => {
-      window.location.reload();
-    });
+    this.router.navigate(["/authentification"]);
   }
 
   //test si connecté
   public get loggedIn(): boolean{
-    return localStorage.getItem('access_token') !==  null;
+    if(localStorage.getItem('access_token') !==  null) return true;
+    else return false;
   }
 
 }

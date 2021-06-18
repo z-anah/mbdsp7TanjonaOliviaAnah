@@ -11,8 +11,8 @@ export class BackComponent implements OnInit {
   constructor(private service : Service) { }
 
   ngOnInit() {
-    if(this.service.isExpiredToken || this.service.loggedIn == null) {
+    /*if(this.service.isExpiredToken || !this.service.loggedIn) {
       this.service.logOut();
-    }
+    }*/
   }
 }
