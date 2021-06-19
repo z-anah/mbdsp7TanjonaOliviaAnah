@@ -1,6 +1,7 @@
 const util = require("util");
 const cors = require("cors");
 const multer = require("multer");
+const config = require("../config/index");
 const maxSize = 5 * 1024 * 1024;
 
 let storage = multer.diskStorage({
@@ -10,13 +11,13 @@ let storage = multer.diskStorage({
   filename: (req, file, cb) => {
     let extArray = file.mimetype.split("/");
     let extension = extArray[extArray.length - 1];
-    cb(null, file.fieldname + '_' + Date.now()+ '.' +extension)
+    cb(null, file.fieldname + "_" + Date.now() + "." + extension);
   },
 });
 let uploadFile = multer({
   storage: storage,
   limits: { fileSize: maxSize },
-  fileFilter : (req, file, cb) => {
+  fileFilter: (req, file, cb) => {
     if (
       file.mimetype == "image/png" ||
       file.mimetype == "image/jpg" ||
@@ -25,7 +26,7 @@ let uploadFile = multer({
       cb(null, true);
     } else {
       cb(null, false);
-      return cb(new Error("Fichier autorisé :  .png, .jpg et .jpeg"));
+      return cb(new Error(config.msg[req.body.loc || "FR"].MSG_E0005));
     }
   },
 }).single("profil");
