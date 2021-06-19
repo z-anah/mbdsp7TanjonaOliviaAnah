@@ -15,7 +15,21 @@ import { RegisterComponent } from './back/pages/gestion-moderator/register/regis
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 const routes:Routes = [
-  { path: '', component: BackComponent},
+  { path: '', component: BackComponent,children: [
+    {
+      path: '',
+      component: DashboardComponent
+    },
+    {
+      path: 'gestionUtilisateur',
+      component: GestionUserComponent
+    },
+    {
+      path: 'ajoutModerateur',
+      component: RegisterComponent
+    }
+  ]
+  },
   { path: 'register', component: RegisterComponent},
   { path: 'authentification', component: AuthComponent},
   { path: 'back', component: BackComponent, children: [
