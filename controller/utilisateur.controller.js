@@ -1,10 +1,15 @@
 var serviceUser = require("../service/utilisateur");
 function signUp(req, res) {
-  serviceUser.register(req, res).then((value) => {
-    if (value.status)
-      res.send({ status: true, message: "Ajout modérateur réussi !" });
-    else res.send({ status: false, message: value.message });
-  });
+  serviceUser
+    .register(req, res)
+    .then((value) => {
+      if (value.status)
+        res.send({ status: true, message: "Ajout modérateur réussi !" });
+      else res.send({ status: false, message: value.message });
+    })
+    .catch((err) => {
+      res.send({ status: false, message: err.message });
+    });
 }
 function testDoublonMail(req, res) {
   serviceUser.testDoublonMail(req, res).then((value) => {
