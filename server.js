@@ -63,36 +63,3 @@ app.route(prefix + "/listRoles").get(roleController.listRoles);
 app.listen(port, "0.0.0.0");
 console.log("Serveur démarré sur http://localhost:" + port);
 module.exports = app;
-
-//global.__basedir = __dirname;
-// const cors = require("cors");
-// const express = require("express");
-// const app = express();
-
-// global.__basedir = __dirname;
-
-// var corsOptions = {
-//   origin: "http://localhost:8010/api"
-// };
-
-// // app.use(function (req, res, next) {
-// //   res.header("Access-Control-Allow-Origin", "*");
-// //   res.header(
-// //     "Access-Control-Allow-Headers",
-// //     "Origin, X-Requested-With, Content-Type, Accept, x-access-token"
-// //   );
-// //   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-// //   next();
-// // });
-
-// //app.use(cors(corsOptions));
-
-// const initRoutes = require("./routes/route");
-
-// app.use(express.urlencoded({ extended: true }));
-// initRoutes(app);
-
-// let port = 8010;
-// app.listen(port, () => {
-//   console.log(`Running at localhost:${port}`);
-// });

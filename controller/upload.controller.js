@@ -1,25 +1,25 @@
 const uploadFile = require("../middleware/upload");
 
-async function upload(req,res){
-  try{
-   await uploadFile(req, res);
-    if (req.file == undefined)  res.send({ message: "Please upload a file!" ,status: false});
-    
+async function upload(req, res) {
+  try {
+    await uploadFile(req, res);
+    if (req.file == undefined)
+      res.send({ message: "Please upload a file!", status: false });
+
     res.status(200).send({
-      status : true,
-      data : req.file.filename
+      status: true,
+      data: req.file.filename,
     });
-  } 
-  catch (error){
+  } catch (error) {
     if (error.code == "LIMIT_FILE_SIZE") {
-        return res.send({
-          message: "Taille maximum : 5MB !",
-          status : false
-        });  
+      return res.send({
+        message: "Taille maximum : 5MB !",
+        status: false,
+      });
     }
     res.send({
       message: `${error}`,
-      status : false
+      status: false,
     });
   }
 }
@@ -84,5 +84,5 @@ const download = (req, res) => {
 };
 */
 module.exports = {
-  upload
+  upload,
 };
