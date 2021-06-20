@@ -16,15 +16,18 @@
 
 package com.example;
 
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.google.gson.Gson;
+import com.models.Condition;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -32,21 +35,32 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
+@RestController
 @SpringBootApplication
 public class Main {
 
   @Value("${spring.datasource.url}")
-  private String dbUrl;
+  private String url;
 
-  @Autowired
-  private DataSource dataSource;
+  @Value("${spring.datasource.username}")
+  private String username;
 
-  public static void main(String[] args) throws Exception {
+  @Value("${spring.datasource.password}")
+  private String password;
+
+  @Value("${spring.datasource.driver.class}")
+  private String c;
+
+  public static void main(String[] args) {
     SpringApplication.run(Main.class, args);
   }
+
+//  @Autowired
+//  private ConditionService cs;
 
   @RequestMapping("/")
   String index() {
@@ -55,17 +69,15 @@ public class Main {
 
   @RequestMapping("/db")
   String db(Map<String, Object> model) {
-    try (Connection connection = dataSource.getConnection()) {
+    try (Connection connection = dataSource().getConnection()) {
       Statement stmt = connection.createStatement();
-      stmt.executeUpdate("CREATE TABLE IF NOT EXISTS ticks (tick timestamp)");
-      stmt.executeUpdate("INSERT INTO ticks VALUES (now())");
-      ResultSet rs = stmt.executeQuery("SELECT tick FROM ticks");
+      ResultSet rs = stmt.executeQuery("SELECT TITLE FROM CONDITION");
 
       ArrayList<String> output = new ArrayList<String>();
       while (rs.next()) {
-        output.add("Read from DB: " + rs.getTimestamp("tick"));
+        output.add(rs.getString(1));
       }
-
+      output.add("HI");
       model.put("records", output);
       return "db";
     } catch (Exception e) {
@@ -74,15 +86,62 @@ public class Main {
     }
   }
 
+  @GetMapping("/conditions")
+  String conditions() throws SQLException {
+
+    try (Connection connection = dataSource().getConnection()) {
+      Statement stmt = connection.createStatement();
+      ResultSet rs = stmt.executeQuery("SELECT ID, TITLE, TITLE_MLG, DESCRIPTION, DESCRIPTION_MLG FROM CONDITION");
+
+      List<Condition> conditions = new ArrayList<Condition>();
+      while (rs.next()) {
+        Condition c = new Condition(
+                rs.getLong(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getString(4),
+                rs.getString(5)
+        );
+        conditions.add(c);
+      }
+      return new Gson().toJson(conditions);
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+
+  @GetMapping("/condition")
+  @ResponseBody
+  String condition() throws SQLException {
+
+    try (Connection connection = dataSource().getConnection()) {
+      Statement stmt = connection.createStatement();
+      ResultSet rs = stmt.executeQuery("SELECT ID, TITLE, TITLE_MLG, DESCRIPTION, DESCRIPTION_MLG FROM CONDITION");
+      Condition c=null;
+      while (rs.next()) {
+        c = new Condition(
+                rs.getLong(1),
+                rs.getString(2),
+                rs.getString(3),
+                rs.getString(4),
+                rs.getString(5)
+        );
+        return new Gson().toJson(c);
+      }
+      return new Gson().toJson(c);
+    } catch (Exception e) {
+      throw e;
+    }
+  }
+
   @Bean
   public DataSource dataSource() throws SQLException {
-    if (dbUrl == null || dbUrl.isEmpty()) {
-      return new HikariDataSource();
-    } else {
-      HikariConfig config = new HikariConfig();
-      config.setJdbcUrl(dbUrl);
-      return new HikariDataSource(config);
-    }
+    DataSourceBuilder dataSourceBuilder = DataSourceBuilder.create();
+    dataSourceBuilder.driverClassName(c);
+    dataSourceBuilder.url(url);
+    dataSourceBuilder.username(username);
+    dataSourceBuilder.password(password);
+    return dataSourceBuilder.build();
   }
 
 }
