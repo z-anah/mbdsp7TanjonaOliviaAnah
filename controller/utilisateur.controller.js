@@ -64,4 +64,24 @@ function authentification(req, res) {
       })
     );
 }
-module.exports = { signUp, testDoublonMail, authentification };
+function userById(req, res) {
+  serviceUser
+    .getUserById(req, res)
+    .then((value) => {
+      if (value.status) res.send({ status: true, result: value.userResult });
+      else{
+        res.send({
+          status: false,
+          message: config.msg[req.body.loc || "FR"].MSG_E0008,
+        });
+      }
+    })
+    .catch((err) =>
+      res.send({
+        status: false,
+        message: config.msg[req.body.loc || "FR"].MSG_E0007,
+      })
+    );
+}
+
+module.exports = { signUp, testDoublonMail, authentification ,userById};

@@ -25,7 +25,7 @@ mongoose.connect(uri, options).then(
   }
 );
 
-const controller = require("./controller/upload.controller");
+const uploadController = require("./controller/upload.controller");
 const userController = require("./controller/utilisateur.controller");
 const roleController = require("./controller/role.controller");
 
@@ -44,6 +44,7 @@ app.use(function (req, res, next) {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 let port = process.env.PORT || 5000;
 
 // les routes
@@ -51,14 +52,15 @@ const prefix = "/api";
 
 //app.route(prefix + "/assignments").get(assignment.getAssignments);
 
-app.route(prefix + "/upload").post(controller.upload);
+app.route(prefix + "/upload").post(uploadController.upload);
 //app.route(prefix + "/download").get(controller.download);
-// route pour matieres
+app.route(prefix + '/user/:id').get(userController.userById);
 app.route(prefix + "/authentification").post(userController.authentification);
 app.route(prefix + "/inscription").post(userController.signUp);
 app.route(prefix + "/testDoublonMail").post(userController.testDoublonMail);
 app.route(prefix + "/listRoles").get(roleController.listRoles);
-
+app.route(prefix + "/profil/:name").get(uploadController.getProfil);
+app.route(prefix + "/download/:name").get(uploadController.download);
 // On démarre le serveur
 app.listen(port, "0.0.0.0");
 console.log("Serveur démarré sur http://localhost:" + port);

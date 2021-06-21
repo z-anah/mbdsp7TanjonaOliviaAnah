@@ -2,7 +2,8 @@ var jwt = require("jsonwebtoken");
 var config = require("../config");
 var bcrypt = require("bcryptjs");
 let Utilisateurs = require("../model/Utilisateurs");
-
+let mongoose = require("mongoose");
+const { Int32 } = require("bson");
 function getSequenceId(req, res) {
   return new Promise((resolve, reject) => {
     Utilisateurs.findOne()
@@ -102,4 +103,35 @@ function auth(req, res) {
   }
 }
 
-module.exports = { register, testDoublonMail, auth };
+function getUserById(req, res){
+  try {
+    return new Promise((resolve, reject) => {
+      let id = parseInt(req.params.id);
+      let aggregate = Utilisateurs.aggregate([
+        { $match: {idUtilisateur: id}},
+        { $lookup: {
+          from: "roles",
+          localField: "idRole",
+          foreignField: "idRole",
+          as: "role_utilisateur" 
+        }}
+      ]);
+      let options = { 
+          
+      };
+    
+      Utilisateurs.aggregatePaginate(aggregate, options, (err, user) => {
+          if (err) {
+            resolve({status : false})
+          }
+          else {
+            resolve({status : true, userResult : user.docs[0]});
+          }
+        }
+      );
+    });
+  } catch (err) {
+    throw err;
+  }
+}
+module.exports = { register, testDoublonMail, auth, getUserById };

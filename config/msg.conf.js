@@ -1,7 +1,6 @@
 module.exports = {
   FR: {
     MSG_I0001: "Ajout modérateur réussi !",
-    MSG_I0001: "xxx",
     MSG_I0002: "xxx",
     MSG_I0003: "xxx",
     MSG_I0004: "xxx",
@@ -45,8 +44,7 @@ module.exports = {
     MSG_E0006: "Fichier autorisé :  .png, .jpg et .jpeg !",
     MSG_E0007:
       "Une erreur interne est survenue, veuillez réessayer ultérieurement !",
-    MSG_E0007: "xxx",
-    MSG_E0008: "xxx",
+    MSG_E0008: "Utilisateur introuvable !",
     MSG_E0009: "xxx",
     MSG_E0010: "xxx",
     MSG_E0011: "xxx",
