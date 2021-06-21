@@ -1,8 +1,6 @@
 .nav-item :hover
 {
   font-weight: bold;
-  font-size: 20px;
-
 }
 .sidebar .nav-item.active .nav-link{
   font-weight: 700;
@@ -10,6 +8,9 @@
   font-size: 15px;
 }
 
+.logout :hover{
+  cursor: pointer;
+}
 .title
 {
   text-align: center;
@@ -35,4 +36,11 @@
 }
 .valid_register{
   color: green;
+}
+
+.profil
+{
+  margin: 45% 50% 50% 30%;
+  border: white solid 7px;
+  border-radius: 30px;
 }

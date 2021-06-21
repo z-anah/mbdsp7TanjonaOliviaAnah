@@ -1,3 +1,5 @@
+import { Roles } from "./roles";
+
 export class Utilisateurs {
   _id?: String
   idUtilisateur: Number;
@@ -7,5 +9,6 @@ export class Utilisateurs {
   profilUtilisateur : String;
   motdepasseUtilisateur: String;
   soldeUtilisateur : Number;
-  idRole : Number
+  idRole : Number;
+  role_utilisateur : Roles
 }

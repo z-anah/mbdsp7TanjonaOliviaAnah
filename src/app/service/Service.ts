@@ -5,6 +5,7 @@ import { Utilisateurs } from 'app/model/utilisateurs';
 import { Roles } from 'app/model/roles';
 import { JwtHelperService } from  '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { LEADING_TRIVIA_CHARS } from '@angular/compiler/src/render3/view/template';
 var helper = new JwtHelperService();
 
 @Injectable({
@@ -12,6 +13,7 @@ var helper = new JwtHelperService();
 })
 export class Service {
   private baseUrl = "http://localhost:5000/api";
+  private admin = 1;
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -44,9 +46,7 @@ export class Service {
   setInfoUserByToken(){
     var token = localStorage.getItem('access_token');
     var decodedToken = helper.decodeToken(token);
-    localStorage.setItem('id', decodedToken.idUtilisateur);
-    localStorage.setItem('nom', decodedToken.nomCompletUtilisateur);
-    localStorage.setItem('role', decodedToken.idRole);
+    localStorage.setItem('id', decodedToken.id);
   }
 
   //test expiration token
@@ -69,9 +69,8 @@ export class Service {
   //logout
   logOut() {
     localStorage.removeItem('access_token');
-    localStorage.removeItem('nom');
     localStorage.removeItem('id');
-    localStorage.removeItem('role');
+
     this.router.navigate(["/authentification"]);
   }
 
@@ -81,4 +80,16 @@ export class Service {
     else return false;
   }
 
+  isAdmin() {
+    if(parseInt(localStorage.getItem("roles")) == this.admin) return true;
+    else return false;
+  }
+
+  userConnecte(id : any):Observable<any> {
+    return this.http.get(this.baseUrl + "/user/"+id);
+  }
+
+  urlProfil(profilName:any){
+    return this.baseUrl+"/download/"+profilName;
+  }
 }

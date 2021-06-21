@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Service } from 'app/service/Service';
 
 @Component({
   selector: 'app-navig-bar',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavigBarComponent implements OnInit {
 
-  constructor() { }
+  isAdmin : any;
+  constructor(private service : Service) { }
 
   ngOnInit() {
+    this.isAdmin  = this.service.isAdmin();
   }
 
 }

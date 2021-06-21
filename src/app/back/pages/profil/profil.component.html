@@ -1,0 +1,104 @@
+
+<title>Pari Admin Profil</title>
+<div class="container">
+  <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+          <!-- Nested Row within Card Body -->
+          <div class="row">
+              <div class="col-lg-5 d-none d-lg-block bg-profil-image">
+                <img class="profil" src="{{urlProfil}}" />
+              </div>
+              <div class="col-lg-7">
+                  <div class="p-5">
+                    <div class="text-center" *ngIf="!changePassword">
+                        <h1 class="h4 text-gray-900 mb-4">Profil</h1>
+                    </div>
+                    <div class="text-center" *ngIf="changePassword">
+                      <h1 class="h4 text-gray-900 mb-4">Changement mot de passe</h1>
+                    </div>
+                    <form class="user" [formGroup]="profilForm" *ngIf="!changePassword">
+                          <div class="form-group">
+                            <label for="">Nom complet<span class='required-indicator'></span></label>
+                            <input [class.is-invalid] = "profilForm.get('nomComplet').invalid && profilForm.get('nomComplet').touched" formControlName = "nomComplet" type="text" class="form-control form-control-user"
+                            placeholder="Entrer nom complet" (change) ="onInputChange($event)">
+                            <div *ngIf="(profilForm.get('nomComplet').invalid) || profilForm.get('nomComplet').dirty">
+                              <small class="error_login" *ngIf="(profilForm.get('nomComplet').touched && profilForm.get('nomComplet').errors?.required)">Nom complet obligatoire.</small>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                              <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="">Email<span class='required-indicator'>*</span></label>
+                                <input [class.is-invalid] = "profilForm.get('email').invalid && profilForm.get('email').touched" formControlName = "email" type="email" class="form-control form-control-user"
+                                  placeholder="Entrer adresse éléctronique" (change) ="onInputChange($event)">
+                                  <div *ngIf="(profilForm.get('email').invalid) || profilForm.get('email').dirty">
+                                    <small class="error_login" *ngIf="(profilForm.get('email').touched && profilForm.get('email').errors?.required)">Email obligatoire.</small>
+                                    <small class="error_login" *ngIf="(profilForm.get('email').touched && profilForm.get('email').errors?.pattern)">Email invalide.</small>
+                                  </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <label for="">Date naissance<span class='required-indicator'>*</span></label>
+                                 <input [class.is-invalid] = "profilForm.get('dateNaissance').invalid && profilForm.get('dateNaissance').touched" formControlName = "dateNaissance" type="date" class="form-control form-control-user"
+                                 placeholder="Entrer date naissance" (change) ="onInputChange($event)">
+                                 <div *ngIf="(profilForm.get('dateNaissance').invalid) || profilForm.get('dateNaissance').dirty">
+                                   <small class="error_login" *ngIf="(profilForm.get('dateNaissance').touched && profilForm.get('dateNaissance').errors?.required)">Date naissance obligatoire.</small>
+                                 </div>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="">Rôle<span class='required-indicator'></span></label>
+                            <input disabled type="text" class="form-control form-control-user" id="exampleInputEmail"
+                                value="{{user.role_utilisateur[0].nomRole}}">
+                          </div>
+                          <div class="form-group">
+                            <label for="">Profil</label>
+                            <input formControlName = "profil" type="file" class="form-control form-control-user" (change)="onFileChange($event)"
+                                placeholder="Votre profil">
+                              <div *ngIf="(profilForm.get('profil').invalid) || profilForm.get('profil').dirty">
+                                <small class="error_login" *ngIf="(profilForm.get('profil').touched && profilForm.get('profil').errors?.required)">Profil obligatoire.</small>
+                              </div>
+                          </div>
+                          <button class="btn btn-primary btn-user btn-block" [disabled] ="!profilForm.valid">
+                            Modifier l'information
+                          </button>
+                          <hr>
+                          <button class="btn btn-danger btn-user btn-block" (click)="formChangePassword()">
+                            Changer mot de passe
+                          </button>
+                    </form>
+
+                      <form class="user" [formGroup]="passwordForm"  *ngIf="changePassword">
+                        <div class="form-group">
+                          <label for="">Mot de passe actuel<span class='required-indicator'></span></label>
+                          <input [class.is-invalid] = "passwordForm.get('password').invalid && passwordForm.get('password').touched" formControlName = "password" type="password" class="form-control form-control-user"
+                          placeholder="Entrer mot de passe" (change) ="onInputChangePassword($event)">
+                          <div *ngIf="(passwordForm.get('password').invalid) || passwordForm.get('password').dirty">
+                            <small class="error_login" *ngIf="(passwordForm.get('password').touched && passwordForm.get('password').errors?.required)">Mot de passe obligatoire.</small>
+                            <small class="error_login" *ngIf="(passwordForm.get('password').touched && passwordForm.get('password').errors?.minlength)">Mot de passe doit supérieur {{minLength}} caractères.</small>
+                          </div>
+
+                        </div>
+                        <div class="form-group">
+                          <label for="">Nouveau mot de passe<span class='required-indicator'></span></label>
+                          <input [class.is-invalid] = "passwordForm.get('repassword').invalid && passwordForm.get('repassword').touched" formControlName = "repassword" type="password" class="form-control form-control-user"
+                          placeholder="Entrer nouveau mot de passe" (change) ="onInputChangePassword($event)">
+                          <div *ngIf="(passwordForm.get('repassword').invalid) || passwordForm.get('repassword').dirty">
+                            <small class="error_login" *ngIf="(passwordForm.get('repassword').touched && passwordForm.get('repassword').errors?.required)">Mot de passe obligatoire.</small>
+                            <small class="error_login" *ngIf="(passwordForm.get('repassword').touched && passwordForm.get('repassword').errors?.minlength)">Mot de passe doit supérieur {{minLength}} caractères.</small>
+                          </div>
+
+                        </div>
+                        <button class="btn btn-primary btn-user btn-block" [disabled] ="!passwordForm.valid">
+                          Enregistrer
+                        </button>
+                        <hr>
+                        <button class="btn btn-danger btn-user btn-block" (click)="formProfil()">
+                          Information
+                        </button>
+                      </form>
+                      <hr>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
