@@ -17,6 +17,8 @@ export class AuthComponent implements OnInit {
   title = "Authentification";
   invalid_login = false;
   invalid_verify_mail = false;
+  valid_change_password = false;
+  invalid_change_password = false;
 
   isAuth = true;
   isVerifyMail = false;
@@ -32,8 +34,10 @@ export class AuthComponent implements OnInit {
 
   invalid_login_msg = '';
   invalid_verifyMail_msg = '';
+  invalid_change_password_msg = '';
+  valid_change_password_msg = '';
 
-
+  email_valid = '';
 
 
   constructor(private router:Router, private formBuilder: FormBuilder, private service : Service) {
@@ -82,6 +86,9 @@ export class AuthComponent implements OnInit {
     this.authForm.reset();
     this.verifyMailForm.reset();
     this.repasswordForm.reset();
+    this.invalid_verify_mail = false;
+    this.invalid_change_password = false;
+    this.valid_change_password = false;
   }
   formVerifyMail(){
     this.isAuth = false;
@@ -98,13 +105,40 @@ export class AuthComponent implements OnInit {
     this.authForm.reset();
     this.verifyMailForm.reset();
     this.repasswordForm.reset();
-  }
-   
-  updatePassword(){
-
+    this.invalid_verify_mail = false;
   }
 
   verifyMail(){
+    let user = new Utilisateurs();
+    user.emailUtilisateur = this.email_verify.value;
+    this.service.check_mail(user).subscribe((value) =>{
+      if(value.status){
+        this.email_valid = this.email_verify.value;
+        this.invalid_verify_mail = false;
+        this.formChangePassword();
+      }
+      else{
+        this.invalid_verify_mail = true;
+        this.invalid_verifyMail_msg = value.message
+      }
+    })
+  }
 
+  updatePassword(){
+    let user = new Utilisateurs();
+    user.motdepasseUtilisateur = this.repassword.value;
+    user.emailUtilisateur = this.email_valid;
+    this.service.updatePasswordByEmail(user).subscribe((value) =>{
+      if(value.status){
+        this.valid_change_password = true;
+        this.invalid_change_password = false;
+        this.valid_change_password_msg = value.message;
+      }
+      else{
+        this.invalid_change_password = true;
+        this.valid_change_password = false;
+        this.invalid_change_password_msg = value.message;
+      }
+    })
   }
 }

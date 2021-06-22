@@ -96,6 +96,9 @@ export class Service {
   updateUser(user: Utilisateurs):Observable<any>{
     return this.http.put(this.baseUrl + "/modification",user);
   }
+  updatePasswordByEmail(user: Utilisateurs):Observable<any>{
+    return this.http.put(this.baseUrl + "/forgotPassword",user);
+  }
 
   deleteProfilFile(profilName:any) :Observable<any> {
     return this.http.get(this.baseUrl+"/deleteProfil/"+profilName);
@@ -103,5 +106,6 @@ export class Service {
   changePassword(user: Utilisateurs) :Observable<any> {
     return this.http.put(this.baseUrl+"/changePassword",user);
   }
+
 
 }

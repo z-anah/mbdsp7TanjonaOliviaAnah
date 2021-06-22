@@ -53,8 +53,8 @@
                                         <a class="small mot" (click)="formVerifyMail()">Mot de passe oublié!</a>
                                       </div>
                                       <hr>
-                                      <div *ngIf="invalid_verify_mail" class="text-center">
-                                          <h5 class="error_auth"><i class="fa fa-times"></i>{{invalid_login_msg}}</h5>
+                                      <div *ngIf="invalid_login" class="text-center">
+                                          <h5 class="error_auth"><i class="fa fa-times"></i>  {{invalid_login_msg}}</h5>
                                       </div>
                                   </form>
 
@@ -71,9 +71,9 @@
                                         Verifier
                                     </button>
                                     <hr>
-                                    <!--<div *ngIf="invalid_login" class="text-center">
-                                        <h5 class="error_auth"><i class="fa fa-times"></i>   Email ou mot de passe invalide</h5>
-                                    </div>-->
+                                    <div *ngIf="invalid_verify_mail" class="text-center">
+                                      <h5 class="error_auth"><i class="fa fa-times"></i>   {{invalid_verifyMail_msg}}</h5>
+                                  </div>
                                 </form>
                                 <form [formGroup] = "repasswordForm" class="user" (submit)="updatePassword()" method="post" *ngIf="isChangePassword">
                                   <div class="form-group">
@@ -89,14 +89,18 @@
                                       Changer
                                   </button>
                                   <hr>
-                                  <div class="text-center">
-                                    <a class="small" href="" (click)="formAuth()">Se connecter</a>
+                                  <div *ngIf="invalid_change_password" class="text-center">
+                                    <h5 class="error_auth"><i class="fa fa-times"></i>  {{invalid_change_password_msg}}</h5>
                                   </div>
-                                  <!--<div *ngIf="invalid_login" class="text-center">
-                                      <h5 class="error_auth"><i class="fa fa-times"></i>   Email ou mot de passe invalide</h5>
-                                  </div>-->
+                                  <div *ngIf="valid_change_password" class="text-center">
+                                    <h5 class="valid_register"><i class="fa fa-check"></i>  {{valid_change_password_msg}}</h5>
+                                  </div>
+                                  <hr>
+                                  <div class="text-center">
+                                    <a class="small mot" (click)="formAuth()">Se connecter</a>
+                                  </div>
                               </form>
-                              </div>
+                            </div>
                           </div>
                       </div>
                   </div>
