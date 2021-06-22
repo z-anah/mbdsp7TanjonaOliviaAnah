@@ -18,9 +18,7 @@ export class TopBarComponent implements OnInit {
       this.urlProfil = this.service.urlProfil(value.result.profilUtilisateur);
       this.nomUser = value.result.nomCompletUtilisateur;
     });
-
   }
-
   logout(){
     this.service.logOut();
   }

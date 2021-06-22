@@ -44,3 +44,9 @@
   border: white solid 7px;
   border-radius: 30px;
 }
+a.mot:hover
+{
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+}

@@ -4,6 +4,8 @@ import { Service } from 'app/service/Service';
 import { DatePipe, formatDate } from '@angular/common';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TopBarComponent } from 'app/back/top-bar/top-bar.component';
+import { DOCUMENT } from '@angular/common';
+import { Inject } from '@angular/core';
 @Component({
   selector: 'app-profil',
   templateUrl: './profil.component.html',
@@ -40,11 +42,11 @@ export class ProfilComponent implements OnInit {
   invalid_change_password_msg = '';
 
   changePassword = false;
-
-  constructor(private service : Service,private formBuilder: FormBuilder,) { }
+  modifInfo = false;
+  constructor(private service : Service,private formBuilder: FormBuilder,@Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
-    this.service.userConnecte(localStorage.getItem('id')).subscribe((value) => {
+    this.service.userConnecte(parseInt(localStorage.getItem('id'))).subscribe((value) => {
       this.user = value.result;
       this.urlProfil = this.service.urlProfil(this.user.profilUtilisateur);
       this.profilForm = this.formBuilder.group({
@@ -70,6 +72,7 @@ export class ProfilComponent implements OnInit {
   onInputChange(event){
     this.invalid_profil = false;
     this.valid_profil = false;
+    this.modifInfo = true;
   }
 
   onInputChangePassword(event){
@@ -80,6 +83,7 @@ export class ProfilComponent implements OnInit {
   onFileChange(event) {
     if (event.target.files.length > 0) {
       this.invalid_profil = false;
+      this.valid_profil = false;
       const file = event.target.files[0];
       this.profilForm.patchValue({
         profilSource: file
@@ -89,11 +93,11 @@ export class ProfilComponent implements OnInit {
 
   formChangePassword(){
     this.changePassword = true;
-
     this.invalid_profil = false;
     this.invalid_profil_msg = '';
     this.valid_profil = false;
     this.valid_profil_msg = '';
+    this.modifInfo = false;
   }
 
   formProfil(){
@@ -103,5 +107,83 @@ export class ProfilComponent implements OnInit {
     this.invalid_change_password_msg = '';
     this.valid_change_password = false;
     this.valid_change_password_msg = '';
+  }
+
+  modificationProfilReussi(message){
+    this.valid_profil = true;
+    this.invalid_profil = false;
+    this.valid_profil_msg = message;
+    this.modifInfo = false;
+  }
+  modificationProfilEchoue(message){
+    this.invalid_profil = true;
+    this.valid_profil = false;
+    this.invalid_profil_msg = message;
+    this.modifInfo = false;
+  }
+
+  //action submit
+  modifUtilisateur(){
+    var newUser = new Utilisateurs();
+    newUser.idUtilisateur = parseInt(localStorage.getItem('id'));
+    if(this.profilForm.get('profil').value == null || this.profilForm.get('profil').value == ""){
+      if(this.modifInfo){ // info modifié
+        newUser.nomCompletUtilisateur = this.nomComplet.value;
+        newUser.emailUtilisateur = this.email.value;
+        newUser.dateNaissanceUtilisateur = this.dateNaissance.value;
+        this.service.updateUser(newUser).subscribe((value) => {
+          if(value.status) this.modificationProfilReussi(value.message);
+          else this.modificationProfilEchoue(value.message);
+        })
+      }
+    }
+    else{ //modifier image
+      const formData = new FormData();
+      formData.append('profil', this.profilForm.get('profilSource').value);
+      this.service.upload(formData).subscribe(res =>{
+        if(res != null && res.status == true){
+            this.service.deleteProfilFile(this.user.profilUtilisateur).subscribe(response =>{
+              if(response.fileDeleted){
+                if(this.modifInfo){ // info modifié aussi
+                  newUser.profilUtilisateur = res.data;
+                  newUser.nomCompletUtilisateur = this.nomComplet.value;
+                  newUser.emailUtilisateur = this.email.value;
+                  newUser.dateNaissanceUtilisateur = this.dateNaissance.value;
+                }
+                else  newUser.profilUtilisateur = res.data;
+
+                this.service.updateUser(newUser).subscribe((value) => {
+                  if(value.status){
+                    this.modificationProfilReussi(value.message);
+                    setTimeout(function() {  this.document.location.reload(); },1000);
+                  }
+                  else this.modificationProfilEchoue(value.message);
+                })
+              }
+            })
+        }
+        else  this.modificationProfilEchoue(res.message);
+      })
+    }
+  }
+
+  changePasswordUser(){
+    var newUser = new Utilisateurs();
+    newUser.idUtilisateur = parseInt(localStorage.getItem('id'));
+    newUser.motdepasseUtilisateur = this.password.value;
+    newUser.repassword = this.repassword.value;
+    this.service.changePassword(newUser).subscribe((value) => {
+      if(value.status){
+        this.valid_change_password = true;
+        this.invalid_change_password = false;
+        this.valid_change_password_msg = value.message;
+        this.passwordForm.reset();
+      }
+      else{
+        this.invalid_change_password = true;
+        this.valid_change_password = false;
+        this.invalid_change_password_msg = value.message;
+      }
+    });
   }
 }

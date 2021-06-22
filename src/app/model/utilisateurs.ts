@@ -10,5 +10,6 @@ export class Utilisateurs {
   motdepasseUtilisateur: String;
   soldeUtilisateur : Number;
   idRole : Number;
-  role_utilisateur : Roles
+  role_utilisateur : Roles;
+  repassword ?: String
 }

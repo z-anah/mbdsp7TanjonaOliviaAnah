@@ -11,16 +11,30 @@ import { Service } from 'app/service/Service';
 export class AuthComponent implements OnInit {
 
 	authForm: FormGroup;
+  verifyMailForm : FormGroup;
+  repasswordForm : FormGroup;
 
   title = "Authentification";
   invalid_login = false;
-  
+  invalid_verify_mail = false;
+
+  isAuth = true;
+  isVerifyMail = false;
+  isChangePassword = false;
+
   email : AbstractControl;
   password : AbstractControl;
+
+  email_verify :  AbstractControl;
+  repassword : AbstractControl;
   minLength = 8;
   maxLength = 100;
 
   invalid_login_msg = '';
+  invalid_verifyMail_msg = '';
+
+
+
 
   constructor(private router:Router, private formBuilder: FormBuilder, private service : Service) {
 
@@ -31,8 +45,18 @@ export class AuthComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(this.minLength)]]
     });
 
+    this.verifyMailForm = this.formBuilder.group({
+      email :['', [Validators.required, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]]
+    });
+    this.repasswordForm = this.formBuilder.group({
+      password: ['', [Validators.required, Validators.minLength(this.minLength)]]
+    });
+
     this.email = this.authForm.controls['email'];
     this.password = this.authForm.controls['password'];
+    this.email_verify = this.verifyMailForm.controls['email'];
+    this.repassword = this.repasswordForm.controls['password'];
+
 	}
 	auth(){
      let user = new Utilisateurs();
@@ -51,4 +75,36 @@ export class AuthComponent implements OnInit {
           }
         })
 	}
+  formAuth(){
+    this.isAuth = true;
+    this.isVerifyMail = false;
+    this.isChangePassword = false;
+    this.authForm.reset();
+    this.verifyMailForm.reset();
+    this.repasswordForm.reset();
+  }
+  formVerifyMail(){
+    this.isAuth = false;
+    this.isVerifyMail = true;
+    this.isChangePassword = false;
+    this.authForm.reset();
+    this.verifyMailForm.reset();
+    this.repasswordForm.reset();
+  }
+  formChangePassword(){
+    this.isAuth = false;
+    this.isVerifyMail = false;
+    this.isChangePassword = true;
+    this.authForm.reset();
+    this.verifyMailForm.reset();
+    this.repasswordForm.reset();
+  }
+   
+  updatePassword(){
+
+  }
+
+  verifyMail(){
+
+  }
 }

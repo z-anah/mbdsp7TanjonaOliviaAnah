@@ -92,4 +92,16 @@ export class Service {
   urlProfil(profilName:any){
     return this.baseUrl+"/download/"+profilName;
   }
+
+  updateUser(user: Utilisateurs):Observable<any>{
+    return this.http.put(this.baseUrl + "/modification",user);
+  }
+
+  deleteProfilFile(profilName:any) :Observable<any> {
+    return this.http.get(this.baseUrl+"/deleteProfil/"+profilName);
+  }
+  changePassword(user: Utilisateurs) :Observable<any> {
+    return this.http.put(this.baseUrl+"/changePassword",user);
+  }
+
 }

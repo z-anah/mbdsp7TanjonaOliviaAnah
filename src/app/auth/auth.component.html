@@ -17,10 +17,16 @@
                           <div class="col-lg-3"></div>
                           <div class="col-lg-6">
                               <div class="p-5">
-                                  <div class="text-center">
+                                  <div class="text-center" *ngIf="isAuth">
                                       <h1 class="h4 text-gray-900 mb-4">Authentification</h1>
                                   </div>
-                                  <form [formGroup] = "authForm" class="user" (submit)="auth()" method="post">
+                                  <div class="text-center" *ngIf="isVerifyMail">
+                                    <h1 class="h4 text-gray-900 mb-4">Vérification Email</h1>
+                                  </div>
+                                  <div class="text-center" *ngIf="isChangePassword">
+                                    <h1 class="h4 text-gray-900 mb-4">Changement mot de passe</h1>
+                                  </div>
+                                  <form [formGroup] = "authForm" class="user" (submit)="auth()" method="post" *ngIf="isAuth">
                                       <div class="form-group">
                                           <label>Email:</label>
                                           <input type="email"  [class.is-invalid] = "authForm.get('email').invalid && authForm.get('email').touched"  class="form-control form-control-user" formControlName="email"  placeholder="Entrer adresse éléctronique"/>
@@ -44,13 +50,52 @@
                                       </button>
                                       <hr>
                                       <div class="text-center">
-                                        <a class="small" href="">Mot de passe oublié!</a>
+                                        <a class="small mot" (click)="formVerifyMail()">Mot de passe oublié!</a>
                                       </div>
                                       <hr>
-                                      <div *ngIf="invalid_login" class="text-center">
-                                          <h5 class="error_auth"><i class="fa fa-times"></i>   Email ou mot de passe invalide</h5>
+                                      <div *ngIf="invalid_verify_mail" class="text-center">
+                                          <h5 class="error_auth"><i class="fa fa-times"></i>{{invalid_login_msg}}</h5>
                                       </div>
                                   </form>
+
+                                  <form [formGroup] = "verifyMailForm" class="user" (submit)="verifyMail()" method="post" *ngIf="isVerifyMail">
+                                    <div class="form-group">
+                                        <label>Email:</label>
+                                        <input type="email"  [class.is-invalid] = "verifyMailForm.get('email').invalid && verifyMailForm.get('email').touched"  class="form-control form-control-user" formControlName="email"  placeholder="Entrer adresse éléctronique"/>
+                                        <div *ngIf="(verifyMailForm.get('email').invalid) || authForm.get('email').dirty">
+                                          <small class="error_login" *ngIf="(verifyMailForm.get('email').touched && verifyMailForm.get('email').errors?.required)">Email obligatoire.</small>
+                                          <small class="error_login" *ngIf="(verifyMailForm.get('email').touched && verifyMailForm.get('email').errors?.pattern)">Email invalide.</small>
+                                        </div>
+                                      </div>
+                                    <button class="btn btn-primary btn-user btn-block" [disabled] ="!verifyMailForm.valid">
+                                        Verifier
+                                    </button>
+                                    <hr>
+                                    <!--<div *ngIf="invalid_login" class="text-center">
+                                        <h5 class="error_auth"><i class="fa fa-times"></i>   Email ou mot de passe invalide</h5>
+                                    </div>-->
+                                </form>
+                                <form [formGroup] = "repasswordForm" class="user" (submit)="updatePassword()" method="post" *ngIf="isChangePassword">
+                                  <div class="form-group">
+                                    <label for="">Nouveau mot de passe<span class='required-indicator'>*</span></label>
+                                    <input [class.is-invalid] = "repasswordForm.get('password').invalid && repasswordForm.get('password').touched" formControlName="password" type="password" class="form-control form-control-user"
+                                        id="exampleInputPassword" placeholder="Entrer mot de passe">
+                                        <div *ngIf="(repasswordForm.get('password').invalid) || repasswordForm.get('password').dirty">
+                                          <small class="error_login" *ngIf="(repasswordForm.get('password').touched && repasswordForm.get('password').errors?.required)">Mot de passe obligatoire.</small>
+                                          <small class="error_login" *ngIf="(repasswordForm.get('password').touched && repasswordForm.get('password').errors?.minlength)">Mot de passe doit supérieur {{minLength}} caractères.</small>
+                                        </div>
+                                  </div>
+                                  <button class="btn btn-primary btn-user btn-block" [disabled] ="!repasswordForm.valid">
+                                      Changer
+                                  </button>
+                                  <hr>
+                                  <div class="text-center">
+                                    <a class="small" href="" (click)="formAuth()">Se connecter</a>
+                                  </div>
+                                  <!--<div *ngIf="invalid_login" class="text-center">
+                                      <h5 class="error_auth"><i class="fa fa-times"></i>   Email ou mot de passe invalide</h5>
+                                  </div>-->
+                              </form>
                               </div>
                           </div>
                       </div>
