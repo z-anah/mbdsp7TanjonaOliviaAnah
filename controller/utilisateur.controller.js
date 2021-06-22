@@ -35,9 +35,9 @@ function testDoublonMail(req, res) {
       if (value)
         res.send({
           status: true,
-          message: config.msg[req.body.loc || "FR"].MSG_E0004,
+          message: config.msg[req.body.loc || "FR"].MSG_E0004
         });
-      else res.send({ status: false, message: value.message });
+      else res.send({ status: false, message: config.msg[req.body.loc || "FR"].MSG_E0011 });
     })
     .catch((err) =>
       res.send({
@@ -104,6 +104,7 @@ function updateUtilisateur(req, res) {
       })
     );
 }
+
 function updatePassword(req, res){
   serviceUser
     . ckeckPassswordById(req, res)
@@ -124,4 +125,25 @@ function updatePassword(req, res){
     );
 }
 
-module.exports = { signUp, testDoublonMail, authentification ,userById, updateUtilisateur, updatePassword };
+//mot de passe oublié
+function updatePasswordByEmail(req, res){
+  serviceUser
+    .updatePasswordByEmail(req, res)
+    .then((value) => {
+      if (value.updated) res.send({ status: true, result: value.result,message : config.msg[req.body.loc || "FR"].MSG_I0003});
+      else{
+        res.send({
+          status: false,
+          message: config.msg[req.body.loc || "FR"].MSG_E009,
+        });
+      }
+    })
+    .catch((err) =>
+      res.send({
+        status: false,
+        message: config.msg[req.body.loc || "FR"].MSG_E0007,
+      })
+    );
+}
+
+module.exports = { signUp, testDoublonMail, authentification ,userById, updateUtilisateur, updatePassword,updatePasswordByEmail };

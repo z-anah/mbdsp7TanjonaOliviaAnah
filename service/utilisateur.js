@@ -150,6 +150,23 @@ function updateByIdUtilisateur(req, res) {
   }
 }
 
+function updatePasswordByEmail(req, res) {
+  try {
+    return new Promise((resolve, reject) => {
+      let email = req.body.emailUtilisateur;
+      var hashedPassword = bcrypt.hashSync(req.body.motdepasseUtilisateur,10);
+      req.body.motdepasseUtilisateur = hashedPassword;
+      Utilisateurs.findOneAndUpdate({emailUtilisateur : email}, req.body,{ new: true },(err, user) => {
+        if (err) resolve({updated : false}) 
+        else resolve({ updated: true , result: user});
+      })
+    });
+  }
+  catch (err) {
+    throw err;
+  }
+}
+
 function ckeckPassswordById(req,res){
   try{
       return new Promise((resolve, reject) => {
@@ -182,4 +199,4 @@ function ckeckPassswordById(req,res){
   }
 }
 
-module.exports = { register, testDoublonMail, auth, getUserById,updateByIdUtilisateur, ckeckPassswordById };
+module.exports = { register, testDoublonMail, auth, getUserById,updateByIdUtilisateur, ckeckPassswordById,updatePasswordByEmail };

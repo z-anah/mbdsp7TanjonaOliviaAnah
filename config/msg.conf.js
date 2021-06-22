@@ -47,7 +47,7 @@ module.exports = {
     MSG_E0008: "Utilisateur introuvable !",
     MSG_E0009: "Modification échoué !Veuillez ressayer ultérieurement !",
     MSG_E0010: "Modification échoué.Ancien mot de passe invalide !",
-    MSG_E0011: "xxx",
+    MSG_E0011: "Email introuvable",
     MSG_E0012: "xxx",
     MSG_E0013: "xxx",
     MSG_E0014: "xxx",

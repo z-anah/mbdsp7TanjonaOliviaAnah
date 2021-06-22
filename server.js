@@ -64,6 +64,7 @@ app.route(prefix + "/download/:name").get(uploadController.download);
 app.route(prefix + "/deleteProfil/:name").get(uploadController.deleteProfil);
 app.route(prefix + "/modification").put(userController.updateUtilisateur);
 app.route(prefix + "/changePassword").put(userController.updatePassword);
+app.route(prefix + "/forgotPassword").put(userController.updatePasswordByEmail);
 
 
 // On démarre le serveur
