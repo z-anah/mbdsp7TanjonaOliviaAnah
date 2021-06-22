@@ -61,6 +61,11 @@ app.route(prefix + "/testDoublonMail").post(userController.testDoublonMail);
 app.route(prefix + "/listRoles").get(roleController.listRoles);
 app.route(prefix + "/profil/:name").get(uploadController.getProfil);
 app.route(prefix + "/download/:name").get(uploadController.download);
+app.route(prefix + "/deleteProfil/:name").get(uploadController.deleteProfil);
+app.route(prefix + "/modification").put(userController.updateUtilisateur);
+app.route(prefix + "/changePassword").put(userController.updatePassword);
+
+
 // On démarre le serveur
 app.listen(port, "0.0.0.0");
 console.log("Serveur démarré sur http://localhost:" + port);

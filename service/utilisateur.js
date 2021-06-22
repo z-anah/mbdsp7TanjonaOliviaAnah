@@ -89,7 +89,7 @@ function auth(req, res) {
                 },
                 config.secret,
                 {
-                  expiresIn: 120, // expires in 120 second
+                  expiresIn: 300, // expires in 300 second
                 }
               );
               resolve({ auth: true, token: token });
@@ -134,4 +134,52 @@ function getUserById(req, res){
     throw err;
   }
 }
-module.exports = { register, testDoublonMail, auth, getUserById };
+
+function updateByIdUtilisateur(req, res) {
+  try {
+    return new Promise((resolve, reject) => {
+      let id = parseInt(req.body.idUtilisateur);
+      Utilisateurs.findOneAndUpdate({idUtilisateur : id}, req.body,{ new: true },(err, user) => {
+        if (err) resolve({updated : false})
+        else resolve({ updated: true , result: user});
+      })
+    });
+  }
+  catch (err) {
+    throw err;
+  }
+}
+
+function ckeckPassswordById(req,res){
+  try{
+      return new Promise((resolve, reject) => {
+      let id = parseInt(req.body.idUtilisateur);
+      let userPasssword = req.body.motdepasseUtilisateur
+      Utilisateurs.findOne({ idUtilisateur: id }, (err, user) => {
+        if (err) resolve({ check: false});
+        else {
+          if (user != null) {
+            var isValidPassword = bcrypt.compareSync(
+              userPasssword,
+              user.motdepasseUtilisateur
+            );
+            if(user && isValidPassword){ // ancien mot de passe  correct
+              var hashedPassword = bcrypt.hashSync(req.body.repassword,10);
+              req.body.motdepasseUtilisateur = hashedPassword;
+              Utilisateurs.findOneAndUpdate({idUtilisateur : id}, req.body,{ new: true },(err, user) => {
+                if (err) resolve({updated : false})
+                else resolve({ updated: true , result: user});
+              })
+            }
+            else resolve({updated : false})
+          }
+        }
+      });
+    });
+  }
+  catch (err) {
+    throw err;
+  }
+}
+
+module.exports = { register, testDoublonMail, auth, getUserById,updateByIdUtilisateur, ckeckPassswordById };

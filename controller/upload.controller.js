@@ -47,19 +47,35 @@ async function upload(req, res) {
       res.status(200).send(fileInfos);
     });
   }
+
   function download (req, res){
     const fileName = req.params.name;
     const directoryPath = "assets/img/profil/";
     res.download(directoryPath + fileName, fileName, (err) => {
       if (err) {
-        res.status(500).send({
+        res.send({
           message: "Could not download the file. " + err,
         });
       }
     });
   };
+
+  function deleteProfil(req,res){
+    const fileName = req.params.name;
+    const directoryPath = "assets/img/profil/";
+    fs.unlink(directoryPath+fileName, (err) => {
+        if(err) {
+          res.send({
+            message: "Could not download the file. " + err,
+          });
+        }
+        else res.send({fileDeleted : true, message : config.msg[req.body.loc || "FR"].MSG_I0002})
+    });
+  }
+
 module.exports = {
   upload,
   getProfil,
-  download
+  download,
+  deleteProfil
 };

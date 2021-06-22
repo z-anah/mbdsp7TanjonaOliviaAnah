@@ -1,5 +1,6 @@
 const config = require("../config/index");
 var serviceUser = require("../service/utilisateur");
+let Utilisateurs = require("../model/Utilisateurs");
 function signUp(req, res) {
   serviceUser
     .register(req, res)
@@ -84,4 +85,43 @@ function userById(req, res) {
     );
 }
 
-module.exports = { signUp, testDoublonMail, authentification ,userById};
+function updateUtilisateur(req, res) {
+  serviceUser
+    .updateByIdUtilisateur(req, res)
+    .then((value) => {
+      if (value.updated) res.send({ status: true, result: value.result,message : config.msg[req.body.loc || "FR"].MSG_I0002});
+      else{
+        res.send({
+          status: false,
+          message: config.msg[req.body.loc || "FR"].MSG_E0009,
+        });
+      }
+    })
+    .catch((err) =>
+      res.send({
+        status: false,
+        message: config.msg[req.body.loc || "FR"].MSG_E0007,
+      })
+    );
+}
+function updatePassword(req, res){
+  serviceUser
+    . ckeckPassswordById(req, res)
+    .then((value) => {
+      if (value.updated) res.send({ status: true, result: value.result,message : config.msg[req.body.loc || "FR"].MSG_I0003});
+      else{
+        res.send({
+          status: false,
+          message: config.msg[req.body.loc || "FR"].MSG_E0010,
+        });
+      }
+    })
+    .catch((err) =>
+      res.send({
+        status: false,
+        message: config.msg[req.body.loc || "FR"].MSG_E0007,
+      })
+    );
+}
+
+module.exports = { signUp, testDoublonMail, authentification ,userById, updateUtilisateur, updatePassword };
