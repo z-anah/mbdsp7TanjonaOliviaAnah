@@ -47,7 +47,7 @@ async function upload(req, res) {
       res.status(200).send(fileInfos);
     });
   }
-
+  
   function download (req, res){
     const fileName = req.params.name;
     const directoryPath = "assets/img/profil/";
