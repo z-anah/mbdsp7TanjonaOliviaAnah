@@ -44,7 +44,6 @@ app.use(function (req, res, next) {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
 let port = process.env.PORT || 5000;
 
 // les routes
@@ -52,9 +51,10 @@ const prefix = "/api";
 
 //app.route(prefix + "/assignments").get(assignment.getAssignments);
 
+require("./route/anah.route")(app);
 app.route(prefix + "/upload").post(uploadController.upload);
 //app.route(prefix + "/download").get(controller.download);
-app.route(prefix + '/user/:id').get(userController.userById);
+app.route(prefix + "/user/:id").get(userController.userById);
 app.route(prefix + "/authentification").post(userController.authentification);
 app.route(prefix + "/inscription").post(userController.signUp);
 app.route(prefix + "/testDoublonMail").post(userController.testDoublonMail);
@@ -65,7 +65,6 @@ app.route(prefix + "/deleteProfil/:name").get(uploadController.deleteProfil);
 app.route(prefix + "/modification").put(userController.updateUtilisateur);
 app.route(prefix + "/changePassword").put(userController.updatePassword);
 app.route(prefix + "/forgotPassword").put(userController.updatePasswordByEmail);
-
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");
