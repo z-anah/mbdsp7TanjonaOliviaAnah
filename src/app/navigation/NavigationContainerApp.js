@@ -5,21 +5,24 @@ import HomeScreen from "../containers/HomeScreen";
 import ConditionsGeneralesScreen from "../containers/ConditionsGeneralesScreen";
 import LangageScreen from "../containers/LangageScreen";
 import IdentificationScreen from "../containers/auth-screen/IdentificationScreen";
+import InscriptionScreen from "../containers/auth-screen/InscriptionScreen";
 import AccueilleScreen from "../containers/pari-screen/AccueilleScreen";
 import NavigationBottom from "./NavigationBottom";
 import Test from "../containers/Test";
+import RecupScreen from "../containers/auth-screen/RecupScreen";
 
 const { Navigator, Screen } = createStackNavigator();
 
 const HomeNavigator = () => (
   <Navigator headerMode="none">
-    {/* <Screen name="Teste" component={Test} /> */}
+    <Screen name="Identification" component={IdentificationScreen} />
+    <Screen name="Inscription" component={InscriptionScreen} />
+    <Screen name="Recuperation" component={RecupScreen} />
+    <Screen name="AccueilleScreen" component={AccueilleScreen} />
     <Screen name="NavigationBottom" component={NavigationBottom} />
-    {/* <Screen name="AccueilleScreen" component={AccueilleScreen} /> */}
-    {/* <Screen name="Identification" component={IdentificationScreen} /> */}
-    {/* <Screen name="Conditions Generales" component={ConditionsGeneralesScreen} /> */}
-    {/* <Screen name="Home" component={HomeScreen} /> */}
-    {/* <Screen name="Langage" component={LangageScreen} /> */}
+    <Screen name="Conditions Generales" component={ConditionsGeneralesScreen} />
+    <Screen name="Home" component={HomeScreen} />
+    <Screen name="Langage" component={LangageScreen} />
   </Navigator>
 );
 

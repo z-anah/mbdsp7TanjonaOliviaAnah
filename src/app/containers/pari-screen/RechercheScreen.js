@@ -155,13 +155,7 @@ class RechercheScreen extends React.Component {
     }
   }
 
-  rechercher = async () => {
-    console.log(
-      this.state.recherche,
-      this.state.recherche1,
-      this.state.recherche2
-    );
-  };
+  rechercher = async () => {};
 
   afficherQrCode = (linkCompetition) => {
     alert(`afficher qr code de la competition  ${linkCompetition}`);

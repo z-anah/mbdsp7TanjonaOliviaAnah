@@ -14,12 +14,10 @@ i18n.locale = "fr";
 export default class App extends React.Component {
   render() {
     return (
-      <>
+      <Provider store={store}>
         <IconRegistry icons={EvaIconsPack} />
-        <Provider store={store}>
-          <NavigationContainerApp />
-        </Provider>
-      </>
+        <NavigationContainerApp />
+      </Provider>
     );
   }
 }

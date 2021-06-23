@@ -54,7 +54,7 @@ export default {
   italic: { fontStyle: "italic" },
   underline: { textDecorationLine: "underline" },
   loginForm: {
-    width: widthPercentageToDP("50%"),
+    width: widthPercentageToDP("65%"),
     marginBottom: widthPercentageToDP("5%"),
   },
   loginContainer: {
