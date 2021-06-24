@@ -8,13 +8,20 @@ import IdentificationScreen from "../containers/auth-screen/IdentificationScreen
 import InscriptionScreen from "../containers/auth-screen/InscriptionScreen";
 import AccueilleScreen from "../containers/pari-screen/AccueilleScreen";
 import NavigationBottom from "./NavigationBottom";
-import Test from "../containers/Test";
+import Test from "../containers/temp/Test";
+import Scan from "../containers/temp/Scan";
+import Notification from "../containers/temp/Notification";
 import RecupScreen from "../containers/auth-screen/RecupScreen";
+import CodeQR from "../containers/temp/CodeQR";
 
 const { Navigator, Screen } = createStackNavigator();
 
 const HomeNavigator = () => (
   <Navigator headerMode="none">
+    <Screen name="TestCodeQR" component={CodeQR} />
+    <Screen name="TestScan" component={Scan} />
+    <Screen name="TestTest" component={Test} />
+    <Screen name="TestNotification" component={Notification} />
     <Screen name="Identification" component={IdentificationScreen} />
     <Screen name="Inscription" component={InscriptionScreen} />
     <Screen name="Recuperation" component={RecupScreen} />

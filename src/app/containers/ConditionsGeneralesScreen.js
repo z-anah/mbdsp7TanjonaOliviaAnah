@@ -17,6 +17,7 @@ import i18n from "i18n-js";
 import { connect } from "react-redux";
 import { ScrollView } from "react-native-gesture-handler";
 import { getConditionsGenerales } from "../api/api";
+import LottieView from "lottie-react-native";
 
 const BackIcon = (props) => <Icon {...props} name="arrow-back" />;
 
@@ -29,31 +30,39 @@ class ConditionsGeneralesScreen extends React.Component {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={[ContainerStyle.AndroidSafeAreaClean]}>
-          <ScrollView>
-            <TopNavigation
-              accessoryLeft={() => this.BackAction()}
-              title={i18n.t("TRL0013")}
-              alignment="center"
+          <TopNavigation
+            accessoryLeft={() => this.BackAction()}
+            title={i18n.t("TRL0013")}
+            alignment="center"
+          />
+          <Divider />
+          {this.state.isLoading ? (
+            <LottieView
+              autoPlay={true}
+              loop={true}
+              source={require("../../../assets/lottie/7929-run-man-run.json")}
             />
-            <Divider />
-            {this.state.conditions.map((c, i) => (
-              <View key={i}>
-                <Card>
-                  <Text>
-                    {i18n.t("TRL0017")} {i + 1} :{" "}
-                    {i18n.locale === "fr" ? c.title : c.titleMlg}
-                  </Text>
-                </Card>
-                <Card>
-                  <Text>
-                    {this.format(
-                      i18n.locale === "fr" ? c.description : c.descriptionMlg
-                    )}
-                  </Text>
-                </Card>
-              </View>
-            ))}
-          </ScrollView>
+          ) : (
+            <ScrollView>
+              {this.state.conditions.map((c, i) => (
+                <View key={i}>
+                  <Card>
+                    <Text>
+                      {i18n.t("TRL0017")} {i + 1} :{" "}
+                      {i18n.locale === "fr" ? c.title : c.titleMlg}
+                    </Text>
+                  </Card>
+                  <Card>
+                    <Text>
+                      {this.format(
+                        i18n.locale === "fr" ? c.description : c.descriptionMlg
+                      )}
+                    </Text>
+                  </Card>
+                </View>
+              ))}
+            </ScrollView>
+          )}
         </SafeAreaView>
       </ApplicationProvider>
     );
@@ -70,8 +79,9 @@ class ConditionsGeneralesScreen extends React.Component {
   );
   async componentDidMount() {
     try {
+      this.setState({ isLoading: true });
       let conditions = await getConditionsGenerales();
-      this.setState({ conditions: conditions });
+      this.setState({ conditions: conditions, isLoading: false });
     } catch (error) {}
   }
 }
