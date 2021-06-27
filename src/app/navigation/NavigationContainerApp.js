@@ -18,11 +18,11 @@ const { Navigator, Screen } = createStackNavigator();
 
 const HomeNavigator = () => (
   <Navigator headerMode="none">
+    <Screen name="Identification" component={IdentificationScreen} />
     <Screen name="TestCodeQR" component={CodeQR} />
     <Screen name="TestScan" component={Scan} />
     <Screen name="TestTest" component={Test} />
     <Screen name="TestNotification" component={Notification} />
-    <Screen name="Identification" component={IdentificationScreen} />
     <Screen name="Inscription" component={InscriptionScreen} />
     <Screen name="Recuperation" component={RecupScreen} />
     <Screen name="AccueilleScreen" component={AccueilleScreen} />
