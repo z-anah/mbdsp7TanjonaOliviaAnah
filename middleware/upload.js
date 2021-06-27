@@ -26,7 +26,7 @@ let uploadFile = multer({
       cb(null, true);
     } else {
       cb(null, false);
-      return cb(new Error(config.msg[req.body.loc || "FR"].MSG_E0006));
+      return cb(new Error(config.msg[req.body.loc || "FR"].error.MSG_E0006));
     }
   },
 }).single("profil");

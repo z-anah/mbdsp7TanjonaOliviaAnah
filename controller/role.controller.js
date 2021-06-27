@@ -10,7 +10,7 @@ function listRoles(req, res) {
     .catch((err) =>
       res.send({
         status: false,
-        message: config.msg[req.body.loc || "FR"].MSG_E0007,
+        message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
       })
     );
 }
