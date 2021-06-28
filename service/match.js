@@ -35,11 +35,11 @@ function getMatch(reqs, res) {
     limit: parseInt(req.query.limit) || 10,
   };
   // callback
-  Match.aggregatePaginate(aggregate, options, (err, Match) => {
+  Match.aggregatePaginate(aggregate, options, (err, match) => {
     if (err) {
       res.send(err);
     }
-    res.send(Match);
+    res.send(match);
   });
 }
 
@@ -74,11 +74,11 @@ function getMatchBycompetition(req, res) {
     },
   ]);
   // callback
-  Match.aggregatePaginate(aggregate, options, (err, Match) => {
+  Match.aggregatePaginate(aggregate, options, (err, match) => {
     if (err) {
       res.send(err);
     }
-    res.send(Match);
+    res.send(match);
   });
 }
 module.exports = { getMatchBycompetition };
