@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace pari.src.dao.view.user_control.panel
@@ -44,7 +45,7 @@ namespace pari.src.dao.view.user_control.panel
         private void displayMatchs() { }
         private void displayUser()
         {
-            var request = WebRequest.Create("https://scontent-jnb1-1.xx.fbcdn.net/v/t1.6435-9/129297069_3761278353930804_4402278375392454087_n.jpg?_nc_cat=110&ccb=1-3&_nc_sid=5b7eaf&_nc_eui2=AeHwDfwuubTHcJTC-GOB_K3UapqQ_8r7s5dqmpD_yvuzlzuqpoCA7CQZO6ZGqwQ0FyY2-EsJ7FVH0qZDxFgR7IrO&_nc_ohc=bNwrP7YpjQEAX92i7Mo&_nc_ht=scontent-jnb1-1.xx&oh=784f7933c908c27e16a451aeff4663de&oe=60D0176D");
+            var request = WebRequest.Create("http://localhost:5000/api/download/profil_1624427102818.jpeg");
             var nomComplet = "Mike";
             var email = "mike@gmail.com";
 
@@ -74,4 +75,5 @@ namespace pari.src.dao.view.user_control.panel
 
         }
     }
+
 }

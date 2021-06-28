@@ -1,20 +1,24 @@
-block try catch
-    try
-    {
+TRY CATCH
+try
+{
 
-    }
-    catch (Exception e)
-    {
-        throw e;
-    }
+}
+catch (Exception e)
+{
+    throw e;
+}
 
-block try catch view
-    try
-    {
+TRY CATCH
+try
+{
 
-    }
-    catch (Exception e)
-    {
-        Console.WriteLine("PARI ERROR: " + e.Message);
-    }
+}
+catch (Exception e)
+{
+    Console.WriteLine("PARI ERROR: " + e.Message);
+}
 
+TEXTE BOX
+this.pariTextBox1.Label.Text = "xxx";
+this.pariTextBox1.TextBox.PlaceholderText = "xxx";
+this.pariTextBox1.LabelError.Text = "";

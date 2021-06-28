@@ -57,7 +57,7 @@ namespace pari.src.dao.view.user_control.panel
             // pariTitle1
             // 
             this.pariTitle1.Location = new System.Drawing.Point(3, 3);
-            this.pariTitle1.Name = "Ajouter une compétition";
+            this.pariTitle1.Name = "pariTitle1";
             this.pariTitle1.Size = new System.Drawing.Size(200, 23);
             this.pariTitle1.TabIndex = 0;
             this.pariTitle1.Load += new System.EventHandler(this.pariTitle1_Load);
@@ -70,6 +70,9 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTextBox1.Name = "pariTextBox1";
             this.pariTextBox1.Size = new System.Drawing.Size(261, 74);
             this.pariTextBox1.TabIndex = 1;
+            this.pariTextBox1.Label.Text = "Compétition";
+            this.pariTextBox1.TextBox.PlaceholderText = "Nom de la compétition";
+            this.pariTextBox1.LabelError.Text = "";
             // 
             // pariTitle2
             // 
@@ -77,6 +80,7 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTitle2.Name = "pariTitle2";
             this.pariTitle2.Size = new System.Drawing.Size(200, 23);
             this.pariTitle2.TabIndex = 5;
+            this.pariTitle2.Label.Text = "Date début";
             // 
             // dateTimePicker1
             // 
@@ -91,6 +95,7 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTitle3.Name = "pariTitle3";
             this.pariTitle3.Size = new System.Drawing.Size(200, 23);
             this.pariTitle3.TabIndex = 6;
+            this.pariTitle3.Label.Text = "Date fin";
             // 
             // dateTimePicker2
             // 
@@ -105,6 +110,7 @@ namespace pari.src.dao.view.user_control.panel
             this.pariLabelError1.Name = "pariLabelError1";
             this.pariLabelError1.Size = new System.Drawing.Size(351, 25);
             this.pariLabelError1.TabIndex = 7;
+            this.pariLabelError1.Label.Text = "";
             // 
             // button1
             // 
