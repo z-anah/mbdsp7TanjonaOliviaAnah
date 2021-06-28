@@ -29,6 +29,7 @@ const uploadController = require("./controller/upload.controller");
 const userController = require("./controller/utilisateur.controller");
 const roleController = require("./controller/role.controller");
 const competitionController = require("./controller/competition.controller");
+const matchController = require("./controller/match.controller");
 
 // Pour accepter les connexions cross-domain (CORS)
 app.use(function (req, res, next) {
@@ -67,7 +68,7 @@ app.route(prefix + "/modification").put(userController.updateUtilisateur);
 app.route(prefix + "/changePassword").put(userController.updatePassword);
 app.route(prefix + "/forgotPassword").put(userController.updatePasswordByEmail);
 app.route(prefix + "/listeCompetition").get(competitionController.listCompetitions);
-
+app.route(prefix + "/listeMatch").get(matchController.listMatchs);
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");
