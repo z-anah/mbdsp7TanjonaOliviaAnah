@@ -1,5 +1,6 @@
 const config = require("../config/index");
 var serviceCompetition = require("../service/competition");
+
 function listCompetitions(req, res) {
   serviceCompetition
     .getListCompetitions(req, res)
