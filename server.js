@@ -28,6 +28,7 @@ mongoose.connect(uri, options).then(
 const uploadController = require("./controller/upload.controller");
 const userController = require("./controller/utilisateur.controller");
 const roleController = require("./controller/role.controller");
+const competitionController = require("./controller/competition.controller");
 
 // Pour accepter les connexions cross-domain (CORS)
 app.use(function (req, res, next) {
@@ -65,6 +66,8 @@ app.route(prefix + "/deleteProfil/:name").get(uploadController.deleteProfil);
 app.route(prefix + "/modification").put(userController.updateUtilisateur);
 app.route(prefix + "/changePassword").put(userController.updatePassword);
 app.route(prefix + "/forgotPassword").put(userController.updatePasswordByEmail);
+app.route(prefix + "/listeCompetition").get(competitionController.listCompetitions);
+
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");
