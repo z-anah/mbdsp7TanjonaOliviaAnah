@@ -10,4 +10,6 @@ module.exports = (app) => {
   });
 
   app.get("/api/send-mail", controller.sendMail);
+  app.post("/api/competition/create", controller.createCompetition);
+  app.post("/api/formations/create", controller.createFormations);
 };

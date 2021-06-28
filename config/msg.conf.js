@@ -3,6 +3,8 @@ const fr = {
   MSG_I0002: "Modification réussi !",
   MSG_I0003: "Changement mot de passe réussi !",
   MSG_I0004: "Email d'envoi de récupération envoyé",
+  MSG_I0005: "Ajout compétition réussi !",
+  MSG_I0006: "Requete réussi !",
 };
 const mlg = {
   MSG_I0001: "Tafiditra ny moderateur !",
