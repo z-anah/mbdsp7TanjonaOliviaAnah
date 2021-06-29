@@ -162,6 +162,7 @@ namespace pari.src.dao.view.user_control.panel
             this.button2.TabIndex = 9;
             this.button2.Text = "Ajouter";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Joueur
             // 
@@ -195,8 +196,8 @@ namespace pari.src.dao.view.user_control.panel
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var idposte = pariComboItem1.ComboBox.SelectedItem.ToString();
-            var idequipe = pariComboItem2.ComboBox.SelectedItem.ToString();
+            //var idposte = pariComboItem1.ComboBox.SelectedItem.ToString();
+            //var idequipe = pariComboItem2.ComboBox.SelectedItem.ToString();
             var nomjoueur = pariTextBox1.TextBox.Text;
             var profiljoueur = pariTextBox2.TextBox.Text;
             var agejoueur = pariDate1.DateTimePicker.Value.ToString();
