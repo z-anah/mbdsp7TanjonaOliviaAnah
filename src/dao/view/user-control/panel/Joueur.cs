@@ -69,6 +69,7 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTitle1.Name = "pariTitle1";
             this.pariTitle1.Size = new System.Drawing.Size(431, 23);
             this.pariTitle1.TabIndex = 0;
+            this.pariTitle1.Label.Text = "Ajouter un joueur";
             // 
             // pariTextBox1
             // 
@@ -77,6 +78,9 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTextBox1.Name = "pariTextBox1";
             this.pariTextBox1.Size = new System.Drawing.Size(264, 74);
             this.pariTextBox1.TabIndex = 1;
+            this.pariTextBox1.Label.Text = "Nom complet";
+            this.pariTextBox1.TextBox.PlaceholderText = "Nom complet";
+            this.pariTextBox1.LabelError.Text = "";
             // 
             // pariTextBox2
             // 
@@ -85,6 +89,9 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTextBox2.Name = "pariTextBox2";
             this.pariTextBox2.Size = new System.Drawing.Size(263, 74);
             this.pariTextBox2.TabIndex = 2;
+            this.pariTextBox2.Label.Text = "Photo de profil";
+            this.pariTextBox2.TextBox.PlaceholderText = "*.jpg;*.jpeg;*.png;";
+            this.pariTextBox2.LabelError.Text = "";
             // 
             // button1
             // 
@@ -102,6 +109,10 @@ namespace pari.src.dao.view.user_control.panel
             this.pariComboItem1.Name = "pariComboItem1";
             this.pariComboItem1.Size = new System.Drawing.Size(300, 70);
             this.pariComboItem1.TabIndex = 4;
+            this.pariComboItem1.PariTitle.Label.Text = "Équipe";
+            this.pariComboItem1.ComboBox.Text = "Équipes";
+
+            //Équipe
             // 
             // pariComboItem2
             // 
@@ -109,6 +120,8 @@ namespace pari.src.dao.view.user_control.panel
             this.pariComboItem2.Name = "pariComboItem2";
             this.pariComboItem2.Size = new System.Drawing.Size(300, 70);
             this.pariComboItem2.TabIndex = 5;
+            this.pariComboItem2.PariTitle.Label.Text = "Poste";
+            this.pariComboItem2.ComboBox.Text = "Postes";
             // 
             // pariDate1
             // 
@@ -116,6 +129,8 @@ namespace pari.src.dao.view.user_control.panel
             this.pariDate1.Name = "pariDate1";
             this.pariDate1.Size = new System.Drawing.Size(218, 113);
             this.pariDate1.TabIndex = 6;
+            this.pariDate1.PariTitle.Label.Text = "Date de naissance";
+            this.pariDate1.PariLabelError.Label.Text = "";
             // 
             // pariTextBox3
             // 
@@ -124,6 +139,9 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTextBox3.Name = "pariTextBox3";
             this.pariTextBox3.Size = new System.Drawing.Size(265, 74);
             this.pariTextBox3.TabIndex = 7;
+            this.pariTextBox3.Label.Text = "Taille (m)";
+            this.pariTextBox3.TextBox.PlaceholderText = "en m";
+            this.pariTextBox3.LabelError.Text = "";
             // 
             // pariTextBox4
             // 
@@ -132,6 +150,9 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTextBox4.Name = "pariTextBox4";
             this.pariTextBox4.Size = new System.Drawing.Size(264, 74);
             this.pariTextBox4.TabIndex = 8;
+            this.pariTextBox4.Label.Text = "Poids (kg)";
+            this.pariTextBox4.TextBox.PlaceholderText = "en kg";
+            this.pariTextBox4.LabelError.Text = "";
             // 
             // button2
             // 
@@ -166,36 +187,46 @@ namespace pari.src.dao.view.user_control.panel
 
         private void Button1_ClickAsync(object sender, EventArgs e)
         {
-
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;...";
             dialog.Multiselect = false;
-            if (dialog.ShowDialog() == DialogResult.OK) // if user clicked OK
+            if (dialog.ShowDialog() == DialogResult.OK) pariTextBox2.TextBox.Text = dialog.FileName;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            var idposte = pariComboItem1.ComboBox.SelectedItem.ToString();
+            var idequipe = pariComboItem2.ComboBox.SelectedItem.ToString();
+            var nomjoueur = pariTextBox1.TextBox.Text;
+            var profiljoueur = pariTextBox2.TextBox.Text;
+            var agejoueur = pariDate1.DateTimePicker.Value.ToString();
+            var taillejoueur = pariTextBox3.TextBox.Text;
+            var poindsjoueur = pariTextBox4.TextBox.Text;
+
+
+
+            /*var client = new RestClient("http://localhost:5000/api");
+            var request = new RestRequest("upload", Method.POST);
+
+            request.AddFile("profil", pariTextBox2.TextBox.Text, "image/png");
+            request.AlwaysMultipartFormData = true;
+
+            IRestResponse response = client.Execute(request);
+            if (response.IsSuccessful)
             {
-                string path = dialog.FileName; // get name of file
-                var client = new RestClient("http://localhost:5000/api");
-                var request = new RestRequest("upload", Method.POST);
-
-                request.AddFile("profil", path, "image/png");
-                request.AlwaysMultipartFormData = true;
-
-                IRestResponse response = client.Execute(request);
-                if (response.IsSuccessful)
+                Console.WriteLine($"Success: {response.Content}");
+            }
+            else
+            {
+                if (response.StatusCode == 0)
                 {
-                    Console.WriteLine($"Success: {response.Content}");
+                    Console.WriteLine($"Failed: network error: {response.ErrorMessage}");
                 }
                 else
                 {
-                    if (response.StatusCode == 0)
-                    {
-                        Console.WriteLine($"Failed: network error: {response.ErrorMessage}");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Failed: {(int)response.StatusCode}-{response.StatusDescription}");
-                    }
+                    Console.WriteLine($"Failed: {(int)response.StatusCode}-{response.StatusDescription}");
                 }
-            }
+            }*/
         }
     }
 
