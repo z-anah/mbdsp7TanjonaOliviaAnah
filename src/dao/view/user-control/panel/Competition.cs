@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+﻿using RestSharp;
+using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace pari.src.dao.view.user_control.panel
@@ -27,15 +24,15 @@ namespace pari.src.dao.view.user_control.panel
 
         private void InitializeComponent()
         {
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.pariTitle1 = new pari.src.dao.view.user_control.PariTitle();
-            this.pariTextBox1 = new pari.src.dao.view.user_control.PariTextBox();
-            this.pariTitle2 = new pari.src.dao.view.user_control.PariTitle();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.pariTitle3 = new pari.src.dao.view.user_control.PariTitle();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.pariLabelError1 = new pari.src.dao.view.user_control.PariLabelError();
-            this.button1 = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new FlowLayoutPanel();
+            this.pariTitle1 = new PariTitle();
+            this.pariTextBox1 = new PariTextBox();
+            this.pariTitle2 = new PariTitle();
+            this.dateTimePicker1 = new DateTimePicker();
+            this.pariTitle3 = new PariTitle();
+            this.dateTimePicker2 = new DateTimePicker();
+            this.pariLabelError1 = new PariLabelError();
+            this.button1 = new Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -141,7 +138,7 @@ namespace pari.src.dao.view.user_control.panel
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             this.pariLabelError1.Label.Text = "";
             this.pariTextBox1.LabelError.Text = "";
@@ -157,12 +154,25 @@ namespace pari.src.dao.view.user_control.panel
                     var res = this.question(nomCompetition, dateDebut, dateFin);
                     if (res == DialogResult.Yes)
                     {
+                        Task<CompetitionRest> ca = this.createCompetitionAsync(nomCompetition, dateDebut, dateFin);
+                        CompetitionRest c = await ca;
+                        Console.WriteLine(c.status);
+                        Console.WriteLine(c.message);
                         this.information(nomCompetition, dateDebut, dateFin);
                     }
                 }
                 else this.pariLabelError1.Label.Text = "Date fin doit être supérieur à Date début";
             }
             else this.pariTextBox1.LabelError.Text = "Nom de la compétition non valide";
+        }
+
+        private async Task<CompetitionRest> createCompetitionAsync(string nomCompetition, string dateDebut, string dateFin)
+        {
+            var client = new RestClient("http://localhost:5000/api");
+            var request = new RestRequest("/competition/create");
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new { nomCompetition, dateDebut, dateFin });
+            return await client.PostAsync<CompetitionRest>(request);
         }
 
         private void information(string nomCompetition, string dateDebut, string dateFin)
@@ -187,5 +197,11 @@ namespace pari.src.dao.view.user_control.panel
                 MessageBoxDefaultButton.Button2
                 );
         }
+    }
+
+    internal class CompetitionRest
+    {
+        public bool status { get; internal set; }
+        public String message { get; internal set; }
     }
 }
