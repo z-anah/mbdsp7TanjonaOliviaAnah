@@ -154,11 +154,12 @@ namespace pari.src.dao.view.user_control.panel
                     var res = this.question(nomCompetition, dateDebut, dateFin);
                     if (res == DialogResult.Yes)
                     {
+                        Cursor = Cursors.WaitCursor;
                         Task<CompetitionRest> ca = this.createCompetitionAsync(nomCompetition, dateDebut, dateFin);
                         CompetitionRest c = await ca;
-                        Console.WriteLine(c.status);
-                        Console.WriteLine(c.message);
-                        this.information(nomCompetition, dateDebut, dateFin);
+                        Cursor = Cursors.Arrow;
+                        if (c.status) this.information(nomCompetition, dateDebut, dateFin);
+                        else this.information(c.message);
                     }
                 }
                 else this.pariLabelError1.Label.Text = "Date fin doit être supérieur à Date début";
@@ -166,12 +167,21 @@ namespace pari.src.dao.view.user_control.panel
             else this.pariTextBox1.LabelError.Text = "Nom de la compétition non valide";
         }
 
+        private void information(string message)
+        {
+            MessageBox.Show(
+                this, message, "Pari",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+                );
+        }
+
         private async Task<CompetitionRest> createCompetitionAsync(string nomCompetition, string dateDebut, string dateFin)
         {
             var client = new RestClient("http://localhost:5000/api");
             var request = new RestRequest("/competition/create");
             request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(new { nomCompetition, dateDebut, dateFin });
+            //request.AddJsonBody(new { nomCompetition, dateDebut, dateFin });
             return await client.PostAsync<CompetitionRest>(request);
         }
 
