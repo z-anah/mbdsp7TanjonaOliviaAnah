@@ -1,9 +1,12 @@
-﻿using System;
+﻿using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace pari.src.dao.view.user_control.panel
@@ -91,6 +94,7 @@ namespace pari.src.dao.view.user_control.panel
             this.button1.TabIndex = 3;
             this.button1.Text = "Importer";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_ClickAsync);
             // 
             // pariComboItem1
             // 
@@ -159,5 +163,45 @@ namespace pari.src.dao.view.user_control.panel
         public PariDate PariDate { get => pariDate1; set { pariDate1 = value; pariDate = value; } }
         public PariTextBox Taille { get => pariTextBox3; set { pariTextBox3 = value; taille = value; } }
         public PariTextBox Poids { get => pariTextBox4; set { pariTextBox4 = value; poids = value; } }
+
+        private void Button1_ClickAsync(object sender, EventArgs e)
+        {
+
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;...";
+            dialog.Multiselect = false;
+            if (dialog.ShowDialog() == DialogResult.OK) // if user clicked OK
+            {
+                string path = dialog.FileName; // get name of file
+                var client = new RestClient("http://localhost:5000/api");
+                var request = new RestRequest("upload", Method.POST);
+
+                request.AddFile("profil", path, "image/png");
+                request.AlwaysMultipartFormData = true;
+
+                IRestResponse response = client.Execute(request);
+                if (response.IsSuccessful)
+                {
+                    Console.WriteLine($"Success: {response.Content}");
+                }
+                else
+                {
+                    if (response.StatusCode == 0)
+                    {
+                        Console.WriteLine($"Failed: network error: {response.ErrorMessage}");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Failed: {(int)response.StatusCode}-{response.StatusDescription}");
+                    }
+                }
+            }
+        }
+    }
+
+    internal class UploadRest
+    {
+        public bool Status { get; internal set; }
+        public string Message { get; internal set; }
     }
 }

@@ -17,7 +17,6 @@ namespace pari
     {
         public Form1()
         {
-            _ = uploadImageAsync();
             InitializeComponent();
             init();
             temp();
@@ -25,6 +24,9 @@ namespace pari
         }
         private void temp()
         {
+            /*Task<ListRolesRest> teste = listRoles();
+            ListRolesRest t = await teste;
+            Console.WriteLine(t.Status);*/
             this.login1.TextBox.TextBox.Text = "zulmianah@gmail.com";
             this.login1.MotPasse.TextBox.Text = "fahmi230995";
         }
@@ -108,12 +110,11 @@ namespace pari
 
         }
 
-        private async Task uploadImageAsync()
+        private async Task<ListRolesRest> listRoles()
         {
             var client = new RestClient("http://localhost:5000/api");
             var request = new RestRequest("listRoles");
-            var response = await client.GetAsync<ListRolesRest>(request);
-            Console.WriteLine(response.Status);
+            return await client.GetAsync<ListRolesRest>(request);
         }
     }
 
