@@ -14,11 +14,12 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
+  useCreateIndex: true,
 };
 
 mongoose.connect(uri, options).then(
   () => {
-    console.log("at URI = " + uri);
+    console.log("Mongo connected");
   },
   (err) => {
     console.log("Erreur de connexion: ", err);
