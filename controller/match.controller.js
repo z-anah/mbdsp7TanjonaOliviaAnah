@@ -1,7 +1,8 @@
 const config = require("../config/index");
 var serviceMatch = require("../service/match");
 function listMatchs(req, res) {
-    serviceMatch.getMatch(req, res)
+  serviceMatch
+    .getMatch(req, res)
     .then((value) => {
       if (value) res.send({ data: value, status: true });
       else res.send({ status: false });
@@ -15,7 +16,8 @@ function listMatchs(req, res) {
 }
 
 function listMatchsCompetition(req, res) {
-    serviceMatch.getMatchBycompetition(req, res)
+  serviceMatch
+    .getMatchBycompetition(req, res)
     .then((value) => {
       if (value) res.send({ data: value, status: true });
       else res.send({ status: false });
@@ -28,5 +30,4 @@ function listMatchsCompetition(req, res) {
     );
 }
 
-module.exports = { listMatchsCompetition }
-module.exports = { listMatchs };
+module.exports = { listMatchsCompetition, listMatchs };

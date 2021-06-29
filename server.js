@@ -68,11 +68,14 @@ app.route(prefix + "/deleteProfil/:name").get(uploadController.deleteProfil);
 app.route(prefix + "/modification").put(userController.updateUtilisateur);
 app.route(prefix + "/changePassword").put(userController.updatePassword);
 app.route(prefix + "/forgotPassword").put(userController.updatePasswordByEmail);
-app.route(prefix + "/listeCompetition").get(competitionController.listCompetitions);
+app
+  .route(prefix + "/listeCompetition")
+  .get(competitionController.listCompetitions);
 app.route(prefix + "/listeMatch").get(matchController.listMatchs);
-app.route(prefix + "/listeMatch/:idcompetition").get(matchController.listMatchsCompetition);
+app
+  .route(prefix + "/listeMatch/:idcompetition")
+  .get(matchController.listMatchsCompetition);
 app.route(prefix + "/listeEquipe").get(equipeController.listEquipes);
-
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");
