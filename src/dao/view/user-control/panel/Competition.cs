@@ -143,9 +143,49 @@ namespace pari.src.dao.view.user_control.panel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Console.WriteLine(pariTextBox1.TextBox.Text);
-            Console.WriteLine(dateTimePicker1.Text);
-            Console.WriteLine(dateTimePicker2.Text);
+            this.pariLabelError1.Label.Text = "";
+            this.pariTextBox1.LabelError.Text = "";
+            var nomCompetition = pariTextBox1.TextBox.Text;
+            var dateDebut = dateTimePicker1.Text;
+            var dateFin = dateTimePicker2.Text;
+            DateTime d1 = DateTime.Parse(dateDebut);
+            DateTime d2 = DateTime.Parse(dateFin);
+            if (nomCompetition.Length >= 3)
+            {
+                if (d1.Date < d2.Date)
+                {
+                    var res = this.question(nomCompetition, dateDebut, dateFin);
+                    if (res == DialogResult.Yes)
+                    {
+                        this.information(nomCompetition, dateDebut, dateFin);
+                    }
+                }
+                else this.pariLabelError1.Label.Text = "Date fin doit être supérieur à Date début";
+            }
+            else this.pariTextBox1.LabelError.Text = "Nom de la compétition non valide";
+        }
+
+        private void information(string nomCompetition, string dateDebut, string dateFin)
+        {
+            MessageBox.Show(
+                this,
+                $"{nomCompetition}\ndu {dateDebut}\nau {dateFin}\nest ajouté avec succès",
+                "Pari",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
+        }
+
+        private DialogResult question(string nomCompetition, string dateDebut, string dateFin)
+        {
+            return MessageBox.Show(
+                this,
+                $"Êtes-vous sûr de vouloir ajouter\n{nomCompetition}\ndu {dateDebut}\nau {dateFin} ? ",
+                "Pari",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question,
+                MessageBoxDefaultButton.Button2
+                );
         }
     }
 }
