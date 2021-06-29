@@ -70,9 +70,9 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTextBox1.Name = "pariTextBox1";
             this.pariTextBox1.Size = new System.Drawing.Size(261, 74);
             this.pariTextBox1.TabIndex = 1;
+            this.pariTextBox1.LabelError.Text = "";
             this.pariTextBox1.Label.Text = "Compétition";
             this.pariTextBox1.TextBox.PlaceholderText = "Nom de la compétition";
-            this.pariTextBox1.LabelError.Text = "";
             // 
             // pariTitle2
             // 
@@ -91,6 +91,8 @@ namespace pari.src.dao.view.user_control.panel
             // 
             // pariTitle3
             // 
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateTimePicker1.CustomFormat = "yyyy-MM-dd";
             this.pariTitle3.Location = new System.Drawing.Point(3, 170);
             this.pariTitle3.Name = "pariTitle3";
             this.pariTitle3.Size = new System.Drawing.Size(200, 23);
@@ -99,6 +101,8 @@ namespace pari.src.dao.view.user_control.panel
             // 
             // dateTimePicker2
             // 
+            dateTimePicker2.Format = DateTimePickerFormat.Custom;
+            dateTimePicker2.CustomFormat = "yyyy-MM-dd";
             this.dateTimePicker2.Location = new System.Drawing.Point(3, 199);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 23);
@@ -120,6 +124,7 @@ namespace pari.src.dao.view.user_control.panel
             this.button1.TabIndex = 2;
             this.button1.Text = "Ajouter";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Competition
             // 
@@ -134,6 +139,13 @@ namespace pari.src.dao.view.user_control.panel
         private void pariTitle1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine(pariTextBox1.TextBox.Text);
+            Console.WriteLine(dateTimePicker1.Text);
+            Console.WriteLine(dateTimePicker2.Text);
         }
     }
 }
