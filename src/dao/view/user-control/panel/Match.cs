@@ -164,18 +164,18 @@ namespace pari.src.dao.view.user_control.panel
             button1.Text = "Importer";
             compet.PariTitle.Label.Text = "Événements";
             compet.ComboBox.Text = "Événements";
-            eq1.PariTitle.Label.Text = "Équipe 1";
-            eq1.ComboBox.Text = "Équipe 1";
-            eq2.PariTitle.Label.Text = "Équipe 2";
-            eq2.ComboBox.Text = "Équipe 2";
-            formationEq1.PariTitle.Label.Text = "Formation équipe 1";
-            formationEq1.ComboBox.Text = "Formations";
-            formationEq2.PariTitle.Label.Text = "Formation équipe 2";
-            formationEq2.ComboBox.Text = "Formations";
-            arbitre.PariTitle.Label.Text = "Arbitre";
-            arbitre.ComboBox.Text = "Arbitres";
+            pariComboItem1.PariTitle.Label.Text = "Équipe 1";
+            pariComboItem1.ComboBox.Text = "Équipe 1";
+            pariComboItem2.PariTitle.Label.Text = "Équipe 2";
+            pariComboItem2.ComboBox.Text = "Équipe 2";
+            pariComboItem3.PariTitle.Label.Text = "Formation équipe 1";
+            pariComboItem3.ComboBox.Text = "Formations";
+            pariComboItem4.PariTitle.Label.Text = "Formation équipe 2";
+            pariComboItem4.ComboBox.Text = "Formations";
+            pariComboItem6.PariTitle.Label.Text = "Arbitre";
+            pariComboItem6.ComboBox.Text = "Arbitres";
             pariDate1.PariTitle.Label.Text = "Date et heure";
-            ajouter.Text = "Ajouter";
+            button2.Text = "Ajouter";
         }
 
         public PariTitle PariTitle { get => pariTitle1; set { pariTitle1 = value; pariTitle = value; } }
