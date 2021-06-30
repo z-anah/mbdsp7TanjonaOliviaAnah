@@ -35,12 +35,13 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTextBox1 = new pari.src.dao.view.user_control.PariTextBox();
             this.pariTextBox2 = new pari.src.dao.view.user_control.PariTextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.pariComboItem1 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariTitle2 = new pari.src.dao.view.user_control.PariTitle();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.pariLabelError1 = new pari.src.dao.view.user_control.PariLabelError();
             this.button1 = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.pariComboItem1 = new pari.src.dao.view.user_control.PariComboItem();
+            this.pariTextBox3 = new pari.src.dao.view.user_control.PariTextBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +52,7 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1.Controls.Add(this.pariTextBox2);
             this.flowLayoutPanel1.Controls.Add(this.button2);
             this.flowLayoutPanel1.Controls.Add(this.pariComboItem1);
+            this.flowLayoutPanel1.Controls.Add(this.pariTextBox3);
             this.flowLayoutPanel1.Controls.Add(this.pariTitle2);
             this.flowLayoutPanel1.Controls.Add(this.richTextBox1);
             this.flowLayoutPanel1.Controls.Add(this.pariLabelError1);
@@ -94,9 +96,16 @@ namespace pari.src.dao.view.user_control.panel
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // pariComboItem1
+            // 
+            this.pariComboItem1.Location = new System.Drawing.Point(3, 112);
+            this.pariComboItem1.Name = "pariComboItem1";
+            this.pariComboItem1.Size = new System.Drawing.Size(262, 70);
+            this.pariComboItem1.TabIndex = 10;
+            // 
             // pariTitle2
             // 
-            this.pariTitle2.Location = new System.Drawing.Point(3, 188);
+            this.pariTitle2.Location = new System.Drawing.Point(3, 192);
             this.pariTitle2.Name = "pariTitle2";
             this.pariTitle2.Size = new System.Drawing.Size(407, 23);
             this.pariTitle2.TabIndex = 4;
@@ -104,7 +113,7 @@ namespace pari.src.dao.view.user_control.panel
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(3, 217);
+            this.richTextBox1.Location = new System.Drawing.Point(3, 221);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(628, 109);
             this.richTextBox1.TabIndex = 5;
@@ -112,14 +121,14 @@ namespace pari.src.dao.view.user_control.panel
             // 
             // pariLabelError1
             // 
-            this.pariLabelError1.Location = new System.Drawing.Point(3, 332);
+            this.pariLabelError1.Location = new System.Drawing.Point(3, 336);
             this.pariLabelError1.Name = "pariLabelError1";
             this.pariLabelError1.Size = new System.Drawing.Size(567, 25);
             this.pariLabelError1.TabIndex = 6;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(3, 363);
+            this.button1.Location = new System.Drawing.Point(3, 367);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 7;
@@ -131,12 +140,13 @@ namespace pari.src.dao.view.user_control.panel
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
-            // pariComboItem1
+            // pariTextBox3
             // 
-            this.pariComboItem1.Location = new System.Drawing.Point(3, 112);
-            this.pariComboItem1.Name = "pariComboItem1";
-            this.pariComboItem1.Size = new System.Drawing.Size(300, 70);
-            this.pariComboItem1.TabIndex = 10;
+            this.pariTextBox3.BackColor = System.Drawing.SystemColors.Window;
+            this.pariTextBox3.Location = new System.Drawing.Point(271, 112);
+            this.pariTextBox3.Name = "pariTextBox3";
+            this.pariTextBox3.Size = new System.Drawing.Size(263, 74);
+            this.pariTextBox3.TabIndex = 11;
             // 
             // Equipe
             // 
@@ -147,7 +157,6 @@ namespace pari.src.dao.view.user_control.panel
             this.Size = new System.Drawing.Size(634, 513);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
-
 
             pariTitle1.Label.Text = "Ajouter équipe";
             pariTextBox1.Label.Text = "Nom de l'équipe";
@@ -161,6 +170,9 @@ namespace pari.src.dao.view.user_control.panel
             richTextBox1.Text = "Le PSG, un jeune club\nLe Paris Saint-Germain Football Club a été fondé en 1970 suite à la fusion du Paris FC et du Stade\nSaint-Germain. Le PSG évolue à domicile au Parc des Princes, un stade d'une capacité de 47 929 places.\nDes travaux sont à l'étude afin de permettre de supporter les forts affluences récurrentes depuis\nquelques années.";
             pariComboItem1.PariTitle.Label.Text = "Formations (Suivez le format xxxxx)";
             pariComboItem1.ComboBox.Text = "xxxxx";
+            pariTextBox3.Label.Text = "Coach";
+            pariTextBox3.TextBox.PlaceholderText = "Nom du Coach";
+            pariTextBox3.LabelError.Text = "";
         }
 
         public PariTitle PariTitle { get => pariTitle1; set { pariTitle1 = value; pariTitle = value; } }
@@ -173,6 +185,7 @@ namespace pari.src.dao.view.user_control.panel
         public OpenFileDialog OpenFileDialog { get => openFileDialog1; set { openFileDialog1 = value; openFileDialog = value; } }
         public Button Importer { get => button2; set { button2 = value; importer = value; } }
         public PariComboItem PariComboItem { get => pariComboItem1; set { pariComboItem = value; pariComboItem1 = value; } }
+        public PariTextBox NomCoach { get => pariTextBox3; set { pariTextBox3 = value; NomCoach = value; } }
 
         private void pariTitle2_Load(object sender, EventArgs e)
         {
@@ -190,8 +203,8 @@ namespace pari.src.dao.view.user_control.panel
         private void button1_Click(object sender, EventArgs e)
         {
             //var idformation = Number;
-            //var nomequipe = String;
-            //var logoequipe = String;
+            var nomequipe = pariTextBox1.Label.Text;
+            var logoequipe = pariTextBox2.LabelError.Text;
             //var nomcoachequipe = String;
             //var Descriptionequipe = String;
         }

@@ -41,5 +41,6 @@ namespace pari.src.dao.view.user_control.panel
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Button button2;
         private PariComboItem pariComboItem1;
+        private PariTextBox pariTextBox3;
     }
 }
