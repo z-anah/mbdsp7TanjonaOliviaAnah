@@ -181,7 +181,7 @@ namespace pari.src.dao.view.user_control.panel
             var client = new RestClient("http://localhost:5000/api");
             var request = new RestRequest("/competition/create");
             request.RequestFormat = DataFormat.Json;
-            //request.AddJsonBody(new { nomCompetition, dateDebut, dateFin });
+            request.AddJsonBody(new { nomCompetition, dateDebut, dateFin });
             return await client.PostAsync<CompetitionRest>(request);
         }
 

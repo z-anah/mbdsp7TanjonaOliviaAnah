@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace pari.src.dao.view.user_control.panel
@@ -24,8 +27,18 @@ namespace pari.src.dao.view.user_control.panel
         public Equipe()
         {
             InitializeComponent();
+            temp();
         }
 
+        private async void temp()
+        {
+            Cursor = Cursors.WaitCursor;
+            var res = await Formations();
+            var fpc = new List<object>();
+            foreach (Datum f in res.Data) fpc.Add(new { Text = f.Nomformation, Value = f.Id });
+            pariComboItem1.ComboBox.DataSource = fpc;
+            Cursor = Cursors.Arrow;
+        }
 
         private void InitializeComponent()
         {
@@ -173,6 +186,20 @@ namespace pari.src.dao.view.user_control.panel
             pariTextBox3.Label.Text = "Coach";
             pariTextBox3.TextBox.PlaceholderText = "Nom du Coach";
             pariTextBox3.LabelError.Text = "";
+
+            //pariComboItem1.ComboBox.Items.Add(new { Text = "report A", Value = "reportA" });
+            pariComboItem1.ComboBox.DisplayMember = "Text";
+            pariComboItem1.ComboBox.ValueMember = "Value";
+
+
+        }
+
+        private async Task<Root> Formations()
+        {
+            var client = new RestClient("http://localhost:5000/api");
+            var request = new RestRequest("/formations");
+            var json = await client.GetAsync<string>(request);
+            return JsonConvert.DeserializeObject<Root>(json);
         }
 
         public PariTitle PariTitle { get => pariTitle1; set { pariTitle1 = value; pariTitle = value; } }
@@ -208,5 +235,29 @@ namespace pari.src.dao.view.user_control.panel
             var nomcoachequipe = NomCoach.TextBox.Text;
             var Descriptionequipe = richTextBox1.Text;
         }
+    }
+
+    public class Datum
+    {
+        [JsonProperty("_id")]
+        public string Id { get; set; }
+
+        [JsonProperty("nomformation")]
+        public string Nomformation { get; set; }
+
+        [JsonProperty("__v")]
+        public int V { get; set; }
+    }
+
+    public class Root
+    {
+        [JsonProperty("status")]
+        public bool Status { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
+
+        [JsonProperty("data")]
+        public List<Datum> Data { get; set; }
     }
 }
