@@ -39,8 +39,8 @@ namespace pari.src.dao.view.user_control.panel
             this.pariComboItem2 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariComboItem3 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariComboItem4 = new pari.src.dao.view.user_control.PariComboItem();
-            this.pariComboItem5 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariComboItem6 = new pari.src.dao.view.user_control.PariComboItem();
+            this.pariComboItem5 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariDate1 = new pari.src.dao.view.user_control.PariDate();
             this.button2 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
@@ -52,10 +52,10 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1.Controls.Add(this.pariTextBox1);
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.pariComboItem1);
+            this.flowLayoutPanel1.Controls.Add(this.pariComboItem6);
             this.flowLayoutPanel1.Controls.Add(this.pariComboItem2);
             this.flowLayoutPanel1.Controls.Add(this.pariComboItem3);
             this.flowLayoutPanel1.Controls.Add(this.pariComboItem4);
-            this.flowLayoutPanel1.Controls.Add(this.pariComboItem6);
             this.flowLayoutPanel1.Controls.Add(this.pariComboItem5);
             this.flowLayoutPanel1.Controls.Add(this.pariDate1);
             this.flowLayoutPanel1.Controls.Add(this.button2);
@@ -86,7 +86,7 @@ namespace pari.src.dao.view.user_control.panel
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
+            this.button1.Text = "Importer";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // pariComboItem1
@@ -98,24 +98,31 @@ namespace pari.src.dao.view.user_control.panel
             // 
             // pariComboItem2
             // 
-            this.pariComboItem2.Location = new System.Drawing.Point(309, 83);
+            this.pariComboItem2.Location = new System.Drawing.Point(3, 159);
             this.pariComboItem2.Name = "pariComboItem2";
             this.pariComboItem2.Size = new System.Drawing.Size(300, 70);
             this.pariComboItem2.TabIndex = 4;
             // 
             // pariComboItem3
             // 
-            this.pariComboItem3.Location = new System.Drawing.Point(3, 159);
+            this.pariComboItem3.Location = new System.Drawing.Point(309, 159);
             this.pariComboItem3.Name = "pariComboItem3";
             this.pariComboItem3.Size = new System.Drawing.Size(300, 70);
             this.pariComboItem3.TabIndex = 5;
             // 
             // pariComboItem4
             // 
-            this.pariComboItem4.Location = new System.Drawing.Point(309, 159);
+            this.pariComboItem4.Location = new System.Drawing.Point(3, 235);
             this.pariComboItem4.Name = "pariComboItem4";
             this.pariComboItem4.Size = new System.Drawing.Size(300, 70);
             this.pariComboItem4.TabIndex = 6;
+            // 
+            // pariComboItem6
+            // 
+            this.pariComboItem6.Location = new System.Drawing.Point(309, 83);
+            this.pariComboItem6.Name = "pariComboItem6";
+            this.pariComboItem6.Size = new System.Drawing.Size(300, 70);
+            this.pariComboItem6.TabIndex = 8;
             // 
             // pariComboItem5
             // 
@@ -124,18 +131,11 @@ namespace pari.src.dao.view.user_control.panel
             this.pariComboItem5.Size = new System.Drawing.Size(300, 70);
             this.pariComboItem5.TabIndex = 7;
             // 
-            // pariComboItem6
-            // 
-            this.pariComboItem6.Location = new System.Drawing.Point(3, 235);
-            this.pariComboItem6.Name = "pariComboItem6";
-            this.pariComboItem6.Size = new System.Drawing.Size(300, 70);
-            this.pariComboItem6.TabIndex = 8;
-            // 
             // pariDate1
             // 
             this.pariDate1.Location = new System.Drawing.Point(3, 311);
             this.pariDate1.Name = "pariDate1";
-            this.pariDate1.Size = new System.Drawing.Size(554, 113);
+            this.pariDate1.Size = new System.Drawing.Size(563, 113);
             this.pariDate1.TabIndex = 9;
             // 
             // button2
@@ -144,7 +144,7 @@ namespace pari.src.dao.view.user_control.panel
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 10;
-            this.button2.Text = "button2";
+            this.button2.Text = "Ajouter";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // Match
@@ -157,25 +157,6 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
-            pariTitle1.Label.Text = "Ajouter un match";
-            pariTextBox1.Label.Text = "Importer un fichier";
-            pariTextBox1.TextBox.PlaceholderText = "*.json; *.csv; *.excel";
-            pariTextBox1.LabelError.Text = "";
-            button1.Text = "Importer";
-            compet.PariTitle.Label.Text = "Événements";
-            compet.ComboBox.Text = "Événements";
-            pariComboItem1.PariTitle.Label.Text = "Équipe 1";
-            pariComboItem1.ComboBox.Text = "Équipe 1";
-            pariComboItem2.PariTitle.Label.Text = "Équipe 2";
-            pariComboItem2.ComboBox.Text = "Équipe 2";
-            pariComboItem3.PariTitle.Label.Text = "Formation équipe 1";
-            pariComboItem3.ComboBox.Text = "Formations";
-            pariComboItem4.PariTitle.Label.Text = "Formation équipe 2";
-            pariComboItem4.ComboBox.Text = "Formations";
-            pariComboItem6.PariTitle.Label.Text = "Arbitre";
-            pariComboItem6.ComboBox.Text = "Arbitres";
-            pariDate1.PariTitle.Label.Text = "Date et heure";
-            button2.Text = "Ajouter";
         }
 
         public PariTitle PariTitle { get => pariTitle1; set { pariTitle1 = value; pariTitle = value; } }
