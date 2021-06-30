@@ -36,10 +36,14 @@ const createFormations = async (formations) => {
   });
   return m;
 };
+const formations = async () => {
+  let f = await Formation.find({});
+  return f;
+};
 
 module.exports = {
   createCompetition,
   createEquipe,
   createFormation,
-  createFormations,
+  createFormations, formations
 };

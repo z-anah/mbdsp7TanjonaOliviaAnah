@@ -8,7 +8,6 @@ mongoose.Promise = global.Promise;
 // remplacer toute cette chaine par l'URI de connexion à votre propre base dans le cloud s
 const uri =
   "mongodb+srv://tanjona:Mongo220799@cluster0.ejbhp.mongodb.net/pari?retryWrites=true&w=majority";
-//mongodb+srv://tanjona:Mongo220799@cluster0.ejbhp.mongodb.net/assignments?retryWrites=true&w=majority
 
 const options = {
   useNewUrlParser: true,
