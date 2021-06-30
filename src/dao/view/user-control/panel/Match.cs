@@ -175,6 +175,7 @@ namespace pari.src.dao.view.user_control.panel
             pariComboItem6.PariTitle.Label.Text = "Arbitre";
             pariComboItem6.ComboBox.Text = "Arbitres";
             pariDate1.PariTitle.Label.Text = "Date et heure";
+            pariDate1.PariLabelError.Label.Text = "";
             button2.Text = "Ajouter";
         }
 

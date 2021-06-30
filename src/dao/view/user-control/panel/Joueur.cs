@@ -174,6 +174,9 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
+
+            pariDate1.DateTimePicker.Format = DateTimePickerFormat.Custom;
+            pariDate1.DateTimePicker.CustomFormat = "yyyy-MM-dd";
         }
 
         public PariTitle PariTitle { get => pariTitle1; set { pariTitle1 = value; pariTitle = value; } }
