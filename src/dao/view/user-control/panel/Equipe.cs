@@ -203,10 +203,10 @@ namespace pari.src.dao.view.user_control.panel
         private void button1_Click(object sender, EventArgs e)
         {
             //var idformation = Number;
-            var nomequipe = pariTextBox1.Label.Text;
-            var logoequipe = pariTextBox2.LabelError.Text;
-            //var nomcoachequipe = String;
-            //var Descriptionequipe = String;
+            var nomequipe = pariTextBox1.TextBox.Text;
+            var logoequipe = pariTextBox2.TextBox.Text;
+            var nomcoachequipe = NomCoach.TextBox.Text;
+            var Descriptionequipe = richTextBox1.Text;
         }
     }
 }
