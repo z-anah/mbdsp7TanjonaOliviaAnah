@@ -34,13 +34,12 @@ namespace pari.src.dao.view.user_control.panel
         private PariTitle pariTitle1;
         private PariTextBox pariTextBox1;
         private PariTextBox pariTextBox2;
-        private PariTextBox pariTextBox3;
         private PariTitle pariTitle2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private PariLabelError pariLabelError1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private PariTextBox pariTextBox4;
         private System.Windows.Forms.Button button2;
+        private PariComboItem pariComboItem1;
     }
 }
