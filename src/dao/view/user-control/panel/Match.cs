@@ -157,6 +157,25 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
+            pariTitle1.Label.Text = "Ajouter un match";
+            pariTextBox1.Label.Text = "Importer un fichier";
+            pariTextBox1.TextBox.PlaceholderText = "*.json; *.csv; *.excel";
+            pariTextBox1.LabelError.Text = "";
+            button1.Text = "Importer";
+            pariComboItem1.PariTitle.Label.Text = "Événements";
+            pariComboItem1.ComboBox.Text = "Événements";
+            pariComboItem2.PariTitle.Label.Text = "Équipe 1";
+            pariComboItem2.ComboBox.Text = "Équipe 1";
+            pariComboItem3.PariTitle.Label.Text = "Équipe 2";
+            pariComboItem3.ComboBox.Text = "Équipe 2";
+            pariComboItem4.PariTitle.Label.Text = "Formation équipe 1";
+            pariComboItem4.ComboBox.Text = "Formations";
+            pariComboItem5.PariTitle.Label.Text = "Formation équipe 2";
+            pariComboItem5.ComboBox.Text = "Formations";
+            pariComboItem6.PariTitle.Label.Text = "Arbitre";
+            pariComboItem6.ComboBox.Text = "Arbitres";
+            pariDate1.PariTitle.Label.Text = "Date et heure";
+            button2.Text = "Ajouter";
         }
 
         public PariTitle PariTitle { get => pariTitle1; set { pariTitle1 = value; pariTitle = value; } }
