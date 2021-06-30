@@ -177,6 +177,9 @@ namespace pari.src.dao.view.user_control.panel
             pariDate1.PariTitle.Label.Text = "Date et heure";
             pariDate1.PariLabelError.Label.Text = "";
             button2.Text = "Ajouter";
+
+            pariDate1.DateTimePicker.Format = DateTimePickerFormat.Custom;
+            pariDate1.DateTimePicker.CustomFormat = "yyyy-MM-dd";
         }
 
         public PariTitle PariTitle { get => pariTitle1; set { pariTitle1 = value; pariTitle = value; } }
