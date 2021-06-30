@@ -57,6 +57,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>Le PSG, un jeune club
+Le Paris Saint-Germain Football Club a été fondé en 1970 suite à la fusion du Paris FC et du Stade
+Saint-Germain. Le PSG évolue à domicile au Parc des Princes, un stade d'une capacité de 47 929 places.
+Des travaux sont à l'étude afin de permettre de supporter les forts affluences récurrentes depuis
+quelques années.</value>
+  </data>
   <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
