@@ -36,6 +36,8 @@ namespace pari.src.dao.view.user_control.panel
             var res = await Formations();
             var fpc = new List<object>();
             foreach (Datum f in res.Data) fpc.Add(new { Text = f.Nomformation, Value = f.Id });
+            pariComboItem1.ComboBox.DisplayMember = "Text";
+            pariComboItem1.ComboBox.ValueMember = "Value";
             pariComboItem1.ComboBox.DataSource = fpc;
             Cursor = Cursors.Arrow;
         }
@@ -186,12 +188,6 @@ namespace pari.src.dao.view.user_control.panel
             pariTextBox3.Label.Text = "Coach";
             pariTextBox3.TextBox.PlaceholderText = "Nom du Coach";
             pariTextBox3.LabelError.Text = "";
-
-            //pariComboItem1.ComboBox.Items.Add(new { Text = "report A", Value = "reportA" });
-            pariComboItem1.ComboBox.DisplayMember = "Text";
-            pariComboItem1.ComboBox.ValueMember = "Value";
-
-
         }
 
         private async Task<Root> Formations()
