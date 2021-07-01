@@ -54,6 +54,7 @@ const prefix = "/api";
 
 require("./route/anah.route")(app);
 require("./route/tanjona.route")(app);
+
 app
   .route(prefix + "/listeCompetition")
   .get(competitionController.listCompetitions);
