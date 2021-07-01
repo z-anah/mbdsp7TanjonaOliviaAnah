@@ -153,4 +153,36 @@ const equipes = async (req, res) => {
   }
 };
 
-module.exports = { sendMail, createCompetition, createFormations, formations, createEquipe, equipes };
+const createJoueur = async (req, res) => {
+  try {
+    const {
+      idposte,
+      idequipe,
+      nomjoueur,
+      profiljoueur,
+      agejoueur,
+      taillejoueur,
+      poindsjoueur } = req.body
+    const data = await service.createJoueur(
+      idposte,
+      idequipe,
+      nomjoueur,
+      profiljoueur,
+      agejoueur,
+      taillejoueur,
+      poindsjoueur);
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data: data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
+module.exports = { sendMail, createCompetition, createFormations, formations, createEquipe, equipes, createJoueur };

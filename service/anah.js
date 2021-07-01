@@ -3,6 +3,7 @@ const Mongoose = require("mongoose");
 let Competition = require("../model/Competition");
 let equipes = require("../model/equipes");
 let Formation = require("../model/Formation");
+const joueurs = require("../model/joueurs");
 const createCompetition = async (nomCompetition, dateDebut, dateFin) => {
   let c = new Competition({
     nomcompetition: nomCompetition,
@@ -52,6 +53,27 @@ const getEquipes = async () => {
   let d = await equipes.find({});
   return d;
 };
+const createJoueur = async (
+  idposte,
+  idequipe,
+  nomjoueur,
+  profiljoueur,
+  agejoueur,
+  taillejoueur,
+  poindsjoueur
+) => {
+  let d = new joueurs({
+    idposte: idposte,
+    idequipe: ObjectId(idequipe),
+    nomjoueur,
+    profiljoueur,
+    agejoueur,
+    taillejoueur,
+    poindsjoueur
+  });
+  await d.save();
+  return d;
+};
 
 module.exports = {
   createCompetition,
@@ -59,5 +81,6 @@ module.exports = {
   createFormation,
   createFormations,
   formations,
-  getEquipes
+  getEquipes,
+  createJoueur
 };

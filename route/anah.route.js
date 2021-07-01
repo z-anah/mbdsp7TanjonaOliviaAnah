@@ -15,4 +15,5 @@ module.exports = (app) => {
   app.get("/api/formations", controller.formations);
   app.post("/api/equipe/create", controller.createEquipe);
   app.get("/api/equipes", controller.equipes);
+  app.post("/api/joueur/create", controller.createJoueur);
 };

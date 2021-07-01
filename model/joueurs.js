@@ -5,7 +5,7 @@ let Schema = mongoose.Schema;
 let JoueurSchema = Schema({
   idjoueur: Number,
   idposte: Number,
-  idequipe: Number,
+  idequipe: String,
   nomjoueur: String,
   profiljoueur: String,
   agejoueur: Number,
