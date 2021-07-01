@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using pari.src.dao.utilities;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -51,7 +52,7 @@ namespace pari.src.dao.view.user_control.panel
 
         public async Task<Root> Formations()
         {
-            var client = new RestClient("http://localhost:5000/api");
+            var client = new RestClient(Env.API_URL_NODE);
             var request = new RestRequest("/formations");
             var json = await client.GetAsync<string>(request);
             return JsonConvert.DeserializeObject<Root>(json);
@@ -59,7 +60,7 @@ namespace pari.src.dao.view.user_control.panel
 
         private async Task<EquipesRest> getEquipes()
         {
-            var client = new RestClient("http://localhost:5000/api");
+            var client = new RestClient(Env.API_URL_NODE);
             var request = new RestRequest("/equipes");
             var json = await client.GetAsync<string>(request);
             return JsonConvert.DeserializeObject<EquipesRest>(json);
@@ -282,7 +283,7 @@ namespace pari.src.dao.view.user_control.panel
         private string upload(string text)
         {
             var res = "";
-            var client = new RestClient("http://localhost:5000/api");
+            var client = new RestClient(Env.API_URL_NODE);
             var request = new RestRequest("upload", Method.POST);
 
             request.AddFile("profil", text, "image/png");

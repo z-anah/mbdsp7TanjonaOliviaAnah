@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using RestSharp;
 using RestSharp.Authenticators;
+using pari.src.dao.utilities;
 
 namespace pari
 {
@@ -111,7 +112,7 @@ namespace pari
 
         private async Task<ListRolesRest> listRoles()
         {
-            var client = new RestClient("http://localhost:5000/api");
+            var client = new RestClient(Env.API_URL_NODE);
             var request = new RestRequest("listRoles");
             return await client.GetAsync<ListRolesRest>(request);
         }

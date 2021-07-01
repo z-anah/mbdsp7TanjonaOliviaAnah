@@ -198,7 +198,7 @@ namespace pari.src.dao.view.user_control.panel
 
         public async Task<Root> Formations()
         {
-            var client = new RestClient("http://localhost:5000/api");
+            var client = new RestClient(Env.API_URL_NODE);
             var request = new RestRequest("/formations");
             var json = await client.GetAsync<string>(request);
             return JsonConvert.DeserializeObject<Root>(json);
@@ -255,7 +255,7 @@ namespace pari.src.dao.view.user_control.panel
         private string upload(string text)
         {
             var res = "";
-            var client = new RestClient("http://localhost:5000/api");
+            var client = new RestClient(Env.API_URL_NODE);
             var request = new RestRequest("upload", Method.POST);
 
             request.AddFile("profil", text, "image/png");
@@ -273,7 +273,7 @@ namespace pari.src.dao.view.user_control.panel
 
         private async Task<EquipeRest> create(string idformation, string nomequipe, string logoequipe, string nomcoachequipe, string Descriptionequipe)
         {
-            var client = new RestClient("http://localhost:5000/api");
+            var client = new RestClient(Env.API_URL_NODE);
             var request = new RestRequest("/equipe/create");
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(new
