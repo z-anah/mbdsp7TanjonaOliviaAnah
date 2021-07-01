@@ -35,36 +35,19 @@ namespace pari.src.dao.view.user_control.panel
         private async void temp()
         {
             Cursor = Cursors.WaitCursor;
-            var res = await getEquipes();
+            var res = await Service.getEquipes();
             var fpc = new List<Combo>();
             foreach (EquipeModel f in res.Data) fpc.Add(new Combo { Text = f.Nomequipe, Value = f.Id });
             pariComboItem1.ComboBox.DisplayMember = "Text";
             pariComboItem1.ComboBox.ValueMember = "Value";
             pariComboItem1.ComboBox.DataSource = fpc;
 
-            var res1 = await Formations();
             var fpc1 = new List<Combo>();
-            foreach (FormationModel f in res1.Data) fpc1.Add(new Combo { Text = f.Nomformation, Value = f.Id });
+            for (int i = 1; i <= 12; i++) fpc1.Add(new Combo { Text = i.ToString(), Value = i.ToString() });
             pariComboItem2.ComboBox.DisplayMember = "Text";
             pariComboItem2.ComboBox.ValueMember = "Value";
             pariComboItem2.ComboBox.DataSource = fpc1;
             Cursor = Cursors.Arrow;
-        }
-
-        public async Task<FormationsRest> Formations()
-        {
-            var client = new RestClient(Env.API_URL_NODE);
-            var request = new RestRequest("/formations");
-            var json = await client.GetAsync<string>(request);
-            return JsonConvert.DeserializeObject<FormationsRest>(json);
-        }
-
-        private async Task<EquipesRest> getEquipes()
-        {
-            var client = new RestClient(Env.API_URL_NODE);
-            var request = new RestRequest("/equipes");
-            var json = await client.GetAsync<string>(request);
-            return JsonConvert.DeserializeObject<EquipesRest>(json);
         }
 
         private void InitializeComponent()
@@ -235,47 +218,27 @@ namespace pari.src.dao.view.user_control.panel
             if (dialog.ShowDialog() == DialogResult.OK) pariTextBox2.TextBox.Text = dialog.FileName;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
 
             Cursor = Cursors.WaitCursor;
             var c = (Combo)pariComboItem1.ComboBox.SelectedItem;
             var c2 = (Combo)pariComboItem2.ComboBox.SelectedItem;
-            var idposte = c.Value;
-            var idequipe = c2.Value;
+            int idposte = int.Parse(c2.Value);
+            var idequipe = c.Value;
             var nomjoueur = pariTextBox1.TextBox.Text;
             var profiljoueur = Service.upload(pariTextBox2.TextBox.Text);
             var agejoueur = pariDate1.DateTimePicker.Value.ToString();
             var taillejoueur = pariTextBox3.TextBox.Text;
-            var poindsjoueur = pariTextBox4.TextBox.Text;
+            var poidsjoueur = pariTextBox4.TextBox.Text;
 
-            Task<Joueur> da = Service.createJoueur(
-                idposte, idequipe, nomjoueur, profiljoueur, agejoueur, taillejoueur, poindsjoueur
+            Task<JoueurRest> da = Service.createJoueur(
+                idposte, idequipe, nomjoueur, profiljoueur, agejoueur, taillejoueur, poidsjoueur
                 );
-            EquipeRest d = await da;
+            JoueurRest d = await da;
             Cursor = Cursors.Arrow;
-            if (d.Status) this.information(nomjoueur);
-            else this.information(d.Message);
-        }
-
-        private void information(string _id, string nomjoueur)
-        {
-            MessageBox.Show(
-                this,
-                $"{nomjoueur} est ajouté avec succès",
-                "Pari",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-                );
-        }
-
-        private void information(string message)
-        {
-            MessageBox.Show(
-                this, message, "Pari",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error
-                );
+            if (d.Status) Information.information(this, $"{nomjoueur} est ajouté avec succès");
+            else Information.informationError(this, d.Message);
         }
     }
 }

@@ -11,6 +11,21 @@ namespace pari.src.dao.service
 {
     class Service
     {
+        public static async Task<FormationsRest> getFormations()
+        {
+            var client = new RestClient(Env.API_URL_NODE);
+            var request = new RestRequest("/formations");
+            var json = await client.GetAsync<string>(request);
+            return JsonConvert.DeserializeObject<FormationsRest>(json);
+        }
+
+        public static async Task<EquipesRest> getEquipes()
+        {
+            var client = new RestClient(Env.API_URL_NODE);
+            var request = new RestRequest("/equipes");
+            var json = await client.GetAsync<string>(request);
+            return JsonConvert.DeserializeObject<EquipesRest>(json);
+        }
         public static async Task<CompetitionRest> createCompetitionAsync(string nomCompetition, string dateDebut, string dateFin)
         {
             var client = new RestClient(Env.API_URL_NODE);
@@ -56,10 +71,10 @@ namespace pari.src.dao.service
             return res;
         }
 
-        internal static Task<Joueur> createJoueur(string idposte, string idequipe, string nomjoueur, string profiljoueur, string agejoueur, string taillejoueur, string poindsjoueur)
+        public static async Task<JoueurRest> createJoueur(int idposte, string idequipe, string nomjoueur, string profiljoueur, string agejoueur, string taillejoueur, string poidsjoueur)
         {
             var client = new RestClient(Env.API_URL_NODE);
-            var request = new RestRequest("/equipe/create");
+            var request = new RestRequest("/joueur/create");
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(new
             {
@@ -67,11 +82,13 @@ namespace pari.src.dao.service
                 idequipe,
                 nomjoueur,
                 profiljoueur,
-                agejoueur,
+                agejoueur = DateTime.Today.Year - Convert.ToDateTime(agejoueur).Year,
                 taillejoueur,
-                poindsjoueur
+                poidsjoueur
             });
             return await client.PostAsync<JoueurRest>(request);
         }
     }
+
+
 }
