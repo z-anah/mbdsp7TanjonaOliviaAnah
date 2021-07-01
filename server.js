@@ -29,8 +29,8 @@ const uploadController = require("./controller/upload.controller");
 const userController = require("./controller/utilisateur.controller");
 const roleController = require("./controller/role.controller");
 const competitionController = require("./controller/competition.controller");
-const matchController = require("./controller/match.controller");
-const equipeController = require("./controller/equipe.controller");
+const match = require("./service/match");
+const equipe = require("./service/equipe");
 
 // Pour accepter les connexions cross-domain (CORS)
 app.use(function (req, res, next) {
@@ -54,7 +54,7 @@ const prefix = "/api";
 
 //app.route(prefix + "/assignments").get(assignment.getAssignments);
 
-require("./route/anah.route")(app);
+// require("./route/anah.route")(app);
 app.route(prefix + "/upload").post(uploadController.upload);
 //app.route(prefix + "/download").get(controller.download);
 app.route(prefix + "/user/:id").get(userController.userById);
@@ -71,11 +71,14 @@ app.route(prefix + "/forgotPassword").put(userController.updatePasswordByEmail);
 app
   .route(prefix + "/listeCompetition")
   .get(competitionController.listCompetitions);
-app.route(prefix + "/listeMatch").get(matchController.listMatchs);
-app
-  .route(prefix + "/listeMatch/:idcompetition")
-  .get(matchController.listMatchsCompetition);
-app.route(prefix + "/listeEquipe").get(equipeController.listEquipes);
+
+// app
+//   .route(prefix + "/listeMatch/:idcompetition")
+//   .get(matchController.listMatchsCompetition);
+
+app.route(prefix + "/listeEquipe").get(equipe.getListEquipe);
+
+app.route(prefix + "/listeMatch").get(match.getMatch);
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");

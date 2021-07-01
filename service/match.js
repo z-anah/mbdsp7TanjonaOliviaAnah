@@ -2,32 +2,32 @@ const { aggregate } = require("../model/Matchs");
 let Match = require("../model/Matchs");
 
 // Récupérer tous les match (GET)
-function getMatch(reqs, res) {
+function getMatch(req, res) {
   let aggregate = Match.aggregate([
     {
       $lookup: {
-        from: "equipes",
+        from: "Equipes",
         localField: "idequipe",
         foreignField: "id",
-        as: "equipes",
+        as: "Equipes",
       },
     },
-    {
-      $lookup: {
-        from: "equipes",
-        localField: "equ_idequipe",
-        foreignField: "id",
-        as: "equ_equipes",
-      },
-    },
-    {
-      $lookup: {
-        from: "formation",
-        localField: "idformation",
-        foreignField: "id",
-        as: "formation",
-      },
-    },
+    // {
+    //   $lookup: {
+    //     from: "Equipes",
+    //     localField: "equ_idequipe",
+    //     foreignField: "id",
+    //     as: "Equ_equipes",
+    //   },
+    // },
+    // {
+    //   $lookup: {
+    //     from: "Formations",
+    //     localField: "idformation",
+    //     foreignField: "id",
+    //     as: "Formations",
+    //   },
+    // },
   ]);
 
   let options = {
