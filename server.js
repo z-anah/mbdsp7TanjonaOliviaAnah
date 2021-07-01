@@ -8,26 +8,27 @@ mongoose.Promise = global.Promise;
 // remplacer toute cette chaine par l'URI de connexion à votre propre base dans le cloud s
 const uri =
   "mongodb+srv://tanjona:Mongo220799@cluster0.ejbhp.mongodb.net/pari?retryWrites=true&w=majority";
-//mongodb+srv://tanjona:Mongo220799@cluster0.ejbhp.mongodb.net/assignments?retryWrites=true&w=majority
 
 const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
+  useCreateIndex: true,
 };
 
 mongoose.connect(uri, options).then(
   () => {
-    console.log("at URI = " + uri);
+    console.log("Mongo connected");
   },
   (err) => {
     console.log("Erreur de connexion: ", err);
   }
 );
 
-const uploadController = require("./controller/upload.controller");
-const userController = require("./controller/utilisateur.controller");
-const roleController = require("./controller/role.controller");
+
+const competitionController = require("./controller/competition.controller");
+const matchController = require("./controller/match.controller");
+const equipeController = require("./controller/equipe.controller");
 
 // Pour accepter les connexions cross-domain (CORS)
 app.use(function (req, res, next) {
@@ -44,7 +45,6 @@ app.use(function (req, res, next) {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
 let port = process.env.PORT || 5000;
 
 // les routes
@@ -52,20 +52,16 @@ const prefix = "/api";
 
 //app.route(prefix + "/assignments").get(assignment.getAssignments);
 
-app.route(prefix + "/upload").post(uploadController.upload);
-//app.route(prefix + "/download").get(controller.download);
-app.route(prefix + '/user/:id').get(userController.userById);
-app.route(prefix + "/authentification").post(userController.authentification);
-app.route(prefix + "/inscription").post(userController.signUp);
-app.route(prefix + "/testDoublonMail").post(userController.testDoublonMail);
-app.route(prefix + "/listRoles").get(roleController.listRoles);
-app.route(prefix + "/profil/:name").get(uploadController.getProfil);
-app.route(prefix + "/download/:name").get(uploadController.download);
-app.route(prefix + "/deleteProfil/:name").get(uploadController.deleteProfil);
-app.route(prefix + "/modification").put(userController.updateUtilisateur);
-app.route(prefix + "/changePassword").put(userController.updatePassword);
-app.route(prefix + "/forgotPassword").put(userController.updatePasswordByEmail);
-
+require("./route/anah.route")(app);
+require("./route/tanjona.route")(app);
+app
+  .route(prefix + "/listeCompetition")
+  .get(competitionController.listCompetitions);
+app.route(prefix + "/listeMatch").get(matchController.listMatchs);
+app
+  .route(prefix + "/listeMatch/:idcompetition")
+  .get(matchController.listMatchsCompetition);
+app.route(prefix + "/listeEquipe").get(equipeController.listEquipes);
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");

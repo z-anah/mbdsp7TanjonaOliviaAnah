@@ -1,8 +1,7 @@
 const config = require("../config/index");
-var serviceRole = require("../service/role");
-function listRoles(req, res) {
-  serviceRole
-    .getListRoles(req, res)
+var serviceEquipe = require("../service/equipe");
+function listEquipes(req, res) {
+    serviceEquipe.getListEquipe(req, res)
     .then((value) => {
       if (value) res.send({ data: value, status: true });
       else res.send({ status: false });
@@ -14,4 +13,5 @@ function listRoles(req, res) {
       })
     );
 }
-module.exports = { listRoles };
+
+module.exports = { listEquipes };
