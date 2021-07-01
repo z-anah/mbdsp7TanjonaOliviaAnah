@@ -12,7 +12,7 @@ var helper = new JwtHelperService();
   providedIn: 'root'
 })
 export class Service {
- // private baseUrl = "http://localhost:5000/api";
+ //private baseUrl = "http://localhost:5000/api";
   private baseUrl = "https://tpt-node.herokuapp.com/api";
 
   private admin = 1;
