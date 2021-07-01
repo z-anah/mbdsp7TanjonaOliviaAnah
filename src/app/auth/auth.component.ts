@@ -89,6 +89,7 @@ export class AuthComponent implements OnInit {
     this.invalid_verify_mail = false;
     this.invalid_change_password = false;
     this.valid_change_password = false;
+    this.invalid_login = false;
   }
   formVerifyMail(){
     this.isAuth = false;

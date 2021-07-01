@@ -1,0 +1,69 @@
+
+<title>Pari Admin Modification</title>
+<div class="container">
+  <h1 class="titre">Gestion modérateur </h1>
+  <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+          <!-- Nested Row within Card Body -->
+          <div class="row">
+              <div class="col-lg-5 d-none d-lg-block bg-profil-image">
+                <img class="profil" src="{{urlProfil}}" />
+              </div>
+              <div class="col-lg-7">
+                  <div class="p-5">
+                    <div class="text-center">
+                        <h1 class="h4 text-gray-900 mb-4">Modification modérateur N° {{idUtilisateur}}</h1>
+                    </div>
+                    <form class="user" [formGroup]="profilForm" (submit)="modifUtilisateur()">
+                          <div class="form-group">
+                            <label for="">Nom complet<span class='required-indicator'>*</span></label>
+                            <input [class.is-invalid] = "profilForm.get('nomComplet').invalid && profilForm.get('nomComplet').touched" formControlName = "nomComplet" type="text" class="form-control form-control-user"
+                            placeholder="Entrer nom complet" (change) ="onInputChange($event)">
+                            <div *ngIf="(profilForm.get('nomComplet').invalid) || profilForm.get('nomComplet').dirty">
+                              <small class="error_login" *ngIf="(profilForm.get('nomComplet').touched && profilForm.get('nomComplet').errors?.required)">Nom complet obligatoire.</small>
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                              <div class="col-sm-6 mb-3 mb-sm-0">
+                                <label for="">Email<span class='required-indicator'>*</span></label>
+                                <input [class.is-invalid] = "profilForm.get('email').invalid && profilForm.get('email').touched" formControlName = "email" type="email" class="form-control form-control-user"
+                                  placeholder="Entrer adresse éléctronique" (change) ="onInputChange($event)">
+                                  <div *ngIf="(profilForm.get('email').invalid) || profilForm.get('email').dirty">
+                                    <small class="error_login" *ngIf="(profilForm.get('email').touched && profilForm.get('email').errors?.required)">Email obligatoire.</small>
+                                    <small class="error_login" *ngIf="(profilForm.get('email').touched && profilForm.get('email').errors?.pattern)">Email invalide.</small>
+                                  </div>
+                              </div>
+                              <div class="col-sm-6">
+                                <label for="">Date naissance<span class='required-indicator'>*</span></label>
+                                 <input [class.is-invalid] = "profilForm.get('dateNaissance').invalid && profilForm.get('dateNaissance').touched" formControlName = "dateNaissance" type="date" class="form-control form-control-user"
+                                 placeholder="Entrer date naissance" (change) ="onInputChange($event)">
+                                 <div *ngIf="(profilForm.get('dateNaissance').invalid) || profilForm.get('dateNaissance').dirty">
+                                   <small class="error_login" *ngIf="(profilForm.get('dateNaissance').touched && profilForm.get('dateNaissance').errors?.required)">Date naissance obligatoire.</small>
+                                 </div>
+                              </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="">Profil</label>
+                            <input formControlName = "profil" type="file" class="form-control form-control-user" (change)="onFileChange($event)"
+                                placeholder="Votre profil">
+                              <div *ngIf="(profilForm.get('profil').invalid) || profilForm.get('profil').dirty">
+                                <small class="error_login" *ngIf="(profilForm.get('profil').touched && profilForm.get('profil').errors?.required)">Profil obligatoire.</small>
+                              </div>
+                          </div>
+                          <button class="btn btn-primary btn-user btn-block" [disabled] ="!profilForm.valid">
+                            Modifier
+                          </button>
+                          <hr>
+                          <div *ngIf="invalid_profil" class="text-center">
+                            <h5 class="error_auth"><i class="fa fa-times"></i>  {{invalid_profil_msg}} </h5>
+                          </div>
+                          <div *ngIf="valid_profil" class="text-center">
+                            <h5 class="valid_register"><i class="fa fa-check" aria-hidden="true"></i> {{ valid_profil_msg }} </h5>
+                          </div>
+                    </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

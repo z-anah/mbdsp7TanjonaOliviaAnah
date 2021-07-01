@@ -1,6 +1,7 @@
 
 <title>Pari Admin Profil</title>
 <div class="container">
+  <h1 class="titre">Profil </h1>
   <div class="card o-hidden border-0 shadow-lg my-5">
       <div class="card-body p-0">
           <!-- Nested Row within Card Body -->
@@ -11,14 +12,14 @@
               <div class="col-lg-7">
                   <div class="p-5">
                     <div class="text-center" *ngIf="!changePassword">
-                        <h1 class="h4 text-gray-900 mb-4">Profil</h1>
+                        <h1 class="h4 text-gray-900 mb-4">Information</h1>
                     </div>
                     <div class="text-center" *ngIf="changePassword">
                       <h1 class="h4 text-gray-900 mb-4">Changement mot de passe</h1>
                     </div>
                     <form class="user" [formGroup]="profilForm" *ngIf="!changePassword" (submit)="modifUtilisateur()">
                           <div class="form-group">
-                            <label for="">Nom complet<span class='required-indicator'></span></label>
+                            <label for="">Nom complet<span class='required-indicator'>*</span></label>
                             <input [class.is-invalid] = "profilForm.get('nomComplet').invalid && profilForm.get('nomComplet').touched" formControlName = "nomComplet" type="text" class="form-control form-control-user"
                             placeholder="Entrer nom complet" (change) ="onInputChange($event)">
                             <div *ngIf="(profilForm.get('nomComplet').invalid) || profilForm.get('nomComplet').dirty">

@@ -17,6 +17,11 @@ import { JwtModule } from '@auth0/angular-jwt';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProfilComponent } from './back/pages/profil/profil.component';
+import { ListModeratorComponent } from './back/pages/gestion-moderator/list-moderator/list-moderator.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import { ModifModeratorComponent } from './back/pages/gestion-moderator/modif-moderator/modif-moderator.component';
 const routes:Routes = [
   { path: '', component: BackComponent,children: [
     {
@@ -38,6 +43,14 @@ const routes:Routes = [
     {
       path: 'ajoutModerateur',
       component: RegisterComponent
+    },
+    {
+      path: 'listeModerateur',
+      component: ListModeratorComponent
+    } ,
+    {
+      path:"modifModerateur/:id",
+      component:ModifModeratorComponent
     },
   ]
   },
@@ -61,6 +74,14 @@ const routes:Routes = [
       component: RegisterComponent
     },
     {
+      path: 'listeModerateur',
+      component: ListModeratorComponent
+    },
+    {
+      path:"modifModerateur/:id",
+      component:ModifModeratorComponent
+    },
+    {
       path: 'profil',
       component: ProfilComponent
     }
@@ -78,6 +99,8 @@ const routes:Routes = [
     AuthComponent,
     RegisterComponent,
     ProfilComponent,
+    ListModeratorComponent,
+    ModifModeratorComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,7 +109,7 @@ const routes:Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     JwtModule,
-    MatProgressBarModule
+    NgxPaginationModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

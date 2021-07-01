@@ -1,0 +1,116 @@
+:host /deep/ .ngx-pagination {
+  padding-left: 0px;
+}
+
+:host /deep/.ngx-pagination .current,
+.btn-info {
+  background: darkslategrey !important;
+  border-radius: 5px;
+  font-family: 'Roboto';
+}
+
+:host /deep/.ngx-pagination .current:hover {
+  border: 1px solid darkslategrey;
+  background:#6B7F7F !important;
+  border-radius: 5px;
+}
+
+:host /deep/.ngx-pagination a:hover, .ngx-pagination button:hover {
+  background: #e6e6e6;
+  border-radius: 5px;
+  border: solid 1px  darkslategrey;
+}
+:host /deep/ a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+  font-family: 'Roboto';
+}
+.pagination{
+margin-top: 0px;
+background: white;
+width: max-content;
+margin: auto;
+padding-left: 4px;
+}
+.pagine{
+margin: auto;
+margin-top: 8px;
+}
+
+:host /deep/.ngx-pagination .pagination-previous a::before,
+:host /deep/.ngx-pagination .pagination-previous.disabled::before,
+:host /deep/.ngx-pagination .pagination-next a::after,
+:host /deep/.ngx-pagination .pagination-next.disabled::after {
+content: '' !important;
+}
+.result{
+margin-top: auto;
+}
+
+.mycard{
+margin: 8px 36px 8px 36px;
+border-radius: inherit;
+}
+
+.mat-card{
+margin:5px;
+padding: inherit;
+}
+
+.content-rendu{
+/*background: url(https://images.unsplash.com/photo-1507208773393-40d9fc670acf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80) repeat center;*/
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, .24), 0 17px 50px 0 rgba(0, 0, 0, .19);
+  margin-bottom: 8px;
+}
+
+.image_profil{
+width: 119px;
+height: 107px;
+border-radius: 5px;
+float: right;
+}
+
+.action_delete{
+color: gray;
+cursor: pointer;
+font-size: large;
+margin-top: 128%;
+}
+
+.action_edit{
+  color: gray;
+  cursor: pointer;
+  font-size: x-large;
+  margin-top: 50%;
+}
+
+.action_delete:hover{
+ color: red;
+}
+.action_edit:hover{
+  color: green;
+ }
+
+.title{
+color:navy;
+margin-top:5px;
+}
+
+.subtitle{
+margin-top:5px;
+}
+a{
+text-decoration: none;
+}
+a.title:hover{
+border: solid 1px navy;
+border-radius: 3px;
+padding: 2px;
+}
+.titre{
+  text-align: center;
+}
+
+p{
+  margin-bottom: 3px;
+}
