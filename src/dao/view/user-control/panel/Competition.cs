@@ -1,4 +1,5 @@
-﻿using pari.src.dao.utilities;
+﻿using pari.src.dao.service;
+using pari.src.dao.utilities;
 using RestSharp;
 using System;
 using System.Threading.Tasks;
@@ -156,7 +157,7 @@ namespace pari.src.dao.view.user_control.panel
                     if (res == DialogResult.Yes)
                     {
                         Cursor = Cursors.WaitCursor;
-                        Task<CompetitionRest> ca = this.createCompetitionAsync(nomCompetition, dateDebut, dateFin);
+                        Task<CompetitionRest> ca = Service.createCompetitionAsync(nomCompetition, dateDebut, dateFin);
                         CompetitionRest c = await ca;
                         Cursor = Cursors.Arrow;
                         if (c.status) Information.information(this, $"{nomCompetition}\ndu {dateDebut}\nau {dateFin}\nest ajouté avec succès");
@@ -166,15 +167,6 @@ namespace pari.src.dao.view.user_control.panel
                 else this.pariLabelError1.Label.Text = "Date fin doit être supérieur à Date début";
             }
             else this.pariTextBox1.LabelError.Text = "Nom de la compétition non valide";
-        }
-
-        private async Task<CompetitionRest> createCompetitionAsync(string nomCompetition, string dateDebut, string dateFin)
-        {
-            var client = new RestClient(Env.API_URL_NODE);
-            var request = new RestRequest("/competition/create");
-            request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(new { nomCompetition, dateDebut, dateFin });
-            return await client.PostAsync<CompetitionRest>(request);
         }
     }
 }
