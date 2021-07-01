@@ -64,6 +64,7 @@ app
 //   .get(matchController.listMatchsCompetition);
 
 app.route(prefix + "/listeJoueurByEquipe/:id").get(joueur.getJoeurByEquipe);
+app.route(prefix + "/joueurById/:id").get(joueur.getJoeurById);
 app.route(prefix + "/listeEquipe").get(equipe.getListEquipe);
 app.route(prefix + "/listeMatch").get(match.getMatch);
 
