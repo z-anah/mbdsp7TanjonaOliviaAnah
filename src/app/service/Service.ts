@@ -91,8 +91,15 @@ export class Service {
     return this.http.get(this.baseUrl + "/user/"+id);
   }
 
+  userById(id : any):Observable<any> {
+    return this.http.get(this.baseUrl + "/user/"+id);
+  }
+
   urlProfil(profilName:any){
     return this.baseUrl+"/download/"+profilName;
+  }
+  urlDownload(){
+    return this.baseUrl+"/download/";
   }
 
   updateUser(user: Utilisateurs):Observable<any>{
@@ -109,5 +116,8 @@ export class Service {
     return this.http.put(this.baseUrl+"/changePassword",user);
   }
 
+  listModerateur(page:number, limit:number) :Observable<any>{
+    return this.http.get(this.baseUrl+"/listModerateurs"+"?page="+page + "&limit="+limit);
+  }
 
 }
