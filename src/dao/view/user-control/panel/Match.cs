@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pari.src.dao.utilities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,10 +37,10 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTextBox1 = new pari.src.dao.view.user_control.PariTextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.pariComboItem1 = new pari.src.dao.view.user_control.PariComboItem();
+            this.pariComboItem6 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariComboItem2 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariComboItem3 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariComboItem4 = new pari.src.dao.view.user_control.PariComboItem();
-            this.pariComboItem6 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariComboItem5 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariDate1 = new pari.src.dao.view.user_control.PariDate();
             this.button2 = new System.Windows.Forms.Button();
@@ -96,6 +97,13 @@ namespace pari.src.dao.view.user_control.panel
             this.pariComboItem1.Size = new System.Drawing.Size(300, 70);
             this.pariComboItem1.TabIndex = 3;
             // 
+            // pariComboItem6
+            // 
+            this.pariComboItem6.Location = new System.Drawing.Point(309, 83);
+            this.pariComboItem6.Name = "pariComboItem6";
+            this.pariComboItem6.Size = new System.Drawing.Size(300, 70);
+            this.pariComboItem6.TabIndex = 8;
+            // 
             // pariComboItem2
             // 
             this.pariComboItem2.Location = new System.Drawing.Point(3, 159);
@@ -116,13 +124,6 @@ namespace pari.src.dao.view.user_control.panel
             this.pariComboItem4.Name = "pariComboItem4";
             this.pariComboItem4.Size = new System.Drawing.Size(300, 70);
             this.pariComboItem4.TabIndex = 6;
-            // 
-            // pariComboItem6
-            // 
-            this.pariComboItem6.Location = new System.Drawing.Point(309, 83);
-            this.pariComboItem6.Name = "pariComboItem6";
-            this.pariComboItem6.Size = new System.Drawing.Size(300, 70);
-            this.pariComboItem6.TabIndex = 8;
             // 
             // pariComboItem5
             // 
@@ -146,6 +147,7 @@ namespace pari.src.dao.view.user_control.panel
             this.button2.TabIndex = 10;
             this.button2.Text = "Ajouter";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Match
             // 
@@ -156,6 +158,11 @@ namespace pari.src.dao.view.user_control.panel
             this.Size = new System.Drawing.Size(634, 513);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
+
+        }
+
+        private void init()
+        {
 
             pariTitle1.Label.Text = "Ajouter un match";
             pariTextBox1.Label.Text = "Importer un fichier";
@@ -194,5 +201,9 @@ namespace pari.src.dao.view.user_control.panel
         public PariComboItem Arbitre { get => pariComboItem6; set { pariComboItem6 = value; arbitre = value; } }
         public PariDate PariDate { get => pariDate1; set { pariDate1 = value; pariDate = value; } }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Information.information(this, "Fonctionnalité non disponible. Nous vous suggérons la fonctionnalité\n\"Importer fichier\"");
+        }
     }
 }
