@@ -34,8 +34,8 @@ namespace pari.src.dao.view.user_control.panel
         {
             Cursor = Cursors.WaitCursor;
             var res = await Formations();
-            var fpc = new List<object>();
-            foreach (Datum f in res.Data) fpc.Add(new { Text = f.Nomformation, Value = f.Id });
+            var fpc = new List<Combo>();
+            foreach (Datum f in res.Data) fpc.Add(new Combo { Text = f.Nomformation, Value = f.Id });
             pariComboItem1.ComboBox.DisplayMember = "Text";
             pariComboItem1.ComboBox.ValueMember = "Value";
             pariComboItem1.ComboBox.DataSource = fpc;
@@ -173,6 +173,11 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
+            init();
+        }
+
+        private void init()
+        {
             pariTitle1.Label.Text = "Ajouter équipe";
             pariTextBox1.Label.Text = "Nom de l'équipe";
             pariTextBox1.TextBox.PlaceholderText = "Nom de l'équipe";
@@ -223,15 +228,98 @@ namespace pari.src.dao.view.user_control.panel
             if (dialog.ShowDialog() == DialogResult.OK) pariTextBox2.TextBox.Text = dialog.FileName;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
-            //var idformation = Number;
+            var c = (Combo)pariComboItem1.ComboBox.SelectedItem;
+            var idformation = c.Value;
             var nomequipe = pariTextBox1.TextBox.Text;
-            var logoequipe = pariTextBox2.TextBox.Text;
+            Cursor = Cursors.WaitCursor;
+            var logoequipe = upload(pariTextBox2.TextBox.Text);
             var nomcoachequipe = NomCoach.TextBox.Text;
             var Descriptionequipe = richTextBox1.Text;
+
+            Task<EquipeRest> da = this.create(
+                idformation,
+                nomequipe,
+                logoequipe,
+                nomcoachequipe,
+                Descriptionequipe
+                );
+            EquipeRest d = await da;
+            Cursor = Cursors.Arrow;
+            if (d.Status) this.information(
+                idformation,
+                nomequipe,
+                logoequipe,
+                nomcoachequipe,
+                Descriptionequipe);
+            else this.information(d.Message);
+        }
+
+        private string upload(string text)
+        {
+            var res = "";
+            var client = new RestClient("http://localhost:5000/api");
+            var request = new RestRequest("upload", Method.POST);
+
+            request.AddFile("profil", text, "image/png");
+            request.AlwaysMultipartFormData = true;
+
+            IRestResponse response = client.Execute(request);
+            if (response.IsSuccessful)
+            {
+                UploadRestModel myDeserializedClass = JsonConvert.DeserializeObject<UploadRestModel>(response.Content);
+                res = myDeserializedClass.Data;
+            }
+
+            return res;
+        }
+
+        private async Task<EquipeRest> create(string idformation, string nomequipe, string logoequipe, string nomcoachequipe, string Descriptionequipe)
+        {
+            var client = new RestClient("http://localhost:5000/api");
+            var request = new RestRequest("/equipe/create");
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new
+            {
+                idformation,
+                nomequipe,
+                logoequipe,
+                nomcoachequipe,
+                Descriptionequipe
+            });
+            return await client.PostAsync<EquipeRest>(request);
+        }
+
+        private void information(string idformation, string nomequipe, string logoequipe, string nomcoachequipe, string Descriptionequipe)
+        {
+            MessageBox.Show(
+                this,
+                $"{nomequipe} est ajouté avec succès",
+                "Pari",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
+        }
+
+        private void information(string message)
+        {
+            MessageBox.Show(
+                this, message, "Pari",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+                );
         }
     }
+    public class UploadRestModel
+    {
+        [JsonProperty("status")]
+        public bool Status { get; set; }
+
+        [JsonProperty("data")]
+        public string Data { get; set; }
+    }
+
 
     public class Datum
     {
@@ -245,6 +333,15 @@ namespace pari.src.dao.view.user_control.panel
         public int V { get; set; }
     }
 
+    public class Combo
+    {
+        [JsonProperty("_id")]
+        public string Value { get; set; }
+
+        [JsonProperty("nomformation")]
+        public string Text { get; set; }
+    }
+
     public class Root
     {
         [JsonProperty("status")]
@@ -256,4 +353,42 @@ namespace pari.src.dao.view.user_control.panel
         [JsonProperty("data")]
         public List<Datum> Data { get; set; }
     }
+
+    public class Data
+    {
+        [JsonProperty("_id")]
+        public string Id { get; set; }
+
+        [JsonProperty("idformation")]
+        public string Idformation { get; set; }
+
+        [JsonProperty("nomequipe")]
+        public string Nomequipe { get; set; }
+
+        [JsonProperty("logoequipe")]
+        public string Logoequipe { get; set; }
+
+        [JsonProperty("nomcoachequipe")]
+        public string Nomcoachequipe { get; set; }
+
+        [JsonProperty("Descriptionequipe")]
+        public string Descriptionequipe { get; set; }
+
+        [JsonProperty("__v")]
+        public int V { get; set; }
+    }
+
+    public class EquipeRest
+    {
+        [JsonProperty("status")]
+        public bool Status { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
+
+        [JsonProperty("data")]
+        public Data Data { get; set; }
+    }
+
+
 }

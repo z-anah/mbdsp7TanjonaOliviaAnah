@@ -167,15 +167,6 @@ namespace pari.src.dao.view.user_control.panel
             else this.pariTextBox1.LabelError.Text = "Nom de la compétition non valide";
         }
 
-        private void information(string message)
-        {
-            MessageBox.Show(
-                this, message, "Pari",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error
-                );
-        }
-
         private async Task<CompetitionRest> createCompetitionAsync(string nomCompetition, string dateDebut, string dateFin)
         {
             var client = new RestClient("http://localhost:5000/api");
@@ -193,6 +184,15 @@ namespace pari.src.dao.view.user_control.panel
                 "Pari",
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Information
+                );
+        }
+
+        private void information(string message)
+        {
+            MessageBox.Show(
+                this, message, "Pari",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
                 );
         }
 
