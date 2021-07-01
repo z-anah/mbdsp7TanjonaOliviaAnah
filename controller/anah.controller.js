@@ -106,4 +106,34 @@ const formations = async (req, res) => {
   }
 };
 
-module.exports = { sendMail, createCompetition, createFormations, formations };
+const createEquipe = async (req, res) => {
+  try {
+    const {
+      idformation,
+      nomequipe,
+      logoequipe,
+      nomcoachequipe,
+      Descriptionequipe
+    } = req.body
+    const data = await service.createEquipe(
+      idformation,
+      nomequipe,
+      logoequipe,
+      nomcoachequipe,
+      Descriptionequipe
+    );
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data: data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
+module.exports = { sendMail, createCompetition, createFormations, formations, createEquipe };

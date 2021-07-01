@@ -1,3 +1,5 @@
+const { ObjectId } = require("bson");
+const Mongoose = require("mongoose");
 let Competition = require("../model/Competition");
 let equipes = require("../model/equipes");
 let Formation = require("../model/Formation");
@@ -10,16 +12,22 @@ const createCompetition = async (nomCompetition, dateDebut, dateFin) => {
   await c.save();
   return c;
 };
-const createEquipe = async () => {
-  //   let m = new equipes({
-  //     idformation: Number,
-  //     nomequipe: String,
-  //     logoequipe: String,
-  //     nomcoachequipe: String,
-  //     Descriptionequipe: Text,
-  //   });
-  //   await m.save();
-  //   return m;
+const createEquipe = async (
+  idformation,
+  nomequipe,
+  logoequipe,
+  nomcoachequipe,
+  Descriptionequipe
+) => {
+  let m = new equipes({
+    idformation: ObjectId(idformation),
+    nomequipe,
+    logoequipe,
+    nomcoachequipe,
+    Descriptionequipe,
+  });
+  await m.save();
+  return m;
 };
 const createFormation = async (nomformation) => {
   let m = new Formation({
@@ -45,5 +53,6 @@ module.exports = {
   createCompetition,
   createEquipe,
   createFormation,
-  createFormations, formations
+  createFormations,
+  formations,
 };

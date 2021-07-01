@@ -1,9 +1,10 @@
+const { ObjectId } = require("bson");
 let mongoose = require("mongoose");
 var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 let Schema = mongoose.Schema;
 
 let EquipeSchema = Schema({
-  idformation: Number,
+  idformation: ObjectId,
   nomequipe: String,
   logoequipe: String,
   nomcoachequipe: String,
