@@ -84,7 +84,6 @@ namespace pari
         {
             try
             {
-                Console.WriteLine("tonga");
                 login1.isValide();
                 pariSideBar1Init();
             }

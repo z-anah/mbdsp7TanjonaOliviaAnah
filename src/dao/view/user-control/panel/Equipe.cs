@@ -195,7 +195,7 @@ namespace pari.src.dao.view.user_control.panel
             pariTextBox3.LabelError.Text = "";
         }
 
-        private async Task<Root> Formations()
+        public async Task<Root> Formations()
         {
             var client = new RestClient("http://localhost:5000/api");
             var request = new RestRequest("/formations");

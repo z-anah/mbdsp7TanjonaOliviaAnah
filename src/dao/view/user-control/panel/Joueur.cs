@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -26,8 +27,43 @@ namespace pari.src.dao.view.user_control.panel
         public Joueur()
         {
             InitializeComponent();
+            temp();
         }
 
+        private async void temp()
+        {
+            Cursor = Cursors.WaitCursor;
+            var res = await getEquipes();
+            var fpc = new List<Combo>();
+            foreach (EquipeDatum f in res.Data) fpc.Add(new Combo { Text = f.Nomequipe, Value = f.Id });
+            pariComboItem1.ComboBox.DisplayMember = "Text";
+            pariComboItem1.ComboBox.ValueMember = "Value";
+            pariComboItem1.ComboBox.DataSource = fpc;
+
+            var res1 = await Formations();
+            var fpc1 = new List<Combo>();
+            foreach (Datum f in res1.Data) fpc1.Add(new Combo { Text = f.Nomformation, Value = f.Id });
+            pariComboItem2.ComboBox.DisplayMember = "Text";
+            pariComboItem2.ComboBox.ValueMember = "Value";
+            pariComboItem2.ComboBox.DataSource = fpc1;
+            Cursor = Cursors.Arrow;
+        }
+
+        public async Task<Root> Formations()
+        {
+            var client = new RestClient("http://localhost:5000/api");
+            var request = new RestRequest("/formations");
+            var json = await client.GetAsync<string>(request);
+            return JsonConvert.DeserializeObject<Root>(json);
+        }
+
+        private async Task<EquipesRest> getEquipes()
+        {
+            var client = new RestClient("http://localhost:5000/api");
+            var request = new RestRequest("/equipes");
+            var json = await client.GetAsync<string>(request);
+            return JsonConvert.DeserializeObject<EquipesRest>(json);
+        }
 
         private void InitializeComponent()
         {
@@ -199,38 +235,67 @@ namespace pari.src.dao.view.user_control.panel
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //var idposte = pariComboItem1.ComboBox.SelectedItem.ToString();
-            //var idequipe = pariComboItem2.ComboBox.SelectedItem.ToString();
+
+            Cursor = Cursors.WaitCursor;
+            var c = (Combo)pariComboItem1.ComboBox.SelectedItem;
+            var c2 = (Combo)pariComboItem2.ComboBox.SelectedItem;
+            var idposte = c.Value;
+            var idequipe = c2.Value;
             var nomjoueur = pariTextBox1.TextBox.Text;
-            var profiljoueur = pariTextBox2.TextBox.Text;
+            var profiljoueur = upload(pariTextBox2.TextBox.Text);
             var agejoueur = pariDate1.DateTimePicker.Value.ToString();
             var taillejoueur = pariTextBox3.TextBox.Text;
             var poindsjoueur = pariTextBox4.TextBox.Text;
 
+            /*Task<Joueur> da = this.create(
+                idformation,
+                nomequipe,
+                logoequipe,
+                nomcoachequipe,
+                Descriptionequipe
+                );
+            EquipeRest d = await da;
+            Cursor = Cursors.Arrow;
+            if (d.Status) this.information(nomjoueur);
+            else this.information(d.Message);*/
+        }
 
+        private void information(string _id, string nomjoueur)
+        {
+            MessageBox.Show(
+                this,
+                $"{nomjoueur} est ajouté avec succès",
+                "Pari",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+                );
+        }
 
-            /*var client = new RestClient("http://localhost:5000/api");
+        private void information(string message)
+        {
+            MessageBox.Show(
+                this, message, "Pari",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Error
+                );
+        }
+        private string upload(string text)
+        {
+            var res = "";
+            var client = new RestClient("http://localhost:5000/api");
             var request = new RestRequest("upload", Method.POST);
 
-            request.AddFile("profil", pariTextBox2.TextBox.Text, "image/png");
+            request.AddFile("profil", text, "image/png");
             request.AlwaysMultipartFormData = true;
 
             IRestResponse response = client.Execute(request);
             if (response.IsSuccessful)
             {
-                Console.WriteLine($"Success: {response.Content}");
+                UploadRestModel myDeserializedClass = JsonConvert.DeserializeObject<UploadRestModel>(response.Content);
+                res = myDeserializedClass.Data;
             }
-            else
-            {
-                if (response.StatusCode == 0)
-                {
-                    Console.WriteLine($"Failed: network error: {response.ErrorMessage}");
-                }
-                else
-                {
-                    Console.WriteLine($"Failed: {(int)response.StatusCode}-{response.StatusDescription}");
-                }
-            }*/
+
+            return res;
         }
     }
 
@@ -238,5 +303,42 @@ namespace pari.src.dao.view.user_control.panel
     {
         public bool Status { get; internal set; }
         public string Message { get; internal set; }
+    }
+
+    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
+    public class EquipeDatum
+    {
+        [JsonProperty("_id")]
+        public string Id { get; set; }
+
+        [JsonProperty("idformation")]
+        public string Idformation { get; set; }
+
+        [JsonProperty("nomequipe")]
+        public string Nomequipe { get; set; }
+
+        [JsonProperty("logoequipe")]
+        public string Logoequipe { get; set; }
+
+        [JsonProperty("nomcoachequipe")]
+        public string Nomcoachequipe { get; set; }
+
+        [JsonProperty("Descriptionequipe")]
+        public string Descriptionequipe { get; set; }
+
+        [JsonProperty("__v")]
+        public int V { get; set; }
+    }
+
+    public class EquipesRest
+    {
+        [JsonProperty("status")]
+        public bool Status { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
+
+        [JsonProperty("data")]
+        public List<EquipeDatum> Data { get; set; }
     }
 }
