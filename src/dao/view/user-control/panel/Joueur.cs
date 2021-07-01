@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using pari.src.dao.service;
 using pari.src.dao.utilities;
 using RestSharp;
 using System;
@@ -50,12 +51,12 @@ namespace pari.src.dao.view.user_control.panel
             Cursor = Cursors.Arrow;
         }
 
-        public async Task<Root> Formations()
+        public async Task<FormationsRest> Formations()
         {
             var client = new RestClient(Env.API_URL_NODE);
             var request = new RestRequest("/formations");
             var json = await client.GetAsync<string>(request);
-            return JsonConvert.DeserializeObject<Root>(json);
+            return JsonConvert.DeserializeObject<FormationsRest>(json);
         }
 
         private async Task<EquipesRest> getEquipes()
@@ -243,22 +244,18 @@ namespace pari.src.dao.view.user_control.panel
             var idposte = c.Value;
             var idequipe = c2.Value;
             var nomjoueur = pariTextBox1.TextBox.Text;
-            var profiljoueur = upload(pariTextBox2.TextBox.Text);
+            var profiljoueur = Service.upload(pariTextBox2.TextBox.Text);
             var agejoueur = pariDate1.DateTimePicker.Value.ToString();
             var taillejoueur = pariTextBox3.TextBox.Text;
             var poindsjoueur = pariTextBox4.TextBox.Text;
 
-            /*Task<Joueur> da = this.create(
-                idformation,
-                nomequipe,
-                logoequipe,
-                nomcoachequipe,
-                Descriptionequipe
+            Task<Joueur> da = Service.createJoueur(
+                idposte, idequipe, nomjoueur, profiljoueur, agejoueur, taillejoueur, poindsjoueur
                 );
             EquipeRest d = await da;
             Cursor = Cursors.Arrow;
             if (d.Status) this.information(nomjoueur);
-            else this.information(d.Message);*/
+            else this.information(d.Message);
         }
 
         private void information(string _id, string nomjoueur)
@@ -279,24 +276,6 @@ namespace pari.src.dao.view.user_control.panel
                 MessageBoxButtons.OK,
                 MessageBoxIcon.Error
                 );
-        }
-        private string upload(string text)
-        {
-            var res = "";
-            var client = new RestClient(Env.API_URL_NODE);
-            var request = new RestRequest("upload", Method.POST);
-
-            request.AddFile("profil", text, "image/png");
-            request.AlwaysMultipartFormData = true;
-
-            IRestResponse response = client.Execute(request);
-            if (response.IsSuccessful)
-            {
-                UploadRestModel myDeserializedClass = JsonConvert.DeserializeObject<UploadRestModel>(response.Content);
-                res = myDeserializedClass.Data;
-            }
-
-            return res;
         }
     }
 }

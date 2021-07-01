@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using pari.src.dao.service;
 using pari.src.dao.utilities;
 using RestSharp;
 using System;
@@ -196,12 +197,12 @@ namespace pari.src.dao.view.user_control.panel
             pariTextBox3.LabelError.Text = "";
         }
 
-        public async Task<Root> Formations()
+        public async Task<FormationsRest> Formations()
         {
             var client = new RestClient(Env.API_URL_NODE);
             var request = new RestRequest("/formations");
             var json = await client.GetAsync<string>(request);
-            return JsonConvert.DeserializeObject<Root>(json);
+            return JsonConvert.DeserializeObject<FormationsRest>(json);
         }
 
         public PariTitle PariTitle { get => pariTitle1; set { pariTitle1 = value; pariTitle = value; } }
@@ -235,11 +236,11 @@ namespace pari.src.dao.view.user_control.panel
             var idformation = c.Value;
             var nomequipe = pariTextBox1.TextBox.Text;
             Cursor = Cursors.WaitCursor;
-            var logoequipe = upload(pariTextBox2.TextBox.Text);
+            var logoequipe = Service.upload(pariTextBox2.TextBox.Text);
             var nomcoachequipe = NomCoach.TextBox.Text;
             var Descriptionequipe = richTextBox1.Text;
 
-            Task<EquipeRest> da = this.create(
+            Task<EquipeRest> da = Service.createEquipe(
                 idformation,
                 nomequipe,
                 logoequipe,
@@ -250,41 +251,6 @@ namespace pari.src.dao.view.user_control.panel
             Cursor = Cursors.Arrow;
             if (d.Status) Information.information(this, $"{nomequipe} est ajouté avec succès");
             else Information.informationError(this, d.Message);
-        }
-
-        private string upload(string text)
-        {
-            var res = "";
-            var client = new RestClient(Env.API_URL_NODE);
-            var request = new RestRequest("upload", Method.POST);
-
-            request.AddFile("profil", text, "image/png");
-            request.AlwaysMultipartFormData = true;
-
-            IRestResponse response = client.Execute(request);
-            if (response.IsSuccessful)
-            {
-                UploadRestModel myDeserializedClass = JsonConvert.DeserializeObject<UploadRestModel>(response.Content);
-                res = myDeserializedClass.Data;
-            }
-
-            return res;
-        }
-
-        private async Task<EquipeRest> create(string idformation, string nomequipe, string logoequipe, string nomcoachequipe, string Descriptionequipe)
-        {
-            var client = new RestClient(Env.API_URL_NODE);
-            var request = new RestRequest("/equipe/create");
-            request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(new
-            {
-                idformation,
-                nomequipe,
-                logoequipe,
-                nomcoachequipe,
-                Descriptionequipe
-            });
-            return await client.PostAsync<EquipeRest>(request);
         }
     }
 

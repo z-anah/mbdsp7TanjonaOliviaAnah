@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace pari.src.dao.view.user_control.panel
 {
-    public class Root
+    public class FormationsRest
     {
         [JsonProperty("status")]
         public bool Status { get; set; }
