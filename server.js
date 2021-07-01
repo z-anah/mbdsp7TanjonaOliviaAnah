@@ -25,9 +25,7 @@ mongoose.connect(uri, options).then(
   }
 );
 
-const uploadController = require("./controller/upload.controller");
-const userController = require("./controller/utilisateur.controller");
-const roleController = require("./controller/role.controller");
+
 const competitionController = require("./controller/competition.controller");
 const matchController = require("./controller/match.controller");
 const equipeController = require("./controller/equipe.controller");
@@ -55,19 +53,7 @@ const prefix = "/api";
 //app.route(prefix + "/assignments").get(assignment.getAssignments);
 
 require("./route/anah.route")(app);
-app.route(prefix + "/upload").post(uploadController.upload);
-//app.route(prefix + "/download").get(controller.download);
-app.route(prefix + "/user/:id").get(userController.userById);
-app.route(prefix + "/authentification").post(userController.authentification);
-app.route(prefix + "/inscription").post(userController.signUp);
-app.route(prefix + "/testDoublonMail").post(userController.testDoublonMail);
-app.route(prefix + "/listRoles").get(roleController.listRoles);
-app.route(prefix + "/profil/:name").get(uploadController.getProfil);
-app.route(prefix + "/download/:name").get(uploadController.download);
-app.route(prefix + "/deleteProfil/:name").get(uploadController.deleteProfil);
-app.route(prefix + "/modification").put(userController.updateUtilisateur);
-app.route(prefix + "/changePassword").put(userController.updatePassword);
-app.route(prefix + "/forgotPassword").put(userController.updatePasswordByEmail);
+require("./route/tanjona.route")(app);
 app
   .route(prefix + "/listeCompetition")
   .get(competitionController.listCompetitions);
