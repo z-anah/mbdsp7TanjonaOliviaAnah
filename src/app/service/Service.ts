@@ -49,6 +49,7 @@ export class Service {
     var token = localStorage.getItem('access_token');
     var decodedToken = helper.decodeToken(token);
     localStorage.setItem('id', decodedToken.id);
+    localStorage.setItem('role', decodedToken.roles);
   }
 
   //test expiration token
@@ -72,6 +73,7 @@ export class Service {
   logOut() {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id');
+    localStorage.removeItem('role');
 
     this.router.navigate(["/authentification"]);
   }
@@ -83,7 +85,7 @@ export class Service {
   }
 
   isAdmin() {
-    if(parseInt(localStorage.getItem("roles")) == this.admin) return true;
+    if(parseInt(localStorage.getItem("role")) == this.admin) return true;
     else return false;
   }
 
