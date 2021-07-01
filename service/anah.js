@@ -60,7 +60,7 @@ const createJoueur = async (
   profiljoueur,
   agejoueur,
   taillejoueur,
-  poindsjoueur
+  poidsjoueur
 ) => {
   let d = new joueurs({
     idposte: idposte,
@@ -69,7 +69,7 @@ const createJoueur = async (
     profiljoueur,
     agejoueur,
     taillejoueur,
-    poindsjoueur
+    poidsjoueur
   });
   await d.save();
   return d;

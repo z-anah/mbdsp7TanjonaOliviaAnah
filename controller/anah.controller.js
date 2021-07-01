@@ -162,7 +162,7 @@ const createJoueur = async (req, res) => {
       profiljoueur,
       agejoueur,
       taillejoueur,
-      poindsjoueur } = req.body
+      poidsjoueur } = req.body
     const data = await service.createJoueur(
       idposte,
       idequipe,
@@ -170,18 +170,20 @@ const createJoueur = async (req, res) => {
       profiljoueur,
       agejoueur,
       taillejoueur,
-      poindsjoueur);
+      poidsjoueur);
     res.send({
       status: true,
       message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
       data: data,
     });
   } catch (error) {
-    res.send({
+    const io = {
       status: false,
       message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
       desc: error.message,
-    });
+    }
+    console.log(io)
+    res.send(io);
   }
 };
 

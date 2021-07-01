@@ -10,7 +10,7 @@ let JoueurSchema = Schema({
   profiljoueur: String,
   agejoueur: Number,
   taillejoueur: Number,
-  poindsjoueur: Number,
+  poidsjoueur: Number,
 });
 
 JoueurSchema.plugin(aggregatePaginate);

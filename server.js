@@ -52,8 +52,8 @@ let port = process.env.PORT || 5000;
 const prefix = "/api";
 
 
-// require("./route/anah.route")(app);
-// require("./route/tanjona.route")(app);
+require("./route/anah.route")(app);
+require("./route/tanjona.route")(app);
 
 app
   .route(prefix + "/listeCompetition")
