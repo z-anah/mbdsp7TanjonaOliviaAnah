@@ -29,6 +29,7 @@ mongoose.connect(uri, options).then(
 const competitionController = require("./controller/competition.controller");
 const match = require("./service/match");
 const equipe = require("./service/equipe");
+const joueur = require("./service/joueur");
 
 // Pour accepter les connexions cross-domain (CORS)
 app.use(function (req, res, next) {
@@ -50,25 +51,9 @@ let port = process.env.PORT || 5000;
 // les routes
 const prefix = "/api";
 
-//app.route(prefix + "/assignments").get(assignment.getAssignments);
 
 // require("./route/anah.route")(app);
-app.route(prefix + "/upload").post(uploadController.upload);
-//app.route(prefix + "/download").get(controller.download);
-app.route(prefix + "/user/:id").get(userController.userById);
-app.route(prefix + "/authentification").post(userController.authentification);
-app.route(prefix + "/inscription").post(userController.signUp);
-app.route(prefix + "/testDoublonMail").post(userController.testDoublonMail);
-app.route(prefix + "/listRoles").get(roleController.listRoles);
-app.route(prefix + "/profil/:name").get(uploadController.getProfil);
-app.route(prefix + "/download/:name").get(uploadController.download);
-app.route(prefix + "/deleteProfil/:name").get(uploadController.deleteProfil);
-app.route(prefix + "/modification").put(userController.updateUtilisateur);
-app.route(prefix + "/changePassword").put(userController.updatePassword);
-app.route(prefix + "/forgotPassword").put(userController.updatePasswordByEmail);
-
-require("./route/anah.route")(app);
-require("./route/tanjona.route")(app);
+// require("./route/tanjona.route")(app);
 
 app
   .route(prefix + "/listeCompetition")
@@ -78,8 +63,8 @@ app
 //   .route(prefix + "/listeMatch/:idcompetition")
 //   .get(matchController.listMatchsCompetition);
 
+app.route(prefix + "/listeJoueurByEquipe/:id").get(joueur.getJoeurByEquipe);
 app.route(prefix + "/listeEquipe").get(equipe.getListEquipe);
-
 app.route(prefix + "/listeMatch").get(match.getMatch);
 
 // On démarre le serveur

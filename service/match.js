@@ -12,22 +12,22 @@ function getMatch(req, res) {
         as: "Equipes",
       },
     },
-    // {
-    //   $lookup: {
-    //     from: "Equipes",
-    //     localField: "equ_idequipe",
-    //     foreignField: "id",
-    //     as: "Equ_equipes",
-    //   },
-    // },
-    // {
-    //   $lookup: {
-    //     from: "Formations",
-    //     localField: "idformation",
-    //     foreignField: "id",
-    //     as: "Formations",
-    //   },
-    // },
+    {
+      $lookup: {
+        from: "Equipes",
+        localField: "equ_idequipe",
+        foreignField: "id",
+        as: "Equ_equipes",
+      },
+    },
+    {
+      $lookup: {
+        from: "Formations",
+        localField: "idformation",
+        foreignField: "id",
+        as: "Formations",
+      },
+    },
   ]);
 
   let options = {
@@ -50,29 +50,33 @@ function getMatchBycompetition(req, res) {
     { $match: { idcompetition: matchId } },
     {
       $lookup: {
-        from: "equipes",
+        from: "Equipes",
         localField: "idequipe",
         foreignField: "id",
-        as: "equipes",
+        as: "Equipes",
       },
     },
     {
       $lookup: {
-        from: "equipes",
+        from: "Equipes",
         localField: "equ_idequipe",
         foreignField: "id",
-        as: "equ_equipes",
+        as: "Equ_equipes",
       },
     },
     {
       $lookup: {
-        from: "formation",
+        from: "Formations",
         localField: "idformation",
         foreignField: "id",
-        as: "formation",
+        as: "Formations",
       },
     },
   ]);
+  
+  let options = {
+
+  };
   // callback
   Match.aggregatePaginate(aggregate, options, (err, match) => {
     if (err) {
