@@ -2,7 +2,7 @@ const { aggregate } = require("../model/equipes");
 let Equipe = require("../model/equipes");
 
 // Récupérer tous les equipe (GET)
-function getListEquipe(reqs, res) {
+function getListEquipe(req, res) {
   let aggregate = Equipe.aggregate([
     {
       $lookup: {

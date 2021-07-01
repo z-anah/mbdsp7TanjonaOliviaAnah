@@ -48,6 +48,10 @@ const formations = async () => {
   let f = await Formation.find({});
   return f;
 };
+const getEquipes = async () => {
+  let d = await equipes.find({});
+  return d;
+};
 
 module.exports = {
   createCompetition,
@@ -55,4 +59,5 @@ module.exports = {
   createFormation,
   createFormations,
   formations,
+  getEquipes
 };
