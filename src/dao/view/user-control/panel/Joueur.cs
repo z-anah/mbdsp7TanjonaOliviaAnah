@@ -35,14 +35,14 @@ namespace pari.src.dao.view.user_control.panel
             Cursor = Cursors.WaitCursor;
             var res = await getEquipes();
             var fpc = new List<Combo>();
-            foreach (EquipeDatum f in res.Data) fpc.Add(new Combo { Text = f.Nomequipe, Value = f.Id });
+            foreach (EquipeModel f in res.Data) fpc.Add(new Combo { Text = f.Nomequipe, Value = f.Id });
             pariComboItem1.ComboBox.DisplayMember = "Text";
             pariComboItem1.ComboBox.ValueMember = "Value";
             pariComboItem1.ComboBox.DataSource = fpc;
 
             var res1 = await Formations();
             var fpc1 = new List<Combo>();
-            foreach (Datum f in res1.Data) fpc1.Add(new Combo { Text = f.Nomformation, Value = f.Id });
+            foreach (FormationModel f in res1.Data) fpc1.Add(new Combo { Text = f.Nomformation, Value = f.Id });
             pariComboItem2.ComboBox.DisplayMember = "Text";
             pariComboItem2.ComboBox.ValueMember = "Value";
             pariComboItem2.ComboBox.DataSource = fpc1;
@@ -297,48 +297,5 @@ namespace pari.src.dao.view.user_control.panel
 
             return res;
         }
-    }
-
-    internal class UploadRest
-    {
-        public bool Status { get; internal set; }
-        public string Message { get; internal set; }
-    }
-
-    // Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse); 
-    public class EquipeDatum
-    {
-        [JsonProperty("_id")]
-        public string Id { get; set; }
-
-        [JsonProperty("idformation")]
-        public string Idformation { get; set; }
-
-        [JsonProperty("nomequipe")]
-        public string Nomequipe { get; set; }
-
-        [JsonProperty("logoequipe")]
-        public string Logoequipe { get; set; }
-
-        [JsonProperty("nomcoachequipe")]
-        public string Nomcoachequipe { get; set; }
-
-        [JsonProperty("Descriptionequipe")]
-        public string Descriptionequipe { get; set; }
-
-        [JsonProperty("__v")]
-        public int V { get; set; }
-    }
-
-    public class EquipesRest
-    {
-        [JsonProperty("status")]
-        public bool Status { get; set; }
-
-        [JsonProperty("message")]
-        public string Message { get; set; }
-
-        [JsonProperty("data")]
-        public List<EquipeDatum> Data { get; set; }
     }
 }

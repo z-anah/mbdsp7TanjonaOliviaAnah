@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="src\assets\images\" />
-    <Folder Include="src\dao\model\" />
     <Folder Include="src\dao\controller\" />
   </ItemGroup>
 

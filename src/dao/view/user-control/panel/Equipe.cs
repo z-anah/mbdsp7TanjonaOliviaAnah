@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using pari.src.dao.utilities;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace pari.src.dao.view.user_control.panel
             Cursor = Cursors.WaitCursor;
             var res = await Formations();
             var fpc = new List<Combo>();
-            foreach (Datum f in res.Data) fpc.Add(new Combo { Text = f.Nomformation, Value = f.Id });
+            foreach (FormationModel f in res.Data) fpc.Add(new Combo { Text = f.Nomformation, Value = f.Id });
             pariComboItem1.ComboBox.DisplayMember = "Text";
             pariComboItem1.ComboBox.ValueMember = "Value";
             pariComboItem1.ComboBox.DataSource = fpc;
@@ -247,13 +248,8 @@ namespace pari.src.dao.view.user_control.panel
                 );
             EquipeRest d = await da;
             Cursor = Cursors.Arrow;
-            if (d.Status) this.information(
-                idformation,
-                nomequipe,
-                logoequipe,
-                nomcoachequipe,
-                Descriptionequipe);
-            else this.information(d.Message);
+            if (d.Status) Information.information(this, $"{nomequipe} est ajouté avec succès");
+            else Information.informationError(this, d.Message);
         }
 
         private string upload(string text)
@@ -290,104 +286,6 @@ namespace pari.src.dao.view.user_control.panel
             });
             return await client.PostAsync<EquipeRest>(request);
         }
-
-        private void information(string idformation, string nomequipe, string logoequipe, string nomcoachequipe, string Descriptionequipe)
-        {
-            MessageBox.Show(
-                this,
-                $"{nomequipe} est ajouté avec succès",
-                "Pari",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-                );
-        }
-
-        private void information(string message)
-        {
-            MessageBox.Show(
-                this, message, "Pari",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error
-                );
-        }
-    }
-    public class UploadRestModel
-    {
-        [JsonProperty("status")]
-        public bool Status { get; set; }
-
-        [JsonProperty("data")]
-        public string Data { get; set; }
-    }
-
-
-    public class Datum
-    {
-        [JsonProperty("_id")]
-        public string Id { get; set; }
-
-        [JsonProperty("nomformation")]
-        public string Nomformation { get; set; }
-
-        [JsonProperty("__v")]
-        public int V { get; set; }
-    }
-
-    public class Combo
-    {
-        [JsonProperty("_id")]
-        public string Value { get; set; }
-
-        [JsonProperty("nomformation")]
-        public string Text { get; set; }
-    }
-
-    public class Root
-    {
-        [JsonProperty("status")]
-        public bool Status { get; set; }
-
-        [JsonProperty("message")]
-        public string Message { get; set; }
-
-        [JsonProperty("data")]
-        public List<Datum> Data { get; set; }
-    }
-
-    public class Data
-    {
-        [JsonProperty("_id")]
-        public string Id { get; set; }
-
-        [JsonProperty("idformation")]
-        public string Idformation { get; set; }
-
-        [JsonProperty("nomequipe")]
-        public string Nomequipe { get; set; }
-
-        [JsonProperty("logoequipe")]
-        public string Logoequipe { get; set; }
-
-        [JsonProperty("nomcoachequipe")]
-        public string Nomcoachequipe { get; set; }
-
-        [JsonProperty("Descriptionequipe")]
-        public string Descriptionequipe { get; set; }
-
-        [JsonProperty("__v")]
-        public int V { get; set; }
-    }
-
-    public class EquipeRest
-    {
-        [JsonProperty("status")]
-        public bool Status { get; set; }
-
-        [JsonProperty("message")]
-        public string Message { get; set; }
-
-        [JsonProperty("data")]
-        public Data Data { get; set; }
     }
 
 

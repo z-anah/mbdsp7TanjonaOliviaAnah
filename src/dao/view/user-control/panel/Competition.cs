@@ -1,4 +1,5 @@
-﻿using RestSharp;
+﻿using pari.src.dao.utilities;
+using RestSharp;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -151,15 +152,15 @@ namespace pari.src.dao.view.user_control.panel
             {
                 if (d1.Date < d2.Date)
                 {
-                    var res = this.question(nomCompetition, dateDebut, dateFin);
+                    var res = Information.question(this, $"Êtes-vous sûr de vouloir ajouter\n{nomCompetition}\ndu {dateDebut}\nau {dateFin} ? ");
                     if (res == DialogResult.Yes)
                     {
                         Cursor = Cursors.WaitCursor;
                         Task<CompetitionRest> ca = this.createCompetitionAsync(nomCompetition, dateDebut, dateFin);
                         CompetitionRest c = await ca;
                         Cursor = Cursors.Arrow;
-                        if (c.status) this.information(nomCompetition, dateDebut, dateFin);
-                        else this.information(c.message);
+                        if (c.status) Information.information(this, $"{nomCompetition}\ndu {dateDebut}\nau {dateFin}\nest ajouté avec succès");
+                        else Information.informationError(this, c.message);
                     }
                 }
                 else this.pariLabelError1.Label.Text = "Date fin doit être supérieur à Date début";
@@ -175,43 +176,5 @@ namespace pari.src.dao.view.user_control.panel
             request.AddJsonBody(new { nomCompetition, dateDebut, dateFin });
             return await client.PostAsync<CompetitionRest>(request);
         }
-
-        private void information(string nomCompetition, string dateDebut, string dateFin)
-        {
-            MessageBox.Show(
-                this,
-                $"{nomCompetition}\ndu {dateDebut}\nau {dateFin}\nest ajouté avec succès",
-                "Pari",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-                );
-        }
-
-        private void information(string message)
-        {
-            MessageBox.Show(
-                this, message, "Pari",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Error
-                );
-        }
-
-        private DialogResult question(string nomCompetition, string dateDebut, string dateFin)
-        {
-            return MessageBox.Show(
-                this,
-                $"Êtes-vous sûr de vouloir ajouter\n{nomCompetition}\ndu {dateDebut}\nau {dateFin} ? ",
-                "Pari",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question,
-                MessageBoxDefaultButton.Button2
-                );
-        }
-    }
-
-    internal class CompetitionRest
-    {
-        public bool status { get; internal set; }
-        public String message { get; internal set; }
     }
 }
