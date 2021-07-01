@@ -165,6 +165,80 @@ function updatePasswordByEmail(req, res) {
     );
 }
 
+function listModerateur(req, res) {
+  serviceUser
+    .getListModerateur(req, res)
+    .then((value) => {
+      if (value.list)
+        res.send({
+          list: true,
+          result: value.result,
+          message: config.msg[req.body.loc || "FR"].info.MSG_I0007,
+        });
+      else {
+        res.send({
+          list: false,
+          message: config.msg[req.body.loc || "FR"].error.MSG_E0012,
+        });
+      }
+    })
+    .catch((err) =>
+      res.send({
+        list: false,
+        message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      })
+    );
+}
+
+function listModerateur(req, res) {
+  serviceUser
+    .getListModerateur(req, res)
+    .then((value) => {
+      if (value.list)
+        res.send({
+          list: true,
+          result: value.result,
+          message: config.msg[req.body.loc || "FR"].info.MSG_I0007,
+        });
+      else {
+        res.send({
+          list: false,
+          message: config.msg[req.body.loc || "FR"].error.MSG_E0012,
+        });
+      }
+    })
+    .catch((err) =>
+      res.send({
+        list: false,
+        message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      })
+    );
+}
+function listUser(req, res) {
+  serviceUser
+    .getListUser(req, res)
+    .then((value) => {
+      if (value.list)
+        res.send({
+          list: true,
+          result: value.result,
+          message: config.msg[req.body.loc || "FR"].info.MSG_I0007,
+        });
+      else {
+        res.send({
+          list: false,
+          message: config.msg[req.body.loc || "FR"].error.MSG_E0012,
+        });
+      }
+    })
+    .catch((err) =>
+      res.send({
+        list: false,
+        message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      })
+    );
+}
+
 module.exports = {
   signUp,
   testDoublonMail,
@@ -173,4 +247,6 @@ module.exports = {
   updateUtilisateur,
   updatePassword,
   updatePasswordByEmail,
+  listModerateur,
+  listUser
 };

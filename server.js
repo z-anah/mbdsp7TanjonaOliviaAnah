@@ -25,9 +25,7 @@ mongoose.connect(uri, options).then(
   }
 );
 
-const uploadController = require("./controller/upload.controller");
-const userController = require("./controller/utilisateur.controller");
-const roleController = require("./controller/role.controller");
+
 const competitionController = require("./controller/competition.controller");
 const match = require("./service/match");
 const equipe = require("./service/equipe");
@@ -68,6 +66,10 @@ app.route(prefix + "/deleteProfil/:name").get(uploadController.deleteProfil);
 app.route(prefix + "/modification").put(userController.updateUtilisateur);
 app.route(prefix + "/changePassword").put(userController.updatePassword);
 app.route(prefix + "/forgotPassword").put(userController.updatePasswordByEmail);
+
+require("./route/anah.route")(app);
+require("./route/tanjona.route")(app);
+
 app
   .route(prefix + "/listeCompetition")
   .get(competitionController.listCompetitions);

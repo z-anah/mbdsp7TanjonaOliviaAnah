@@ -199,4 +199,66 @@ function ckeckPassswordById(req,res){
   }
 }
 
-module.exports = { register, testDoublonMail, auth, getUserById,updateByIdUtilisateur, ckeckPassswordById,updatePasswordByEmail };
+// Récupérer tous les assignments non_rendu(GET)
+function getListModerateur(req, res) {
+  try{
+    return new Promise((resolve, reject) => {
+      let aggregate = Utilisateurs.aggregate([
+        { $match: {idRole: 2}},
+        { $lookup: {
+          from: "roles",
+          localField: "idRole",
+          foreignField: "idRole",
+          as: "role_utilisateur" 
+        }},
+        { $sort : { idUtilisateur : 1} }
+      ]);
+      let options = { 
+          page: parseInt(req.query.page) || 1,
+          limit: parseInt(req.query.limit) || 5,
+      };
+      // callback
+      Utilisateurs.aggregatePaginate(aggregate, options, (err, users) => {
+          if (err) resolve ({list : false})
+          else resolve({list : true, result : users});
+        });  
+    })
+  }
+  catch (err) {
+    throw err;
+  }
+}
+  // Récupérer tous les assignments non_rendu(GET)
+function getListUser(req, res) {
+  try{
+    return new Promise((resolve, reject) => {
+      let aggregate = Utilisateurs.aggregate([
+        { $match: {idRole: NULL}},
+        { $lookup: {
+          from: "roles",
+          localField: "idRole",
+          foreignField: "idRole",
+          as: "role_utilisateur" 
+        }},
+        { $sort : { dateNaissanceUtilisateur : -1} }
+      ]);
+      let options = { 
+          page: parseInt(req.query.page) || 1,
+          limit: parseInt(req.query.limit) || 20,
+      };
+      // callback
+      Utilisateurs.aggregatePaginate(aggregate, options, (err, users) => {
+          if (err) resolve ({list : false})
+          else resolve({list : true, result : users});
+        });  
+    })
+  }
+  catch (err) {
+    throw err;
+  }
+  function userById(){
+    
+  }
+}
+
+module.exports = { register, testDoublonMail, auth, getUserById,updateByIdUtilisateur, ckeckPassswordById,updatePasswordByEmail,getListModerateur,getListUser };
