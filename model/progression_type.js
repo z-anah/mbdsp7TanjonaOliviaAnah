@@ -5,8 +5,8 @@ const mongooseUniqueValidator = require("mongoose-unique-validator");
 let Schema = mongoose.Schema;
 
 let progression_type = Schema({
-  id_match: { type: ObjectId, unique: true, required: true },
-  nom_progression_type: { type: String, unique: true, required: true },
+  nomProgressionType: { type: String, unique: true, required: true },
+  nomProgressionTypeMLG: { type: String, unique: true, required: true },
 });
 
 progression_type.plugin(aggregatePaginate);

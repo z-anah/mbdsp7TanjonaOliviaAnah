@@ -4,7 +4,7 @@ const mongooseUniqueValidator = require("mongoose-unique-validator");
 let Schema = mongoose.Schema;
 
 let type_pari = Schema({
-  nom_type_pari: { type: String, unique: true, required: true },
+  nomTypePari: { type: String, unique: true, required: true },
 });
 
 type_pari.plugin(aggregatePaginate);

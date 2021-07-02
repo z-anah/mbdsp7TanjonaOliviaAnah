@@ -7,6 +7,7 @@ const joueurs = require("../model/joueurs");
 const Matchs = require("../model/Matchs");
 const Postes = require("../model/Postes");
 const progression_type = require("../model/progression_type");
+const type_pari = require("../model/type_pari");
 const createCompetition = async (nomCompetition, dateDebut, dateFin) => {
   let c = new Competition({
     nomcompetition: nomCompetition,
@@ -95,7 +96,7 @@ const createPostes = async (postes) => {
   });
   return d;
 };
-const teste = async (m) => {
+const createMatch = async (m) => {
   const {
     idEquipe,
     Equ_idEquipe,
@@ -123,7 +124,32 @@ const teste = async (m) => {
   await d.save();
   return d;
 };
-
+const createProgressionTypes = async (m) => {
+  let d = [
+    new progression_type({
+      _id: ObjectId(),
+      nomProgressionType: "en attente",
+      nomProgressionTypeMLG: "andrasana",
+    }),
+    new progression_type({
+      _id: ObjectId(),
+      nomProgressionType: "en cours",
+      nomProgressionTypeMLG: "eo am-panatanterahana",
+    }),
+    new progression_type({
+      _id: ObjectId(),
+      nomProgressionType: "terminé",
+      nomProgressionTypeMLG: "tapitra",
+    }),
+  ];
+  await progression_type.insertMany(d);
+  return d;
+};
+const teste = async (m) => {
+  let d = [new type_pari({ nomTypePari: "pari" })];
+  await type_pari.insertMany(d);
+  return d;
+};
 module.exports = {
   createCompetition,
   createEquipe,
@@ -133,5 +159,6 @@ module.exports = {
   getEquipes,
   createJoueur,
   createPostes,
+  createMatch,
   teste,
 };
