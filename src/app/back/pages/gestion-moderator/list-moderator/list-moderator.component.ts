@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Utilisateurs } from 'app/model/utilisateurs';
 import { Service } from 'app/service/Service';
+import { DialogDeleteComponent } from '../../dialog-delete/dialog-delete.component';
 
 @Component({
   selector: 'app-list-moderator',
@@ -10,7 +11,7 @@ import { Service } from 'app/service/Service';
 })
 export class ListModeratorComponent implements OnInit {
 
-  list:Utilisateurs[];
+  lists:Utilisateurs[];
 
   page: number=1;
   limit: number = 5;
@@ -38,7 +39,7 @@ export class ListModeratorComponent implements OnInit {
   getListModerateur() {
     this.service.listModerateur(this.page, this.limit)
       .subscribe(data => {
-      this.list = data.result.docs;
+      this.lists = data.result.docs;
       this.page = data.result.page;
       this.limit = data.result.limit;
       this.totalDocs = data.result.totalDocs;
@@ -61,4 +62,16 @@ export class ListModeratorComponent implements OnInit {
     this.page = 1;
     this.getListModerateur();
   }
+  /*openDialogDelete(id) {
+    const dialogRef = this.dialog.open(DialogDeleteComponent,{
+      data:{
+        id : id,
+        message: 'Voulez vous vraiment supprimer?',
+        buttonText: {
+          ok: 'Oui',
+          cancel: 'Non'
+        }
+      }
+    });
+  }*/
 }

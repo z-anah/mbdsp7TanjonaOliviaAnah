@@ -12,10 +12,8 @@ var helper = new JwtHelperService();
   providedIn: 'root'
 })
 export class Service {
- //private baseUrl = "http://localhost:5000/api";
-  private baseUrl = "https://tpt-node.herokuapp.com/api";
-
-  private admin = 1;
+  private baseUrl = "http://localhost:5000/api";
+  //private baseUrl = "https://tpt-node.herokuapp.com/api";
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -84,9 +82,9 @@ export class Service {
     else return false;
   }
 
-  isAdmin() {
-    if(parseInt(localStorage.getItem("role")) == this.admin) return true;
-    else return false;
+
+  isAdmin(): Observable<any> {
+    return this.http.get(this.baseUrl + "/adminRole");
   }
 
   userConnecte(id : any):Observable<any> {
@@ -120,6 +118,9 @@ export class Service {
 
   listModerateur(page:number, limit:number) :Observable<any>{
     return this.http.get(this.baseUrl+"/listModerateurs"+"?page="+page + "&limit="+limit);
+  }
+  listClient(page:number, limit:number) :Observable<any>{
+    return this.http.get(this.baseUrl+"/listClients"+"?page="+page + "&limit="+limit);
   }
 
 }

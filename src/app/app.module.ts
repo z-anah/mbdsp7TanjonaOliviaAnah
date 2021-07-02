@@ -14,14 +14,13 @@ import { AuthComponent } from './auth/auth.component';
 import { RegisterComponent } from './back/pages/gestion-moderator/register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
-import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProfilComponent } from './back/pages/profil/profil.component';
 import { ListModeratorComponent } from './back/pages/gestion-moderator/list-moderator/list-moderator.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import {MatCardModule} from '@angular/material/card';
-import {MatIconModule} from '@angular/material/icon';
+;
 import { ModifModeratorComponent } from './back/pages/gestion-moderator/modif-moderator/modif-moderator.component';
+import { DialogDeleteComponent } from './back/pages/dialog-delete/dialog-delete.component';
 const routes:Routes = [
   { path: '', component: BackComponent,children: [
     {
@@ -101,6 +100,7 @@ const routes:Routes = [
     ProfilComponent,
     ListModeratorComponent,
     ModifModeratorComponent,
+    DialogDeleteComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,7 +109,7 @@ const routes:Routes = [
     RouterModule.forRoot(routes),
     HttpClientModule,
     JwtModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

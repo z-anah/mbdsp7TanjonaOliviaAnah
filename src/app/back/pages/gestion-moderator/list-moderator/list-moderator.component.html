@@ -22,7 +22,7 @@
         <!--<nav>
           <a routerLink="/assignment/{{a.id}}">-->
           <div class="mycard">
-            <mat-card *ngFor="let a of list | paginate : {
+            <mat-card *ngFor="let mod of lists | paginate : {
               itemsPerPage: limit,
               currentPage: page,
               totalItems: count
@@ -32,18 +32,18 @@
                   <mat-card-header>
                       <mat-card-subtitle>
                         <h4 mat-subheader class="subtitle">
-                          <a routerLink="/back/modifModerateur/{{a.idUtilisateur}}" class="title">
-                            {{a.nomCompletUtilisateur}}
+                          <a routerLink="/back/modifModerateur/{{mod.idUtilisateur}}" class="title">
+                            {{mod.nomCompletUtilisateur}}
                           </a>
                         </h4>
-                        <p>Email : {{a.emailUtilisateur}}</p>
-                        <p>Née le {{ a.dateNaissanceUtilisateur | date:"dd/MM/yyyy" }}</p>
+                        <p>Email : {{mod.emailUtilisateur}}</p>
+                        <p>Née le {{ mod.dateNaissanceUtilisateur | date:"dd/MM/yyyy" }}</p>
                       </mat-card-subtitle>
                   </mat-card-header>
                 </div>
                 <div class="col-md-2">
                   <mat-card-actions>
-                    <a routerLink="/back/modifModerateur/{{a.idUtilisateur}}">
+                    <a routerLink="/back/modifModerateur/{{mod.idUtilisateur}}">
                       <i class="fas fa-pen-square action_edit" title="Modifier"></i>
                     </a>
                   </mat-card-actions>
@@ -56,25 +56,10 @@
                   </mat-card-actions>
                 </div>
                 <div class="col-md-3">
-                  <img src="{{urlDownload + a.profilUtilisateur}}" alt="image_profil" class="image_profil">
+                  <img src="{{urlDownload + mod.profilUtilisateur}}" alt="image_profil" class="image_profil">
                 </div>
               </div>
-              <!--<div class="row">
-                <div class="col-md-2">
-                  <mat-card-actions>
-                    <a routerLink="/back/modifModerateur/{{a.idUtilisateur}}">
-                      <i class="fas fa-pen-square action_edit" title="Modifier"></i>
-                    </a>
-                  </mat-card-actions>
-                </div>
-                <div class="col-md-2">
-                  <mat-card-actions>
-                    <a (click)="openDialogDelete(a.id)">
-                      <i class="fas fa-trash action_delete" title="Supprimer"></i>
-                    </a>
-                  </mat-card-actions>
-                </div>
-              </div>-->
+            
               <hr>
             </mat-card>
           </div>
