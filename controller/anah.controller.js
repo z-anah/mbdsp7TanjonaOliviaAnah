@@ -73,7 +73,6 @@ const createCompetition = async (req, res) => {
 const createFormations = async (req, res) => {
   try {
     let formations = req.body.formations;
-    console.log(formations);
     const data = await service.createFormations(formations);
     res.send({
       status: true,
@@ -187,4 +186,22 @@ const createJoueur = async (req, res) => {
   }
 };
 
-module.exports = { sendMail, createCompetition, createFormations, formations, createEquipe, equipes, createJoueur };
+const createPostes = async (req, res) => {
+  try {
+    let { postes } = req.body;
+    const data = await service.createPostes(postes);
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
+module.exports = { sendMail, createCompetition, createFormations, formations, createEquipe, equipes, createJoueur, createPostes };

@@ -4,6 +4,7 @@ let Competition = require("../model/Competition");
 let equipes = require("../model/equipes");
 let Formation = require("../model/Formation");
 const joueurs = require("../model/joueurs");
+const Postes = require("../model/Postes");
 const createCompetition = async (nomCompetition, dateDebut, dateFin) => {
   let c = new Competition({
     nomcompetition: nomCompetition,
@@ -74,6 +75,28 @@ const createJoueur = async (
   await d.save();
   return d;
 };
+const createPoste = async (poste) => {
+  let {
+    idPoste,
+    nomPoste,
+    abreviation
+  } = poste;
+  let d = new Postes({
+    idPoste,
+    nomPoste,
+    abreviation
+  });
+  await d.save();
+  return d;
+};
+const createPostes = async (postes) => {
+  let d = [];
+  postes.map(async (p) => {
+    let n = await createPoste(p);
+    d.push(n);
+  });
+  return d;
+};
 
 module.exports = {
   createCompetition,
@@ -82,5 +105,6 @@ module.exports = {
   createFormations,
   formations,
   getEquipes,
-  createJoueur
+  createJoueur,
+  createPostes
 };
