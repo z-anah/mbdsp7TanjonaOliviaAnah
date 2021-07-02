@@ -16,6 +16,7 @@ module.exports = (app) => {
     app.post("/api/inscription",userController.signUp);
     app.post("/api/testDoublonMail",userController.testDoublonMail);
     app.get("/api/listRoles",roleController.listRoles);
+    app.get("/api/adminRole",roleController.adminRole);
     app.get("/api/profil/:name",uploadController.getProfil);
     app.get("/api/download/:name",uploadController.download);
     app.get("/api/deleteProfil/:name",uploadController.deleteProfil);
@@ -23,5 +24,5 @@ module.exports = (app) => {
     app.put("/api/changePassword",userController.updatePassword);
     app.put("/api/forgotPassword",userController.updatePasswordByEmail);
     app.get("/api/listModerateurs",userController.listModerateur);
-    app.get("/api/listUtilisateurs",userController.listUser);
+    app.get("/api/listClients",userController.listUser);
 };
