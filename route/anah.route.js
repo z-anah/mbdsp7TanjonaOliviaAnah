@@ -1,3 +1,4 @@
+const multer = require("multer");
 const controller = require("../controller/anah.controller");
 
 module.exports = (app) => {
@@ -18,5 +19,6 @@ module.exports = (app) => {
   app.post("/api/joueur/create", controller.createJoueur);
   app.post("/api/postes/create", controller.createPostes);
   app.post("/api/match/create", controller.createMatch);
+  app.post("/api/joueur/create/csv", controller.createJoueurCsv);
   app.post("/api/teste", controller.teste);
 };

@@ -2,6 +2,9 @@ const service = require("../service/anah");
 var nodemailer = require("nodemailer");
 const config = require("../config/index");
 const emailPassRecoverHtml = require("./email-password-recover");
+const { uploadFileCsvMiddleware } = require("../middleware/upload");
+const csv = require("csv-parser");
+const fs = require("fs");
 
 const sendMail = async (req, res) => {
   try {
@@ -240,6 +243,32 @@ const createMatch = async (req, res) => {
   }
 };
 
+const createJoueurCsv = async (req, res) => {
+  try {
+    const data = {};
+    await uploadFileCsvMiddleware(req, res);
+    data.file = req.file;
+    let t = [];
+    fs.createReadStream(req.file.path)
+      .pipe(csv())
+      .on("data", (data) => t.push(data))
+      .on("end", async () => {
+        data.joueurs = await service.createJoueurCsv(t);
+        res.send({
+          status: true,
+          message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+          data,
+        });
+      });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
 module.exports = {
   sendMail,
   createCompetition,
@@ -251,4 +280,5 @@ module.exports = {
   createPostes,
   teste,
   createMatch,
+  createJoueurCsv,
 };

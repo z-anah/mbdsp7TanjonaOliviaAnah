@@ -150,6 +150,10 @@ const teste = async (m) => {
   await type_pari.insertMany(d);
   return d;
 };
+const createJoueurCsv = async (d) => {
+  await joueurs.insertMany(d);
+  return d;
+};
 module.exports = {
   createCompetition,
   createEquipe,
@@ -160,5 +164,6 @@ module.exports = {
   createJoueur,
   createPostes,
   createMatch,
+  createJoueurCsv,
   teste,
 };

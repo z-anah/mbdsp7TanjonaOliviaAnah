@@ -1,9 +1,9 @@
 const config = require("../config/index");
-const uploadFile = require("../middleware/upload");
 const fs = require("fs");
+const { uploadFileMiddleware } = require("../middleware/upload");
 async function upload(req, res) {
   try {
-    await uploadFile(req, res);
+    await uploadFileMiddleware(req, res);
     if (req.file == undefined)
       res.send({
         message: config.msg[req.body.loc || "FR"].error.MSG_E0002,

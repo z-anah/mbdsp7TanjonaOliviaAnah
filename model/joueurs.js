@@ -4,11 +4,10 @@ var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 let Schema = mongoose.Schema;
 
 let JoueurSchema = Schema({
-  idjoueur: Number,
-  idposte: ObjectId,
-  idequipe: String,
+  idposte: Number,
+  idequipe: ObjectId,
   nomjoueur: String,
-  profiljoueur: String,
+  profiljoueur: { type: String, default: "default.png" },
   agejoueur: Number,
   taillejoueur: Number,
   poidsjoueur: Number,
