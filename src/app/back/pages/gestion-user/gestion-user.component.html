@@ -1,3 +1,76 @@
-<p>
-  gestion-user works!
-</p>
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="titre">Gestion utilisateur</h1>
+  <p class="mb-4"></p>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+      <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">Liste des clients</h6>
+      </div>
+      <div class="pagination">
+        <div class="d-flex justify-content-center">
+          <p class="result">Résultats par page</p>
+            <div class="p-2 bd-highlight">
+                <select (change)="tableData($event)" class="custom-select">
+                  <option *ngFor="let size of tableSizes" [ngValue]="size">
+                    {{ size }}
+                  </option>
+                </select>
+            </div>
+            <div class="pagine">
+              <pagination-controls responsive="true"  previousLabel="<"
+              nextLabel=">" (pageChange)="tabSize($event)"></pagination-controls>
+            </div>
+        </div>
+      </div>
+      <div class="card-body">
+          <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                      <tr>
+                          <th>Profil</th>
+                          <th>Nom</th>
+                          <th>Email</th>
+                          <th>Date Naissance</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+
+                      <tr *ngFor="let cl of lists | paginate : {
+                        itemsPerPage: limit,
+                        currentPage: page,
+                        totalItems: count
+                      };">
+                          <td>  <img class="img-profile rounded-circle"
+                            src="{{urlDownload + cl.profilUtilisateur}}"></td>
+                          <td>{{cl.nomCompletUtilisateur}}</td>
+                          <td>{{cl.emailUtilisateur}}</td>
+                          <td>{{ cl.dateNaissanceUtilisateur | date:"dd/MM/yyyy" }}</td>
+                          <td><button type="button" class="btn btn-primary btn-sm">Bloquer</button></td>
+                      </tr>
+                  </tbody>
+              </table>
+            </div>
+      </div>
+      <div class="pagination">
+        <div class="d-flex justify-content-center">
+          <p class="result">Résultats par page</p>
+            <div class="p-2 bd-highlight">
+                <select (change)="tableData($event)" class="custom-select">
+                  <option *ngFor="let size of tableSizes" [ngValue]="size">
+                    {{ size }}
+                  </option>
+                </select>
+            </div>
+            <div class="pagine">
+              <pagination-controls responsive="true"  previousLabel="<"
+              nextLabel=">" (pageChange)="tabSize($event)"></pagination-controls>
+            </div>
+        </div>
+      </div>
+  </div>
+ </div>

@@ -12,7 +12,10 @@ export class NavigBarComponent implements OnInit {
   constructor(private service : Service) { }
 
   ngOnInit() {
-    this.isAdmin  = this.service.isAdmin();
+    this.service.isAdmin().subscribe((value) =>{
+      if(parseInt(localStorage.getItem("role")) == parseInt(value.idRole)) this.isAdmin = true;
+      else this.isAdmin =  false;
+    })
   }
 
 }
