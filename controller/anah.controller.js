@@ -2,6 +2,9 @@ const service = require("../service/anah");
 var nodemailer = require("nodemailer");
 const config = require("../config/index");
 const emailPassRecoverHtml = require("./email-password-recover");
+const { uploadFileCsvMiddleware } = require("../middleware/upload");
+const csv = require("csv-parser");
+const fs = require("fs");
 
 const sendMail = async (req, res) => {
   try {
@@ -112,8 +115,8 @@ const createEquipe = async (req, res) => {
       nomequipe,
       logoequipe,
       nomcoachequipe,
-      Descriptionequipe
-    } = req.body
+      Descriptionequipe,
+    } = req.body;
     const data = await service.createEquipe(
       idformation,
       nomequipe,
@@ -161,7 +164,8 @@ const createJoueur = async (req, res) => {
       profiljoueur,
       agejoueur,
       taillejoueur,
-      poidsjoueur } = req.body
+      poidsjoueur,
+    } = req.body;
     const data = await service.createJoueur(
       idposte,
       idequipe,
@@ -169,7 +173,8 @@ const createJoueur = async (req, res) => {
       profiljoueur,
       agejoueur,
       taillejoueur,
-      poidsjoueur);
+      poidsjoueur
+    );
     res.send({
       status: true,
       message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
@@ -180,8 +185,8 @@ const createJoueur = async (req, res) => {
       status: false,
       message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
       desc: error.message,
-    }
-    console.log(io)
+    };
+    console.log(io);
     res.send(io);
   }
 };
@@ -204,4 +209,76 @@ const createPostes = async (req, res) => {
   }
 };
 
-module.exports = { sendMail, createCompetition, createFormations, formations, createEquipe, equipes, createJoueur, createPostes };
+const teste = async (req, res) => {
+  try {
+    const data = await service.teste(req.body);
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
+const createMatch = async (req, res) => {
+  try {
+    const data = await service.createMatch(req.body);
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
+const createJoueurCsv = async (req, res) => {
+  try {
+    const data = {};
+    await uploadFileCsvMiddleware(req, res);
+    data.file = req.file;
+    let t = [];
+    fs.createReadStream(req.file.path)
+      .pipe(csv())
+      .on("data", (data) => t.push(data))
+      .on("end", async () => {
+        data.joueurs = await service.createJoueurCsv(t);
+        res.send({
+          status: true,
+          message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+          data,
+        });
+      });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
+module.exports = {
+  sendMail,
+  createCompetition,
+  createFormations,
+  formations,
+  createEquipe,
+  equipes,
+  createJoueur,
+  createPostes,
+  teste,
+  createMatch,
+  createJoueurCsv,
+};
