@@ -13,6 +13,7 @@ let UtilisateurSchema = Schema({
   motdepasseUtilisateur: { type: String, required: true },
   soldeUtilisateur: { type: Number, required: true },
   idRole: { type: Number, required: true },
+  est_bloque: Boolean,
 });
 
 UtilisateurSchema.plugin(uniqueValidator);
