@@ -2,30 +2,30 @@ const { aggregate } = require("../model/Matchs");
 let Match = require("../model/Matchs");
 
 // Récupérer tous les match (GET)
-function getMatch(reqs, res) {
+function getMatch(req, res) {
   let aggregate = Match.aggregate([
     {
       $lookup: {
-        from: "equipes",
+        from: "Equipes",
         localField: "idequipe",
         foreignField: "id",
-        as: "equipes",
+        as: "Equipes",
       },
     },
     {
       $lookup: {
-        from: "equipes",
+        from: "Equipes",
         localField: "equ_idequipe",
         foreignField: "id",
-        as: "equ_equipes",
+        as: "Equ_equipes",
       },
     },
     {
       $lookup: {
-        from: "formation",
+        from: "Formations",
         localField: "idformation",
         foreignField: "id",
-        as: "formation",
+        as: "Formations",
       },
     },
   ]);
@@ -50,29 +50,33 @@ function getMatchBycompetition(req, res) {
     { $match: { idcompetition: matchId } },
     {
       $lookup: {
-        from: "equipes",
+        from: "Equipes",
         localField: "idequipe",
         foreignField: "id",
-        as: "equipes",
+        as: "Equipes",
       },
     },
     {
       $lookup: {
-        from: "equipes",
+        from: "Equipes",
         localField: "equ_idequipe",
         foreignField: "id",
-        as: "equ_equipes",
+        as: "Equ_equipes",
       },
     },
     {
       $lookup: {
-        from: "formation",
+        from: "Formations",
         localField: "idformation",
         foreignField: "id",
-        as: "formation",
+        as: "Formations",
       },
     },
   ]);
+  
+  let options = {
+
+  };
   // callback
   Match.aggregatePaginate(aggregate, options, (err, match) => {
     if (err) {

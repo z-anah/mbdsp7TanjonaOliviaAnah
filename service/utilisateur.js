@@ -4,6 +4,7 @@ var bcrypt = require("bcryptjs");
 let Utilisateurs = require("../model/Utilisateurs");
 let mongoose = require("mongoose");
 const { Int32 } = require("bson");
+var serviceRole = require("../service/role");
 function getSequenceId(req, res) {
   return new Promise((resolve, reject) => {
     Utilisateurs.findOne()
@@ -203,37 +204,46 @@ function ckeckPassswordById(req,res){
 function getListModerateur(req, res) {
   try{
     return new Promise((resolve, reject) => {
-      let aggregate = Utilisateurs.aggregate([
-        { $match: {idRole: 2}},
-        { $lookup: {
-          from: "roles",
-          localField: "idRole",
-          foreignField: "idRole",
-          as: "role_utilisateur" 
-        }},
-        { $sort : { idUtilisateur : 1} }
-      ]);
-      let options = { 
-          page: parseInt(req.query.page) || 1,
-          limit: parseInt(req.query.limit) || 5,
-      };
-      // callback
-      Utilisateurs.aggregatePaginate(aggregate, options, (err, users) => {
-          if (err) resolve ({list : false})
-          else resolve({list : true, result : users});
-        });  
+      serviceRole
+      .getRoleModerateur(req, res)
+      .then((value) => {
+        var idRoleValue = value.idRole;
+        let aggregate = Utilisateurs.aggregate([
+          { $match: {idRole: idRoleValue}},
+          { $lookup: {
+            from: "roles",
+            localField: "idRole",
+            foreignField: "idRole",
+            as: "role_utilisateur" 
+          }},
+          { $sort : { idUtilisateur : 1} }
+        ]);
+        let options = { 
+            page: parseInt(req.query.page) || 1,
+            limit: parseInt(req.query.limit) || 5,
+        };
+        // callback
+        Utilisateurs.aggregatePaginate(aggregate, options, (err, users) => {
+            if (err) resolve ({list : false})
+            else resolve({list : true, result : users});
+          });    
+      })
     })
   }
   catch (err) {
     throw err;
   }
 }
-  // Récupérer tous les assignments non_rendu(GET)
+ 
 function getListUser(req, res) {
   try{
     return new Promise((resolve, reject) => {
-      let aggregate = Utilisateurs.aggregate([
-        { $match: {idRole: NULL}},
+      serviceRole
+      .getRoleClient(req, res)
+      .then((value) => {
+        var idRoleValue = value.idRole;
+        let aggregate = Utilisateurs.aggregate([
+        { $match: {idRole: idRoleValue}},
         { $lookup: {
           from: "roles",
           localField: "idRole",
@@ -241,24 +251,37 @@ function getListUser(req, res) {
           as: "role_utilisateur" 
         }},
         { $sort : { dateNaissanceUtilisateur : -1} }
-      ]);
-      let options = { 
-          page: parseInt(req.query.page) || 1,
-          limit: parseInt(req.query.limit) || 20,
-      };
-      // callback
-      Utilisateurs.aggregatePaginate(aggregate, options, (err, users) => {
-          if (err) resolve ({list : false})
-          else resolve({list : true, result : users});
-        });  
+        ]);
+        let options = { 
+            page: parseInt(req.query.page) || 1,
+            limit: parseInt(req.query.limit) || 10,
+        };
+        // callback
+        Utilisateurs.aggregatePaginate(aggregate, options, (err, users) => {
+            if (err) resolve ({list : false})
+            else resolve({list : true, result : users});
+          });  
+      })
     })
   }
   catch (err) {
     throw err;
   }
-  function userById(){
-    
-  }
 }
 
-module.exports = { register, testDoublonMail, auth, getUserById,updateByIdUtilisateur, ckeckPassswordById,updatePasswordByEmail,getListModerateur,getListUser };
+  function deleteUserById(req, res){
+    try{
+      let id = parseInt(req.params.id);
+      return new Promise((resolve, reject) => {
+        Utilisateurs.findOneAndDelete({idUtilisateur : id}, (err, user) => {
+          if (err) resolve(err)
+          else resolve ({deleted : true});
+        })
+      })
+    }
+    catch (err) {
+      throw err;
+    }
+}
+
+module.exports = { register, testDoublonMail, auth, getUserById,updateByIdUtilisateur, ckeckPassswordById,updatePasswordByEmail,getListModerateur,getListUser,deleteUserById };

@@ -27,8 +27,9 @@ mongoose.connect(uri, options).then(
 
 
 const competitionController = require("./controller/competition.controller");
-const matchController = require("./controller/match.controller");
-const equipeController = require("./controller/equipe.controller");
+const match = require("./service/match");
+const equipe = require("./service/equipe");
+const joueur = require("./service/joueur");
 
 // Pour accepter les connexions cross-domain (CORS)
 app.use(function (req, res, next) {
@@ -50,18 +51,22 @@ let port = process.env.PORT || 5000;
 // les routes
 const prefix = "/api";
 
-//app.route(prefix + "/assignments").get(assignment.getAssignments);
 
 require("./route/anah.route")(app);
 require("./route/tanjona.route")(app);
+
 app
   .route(prefix + "/listeCompetition")
   .get(competitionController.listCompetitions);
-app.route(prefix + "/listeMatch").get(matchController.listMatchs);
-app
-  .route(prefix + "/listeMatch/:idcompetition")
-  .get(matchController.listMatchsCompetition);
-app.route(prefix + "/listeEquipe").get(equipeController.listEquipes);
+
+// app
+//   .route(prefix + "/listeMatch/:idcompetition")
+//   .get(matchController.listMatchsCompetition);
+
+app.route(prefix + "/listeJoueurByEquipe/:id").get(joueur.getJoeurByEquipe);
+app.route(prefix + "/joueurById/:id").get(joueur.getJoeurById);
+app.route(prefix + "/listeEquipe").get(equipe.getListEquipe);
+app.route(prefix + "/listeMatch").get(match.getMatch);
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");
