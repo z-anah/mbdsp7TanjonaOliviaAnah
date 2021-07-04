@@ -50,7 +50,7 @@
                 </div>
                 <div class="col-md-1">
                   <mat-card-actions>
-                    <a (click)="openDialogDelete(a.id)">
+                    <a (click)="openConfirmationDialog(mod.idUtilisateur,mod.profilUtilisateur)">
                       <i class="fas fa-trash action_delete" title="Supprimer"></i>
                     </a>
                   </mat-card-actions>
@@ -59,7 +59,7 @@
                   <img src="{{urlDownload + mod.profilUtilisateur}}" alt="image_profil" class="image_profil">
                 </div>
               </div>
-            
+
               <hr>
             </mat-card>
           </div>

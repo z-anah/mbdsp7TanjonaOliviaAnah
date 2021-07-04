@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Utilisateurs } from 'app/model/utilisateurs';
 import { Service } from 'app/service/Service';
+import { DialogDeleteService } from '../dialog-delete/dialog-delete.service';
 
 @Component({
   selector: 'app-gestion-user',
@@ -61,5 +62,7 @@ export class GestionUserComponent implements OnInit {
     this.page = 1;
     this.getListClient();
   }
+
+
 
 }

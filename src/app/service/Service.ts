@@ -123,4 +123,7 @@ export class Service {
     return this.http.get(this.baseUrl+"/listClients"+"?page="+page + "&limit="+limit);
   }
 
+  deleteModerateur(user : Utilisateurs): Observable<any>{
+    return this.http.delete(this.baseUrl+"/suppressionModerateur/"+user.idUtilisateur);
+  }
 }

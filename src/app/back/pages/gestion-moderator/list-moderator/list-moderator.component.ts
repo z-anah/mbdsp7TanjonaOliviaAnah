@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Utilisateurs } from 'app/model/utilisateurs';
 import { Service } from 'app/service/Service';
 import { DialogDeleteComponent } from '../../dialog-delete/dialog-delete.component';
+import { DialogDeleteService } from '../../dialog-delete/dialog-delete.service';
 
 @Component({
   selector: 'app-list-moderator',
@@ -25,7 +26,7 @@ export class ListModeratorComponent implements OnInit {
   tableSizes = [5, 10, 15, 20];
   urlDownload : any;
 
-  constructor(private route:ActivatedRoute, private service : Service) { }
+  constructor(private route:ActivatedRoute, private service : Service,private confirmationDeleteService: DialogDeleteService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(queryParams => {
@@ -62,16 +63,19 @@ export class ListModeratorComponent implements OnInit {
     this.page = 1;
     this.getListModerateur();
   }
-  /*openDialogDelete(id) {
-    const dialogRef = this.dialog.open(DialogDeleteComponent,{
-      data:{
-        id : id,
-        message: 'Voulez vous vraiment supprimer?',
-        buttonText: {
-          ok: 'Oui',
-          cancel: 'Non'
+  openConfirmationDialog(id,profil) {
+    this.confirmationDeleteService.confirm('Confirmation de suppression', 'Voulez-vous vraiment supprimer cet modérateur ?')
+    .then((confirmed) =>{
+      var newUser = new Utilisateurs();
+      newUser.idUtilisateur = parseInt(id);
+      this.service.deleteModerateur(newUser).subscribe((value) => {
+        if(value.deleted){
+          this.service.deleteProfilFile(profil).subscribe(response =>{
+            if(response.fileDeleted) window.location.reload();
+            window.location.reload();
+          })
         }
-      }
-    });
-  }*/
+      })
+    })
+  }
 }

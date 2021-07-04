@@ -1,6 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Service } from 'app/service/Service';
+import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-dialog-delete',
@@ -8,49 +7,25 @@ import { Service } from 'app/service/Service';
   styleUrls: ['./dialog-delete.component.css']
 })
 export class DialogDeleteComponent implements OnInit {
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  @Input() title: string;
+  @Input() message: string;
+  @Input() btnOkText: string;
+  @Input() btnCancelText: string;
+
+  constructor(private activeModal: NgbActiveModal) { }
+
+  ngOnInit() {
   }
 
-  /*message: string = "Are you sure?"
-  confirmButtonText = "Yes"
-  cancelButtonText = "Cancel"
-  idAssignement:number;
-  detail = false;
-  constructor(
-    @Inject(MAT_DIALOG_DATA) private data: any,
-    private dialogRef: MatDialogRef<DialogDeleteComponent>, private service:Service,private router: Router) {
-      if(data){
-        this.message = data.message || this.message;
-        this.detail = data.detail || this.detail;
-        this.idAssignement = data.id;
-        if (data.buttonText) {
-          this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;
-          this.cancelButtonText = data.buttonText.cancel || this.cancelButtonText;
-        }
-      }
-  }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  public decline() {
+    this.activeModal.close(false);
   }
 
-  onConfirmClick(): void {
-    /*this.assignmentsService.getAssignment(this.idAssignement).subscribe((assignment) => {
-      this.assignmentsService
-      .deleteAssignment(assignment)
-      .subscribe((deleted) => {
-        // et on navigue vers la page d'accueil qui affiche la liste
-        if(deleted){
-          if(this.detail) this.router.navigate(["/home/rendu"]);
-          else  window.location.reload();
-          this.dialogRef.close();
-        }
-      });
-    });
-  }*/
+  public accept() {
+    this.activeModal.close(true);
+  }
 
+  public dismiss() {
+    this.activeModal.dismiss();
+  }
 }
-function MAT_DIALOG_DATA(MAT_DIALOG_DATA: any) {
-  throw new Error('Function not implemented.');
-}
-
