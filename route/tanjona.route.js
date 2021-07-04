@@ -25,4 +25,5 @@ module.exports = (app) => {
     app.put("/api/forgotPassword",userController.updatePasswordByEmail);
     app.get("/api/listModerateurs",userController.listModerateur);
     app.get("/api/listClients",userController.listUser);
+    app.delete("/api/suppressionModerateur/:id",userController.deleteUser);
 };

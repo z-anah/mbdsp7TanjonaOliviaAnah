@@ -5,7 +5,8 @@ const fr = {
   MSG_I0004: "Email d'envoi de récupération envoyé",
   MSG_I0005: "Ajout compétition réussi !",
   MSG_I0006: "Requete réussi !",
-  MSG_I0007: "Liste utilisateur!"
+  MSG_I0007: "Liste utilisateur!",
+  MSG_I0008: "Suppression modérateur réussi!"
 };
 const mlg = {
   MSG_I0001: "Tafiditra ny moderateur !",
@@ -26,7 +27,8 @@ const fr_err = {
   MSG_E0009: "Modification échoué !Veuillez ressayer ultérieurement !",
   MSG_E0010: "Modification échoué.Ancien mot de passe invalide !",
   MSG_E0011: "Email introuvable",
-  MSG_E0012: "Liste  introuvable."
+  MSG_E0012: "Liste  introuvable.",
+  MSG_E0013: "Suppression modérateur échoué!"
 };
 const mlg_err = {
   MSG_E0001: "Adiresy mailaka na tenimiafina diso !",
