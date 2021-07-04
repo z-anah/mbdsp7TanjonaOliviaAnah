@@ -32,8 +32,6 @@ namespace pari.src.dao.view.user_control.panel
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private PariTitle pariTitle1;
-        private PariTextBox pariTextBox1;
-        private System.Windows.Forms.Button button1;
         private PariComboItem pariComboItem1;
         private PariComboItem pariComboItem2;
         private PariComboItem pariComboItem3;

@@ -61,9 +61,17 @@ namespace pari.src.dao.view.user_control.panel
             this.pariComboItem2 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariDate1 = new pari.src.dao.view.user_control.PariDate();
             this.pariTextBox3 = new pari.src.dao.view.user_control.PariTextBox();
-            this.pariTextBox4 = new pari.src.dao.view.user_control.PariTextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pariTextBox4 = new pari.src.dao.view.user_control.PariTextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.pariTextBox5 = new pari.src.dao.view.user_control.PariTextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.flowLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -74,10 +82,12 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Controls.Add(this.pariComboItem1);
             this.flowLayoutPanel1.Controls.Add(this.pariComboItem2);
-            this.flowLayoutPanel1.Controls.Add(this.pariDate1);
+            this.flowLayoutPanel1.Controls.Add(this.panel2);
             this.flowLayoutPanel1.Controls.Add(this.pariTextBox3);
-            this.flowLayoutPanel1.Controls.Add(this.pariTextBox4);
-            this.flowLayoutPanel1.Controls.Add(this.button2);
+            this.flowLayoutPanel1.Controls.Add(this.panel1);
+            this.flowLayoutPanel1.Controls.Add(this.panel3);
+            this.flowLayoutPanel1.Controls.Add(this.pariTextBox5);
+            this.flowLayoutPanel1.Controls.Add(this.button3);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -90,7 +100,6 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTitle1.Name = "pariTitle1";
             this.pariTitle1.Size = new System.Drawing.Size(431, 23);
             this.pariTitle1.TabIndex = 0;
-            this.pariTitle1.Label.Text = "Ajouter un joueur";
             // 
             // pariTextBox1
             // 
@@ -99,9 +108,6 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTextBox1.Name = "pariTextBox1";
             this.pariTextBox1.Size = new System.Drawing.Size(264, 74);
             this.pariTextBox1.TabIndex = 1;
-            this.pariTextBox1.Label.Text = "Nom complet";
-            this.pariTextBox1.TextBox.PlaceholderText = "Nom complet";
-            this.pariTextBox1.LabelError.Text = "";
             // 
             // pariTextBox2
             // 
@@ -110,9 +116,6 @@ namespace pari.src.dao.view.user_control.panel
             this.pariTextBox2.Name = "pariTextBox2";
             this.pariTextBox2.Size = new System.Drawing.Size(263, 74);
             this.pariTextBox2.TabIndex = 2;
-            this.pariTextBox2.Label.Text = "Photo de profil";
-            this.pariTextBox2.TextBox.PlaceholderText = "*.jpg;*.jpeg;*.png;";
-            this.pariTextBox2.LabelError.Text = "";
             // 
             // button1
             // 
@@ -130,10 +133,6 @@ namespace pari.src.dao.view.user_control.panel
             this.pariComboItem1.Name = "pariComboItem1";
             this.pariComboItem1.Size = new System.Drawing.Size(300, 70);
             this.pariComboItem1.TabIndex = 4;
-            this.pariComboItem1.PariTitle.Label.Text = "Équipe";
-            this.pariComboItem1.ComboBox.Text = "Équipes";
-
-            //Équipe
             // 
             // pariComboItem2
             // 
@@ -141,49 +140,81 @@ namespace pari.src.dao.view.user_control.panel
             this.pariComboItem2.Name = "pariComboItem2";
             this.pariComboItem2.Size = new System.Drawing.Size(300, 70);
             this.pariComboItem2.TabIndex = 5;
-            this.pariComboItem2.PariTitle.Label.Text = "Poste";
-            this.pariComboItem2.ComboBox.Text = "Postes";
             // 
             // pariDate1
             // 
-            this.pariDate1.Location = new System.Drawing.Point(3, 188);
+            this.pariDate1.Location = new System.Drawing.Point(3, 3);
             this.pariDate1.Name = "pariDate1";
             this.pariDate1.Size = new System.Drawing.Size(218, 113);
             this.pariDate1.TabIndex = 6;
-            this.pariDate1.PariTitle.Label.Text = "Date de naissance";
-            this.pariDate1.PariLabelError.Label.Text = "";
             // 
             // pariTextBox3
             // 
             this.pariTextBox3.BackColor = System.Drawing.SystemColors.Window;
-            this.pariTextBox3.Location = new System.Drawing.Point(227, 188);
+            this.pariTextBox3.Location = new System.Drawing.Point(315, 188);
             this.pariTextBox3.Name = "pariTextBox3";
             this.pariTextBox3.Size = new System.Drawing.Size(265, 74);
             this.pariTextBox3.TabIndex = 7;
-            this.pariTextBox3.Label.Text = "Taille (m)";
-            this.pariTextBox3.TextBox.PlaceholderText = "en m";
-            this.pariTextBox3.LabelError.Text = "";
-            // 
-            // pariTextBox4
-            // 
-            this.pariTextBox4.BackColor = System.Drawing.SystemColors.Window;
-            this.pariTextBox4.Location = new System.Drawing.Point(3, 307);
-            this.pariTextBox4.Name = "pariTextBox4";
-            this.pariTextBox4.Size = new System.Drawing.Size(264, 74);
-            this.pariTextBox4.TabIndex = 8;
-            this.pariTextBox4.Label.Text = "Poids (kg)";
-            this.pariTextBox4.TextBox.PlaceholderText = "en kg";
-            this.pariTextBox4.LabelError.Text = "";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(273, 307);
+            this.button2.Location = new System.Drawing.Point(3, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 9;
             this.button2.Text = "Ajouter";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.pariTextBox4);
+            this.panel1.Location = new System.Drawing.Point(3, 297);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(584, 80);
+            this.panel1.TabIndex = 10;
+            // 
+            // pariTextBox4
+            // 
+            this.pariTextBox4.BackColor = System.Drawing.SystemColors.Window;
+            this.pariTextBox4.Location = new System.Drawing.Point(3, 3);
+            this.pariTextBox4.Name = "pariTextBox4";
+            this.pariTextBox4.Size = new System.Drawing.Size(264, 74);
+            this.pariTextBox4.TabIndex = 8;
+            this.pariTextBox4.Load += new System.EventHandler(this.pariTextBox4_Load);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.pariDate1);
+            this.panel2.Location = new System.Drawing.Point(3, 188);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(306, 103);
+            this.panel2.TabIndex = 11;
+            // 
+            // pariTextBox5
+            // 
+            this.pariTextBox5.BackColor = System.Drawing.SystemColors.Window;
+            this.pariTextBox5.Location = new System.Drawing.Point(3, 423);
+            this.pariTextBox5.Name = "pariTextBox5";
+            this.pariTextBox5.Size = new System.Drawing.Size(263, 74);
+            this.pariTextBox5.TabIndex = 12;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(272, 423);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 13;
+            this.button3.Text = "Importer";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.button2);
+            this.panel3.Location = new System.Drawing.Point(3, 383);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(384, 34);
+            this.panel3.TabIndex = 14;
             // 
             // Joueur
             // 
@@ -193,9 +224,36 @@ namespace pari.src.dao.view.user_control.panel
             this.Name = "Joueur";
             this.Size = new System.Drawing.Size(634, 513);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
             this.ResumeLayout(false);
 
+            init();
+        }
 
+        private void init()
+        {
+
+            this.pariTitle1.Label.Text = "Ajouter un joueur";
+            this.pariTextBox1.Label.Text = "Nom complet";
+            this.pariTextBox1.TextBox.PlaceholderText = "Nom complet";
+            this.pariTextBox1.LabelError.Text = "";
+            this.pariTextBox2.Label.Text = "Photo de profil";
+            this.pariTextBox2.TextBox.PlaceholderText = "*.jpg;*.jpeg;*.png;";
+            this.pariTextBox2.LabelError.Text = "";
+            this.pariComboItem1.PariTitle.Label.Text = "Équipe";
+            this.pariComboItem1.ComboBox.Text = "Équipes";
+            this.pariComboItem2.PariTitle.Label.Text = "Poste";
+            this.pariComboItem2.ComboBox.Text = "Postes";
+            this.pariDate1.PariTitle.Label.Text = "Date de naissance";
+            this.pariDate1.PariLabelError.Label.Text = "";
+            this.pariTextBox3.Label.Text = "Taille (m)";
+            this.pariTextBox3.TextBox.PlaceholderText = "en m";
+            this.pariTextBox3.LabelError.Text = "";
+            this.pariTextBox4.Label.Text = "Poids (kg)";
+            this.pariTextBox4.TextBox.PlaceholderText = "en kg";
+            this.pariTextBox4.LabelError.Text = "";
             pariDate1.DateTimePicker.Format = DateTimePickerFormat.Custom;
             pariDate1.DateTimePicker.CustomFormat = "yyyy-MM-dd";
         }
@@ -239,6 +297,11 @@ namespace pari.src.dao.view.user_control.panel
             Cursor = Cursors.Arrow;
             if (d.Status) Information.information(this, $"{nomjoueur} est ajouté avec succès");
             else Information.informationError(this, d.Message);
+        }
+
+        private void pariTextBox4_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
