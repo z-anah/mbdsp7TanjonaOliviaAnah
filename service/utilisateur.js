@@ -2,6 +2,7 @@ var jwt = require("jsonwebtoken");
 var config = require("../config");
 var bcrypt = require("bcryptjs");
 let Utilisateurs = require("../model/Utilisateurs");
+let Commentaire = require("../model/commentaire");
 let mongoose = require("mongoose");
 const { Int32 } = require("bson");
 var serviceRole = require("../service/role");
@@ -247,8 +248,8 @@ function getListClient(req, res) {
         { 
           $lookup: {
           from: "commentaire",
-          localField: "id_utilisateur",
-          foreignField: "idUtilisateur",
+          localField: "idUtilisateur", // id dans la classe principal
+          foreignField: "id_utilisateur", // id dans la classe jointure
           as: "commentaire_signale" 
           }
         },

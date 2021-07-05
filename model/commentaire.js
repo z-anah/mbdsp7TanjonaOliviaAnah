@@ -7,7 +7,7 @@ let Schema = mongoose.Schema;
 let commentaire = Schema({
   commentaire: { type: String, unique: true, required: true },
   est_signale: Boolean,
-  id_utilisateur: ObjectId,
+  id_utilisateur: { type: Number, required: true,ref: 'utilisateurs' }
 });
 
 commentaire.plugin(aggregatePaginate);
