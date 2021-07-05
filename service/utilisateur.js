@@ -235,7 +235,7 @@ function getListModerateur(req, res) {
   }
 }
  
-function getListUser(req, res) {
+function getListClient(req, res) {
   try{
     return new Promise((resolve, reject) => {
       serviceRole
@@ -244,14 +244,41 @@ function getListUser(req, res) {
         var idRoleValue = value.idRole;
         let aggregate = Utilisateurs.aggregate([
         { $match: {idRole: idRoleValue}},
-        { $lookup: {
-          from: "roles",
-          localField: "idRole",
-          foreignField: "idRole",
-          as: "role_utilisateur" 
-        }},
+        { 
+          $lookup: {
+          from: "commentaire",
+          localField: "id_utilisateur",
+          foreignField: "idUtilisateur",
+          as: "commentaire_signale" 
+          }
+        },
+        {
+          $project : {
+            idUtilisateur: 1,
+            emailUtilisateur : 1,
+            profilUtilisateur : 1,
+            idUtilisateur: 1,
+            nomCompletUtilisateur: 1,
+            emailUtilisateur: 1,
+            dateNaissanceUtilisateur: 1,
+            est_bloque: 1,
+            // ... as you need 
+            commentaire_signale: {
+              $filter: {
+                input: "$commentaire_signale",
+                as: "comm",
+                cond: {
+                  $and: [
+                    {$eq: ["$$comm.est_signale", true]}
+                  ]
+                }
+              }
+            }
+          }
+        },
         { $sort : { dateNaissanceUtilisateur : -1} }
-        ]);
+      ]);
+       
         let options = { 
             page: parseInt(req.query.page) || 1,
             limit: parseInt(req.query.limit) || 10,
@@ -284,4 +311,4 @@ function getListUser(req, res) {
     }
 }
 
-module.exports = { register, testDoublonMail, auth, getUserById,updateByIdUtilisateur, ckeckPassswordById,updatePasswordByEmail,getListModerateur,getListUser,deleteUserById };
+module.exports = { register, testDoublonMail, auth, getUserById,updateByIdUtilisateur, ckeckPassswordById,updatePasswordByEmail,getListModerateur,getListClient,deleteUserById };

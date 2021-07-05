@@ -5,7 +5,7 @@ const fr = {
   MSG_I0004: "Email d'envoi de récupération envoyé",
   MSG_I0005: "Ajout compétition réussi !",
   MSG_I0006: "Requete réussi !",
-  MSG_I0007: "Liste utilisateur!",
+  MSG_I0007: "Liste client!",
   MSG_I0008: "Suppression modérateur réussi!"
 };
 const mlg = {
