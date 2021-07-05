@@ -16,6 +16,7 @@ import { ClubComponent } from './club/club.component';
 import { AcceuilComponent } from './acceuil/acceuil.component';
 import { DetailequipeComponent } from './detailequipe/detailequipe.component';
 import { DetaileMatchComponent } from './detaile-match/detaile-match.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes:Routes = [
    
@@ -61,7 +62,7 @@ const routes:Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(routes),HttpClientModule,
+    RouterModule.forRoot(routes),HttpClientModule,NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
