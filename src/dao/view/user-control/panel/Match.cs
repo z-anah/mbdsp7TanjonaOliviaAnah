@@ -13,8 +13,6 @@ namespace pari.src.dao.view.user_control.panel
     {
 
         private PariTitle pariTitle;
-        private PariTextBox pariTextBox;
-        private System.Windows.Forms.Button importer;
         private PariComboItem compet;
         private PariComboItem eq1;
         private PariComboItem eq2;

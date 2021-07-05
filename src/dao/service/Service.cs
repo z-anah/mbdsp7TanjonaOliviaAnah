@@ -3,7 +3,6 @@ using pari.src.dao.utilities;
 using pari.src.dao.view.user_control.panel;
 using RestSharp;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -88,7 +87,18 @@ namespace pari.src.dao.service
             });
             return await client.PostAsync<JoueurRest>(request);
         }
+
+        internal static IRestResponse UploadCsv(string text)
+        {
+            var client = new RestClient(Env.API_URL_NODE);
+            var request = new RestRequest("/joueur/create/csv", Method.POST);
+
+            request.AddFile("file", text, "text/csv");
+            request.AlwaysMultipartFormData = true;
+
+            IRestResponse response = client.Execute(request);
+            return response;
+
+        }
     }
-
-
 }

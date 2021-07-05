@@ -46,5 +46,6 @@ namespace pari.src.dao.view.user_control.panel
         private System.Windows.Forms.Panel panel3;
         private PariTextBox pariTextBox5;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
     }
 }

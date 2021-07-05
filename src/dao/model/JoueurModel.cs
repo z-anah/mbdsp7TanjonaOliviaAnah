@@ -24,10 +24,10 @@ namespace pari.src.dao.service
         public int Agejoueur { get; set; }
 
         [JsonProperty("taillejoueur")]
-        public int Taillejoueur { get; set; }
+        public double Taillejoueur { get; set; }
 
         [JsonProperty("poidsjoueur")]
-        public int Poidsjoueur { get; set; }
+        public double Poidsjoueur { get; set; }
 
         [JsonProperty("__v")]
         public int V { get; set; }
