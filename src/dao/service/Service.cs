@@ -100,5 +100,15 @@ namespace pari.src.dao.service
             return response;
 
         }
+
+        internal static async Task<CompetitionsRest> Evenements()
+        {
+            var client = new RestClient(Env.API_URL_NODE);
+            var request = new RestRequest("/listeCompetition");
+            var json = await client.GetAsync<string>(request);
+            return JsonConvert.DeserializeObject<CompetitionsRest>(json);
+        }
     }
+
+
 }

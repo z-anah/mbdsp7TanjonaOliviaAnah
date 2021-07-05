@@ -326,7 +326,6 @@ namespace pari.src.dao.view.user_control.panel
         {
             Cursor = Cursors.WaitCursor;
             var csv = Service.UploadCsv(pariTextBox5.TextBox.Text);
-            Console.WriteLine(csv);
             Cursor = Cursors.Arrow;
 
             if (csv.IsSuccessful)

@@ -35,10 +35,8 @@ namespace pari.src.dao.view.user_control.panel
         private PariComboItem pariComboItem1;
         private PariComboItem pariComboItem2;
         private PariComboItem pariComboItem3;
-        private PariComboItem pariComboItem4;
-        private PariComboItem pariComboItem5;
         private System.Windows.Forms.Button button2;
-        private PariComboItem pariComboItem6;
         private PariDate pariDate1;
+        private PariTextBox pariTextBox1;
     }
 }
