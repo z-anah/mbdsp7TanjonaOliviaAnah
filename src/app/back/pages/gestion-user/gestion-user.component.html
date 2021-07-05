@@ -2,13 +2,13 @@
 <div class="container-fluid">
 
   <!-- Page Heading -->
-  <h1 class="titre">Gestion utilisateur</h1>
-  <p class="mb-4"></p>
+  <h1 class="titre">Gestion  des utilisateurs</h1>
+  <p class="mb-4 titre">Action de bloquer les utilisateurs qui ont des commentaires signalés.</p>
 
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
       <div class="card-header py-3">
-          <h6 class="m-0 font-weight-bold text-primary">Liste des clients</h6>
+          <h4 class="m-0 font-weight-bold text-primary">Liste des utilisateurs(clients).</h4>
       </div>
       <div class="pagination">
         <div class="d-flex justify-content-center">
@@ -35,7 +35,9 @@
                           <th>Nom</th>
                           <th>Email</th>
                           <th>Date Naissance</th>
+                          <th>Commentaires signalés</th>
                           <th>Action</th>
+                          <th>Note</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -50,7 +52,22 @@
                           <td>{{cl.nomCompletUtilisateur}}</td>
                           <td>{{cl.emailUtilisateur}}</td>
                           <td>{{ cl.dateNaissanceUtilisateur | date:"dd/MM/yyyy" }}</td>
-                          <td><button type="button" class="btn btn-primary btn-sm">Bloquer</button></td>
+                          <td>
+                            <ul *ngIf="cl.commentaire_signale.length != 0">
+                              <li *ngFor ="let com of cl.commentaire_signale">
+                                {{com.commentaire}}
+                              </li>
+                            </ul>
+                            <p *ngIf="cl.commentaire_signale.length == 0">Aucun commantaire</p>
+                          </td>
+                          <td>
+                            <button type="button" class="btn btn-primary btn-sm" *ngIf = "!cl.est_bloque" [disabled] = "cl.commentaire_signale.length == 0" (click)="openConfirmationBloque(cl.idUtilisateur,true)">Bloquer</button>
+                            <button type="button" class="btn btn-primary btn-sm" *ngIf = "cl.est_bloque" (click)="openConfirmationBloque(cl.idUtilisateur,false)">Débloquer</button>
+                          </td>
+                          <td>
+                            <p *ngIf="cl.est_bloque" class="bloque">Commentaire bloqué.</p>
+                            <p *ngIf="!cl.est_bloque" class="actif">Commentaire activé.</p>
+                          </td>
                       </tr>
                   </tbody>
               </table>

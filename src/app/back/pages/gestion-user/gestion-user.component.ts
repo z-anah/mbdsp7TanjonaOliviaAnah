@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Utilisateurs } from 'app/model/utilisateurs';
 import { Service } from 'app/service/Service';
+import { DialogBloqueService } from '../dialog-bloque/dialog-bloque.service';
 import { DialogDeleteService } from '../dialog-delete/dialog-delete.service';
 
 @Component({
@@ -25,7 +26,7 @@ export class GestionUserComponent implements OnInit {
   tableSizes = [10, 15, 20];
   urlDownload : any;
 
-  constructor(private route:ActivatedRoute, private service : Service) { }
+  constructor(private route:ActivatedRoute, private service : Service,private confirmationBloqueService: DialogBloqueService) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(queryParams => {
@@ -63,6 +64,18 @@ export class GestionUserComponent implements OnInit {
     this.getListClient();
   }
 
-
-
+  openConfirmationBloque(id,est_bloque) {
+    var msg = 'bloquer';
+    var conf = 'blocage';
+    if(!est_bloque) msg = 'débloquer', conf= 'déblocage';
+    this.confirmationBloqueService.confirm('Confirmation de '+conf+'', 'Voulez-vous vraiment '+msg+' cet utilisateur ?')
+    .then((confirmed) =>{
+      var newUser = new Utilisateurs();
+      newUser.idUtilisateur = parseInt(id);
+      newUser.est_bloque = est_bloque;
+      this.service.updateUser(newUser).subscribe((value) => {
+        if(value.status) window.location.reload();
+      })
+    })
+  }
 }
