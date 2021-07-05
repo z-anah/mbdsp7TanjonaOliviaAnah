@@ -30,11 +30,11 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.pariTitle1 = new pari.src.dao.view.user_control.PariTitle();
             this.pariComboItem1 = new pari.src.dao.view.user_control.PariComboItem();
+            this.pariTextBox1 = new pari.src.dao.view.user_control.PariTextBox();
             this.pariComboItem2 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariComboItem3 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariDate1 = new pari.src.dao.view.user_control.PariDate();
             this.button2 = new System.Windows.Forms.Button();
-            this.pariTextBox1 = new pari.src.dao.view.user_control.PariTextBox();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +67,14 @@ namespace pari.src.dao.view.user_control.panel
             this.pariComboItem1.Size = new System.Drawing.Size(300, 70);
             this.pariComboItem1.TabIndex = 3;
             // 
+            // pariTextBox1
+            // 
+            this.pariTextBox1.BackColor = System.Drawing.SystemColors.Window;
+            this.pariTextBox1.Location = new System.Drawing.Point(309, 69);
+            this.pariTextBox1.Name = "pariTextBox1";
+            this.pariTextBox1.Size = new System.Drawing.Size(274, 74);
+            this.pariTextBox1.TabIndex = 11;
+            // 
             // pariComboItem2
             // 
             this.pariComboItem2.Location = new System.Drawing.Point(3, 149);
@@ -96,15 +104,7 @@ namespace pari.src.dao.view.user_control.panel
             this.button2.TabIndex = 10;
             this.button2.Text = "Ajouter";
             this.button2.UseVisualStyleBackColor = true;
-            //this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // pariTextBox1
-            // 
-            this.pariTextBox1.BackColor = System.Drawing.SystemColors.Window;
-            this.pariTextBox1.Location = new System.Drawing.Point(309, 69);
-            this.pariTextBox1.Name = "pariTextBox1";
-            this.pariTextBox1.Size = new System.Drawing.Size(274, 74);
-            this.pariTextBox1.TabIndex = 11;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // Match
             // 
@@ -116,7 +116,6 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             init();
-
         }
 
         private async void init()
@@ -146,6 +145,17 @@ namespace pari.src.dao.view.user_control.panel
             pariComboItem1.ComboBox.DisplayMember = "Text";
             pariComboItem1.ComboBox.ValueMember = "Value";
             pariComboItem1.ComboBox.DataSource = fpc;
+
+            var res2 = await Service.getEquipes();
+            var fpc2 = new List<Combo>();
+            foreach (EquipeModel f in res2.Data) fpc2.Add(new Combo { Text = f.Nomequipe, Value = f.Id });
+            pariComboItem2.ComboBox.DisplayMember = "Text";
+            pariComboItem2.ComboBox.ValueMember = "Value";
+            pariComboItem2.ComboBox.DataSource = fpc2;
+
+            pariComboItem3.ComboBox.DisplayMember = "Text";
+            pariComboItem3.ComboBox.ValueMember = "Value";
+            pariComboItem3.ComboBox.DataSource = fpc2;
             Cursor = Cursors.Arrow;
         }
 
@@ -154,12 +164,11 @@ namespace pari.src.dao.view.user_control.panel
         public PariComboItem Eq1 { get => pariComboItem2; set { pariComboItem2 = value; eq1 = value; } }
         public PariComboItem Eq2 { get => pariComboItem3; set { pariComboItem3 = value; eq2 = value; } }
         public Button Ajouter { get => button2; set { button2 = value; ajouter = value; } }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
-
-    //private void button2_Click(object sender, EventArgs e)
-    //{
-    //Information.information(this, "Fonctionnalité non disponible. Nous vous suggérons la fonctionnalité\n\"Importer fichier\"");
-
-    //}
 }
 
