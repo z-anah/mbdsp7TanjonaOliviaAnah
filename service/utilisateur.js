@@ -267,7 +267,21 @@ function getListUser(req, res) {
   catch (err) {
     throw err;
   }
- 
 }
 
-module.exports = { register, testDoublonMail, auth, getUserById,updateByIdUtilisateur, ckeckPassswordById,updatePasswordByEmail,getListModerateur,getListUser };
+  function deleteUserById(req, res){
+    try{
+      let id = parseInt(req.params.id);
+      return new Promise((resolve, reject) => {
+        Utilisateurs.findOneAndDelete({idUtilisateur : id}, (err, user) => {
+          if (err) resolve(err)
+          else resolve ({deleted : true});
+        })
+      })
+    }
+    catch (err) {
+      throw err;
+    }
+}
+
+module.exports = { register, testDoublonMail, auth, getUserById,updateByIdUtilisateur, ckeckPassswordById,updatePasswordByEmail,getListModerateur,getListUser,deleteUserById };

@@ -239,6 +239,30 @@ function listUser(req, res) {
     );
 }
 
+function deleteUser(req, res) {
+  serviceUser
+    .deleteUserById(req, res)
+    .then((value) => {
+      if (value.deleted)
+        res.send({
+          deleted: true,
+          message: config.msg[req.body.loc || "FR"].info.MSG_I0008,
+        });
+      else {
+        res.send({
+          deleted: false,
+          message: config.msg[req.body.loc || "FR"].error.MSG_E0013,
+        });
+      }
+    })
+    .catch((err) =>
+      res.send({
+        list: false,
+        message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      })
+    );
+}
+
 module.exports = {
   signUp,
   testDoublonMail,
@@ -248,5 +272,6 @@ module.exports = {
   updatePassword,
   updatePasswordByEmail,
   listModerateur,
-  listUser
+  listUser,
+  deleteUser
 };
