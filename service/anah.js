@@ -151,7 +151,11 @@ const teste = async (m) => {
   return d;
 };
 const createJoueurCsv = async (d) => {
-  await joueurs.insertMany(d);
+  d.map((j) => {
+    j._id = ObjectId();
+    delete j["﻿_"];
+  });
+  // await joueurs.insertMany(d);
   return d;
 };
 module.exports = {

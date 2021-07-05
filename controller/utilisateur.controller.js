@@ -214,9 +214,9 @@ function listModerateur(req, res) {
       })
     );
 }
-function listUser(req, res) {
+function listClient(req, res) {
   serviceUser
-    .getListUser(req, res)
+    .getListClient(req, res)
     .then((value) => {
       if (value.list)
         res.send({
@@ -272,6 +272,6 @@ module.exports = {
   updatePassword,
   updatePasswordByEmail,
   listModerateur,
-  listUser,
+  listClient,
   deleteUser
 };
