@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Utilisateurs } from 'app/model/utilisateurs';
 import { Service } from 'app/service/Service';
 import { DialogBloqueService } from '../dialog-bloque/dialog-bloque.service';
@@ -26,7 +26,7 @@ export class GestionUserComponent implements OnInit {
   tableSizes = [10, 15, 20];
   urlDownload : any;
 
-  constructor(private route:ActivatedRoute, private service : Service,private confirmationBloqueService: DialogBloqueService) { }
+  constructor(private route:ActivatedRoute, private service : Service,private confirmationBloqueService: DialogBloqueService, private router:Router) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(queryParams => {
@@ -74,7 +74,9 @@ export class GestionUserComponent implements OnInit {
       newUser.idUtilisateur = parseInt(id);
       newUser.est_bloque = est_bloque;
       this.service.updateUser(newUser).subscribe((value) => {
-        if(value.status) window.location.reload();
+        if(value.status) this.router.navigate(["/gestionUtilisateur"]).then(() => {
+          window.location.reload();
+        });
       })
     })
   }
