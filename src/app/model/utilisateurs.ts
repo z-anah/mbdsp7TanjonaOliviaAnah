@@ -1,4 +1,5 @@
 import { Roles } from "./roles";
+import { Commentaires } from "./commentaires";
 
 export class Utilisateurs {
   _id?: String
@@ -10,6 +11,8 @@ export class Utilisateurs {
   motdepasseUtilisateur: String;
   soldeUtilisateur : Number;
   idRole : Number;
-  role_utilisateur : Roles;
-  repassword ?: String
+  role_utilisateur? : Roles;
+  repassword ?: String;
+  commentaire_signale? : [Commentaires];
+  est_bloque? : boolean
 }

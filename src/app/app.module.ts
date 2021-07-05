@@ -22,6 +22,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ModifModeratorComponent } from './back/pages/gestion-moderator/modif-moderator/modif-moderator.component';
 import { DialogDeleteComponent } from './back/pages/dialog-delete/dialog-delete.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DialogBloqueComponent } from './back/pages/dialog-bloque/dialog-bloque.component';
 const routes:Routes = [
   { path: '', component: BackComponent,children: [
     {
@@ -102,6 +103,7 @@ const routes:Routes = [
     ListModeratorComponent,
     ModifModeratorComponent,
     DialogDeleteComponent,
+    DialogBloqueComponent,
   ],
   imports: [
     BrowserModule,
