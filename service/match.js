@@ -7,24 +7,24 @@ function getMatch(req, res) {
     {
       $lookup: {
         from: "Equipes",
-        localField: "idequipe",
-        foreignField: "id",
+        localField: "idEquipe",
+        foreignField: "_id",
         as: "Equipes",
       },
     },
     {
       $lookup: {
         from: "Equipes",
-        localField: "equ_idequipe",
-        foreignField: "id",
-        as: "Equ_equipes",
+        localField: "Equ_idEquipe",
+        foreignField: "_id",
+        as: "Equ_equipes_equipe",
       },
     },
     {
       $lookup: {
         from: "Formations",
-        localField: "idformation",
-        foreignField: "id",
+        localField: "idFormation",
+        foreignField: "_id",
         as: "Formations",
       },
     },
