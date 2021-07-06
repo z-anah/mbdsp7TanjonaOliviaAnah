@@ -43,171 +43,41 @@
     <section class="schedule-section spad">
       <div class="container">
         <div class="row">
-          <div class="col-lg-8 left-blog-pad">
+          <div class="col-lg-12 left-blog-pad">
             <div class="schedule-text">
               <h4 class="st-title">Competion: League</h4>
               <div class="st-table">
                 <table>
                   <tbody>
-                    <tr routerLink="/detailMatch">
-                      <td class="left-team">
+                    <tr *ngFor="let a of matchs | paginate : {
+                      itemsPerPage: limit,
+                      currentPage: page,
+                      totalItems: count
+                    };" routerLink="/detailMatch">
+                      <td *ngFor="let e of a.Equipes" class="left-team">
                         <img
                           src="../../assets/img/schedule/flag-1.jpg"
                           alt=""
                         />
-                        <h4>Australia</h4>
+                        <h4>{{e.nomequipe}}</h4>
                       </td>
-                      <td class="st-option">
-                        <div class="so-text">
-                          MetLife Stadium, Rutherford USA
-                        </div>
+                      <td *ngFor="let e of a.Equipes" class="st-option">
                         <h4>VS</h4>
-                        <div class="so-text">15 September 2019</div>
+                        <div class="so-text">{{ a.dateHeureMatch}}</div>
                       </td>
-                      <td class="right-team">
+                      <td *ngFor="let i of a.Equ_equipes_equipe" class="right-team">
                         <img
                           src="../../assets/img/schedule/flag-2.jpg"
                           alt=""
                         />
-                        <h4>Qatar</h4>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="left-team">
-                        <img
-                          src="../../assets/img/schedule/flag-3.jpg"
-                          alt=""
-                        />
-                        <h4>Combodia</h4>
-                      </td>
-                      <td class="st-option">
-                        <div class="so-text">
-                          MetLife Stadium, Rutherford USA
-                        </div>
-                        <h4>VS</h4>
-                        <div class="so-text">15 September 2019</div>
-                      </td>
-                      <td class="right-team">
-                        <img
-                          src="../../assets/img/schedule/flag-4.jpg"
-                          alt=""
-                        />
-                        <h4>France</h4>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="left-team">
-                        <img
-                          src="../../assets/img/schedule/flag-5.jpg"
-                          alt=""
-                        />
-                        <h4>Iceland</h4>
-                      </td>
-                      <td class="st-option">
-                        <div class="so-text">
-                          MetLife Stadium, Rutherford USA
-                        </div>
-                        <h4>VS</h4>
-                        <div class="so-text">15 September 2019</div>
-                      </td>
-                      <td class="right-team">
-                        <img
-                          src="../../assets/img/schedule/flag-6.jpg"
-                          alt=""
-                        />
-                        <h4>Morocco</h4>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="left-team">
-                        <img
-                          src="../../assets/img/schedule/flag-7.jpg"
-                          alt=""
-                        />
-                        <h4>Croatia</h4>
-                      </td>
-                      <td class="st-option">
-                        <div class="so-text">
-                          MetLife Stadium, Rutherford USA
-                        </div>
-                        <h4>VS</h4>
-                        <div class="so-text">15 September 2019</div>
-                      </td>
-                      <td class="right-team">
-                        <img
-                          src="../../assets/img/schedule/flag-8.jpg"
-                          alt=""
-                        />
-                        <h4>Uruguay</h4>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="left-team">
-                        <img
-                          src="../../assets/img/schedule/flag-9.jpg"
-                          alt=""
-                        />
-                        <h4>Brazil</h4>
-                      </td>
-                      <td class="st-option">
-                        <div class="so-text">
-                          MetLife Stadium, Rutherford USA
-                        </div>
-                        <h4>VS</h4>
-                        <div class="so-text">15 September 2019</div>
-                      </td>
-                      <td class="right-team">
-                        <img
-                          src="../../assets/img/schedule/flag-10.jpg"
-                          alt=""
-                        />
-                        <h4>Qatar</h4>
+                        <h4>{{i.nomequipe}}</h4>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="schedule-sidebar">
-              <div class="ss-league">
-                <div class="section-title sidebar-title">
-                  <h5>Top Leagues</h5>
-                </div>
-                <a href="#" class="sl-item">
-                  <img
-                    src="../../assets/img/flag/xflag-1.jpg.pagespeed.ic.XZtAHKPGXV.jpg"
-                    alt=""
-                  />
-                  <span>Afghanis</span>
-                </a>
-                <a href="#" class="sl-item">
-                  <img
-                    src="../../assets/img/flag/xflag-2.jpg.pagespeed.ic.NuKzsKTlYG.jpg"
-                    alt=""
-                  />
-                  <span>Australia</span>
-                </a>
-                <a href="#" class="sl-item">
-                  <img
-                    src="../../assets/img/flag/xflag-3.jpg.pagespeed.ic.OSuFPrHiBD.jpg"
-                    alt=""
-                  />
-                  <span>Qatar</span>
-                </a>
-                <a href="#" class="sl-item">
-                  <img
-                    src="../../assets/img/flag/xflag-4.jpg.pagespeed.ic.OJX5vrsH2k.jpg"
-                    alt=""
-                  />
-                  <span>Cambodia</span>
-                </a>
-                <a href="#" class="sl-item">
-                  <img src="../../assets/img/flag/flag-5.jpg" alt="" />
-                  <span>Uzbekistan</span>
-                </a>
-              </div>
+              <pagination-controls responsive="true"  previousLabel="<"
+              nextLabel=">" (pageChange)="tabSize($event)"></pagination-controls>
             </div>
           </div>
         </div>
