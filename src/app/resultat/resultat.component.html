@@ -49,101 +49,35 @@
               <div class="st-table">
                 <table>
                   <tbody>
-                    <tr>
-                      <td class="left-team">
-                        <img
-                          src="../../assets/img/schedule/xflag-1.jpg.pagespeed.ic.Q7B5OnIbn0.jpg"
-                          alt=""
-                        />
-                        <h4>Australia</h4>
-                      </td>
-                      <td class="st-option">
-                        <div class="so-text">
-                          MetLife Stadium, Rutherford USA
-                        </div>
-                        <h4>1 : 2</h4>
-                        <div class="so-text">15 September 2019</div>
-                      </td>
-                      <td class="right-team">
-                        <img
-                          src="../../assets/img/schedule/xflag-2.jpg.pagespeed.ic.KCG3E58keU.jpg"
-                          alt=""
-                        />
-                        <h4>Qatar</h4>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="left-team">
-                        <img
-                          src="../../assets/img/schedule/xflag-3.jpg.pagespeed.ic.4aZPNd7rzW.jpg"
-                          alt=""
-                        />
-                        <h4>Combodia</h4>
-                      </td>
-                      <td class="st-option">
-                        <div class="so-text">
-                          MetLife Stadium, Rutherford USA
-                        </div>
-                        <h4>0 : 1</h4>
-                        <div class="so-text">15 September 2019</div>
-                      </td>
-                      <td class="right-team">
-                        <img
-                          src="../../assets/img/schedule/xflag-4.jpg.pagespeed.ic.twi7C7dPTE.jpg"
-                          alt=""
-                        />
-                        <h4>France</h4>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="left-team">
-                        <img
-                          src="../../assets/img/schedule/xflag-5.jpg.pagespeed.ic.tap7TOFuS6.jpg"
-                          alt=""
-                        />
-                        <h4>Iceland</h4>
-                      </td>
-                      <td class="st-option">
-                        <div class="so-text">
-                          MetLife Stadium, Rutherford USA
-                        </div>
-                        <h4>2 : 2</h4>
-                        <div class="so-text">15 September 2019</div>
-                      </td>
-                      <td class="right-team">
-                        <img
-                          src="../../assets/img/schedule/xflag-6.jpg.pagespeed.ic.Ca_sCWEb_v.jpg"
-                          alt=""
-                        />
-                        <h4>Morocco</h4>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="left-team">
-                        <img
+                    <tr *ngFor="let a of matchs | paginate : {
+                      itemsPerPage: limit,
+                      currentPage: page,
+                      totalItems: count
+                    };">
+                    <td *ngFor="let e of a.Equipes" class="left-team">
+                      <img
                           src="../../assets/img/schedule/xflag-7.jpg.pagespeed.ic.g421X72lB8.jpg"
                           alt=""
                         />
-                        <h4>Croatia</h4>
+                        <h4>{{e.nomequipe}}</h4>
                       </td>
                       <td class="st-option">
-                        <div class="so-text">
-                          MetLife Stadium, Rutherford USA
-                        </div>
-                        <h4>3 : 1</h4>
-                        <div class="so-text">15 September 2019</div>
+                        <h4>{{a.scoreEq1}} : {{a.scoreEq2}}</h4>
+                        <div class="so-text">{{a.dateHeureMatch}}</div>
                       </td>
-                      <td class="right-team">
+                      <td *ngFor="let i of a.Equ_equipes_equipe" class="right-team">
                         <img
                           src="../../assets/img/schedule/xflag-8.jpg.pagespeed.ic.kV0kJu-eqL.jpg"
                           alt=""
                         />
-                        <h4>Uruguay</h4>
+                        <h4>{{i.nomequipe}}</h4>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
+              <pagination-controls responsive="true"  previousLabel="<"
+              nextLabel=">" (pageChange)="tabSize($event)"></pagination-controls>
             </div>
           </div>
         </div>
