@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace pari.src.dao.view.user_control.panel
@@ -35,6 +36,7 @@ namespace pari.src.dao.view.user_control.panel
             this.pariComboItem3 = new pari.src.dao.view.user_control.PariComboItem();
             this.pariDate1 = new pari.src.dao.view.user_control.PariDate();
             this.button2 = new System.Windows.Forms.Button();
+            this.pariDate2 = new pari.src.dao.view.user_control.PariDate();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,6 +49,7 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1.Controls.Add(this.pariComboItem3);
             this.flowLayoutPanel1.Controls.Add(this.pariDate1);
             this.flowLayoutPanel1.Controls.Add(this.button2);
+            this.flowLayoutPanel1.Controls.Add(this.pariDate2);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
@@ -93,18 +96,25 @@ namespace pari.src.dao.view.user_control.panel
             // 
             this.pariDate1.Location = new System.Drawing.Point(3, 225);
             this.pariDate1.Name = "pariDate1";
-            this.pariDate1.Size = new System.Drawing.Size(563, 113);
+            this.pariDate1.Size = new System.Drawing.Size(300, 113);
             this.pariDate1.TabIndex = 9;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(3, 344);
+            this.button2.Location = new System.Drawing.Point(309, 225);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 10;
             this.button2.Text = "Ajouter";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // pariDate2
+            // 
+            this.pariDate2.Location = new System.Drawing.Point(3, 344);
+            this.pariDate2.Name = "pariDate2";
+            this.pariDate2.Size = new System.Drawing.Size(300, 113);
+            this.pariDate2.TabIndex = 12;
             // 
             // Match
             // 
@@ -115,7 +125,7 @@ namespace pari.src.dao.view.user_control.panel
             this.Size = new System.Drawing.Size(634, 513);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
-            init();
+
         }
 
         private async void init()
@@ -129,14 +139,17 @@ namespace pari.src.dao.view.user_control.panel
             pariComboItem3.PariTitle.Label.Text = "Équipe 2";
             pariComboItem3.ComboBox.Text = "Équipe 2";
             pariTextBox1.Label.Text = "Arbitre";
-            pariTextBox1.TextBox.Text = "Arbitres";
+            pariTextBox1.TextBox.PlaceholderText = "Arbitres";
             pariTextBox1.LabelError.Text = "";
             pariDate1.PariTitle.Label.Text = "Date et heure";
             pariDate1.PariLabelError.Label.Text = "";
             button2.Text = "Ajouter";
 
             pariDate1.DateTimePicker.Format = DateTimePickerFormat.Custom;
-            pariDate1.DateTimePicker.CustomFormat = "yyyy-MM-dd";
+            pariDate1.DateTimePicker.CustomFormat = "yyyy-MM-dd hh:mm";
+
+            pariDate2.DateTimePicker.Format = DateTimePickerFormat.Custom;
+            pariDate2.DateTimePicker.CustomFormat = "yyyy-MM-dd hh:mm";
 
             Cursor = Cursors.WaitCursor;
             var res = await Service.Evenements();
@@ -165,10 +178,31 @@ namespace pari.src.dao.view.user_control.panel
         public PariComboItem Eq2 { get => pariComboItem3; set { pariComboItem3 = value; eq2 = value; } }
         public Button Ajouter { get => button2; set { button2 = value; ajouter = value; } }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
+            Cursor = Cursors.WaitCursor;
+            var c = (Combo)pariComboItem1.ComboBox.SelectedItem;
+            var idcompetition = c.Value;
+            var c1 = (Combo)pariComboItem2.ComboBox.SelectedItem;
+            var ide1 = c.Value;
+            var c2 = (Combo)pariComboItem3.ComboBox.SelectedItem;
+            var ide2 = c.Value;
+            var arbitreNom = pariTextBox1.TextBox.Text;
+            var date1 = pariDate1.DateTimePicker.Text;
+            DateTime d1 = DateTime.Parse(date1);
+            var date2 = pariDate1.DateTimePicker.Text;
+            DateTime d2 = DateTime.Parse(date1);
 
+            Task<MatchRest> da = Service.createMatch(
+                idcompetition, ide1, ide2, arbitreNom, d1, d2
+                );
+            var d = await da;
+            Cursor = Cursors.Arrow;
+            if (d.status) Information.information(this, $"{d1} est ajouté avec succès");
+            else Information.informationError(this, d.message);
         }
     }
+
+
 }
 

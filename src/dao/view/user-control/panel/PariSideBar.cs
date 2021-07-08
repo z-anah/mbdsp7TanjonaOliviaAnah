@@ -1,4 +1,5 @@
-﻿using System;
+﻿using pari.src.dao.service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +21,6 @@ namespace pari.src.dao.view.user_control.panel
         private System.Windows.Forms.Button equipe;
         private System.Windows.Forms.Button joueur;
         private System.Windows.Forms.Button match;
-        private System.Windows.Forms.VScrollBar vScrollBar;
         private System.Windows.Forms.Button deconnecter;
 
         public PariSideBar()
@@ -31,14 +31,27 @@ namespace pari.src.dao.view.user_control.panel
             displayMatchs();
         }
 
-        private void initializeComponent()
+        private async void initializeComponent()
         {
+            Cursor = Cursors.WaitCursor;
             button1.Text = "Compétitions";
             button2.Text = "Équipes";
             button3.Text = "Joueurs";
             button4.Text = "Matchs";
             label3.Text = "Les matchs à venir";
             button5.Text = "Se déconnecter";
+            flowLayoutPanel6.AutoScroll = true;
+            MatchsEquipeRest matchs = await Service.Matchs("60df6680f56ae1297ca71c2f");
+            foreach (MatchEquipeModel m in matchs.data)
+            {
+                Button button = new Button();
+                // button.Size = new Size(200, 25);
+                button.Size = new Size(200, 100);
+                button.Text = $"{m.equipe1.Nomequipe} VS {m.equipe2.Nomequipe}\n{m.dateHeureMatch}";
+                button.Tag = m._id;
+                flowLayoutPanel6.Controls.Add(button);
+            }
+            Cursor = Cursors.Arrow;
         }
 
         // TODO
@@ -67,7 +80,6 @@ namespace pari.src.dao.view.user_control.panel
         public Button Equipe { get => button2; set { button2 = value; equipe = value; } }
         public Button Joueur { get => button3; set { button3 = value; joueur = value; } }
         public Button Match { get => button4; set { button4 = value; match = value; } }
-        public VScrollBar VScrollBar { get => vScrollBar1; set { vScrollBar1 = value; vScrollBar = value; } }
         public Button Deconnecter { get => button5; set { button5 = value; deconnecter = value; } }
 
         private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)

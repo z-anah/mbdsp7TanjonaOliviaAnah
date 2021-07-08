@@ -43,7 +43,6 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
             this.button5 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -63,7 +62,6 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel1.Controls.Add(this.button4);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel5);
             this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel6);
-            this.flowLayoutPanel1.Controls.Add(this.vScrollBar1);
             this.flowLayoutPanel1.Controls.Add(this.button5);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -183,15 +181,8 @@ namespace pari.src.dao.view.user_control.panel
             // 
             this.flowLayoutPanel6.Location = new System.Drawing.Point(3, 214);
             this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(210, 265);
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(237, 265);
             this.flowLayoutPanel6.TabIndex = 7;
-            // 
-            // vScrollBar1
-            // 
-            this.vScrollBar1.Location = new System.Drawing.Point(216, 211);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 268);
-            this.vScrollBar1.TabIndex = 8;
             // 
             // button5
             // 
@@ -238,7 +229,6 @@ namespace pari.src.dao.view.user_control.panel
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.VScrollBar vScrollBar1;
         private System.Windows.Forms.Button button5;
     }
 }

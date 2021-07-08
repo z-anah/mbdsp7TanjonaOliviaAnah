@@ -108,6 +108,38 @@ namespace pari.src.dao.service
             var json = await client.GetAsync<string>(request);
             return JsonConvert.DeserializeObject<CompetitionsRest>(json);
         }
+
+        internal static async Task<MatchsEquipeRest> Matchs(String idProgressionType)
+        {
+            var client = new RestClient(Env.API_URL_NODE);
+            var request = new RestRequest("/matchs");
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new
+            {
+                idProgressionType
+            });
+            var json = await client.GetAsync<string>(request);
+            return JsonConvert.DeserializeObject<MatchsEquipeRest>(json);
+        }
+
+        internal static async Task<MatchRest> createMatch(string idCompetition, string idEquipe, string Equ_idEquipe, string arbitre_nom, DateTime dateHeureMatch, DateTime finDateHeureMatch)
+        {
+            var client = new RestClient(Env.API_URL_NODE);
+            var request = new RestRequest("/match/create");
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(new
+            {
+                idCompetition,
+                idEquipe,
+                Equ_idEquipe,
+                arbitre_nom,
+                dateHeureMatch,
+                finDateHeureMatch
+
+
+            });
+            return await client.PostAsync<MatchRest>(request);
+        }
     }
 
 

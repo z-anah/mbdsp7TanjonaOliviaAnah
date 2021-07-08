@@ -38,5 +38,6 @@ namespace pari.src.dao.view.user_control.panel
         private System.Windows.Forms.Button button2;
         private PariDate pariDate1;
         private PariTextBox pariTextBox1;
+        private PariDate pariDate2;
     }
 }
