@@ -101,25 +101,20 @@ const createMatch = async (m) => {
     idEquipe,
     Equ_idEquipe,
     idCompetition,
-    idFormation,
-    For_idFormation,
-    idProgressionType,
     dateHeureMatch,
     finDateHeureMatch,
-    scoreEq1,
-    scoreEq2,
+    arbitre_nom,
   } = m;
   let d = new Matchs({
     idEquipe: ObjectId(idEquipe),
     Equ_idEquipe: ObjectId(Equ_idEquipe),
     idCompetition: ObjectId(idCompetition),
-    idFormation: ObjectId(idFormation),
-    For_idFormation: ObjectId(For_idFormation),
-    idProgressionType: ObjectId(idProgressionType),
+    idProgressionType: ObjectId("60df6680f56ae1297ca71c2f"),
     dateHeureMatch,
     finDateHeureMatch,
-    scoreEq1,
-    scoreEq2,
+    scoreEq1: 0,
+    scoreEq2: 0,
+    arbitre_nom,
   });
   await d.save();
   return d;
@@ -155,7 +150,35 @@ const createJoueurCsv = async (d) => {
     j._id = ObjectId();
     delete j["﻿_"];
   });
-  // await joueurs.insertMany(d);
+  await joueurs.insertMany(d);
+  return d;
+};
+const matchs = async (idProgressionType) => {
+  const d = await Matchs.aggregate([
+    {
+      $lookup: {
+        from: "Equipes",
+        localField: "idEquipe",
+        foreignField: "_id",
+        as: "equipe1",
+      },
+    },
+    {
+      $unwind: "$equipe1",
+    },
+    {
+      $lookup: {
+        from: "Equipes",
+        localField: "Equ_idEquipe",
+        foreignField: "_id",
+        as: "equipe2",
+      },
+    },
+    {
+      $unwind: "$equipe2",
+    },
+  ]);
+  console.log(Matchs.findOne().populate("Equipe"));
   return d;
 };
 module.exports = {
@@ -170,4 +193,5 @@ module.exports = {
   createMatch,
   createJoueurCsv,
   teste,
+  matchs,
 };
