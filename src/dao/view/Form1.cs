@@ -11,6 +11,8 @@ using System.Windows.Forms;
 using RestSharp;
 using RestSharp.Authenticators;
 using pari.src.dao.utilities;
+using pari.src.dao.service;
+using pari.src.dao.view.user_control.panel;
 
 namespace pari
 {
@@ -87,12 +89,30 @@ namespace pari
             {
                 login1.isValide();
                 pariSideBar1Init();
+                matchs();
             }
             catch (Exception e)
             {
                 Console.WriteLine("PARI ERROR: " + e.Message);
             }
         }
+
+        private async void matchs()
+        {
+            Cursor = Cursors.WaitCursor;
+            MatchsEquipeRest matchs = await Service.Matchs("60df6680f56ae1297ca71c2f");
+            foreach (MatchEquipeModel m in matchs.data)
+            {
+                Button button = new Button();
+                // button.Size = new Size(200, 25);
+                button.Size = new Size(200, 100);
+                button.Text = $"{m.equipe1.Nomequipe} VS {m.equipe2.Nomequipe}\n{m.dateHeureMatch}";
+                button.Tag = m._id;
+                pariSideBar1.FlowLayoutPanel.Controls.Add(button);
+            }
+            Cursor = Cursors.Arrow;
+        }
+
         private void LoginInit()
         {
             initFenetre();

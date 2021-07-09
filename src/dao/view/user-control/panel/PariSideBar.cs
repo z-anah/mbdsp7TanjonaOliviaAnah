@@ -22,6 +22,7 @@ namespace pari.src.dao.view.user_control.panel
         private System.Windows.Forms.Button joueur;
         private System.Windows.Forms.Button match;
         private System.Windows.Forms.Button deconnecter;
+        private FlowLayoutPanel flowLayoutPanel;
 
         public PariSideBar()
         {
@@ -31,9 +32,8 @@ namespace pari.src.dao.view.user_control.panel
             displayMatchs();
         }
 
-        private async void initializeComponent()
+        private void initializeComponent()
         {
-            Cursor = Cursors.WaitCursor;
             button1.Text = "Compétitions";
             button2.Text = "Équipes";
             button3.Text = "Joueurs";
@@ -41,17 +41,6 @@ namespace pari.src.dao.view.user_control.panel
             label3.Text = "Les matchs à venir";
             button5.Text = "Se déconnecter";
             flowLayoutPanel6.AutoScroll = true;
-            MatchsEquipeRest matchs = await Service.Matchs("60df6680f56ae1297ca71c2f");
-            foreach (MatchEquipeModel m in matchs.data)
-            {
-                Button button = new Button();
-                // button.Size = new Size(200, 25);
-                button.Size = new Size(200, 100);
-                button.Text = $"{m.equipe1.Nomequipe} VS {m.equipe2.Nomequipe}\n{m.dateHeureMatch}";
-                button.Tag = m._id;
-                flowLayoutPanel6.Controls.Add(button);
-            }
-            Cursor = Cursors.Arrow;
         }
 
         // TODO
@@ -81,6 +70,14 @@ namespace pari.src.dao.view.user_control.panel
         public Button Joueur { get => button3; set { button3 = value; joueur = value; } }
         public Button Match { get => button4; set { button4 = value; match = value; } }
         public Button Deconnecter { get => button5; set { button5 = value; deconnecter = value; } }
+
+        public FlowLayoutPanel FlowLayoutPanel
+        {
+            get => flowLayoutPanel6; set
+            {
+                flowLayoutPanel6 = value; flowLayoutPanel = value;
+            }
+        }
 
         private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
         {

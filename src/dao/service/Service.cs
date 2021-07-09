@@ -113,12 +113,11 @@ namespace pari.src.dao.service
         {
             var client = new RestClient(Env.API_URL_NODE);
             var request = new RestRequest("/matchs");
+            var param = new { idProgressionType };
+
             request.RequestFormat = DataFormat.Json;
-            request.AddJsonBody(new
-            {
-                idProgressionType
-            });
-            var json = await client.GetAsync<string>(request);
+            request.AddJsonBody(param);
+            var json = await client.PostAsync<string>(request);
             return JsonConvert.DeserializeObject<MatchsEquipeRest>(json);
         }
 
@@ -135,8 +134,6 @@ namespace pari.src.dao.service
                 arbitre_nom,
                 dateHeureMatch,
                 finDateHeureMatch
-
-
             });
             return await client.PostAsync<MatchRest>(request);
         }
