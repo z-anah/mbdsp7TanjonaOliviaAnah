@@ -47,13 +47,13 @@ namespace pari.src.dao.view.user_control.panel
         private void displayMatchs() { }
         private void displayUser()
         {
-            var request = WebRequest.Create("http://localhost:5000/api/download/profil_1624427102818.jpeg");
             var nomComplet = "Mike";
             var email = "mike@gmail.com";
 
             label1.Text = nomComplet;
             label2.Text = email;
 
+            var request = WebRequest.Create("http://localhost:5000/api/download/profil_1624427102818.jpeg");
             using (var response = request.GetResponse())
             using (var stream = response.GetResponseStream())
             {

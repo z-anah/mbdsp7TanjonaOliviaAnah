@@ -130,7 +130,6 @@ namespace pari.src.dao.service
             request.RequestFormat = DataFormat.Json;
             request.AddJsonBody(param);
             var json = await client.PostAsync<string>(request);
-            Console.WriteLine(json);
             return JsonConvert.DeserializeObject<MatchEquipeFormationRest>(json);
         }
 

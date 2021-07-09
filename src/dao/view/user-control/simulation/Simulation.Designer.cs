@@ -70,7 +70,7 @@ namespace pari.src.dao.view.user_control.panel
             // 
             this.pariTitle1.Location = new System.Drawing.Point(3, 3);
             this.pariTitle1.Name = "pariTitle1";
-            this.pariTitle1.Size = new System.Drawing.Size(200, 23);
+            this.pariTitle1.Size = new System.Drawing.Size(491, 69);
             this.pariTitle1.TabIndex = 0;
             // 
             // flowLayoutPanel2
@@ -118,7 +118,7 @@ namespace pari.src.dao.view.user_control.panel
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
+            this.button1.Text = "Pause";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
@@ -127,7 +127,7 @@ namespace pari.src.dao.view.user_control.panel
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
-            this.button2.Text = "button2";
+            this.button2.Text = "Start";
             this.button2.UseVisualStyleBackColor = true;
             // 
             // Simulation

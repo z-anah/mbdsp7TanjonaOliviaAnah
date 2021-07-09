@@ -29,6 +29,7 @@ namespace pari.src.dao.view.user_control.simulation
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EquipeSimulation));
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
@@ -67,6 +68,7 @@ namespace pari.src.dao.view.user_control.simulation
             // 
             // flowLayoutPanel5
             // 
+            this.flowLayoutPanel5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowLayoutPanel5.BackgroundImage")));
             this.flowLayoutPanel5.Controls.Add(this.pictureBox1);
             this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";

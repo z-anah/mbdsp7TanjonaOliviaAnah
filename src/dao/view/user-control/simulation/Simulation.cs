@@ -20,6 +20,10 @@ namespace pari.src.dao.view.user_control.panel
         public Simulation()
         {
             InitializeComponent();
+            this.button1.Text = "Pause";
+            this.button2.Text = "Start";
+            equipeSimulation1.Button.Text = "A marqué";
+            equipeSimulation2.Button.Text = "A marqué";
         }
 
         public EquipeSimulation Equipe1 { get => equipeSimulation1; set { equipeSimulation1 = value; equipe1 = value; } }

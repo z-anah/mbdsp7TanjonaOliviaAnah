@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Net;
 using System.Text;
 using System.Windows.Forms;
 
@@ -56,6 +57,14 @@ namespace pari.src.dao.view.user_control.simulation
         public EquipeSimulation()
         {
             InitializeComponent();
+            Console.WriteLine("tste");
+            var request = WebRequest.Create("http://localhost:5000/api/download/profil_1624427102818.jpeg");
+            using (var response = request.GetResponse())
+            using (var stream = response.GetResponseStream())
+            {
+                pictureBox1.Image = Bitmap.FromStream(stream);
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            }
         }
     }
 }

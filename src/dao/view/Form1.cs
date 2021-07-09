@@ -14,6 +14,7 @@ using pari.src.dao.utilities;
 using pari.src.dao.service;
 using pari.src.dao.view.user_control.panel;
 using System.Globalization;
+using System.Net;
 
 namespace pari
 {
@@ -22,6 +23,7 @@ namespace pari
         public Form1()
         {
             InitializeComponent();
+            simulation1.Equipe1.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             init();
             temp();
             LoginInit();
@@ -107,7 +109,6 @@ namespace pari
             {
                 Button button = new Button();
                 button.Click += new EventHandler(matchFenetre);
-                // button.Size = new Size(200, 25);
                 button.Size = new Size(200, 100);
                 button.Text = $"{m.equipe1.Nomequipe} VS {m.equipe2.Nomequipe}\n{m.dateHeureMatch}";
                 button.Tag = m._id;
@@ -126,9 +127,21 @@ namespace pari
                 MatchEquipeFormationRest m = await Service.Match((string)((Button)sender).Tag);
                 Cursor = Cursors.Arrow;
                 CultureInfo culture = new CultureInfo("fr-CA", true);
+                this.simulation1.PariTitle.Label.TextAlign = (ContentAlignment)HorizontalAlignment.Center;
                 this.simulation1.PariTitle.Label.Text =
-                    $"{m.data.dateHeureMatch.ToString("ddd, dd MMM yyyy HH':'mm':'ss zzz", culture)}\n" +
+                    $"{m.data.dateHeureMatch.ToString("dddd, dd MMM yyyy hh:mm", culture).ToUpper()}\n" +
                     $"Arbitré par _ _ _ _\n{m.data.scoreEq1} VS {m.data.scoreEq2}";
+
+                this.simulation1.Equipe1.PariTitle.Label.Text = m.data.equipe1.Nomequipe;
+                this.simulation1.Equipe2.PariTitle.Label.Text = m.data.equipe2.Nomequipe;
+
+                var request = WebRequest.Create("http://localhost:5000/api/download/l1.jpg");
+                using (var response = request.GetResponse())
+                using (var stream = response.GetResponseStream())
+                {
+                    simulation1.Equipe1.PictureBox.Image = Bitmap.FromStream(stream);
+                    simulation1.Equipe1.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                }
             }
             catch (Exception e)
             {
