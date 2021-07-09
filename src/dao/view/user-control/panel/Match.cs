@@ -23,6 +23,7 @@ namespace pari.src.dao.view.user_control.panel
         public Match()
         {
             InitializeComponent();
+            init();
         }
 
 

@@ -13,6 +13,7 @@ using RestSharp.Authenticators;
 using pari.src.dao.utilities;
 using pari.src.dao.service;
 using pari.src.dao.view.user_control.panel;
+using System.Globalization;
 
 namespace pari
 {
@@ -82,6 +83,7 @@ namespace pari
             this.competition1.Visible = false;
             this.pariSideBar1.Visible = false;
             this.login1.Visible = false;
+            this.simulation1.Visible = false;
         }
         private void login1SeConnecter(object sender, EventArgs ev)
         {
@@ -104,6 +106,7 @@ namespace pari
             foreach (MatchEquipeModel m in matchs.data)
             {
                 Button button = new Button();
+                button.Click += new EventHandler(matchFenetre);
                 // button.Size = new Size(200, 25);
                 button.Size = new Size(200, 100);
                 button.Text = $"{m.equipe1.Nomequipe} VS {m.equipe2.Nomequipe}\n{m.dateHeureMatch}";
@@ -111,6 +114,26 @@ namespace pari
                 pariSideBar1.FlowLayoutPanel.Controls.Add(button);
             }
             Cursor = Cursors.Arrow;
+        }
+        private async void matchFenetre(object sender, EventArgs ev)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                initFenetre();
+                this.pariSideBar1.Visible = true;
+                this.simulation1.Visible = true;
+                MatchEquipeFormationRest m = await Service.Match((string)((Button)sender).Tag);
+                Cursor = Cursors.Arrow;
+                CultureInfo culture = new CultureInfo("fr-CA", true);
+                this.simulation1.PariTitle.Label.Text =
+                    $"{m.data.dateHeureMatch.ToString("ddd, dd MMM yyyy HH':'mm':'ss zzz", culture)}\n" +
+                    $"Arbitré par _ _ _ _\n{m.data.scoreEq1} VS {m.data.scoreEq2}";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("PARI ERROR: " + e.Message);
+            }
         }
 
         private void LoginInit()

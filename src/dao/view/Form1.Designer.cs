@@ -35,6 +35,7 @@
             this.equipe1 = new pari.src.dao.view.user_control.panel.Equipe();
             this.joueur1 = new pari.src.dao.view.user_control.panel.Joueur();
             this.match1 = new pari.src.dao.view.user_control.panel.Match();
+            this.simulation1 = new pari.src.dao.view.user_control.panel.Simulation();
             this.SuspendLayout();
             // 
             // login1
@@ -60,6 +61,7 @@
             // 
             // equipe1
             // 
+            this.equipe1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.equipe1.Location = new System.Drawing.Point(259, 8);
             this.equipe1.Name = "equipe1";
             this.equipe1.Size = new System.Drawing.Size(634, 513);
@@ -67,6 +69,7 @@
             // 
             // joueur1
             // 
+            this.joueur1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.joueur1.Location = new System.Drawing.Point(259, 8);
             this.joueur1.Name = "joueur1";
             this.joueur1.Size = new System.Drawing.Size(634, 513);
@@ -74,10 +77,18 @@
             // 
             // match1
             // 
+            this.match1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.match1.Location = new System.Drawing.Point(259, 8);
             this.match1.Name = "match1";
             this.match1.Size = new System.Drawing.Size(634, 513);
             this.match1.TabIndex = 6;
+            // 
+            // simulation1
+            // 
+            this.simulation1.Location = new System.Drawing.Point(259, 8);
+            this.simulation1.Name = "simulation1";
+            this.simulation1.Size = new System.Drawing.Size(634, 513);
+            this.simulation1.TabIndex = 7;
             // 
             // Form1
             // 
@@ -85,6 +96,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(905, 533);
+            this.Controls.Add(this.simulation1);
             this.Controls.Add(this.pariSideBar1);
             this.Controls.Add(this.joueur1);
             this.Controls.Add(this.equipe1);
@@ -106,6 +118,7 @@
         private src.dao.view.user_control.panel.Equipe equipe1;
         private src.dao.view.user_control.panel.Joueur joueur1;
         private src.dao.view.user_control.panel.Match match1;
+        private src.dao.view.user_control.panel.Simulation simulation1;
     }
 }
 
