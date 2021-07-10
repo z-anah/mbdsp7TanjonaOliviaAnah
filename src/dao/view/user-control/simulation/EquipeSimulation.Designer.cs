@@ -29,10 +29,8 @@ namespace pari.src.dao.view.user_control.simulation
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EquipeSimulation));
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pariTitle1 = new pari.src.dao.view.user_control.PariTitle();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
@@ -41,7 +39,6 @@ namespace pari.src.dao.view.user_control.simulation
             this.button1 = new System.Windows.Forms.Button();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
-            this.flowLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.flowLayoutPanel4.SuspendLayout();
             this.SuspendLayout();
@@ -59,34 +56,25 @@ namespace pari.src.dao.view.user_control.simulation
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Controls.Add(this.flowLayoutPanel5);
+            this.flowLayoutPanel1.Controls.Add(this.pictureBox1);
             this.flowLayoutPanel1.Controls.Add(this.pariTitle1);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(301, 60);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
-            // flowLayoutPanel5
-            // 
-            this.flowLayoutPanel5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("flowLayoutPanel5.BackgroundImage")));
-            this.flowLayoutPanel5.Controls.Add(this.pictureBox1);
-            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(58, 54);
-            this.flowLayoutPanel5.TabIndex = 0;
-            // 
             // pictureBox1
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::pari.Properties.Resources.Capture;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(55, 0);
-            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.Size = new System.Drawing.Size(60, 60);
+            this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
             // pariTitle1
             // 
-            this.pariTitle1.Location = new System.Drawing.Point(67, 3);
+            this.pariTitle1.Location = new System.Drawing.Point(69, 3);
             this.pariTitle1.Name = "pariTitle1";
             this.pariTitle1.Size = new System.Drawing.Size(200, 23);
             this.pariTitle1.TabIndex = 1;
@@ -133,7 +121,6 @@ namespace pari.src.dao.view.user_control.simulation
             this.Size = new System.Drawing.Size(307, 250);
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.flowLayoutPanel4.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -144,7 +131,6 @@ namespace pari.src.dao.view.user_control.simulation
 
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
         private System.Windows.Forms.ComboBox comboBox1;

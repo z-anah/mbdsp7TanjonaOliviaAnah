@@ -52,14 +52,6 @@ namespace pari.src.dao.view.user_control.panel
 
             label1.Text = nomComplet;
             label2.Text = email;
-
-            var request = WebRequest.Create("http://localhost:5000/api/download/profil_1624427102818.jpeg");
-            using (var response = request.GetResponse())
-            using (var stream = response.GetResponseStream())
-            {
-                pictureBox1.Image = Bitmap.FromStream(stream);
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            }
         }
 
         public PictureBox PictureBox { get => pictureBox1; set { pictureBox1 = value; pictureBox = value; } }

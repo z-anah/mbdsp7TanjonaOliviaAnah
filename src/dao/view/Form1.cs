@@ -23,16 +23,12 @@ namespace pari
         public Form1()
         {
             InitializeComponent();
-            simulation1.Equipe1.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             init();
             temp();
             LoginInit();
         }
         private void temp()
         {
-            /*Task<ListRolesRest> teste = listRoles();
-            ListRolesRest t = await teste;
-            Console.WriteLine(t.Status);*/
             this.login1.TextBox.TextBox.Text = "zulmianah@gmail.com";
             this.login1.MotPasse.TextBox.Text = "fahmi230995";
         }
@@ -94,6 +90,8 @@ namespace pari
                 login1.isValide();
                 pariSideBar1Init();
                 matchs();
+                pariSideBar1.PictureBox.ImageLocation = "http://localhost:5000/api/download/profil_1624427102818.jpeg";
+                pariSideBar1.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             }
             catch (Exception e)
             {
@@ -125,7 +123,6 @@ namespace pari
                 this.pariSideBar1.Visible = true;
                 this.simulation1.Visible = true;
                 MatchEquipeFormationRest m = await Service.Match((string)((Button)sender).Tag);
-                Cursor = Cursors.Arrow;
                 CultureInfo culture = new CultureInfo("fr-CA", true);
                 this.simulation1.PariTitle.Label.TextAlign = (ContentAlignment)HorizontalAlignment.Center;
                 this.simulation1.PariTitle.Label.Text =
@@ -134,14 +131,14 @@ namespace pari
 
                 this.simulation1.Equipe1.PariTitle.Label.Text = m.data.equipe1.Nomequipe;
                 this.simulation1.Equipe2.PariTitle.Label.Text = m.data.equipe2.Nomequipe;
+                string url1 = $"http://localhost:5000/api/download/{m.data.equipe1.Logoequipe}";
+                var url2 = $"http://localhost:5000/api/download/{m.data.equipe2.Logoequipe}";
 
-                var request = WebRequest.Create("http://localhost:5000/api/download/l1.jpg");
-                using (var response = request.GetResponse())
-                using (var stream = response.GetResponseStream())
-                {
-                    simulation1.Equipe1.PictureBox.Image = Bitmap.FromStream(stream);
-                    simulation1.Equipe1.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-                }
+                simulation1.Equipe1.PictureBox.ImageLocation = url1;
+                simulation1.Equipe1.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                simulation1.Equipe2.PictureBox.ImageLocation = url2;
+                simulation1.Equipe2.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+                Cursor = Cursors.Arrow;
             }
             catch (Exception e)
             {

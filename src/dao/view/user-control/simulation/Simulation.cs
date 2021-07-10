@@ -24,9 +24,10 @@ namespace pari.src.dao.view.user_control.panel
             this.button2.Text = "Start";
             equipeSimulation1.Button.Text = "A marqué";
             equipeSimulation2.Button.Text = "A marqué";
+            equipe1 = equipeSimulation1;
         }
 
-        public EquipeSimulation Equipe1 { get => equipeSimulation1; set { equipeSimulation1 = value; equipe1 = value; } }
+        public EquipeSimulation Equipe1 { get => equipe1; set { equipeSimulation1 = value; equipe1 = value; } }
         public EquipeSimulation Equipe2 { get => equipeSimulation2; set { equipeSimulation2 = value; equipe2 = value; } }
         public PariTitle PariTitle { get => pariTitle1; set { pariTitle1 = value; pariTitle = value; } }
         public Button Pause { get => button1; set { button1 = value; pause = value; } }
