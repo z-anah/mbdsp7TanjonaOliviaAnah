@@ -167,6 +167,8 @@ const matchs = async (idProgressionType) => {
 const match = async (_id) => {
   const eff1 = equipeFormationFilter(1);
   const eff2 = equipeFormationFilter(2);
+  const js1 = joueursFilter(1);
+  const js2 = joueursFilter(2);
   const d = await Matchs.aggregate([
     {
       $match: { _id: ObjectId(_id) },
@@ -174,6 +176,8 @@ const match = async (_id) => {
     ...matchsEquipesFilter,
     ...eff1,
     ...eff2,
+    ...js1,
+    ...js2,
   ]);
   return d[0];
 };
@@ -191,6 +195,19 @@ module.exports = {
   teste,
   matchs,
   match,
+};
+
+joueursFilter = (i) => {
+  return [
+    {
+      $lookup: {
+        from: "Joueurs",
+        localField: `equipe${i}._id`,
+        foreignField: "idequipe",
+        as: `joueurs${i}`,
+      },
+    },
+  ];
 };
 
 equipeFormationFilter = (i) => {
