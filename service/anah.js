@@ -156,30 +156,26 @@ const createJoueurCsv = async (d) => {
 const matchs = async (idProgressionType) => {
   const d = await Matchs.aggregate([
     {
-      $lookup: {
-        from: "Equipes",
-        localField: "idEquipe",
-        foreignField: "_id",
-        as: "equipe1",
+      $match: {
+        idProgressionType: ObjectId(idProgressionType),
       },
     },
-    {
-      $unwind: "$equipe1",
-    },
-    {
-      $lookup: {
-        from: "Equipes",
-        localField: "Equ_idEquipe",
-        foreignField: "_id",
-        as: "equipe2",
-      },
-    },
-    {
-      $unwind: "$equipe2",
-    },
+    ...matchsEquipesFilter,
   ]);
-  console.log(Matchs.findOne().populate("Equipe"));
   return d;
+};
+const match = async (_id) => {
+  const eff1 = equipeFormationFilter(1);
+  const eff2 = equipeFormationFilter(2);
+  const d = await Matchs.aggregate([
+    {
+      $match: { _id: ObjectId(_id) },
+    },
+    ...matchsEquipesFilter,
+    ...eff1,
+    ...eff2,
+  ]);
+  return d[0];
 };
 module.exports = {
   createCompetition,
@@ -194,4 +190,46 @@ module.exports = {
   createJoueurCsv,
   teste,
   matchs,
+  match,
 };
+
+equipeFormationFilter = (i) => {
+  return [
+    {
+      $lookup: {
+        from: "Formations",
+        localField: `equipe${i}.idformation`,
+        foreignField: "_id",
+        as: `formation${i}`,
+      },
+    },
+    {
+      $unwind: `$formation${i}`,
+    },
+  ];
+};
+
+const matchsEquipesFilter = [
+  {
+    $lookup: {
+      from: "Equipes",
+      localField: "idEquipe",
+      foreignField: "_id",
+      as: "equipe1",
+    },
+  },
+  {
+    $unwind: "$equipe1",
+  },
+  {
+    $lookup: {
+      from: "Equipes",
+      localField: "Equ_idEquipe",
+      foreignField: "_id",
+      as: "equipe2",
+    },
+  },
+  {
+    $unwind: "$equipe2",
+  },
+];

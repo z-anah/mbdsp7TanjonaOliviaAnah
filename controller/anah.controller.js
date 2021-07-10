@@ -186,7 +186,6 @@ const createJoueur = async (req, res) => {
       message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
       desc: error.message,
     };
-    console.log(io);
     res.send(io);
   }
 };
@@ -287,6 +286,24 @@ const matchs = async (req, res) => {
   }
 };
 
+const match = async (req, res) => {
+  try {
+    const { _id } = req.body;
+    const data = await service.match(_id);
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
 module.exports = {
   sendMail,
   createCompetition,
@@ -300,4 +317,5 @@ module.exports = {
   createMatch,
   createJoueurCsv,
   matchs,
+  match,
 };
