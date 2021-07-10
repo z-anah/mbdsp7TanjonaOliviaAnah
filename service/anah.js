@@ -1,5 +1,6 @@
 const { ObjectId } = require("bson");
 const Mongoose = require("mongoose");
+const But = require("../model/but");
 let Competition = require("../model/Competition");
 let equipes = require("../model/equipes");
 let Formation = require("../model/Formation");
@@ -181,6 +182,30 @@ const match = async (_id) => {
   ]);
   return d[0];
 };
+
+const playMatch = async (_id, idProgressionType) => {
+  let query = { _id };
+  let update = { idProgressionType: ObjectId(idProgressionType) };
+  await Matchs.findByIdAndUpdate(query, update);
+  return await Matchs.findById(query);
+};
+
+const butMatch = async (but) => {
+  let { id_match, id_joueur, scoreEq1, scoreEq2 } = but;
+
+  let d = {};
+  d.but = new But({
+    id_match: ObjectId(id_match),
+    id_joueur: ObjectId(id_joueur),
+  });
+  await d.but.save();
+  let query = { _id: ObjectId(id_match) };
+  let update = { scoreEq1, scoreEq2 };
+  await Matchs.findByIdAndUpdate(query, update);
+  d.match = await Matchs.findByIdAndUpdate(query);
+  return d;
+};
+
 module.exports = {
   createCompetition,
   createEquipe,
@@ -195,6 +220,8 @@ module.exports = {
   teste,
   matchs,
   match,
+  playMatch,
+  butMatch,
 };
 
 joueursFilter = (i) => {

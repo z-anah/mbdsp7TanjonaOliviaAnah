@@ -21,5 +21,7 @@ module.exports = (app) => {
   app.post("/api/joueur/create/csv", controller.createJoueurCsv);
   app.post("/api/matchs", controller.matchs);
   app.post("/api/match", controller.match);
+  app.post("/api/match/progression", controller.playMatch);
+  app.post("/api/match/but", controller.butMatch);
   app.post("/api/teste", controller.teste);
 };

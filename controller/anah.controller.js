@@ -304,6 +304,47 @@ const match = async (req, res) => {
   }
 };
 
+const playMatch = async (req, res) => {
+  try {
+    const { _id, idProgressionType } = req.body;
+    const data = await service.playMatch(_id, idProgressionType);
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
+const butMatch = async (req, res) => {
+  try {
+    const { id_match, id_joueur, scoreEq1, scoreEq2 } = req.body;
+    const data = await service.butMatch({
+      id_match,
+      id_joueur,
+      scoreEq1,
+      scoreEq2,
+    });
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
 module.exports = {
   sendMail,
   createCompetition,
@@ -318,4 +359,6 @@ module.exports = {
   createJoueurCsv,
   matchs,
   match,
+  playMatch,
+  butMatch,
 };
