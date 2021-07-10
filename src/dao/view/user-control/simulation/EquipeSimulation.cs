@@ -16,6 +16,7 @@ namespace pari.src.dao.view.user_control.simulation
         private Button button;
         private PariTitle pariTitle;
         private PictureBox pictureBox;
+        private PictureBox formationPictureBox;
 
         public ComboBox ComboBox
         {
@@ -54,10 +55,21 @@ namespace pari.src.dao.view.user_control.simulation
             }
         }
 
+        public PictureBox Formation
+        {
+            get => pictureBox2;
+            set
+            {
+                pictureBox2 = value;
+                formationPictureBox = value;
+            }
+        }
+
         public EquipeSimulation()
         {
             InitializeComponent();
             pictureBox = pictureBox1;
+            pariTitle1.Label.Text = "_ _ _";
         }
     }
 }

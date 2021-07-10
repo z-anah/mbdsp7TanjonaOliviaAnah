@@ -71,7 +71,8 @@ namespace pari.src.dao.view.user_control.panel
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::pari.Properties.Resources.Capture;
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(60, 60);

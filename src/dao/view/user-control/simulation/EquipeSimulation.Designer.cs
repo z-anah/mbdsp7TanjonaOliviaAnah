@@ -37,10 +37,13 @@ namespace pari.src.dao.view.user_control.simulation
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.flowLayoutPanel2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.flowLayoutPanel3.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // flowLayoutPanel2
@@ -60,12 +63,13 @@ namespace pari.src.dao.view.user_control.simulation
             this.flowLayoutPanel1.Controls.Add(this.pariTitle1);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(301, 60);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(301, 65);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::pari.Properties.Resources.Capture;
+            this.pictureBox1.ErrorImage = null;
+            this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(60, 60);
@@ -81,16 +85,17 @@ namespace pari.src.dao.view.user_control.simulation
             // 
             // flowLayoutPanel3
             // 
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 69);
+            this.flowLayoutPanel3.Controls.Add(this.pictureBox2);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 74);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(301, 142);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(301, 134);
             this.flowLayoutPanel3.TabIndex = 1;
             // 
             // flowLayoutPanel4
             // 
             this.flowLayoutPanel4.Controls.Add(this.comboBox1);
             this.flowLayoutPanel4.Controls.Add(this.button1);
-            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 217);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(3, 214);
             this.flowLayoutPanel4.Name = "flowLayoutPanel4";
             this.flowLayoutPanel4.Size = new System.Drawing.Size(301, 33);
             this.flowLayoutPanel4.TabIndex = 2;
@@ -112,6 +117,16 @@ namespace pari.src.dao.view.user_control.simulation
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.ErrorImage = null;
+            this.pictureBox2.InitialImage = null;
+            this.pictureBox2.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(294, 131);
+            this.pictureBox2.TabIndex = 8;
+            this.pictureBox2.TabStop = false;
+            // 
             // EquipeSimulation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -122,7 +137,9 @@ namespace pari.src.dao.view.user_control.simulation
             this.flowLayoutPanel2.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -137,5 +154,6 @@ namespace pari.src.dao.view.user_control.simulation
         private System.Windows.Forms.Button button1;
         private PariTitle pariTitle1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

@@ -127,7 +127,7 @@ namespace pari
                 this.simulation1.PariTitle.Label.TextAlign = (ContentAlignment)HorizontalAlignment.Center;
                 this.simulation1.PariTitle.Label.Text =
                     $"{m.data.dateHeureMatch.ToString("dddd, dd MMM yyyy hh:mm", culture).ToUpper()}\n" +
-                    $"Arbitré par _ _ _ _\n{m.data.scoreEq1} VS {m.data.scoreEq2}";
+                    $"Arbitré par {m.data.arbitre_nom}\n{m.data.scoreEq1} VS {m.data.scoreEq2}";
 
                 this.simulation1.Equipe1.PariTitle.Label.Text = m.data.equipe1.Nomequipe;
                 this.simulation1.Equipe2.PariTitle.Label.Text = m.data.equipe2.Nomequipe;
@@ -138,6 +138,13 @@ namespace pari
                 simulation1.Equipe1.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                 simulation1.Equipe2.PictureBox.ImageLocation = url2;
                 simulation1.Equipe2.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+
+                string url3 = $"http://localhost:5000/api/download/{m.data.formation1.logo_formation}";
+                var url4 = $"http://localhost:5000/api/download/{m.data.formation2.logo_formation}";
+                simulation1.Equipe1.Formation.ImageLocation = url3;
+                simulation1.Equipe1.Formation.SizeMode = PictureBoxSizeMode.Zoom;
+                simulation1.Equipe2.Formation.ImageLocation = url4;
+                simulation1.Equipe2.Formation.SizeMode = PictureBoxSizeMode.Zoom;
                 Cursor = Cursors.Arrow;
             }
             catch (Exception e)

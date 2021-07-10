@@ -39,6 +39,7 @@ namespace pari.src.dao.view.user_control.panel
     {
         public string _id { get; set; }
         public string idEquipe { get; set; }
+        public string arbitre_nom { get; set; }
         public string Equ_idEquipe { get; set; }
         public string idCompetition { get; set; }
         public string idFormation { get; set; }

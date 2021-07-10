@@ -25,6 +25,7 @@ namespace pari.src.dao.view.user_control.panel
             equipeSimulation1.Button.Text = "A marqué";
             equipeSimulation2.Button.Text = "A marqué";
             equipe1 = equipeSimulation1;
+            pariTitle1.Label.Text = "_ _ _";
         }
 
         public EquipeSimulation Equipe1 { get => equipe1; set { equipeSimulation1 = value; equipe1 = value; } }

@@ -12,6 +12,8 @@ namespace pari.src.dao.view.user_control.panel
 
         [JsonProperty("__v")]
         public int V { get; set; }
+
+        public string logo_formation { get; set; }
     }
 
 
