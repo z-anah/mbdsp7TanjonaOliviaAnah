@@ -160,6 +160,18 @@ namespace pari.src.dao.service
             });
             return await client.PostAsync<MatchRest>(request);
         }
+
+        internal static async Task marquer(string id_match, string id_joueur, int scoreEq1, int scoreEq2)
+        {
+            var client = new RestClient(Env.API_URL_NODE);
+            var request = new RestRequest("/match/but");
+            var param = new { id_match, id_joueur, scoreEq1, scoreEq2 };
+
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(param);
+            var json = await client.PostAsync<string>(request);
+            Console.WriteLine(json);
+        }
     }
 
 

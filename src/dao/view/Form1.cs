@@ -133,8 +133,54 @@ namespace pari
 
                 this.simulation1.Terminer.Tag = m.data._id;
                 this.simulation1.Terminer.Click += new EventHandler(terminer);
+                this.simulation1.Commencer.Tag = m.data._id;
                 this.simulation1.Commencer.Click += new EventHandler(commencer);
 
+
+
+                this.simulation1.Equipe1.Button.Tag = m;
+                this.simulation1.Equipe2.Button.Tag = m;
+                this.simulation1.Equipe1.Button.Click += new EventHandler(marque1);
+                this.simulation1.Equipe2.Button.Click += new EventHandler(marque2);
+
+                Cursor = Cursors.Arrow;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("PARI ERROR: " + e.Message);
+            }
+        }
+
+        private async void marque1(object sender, EventArgs ev)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                var c1 = (Combo)this.simulation1.Equipe1.ComboBox.SelectedItem;
+                var id_joueur = c1.Value;
+                var m = (MatchEquipeFormationRest)((Button)sender).Tag;
+                m.data.scoreEq1 += 1;
+                await Service.marquer(m.data._id, id_joueur, m.data.scoreEq1, m.data.scoreEq2);
+                titleMatch(m);
+                Cursor = Cursors.Arrow;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("PARI ERROR: " + e.Message);
+            }
+        }
+
+        private async void marque2(object sender, EventArgs ev)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                var c2 = (Combo)this.simulation1.Equipe2.ComboBox.SelectedItem;
+                var id_joueur = c2.Value;
+                var m = (MatchEquipeFormationRest)((Button)sender).Tag;
+                m.data.scoreEq2 += 1;
+                await Service.marquer(m.data._id, id_joueur, m.data.scoreEq1, m.data.scoreEq2);
+                titleMatch(m);
                 Cursor = Cursors.Arrow;
             }
             catch (Exception e)
@@ -148,8 +194,6 @@ namespace pari
             try
             {
                 Cursor = Cursors.WaitCursor;
-                /*string idjoueur = null;
-                Console.WriteLine(idjoueur);*/
                 this.simulation1.Status.BackColor = Color.Blue;
                 this.simulation1.Status.Text = "Status: Terminer";
                 await Service.MatchProgression((string)((Button)sender).Tag, "60df6680f56ae1297ca71c33");
