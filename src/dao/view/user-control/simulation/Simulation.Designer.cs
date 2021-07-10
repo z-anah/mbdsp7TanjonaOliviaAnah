@@ -39,6 +39,7 @@ namespace pari.src.dao.view.user_control.panel
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.flowLayoutPanel4.SuspendLayout();
             this.flowLayoutPanel2.SuspendLayout();
@@ -105,30 +106,40 @@ namespace pari.src.dao.view.user_control.panel
             // 
             // flowLayoutPanel5
             // 
+            this.flowLayoutPanel5.Controls.Add(this.button3);
             this.flowLayoutPanel5.Controls.Add(this.button1);
             this.flowLayoutPanel5.Controls.Add(this.button2);
             this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 340);
             this.flowLayoutPanel5.Name = "flowLayoutPanel5";
-            this.flowLayoutPanel5.Size = new System.Drawing.Size(200, 29);
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(518, 29);
             this.flowLayoutPanel5.TabIndex = 5;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(3, 3);
+            this.button1.Location = new System.Drawing.Point(251, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(148, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "Pause";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(84, 3);
+            this.button2.Location = new System.Drawing.Point(405, 3);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 4;
             this.button2.Text = "Start";
             this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(3, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(242, 23);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // Simulation
             // 
@@ -158,5 +169,6 @@ namespace pari.src.dao.view.user_control.panel
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.Button button3;
     }
 }

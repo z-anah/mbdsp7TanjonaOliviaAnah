@@ -121,6 +121,17 @@ namespace pari.src.dao.service
             return JsonConvert.DeserializeObject<MatchsEquipeRest>(json);
         }
 
+        internal static async Task MatchProgression(String _id, String idProgressionType)
+        {
+            var client = new RestClient(Env.API_URL_NODE);
+            var request = new RestRequest("/match/progression");
+            var param = new { _id, idProgressionType };
+
+            request.RequestFormat = DataFormat.Json;
+            request.AddJsonBody(param);
+            var json = await client.PostAsync<string>(request);
+        }
+
         internal static async Task<MatchEquipeFormationRest> Match(String _id)
         {
             var client = new RestClient(Env.API_URL_NODE);

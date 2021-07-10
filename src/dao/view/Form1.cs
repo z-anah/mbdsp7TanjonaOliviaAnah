@@ -123,11 +123,52 @@ namespace pari
                 this.pariSideBar1.Visible = true;
                 this.simulation1.Visible = true;
 
+                this.simulation1.Status.BackColor = Color.Transparent;
+                this.simulation1.Status.Text = "Status: En attente";
+
                 MatchEquipeFormationRest m = await Service.Match((string)((Button)sender).Tag);
                 titleMatch(m);
                 displayEquipesMatch(m);
                 displayComboItemEquipesMatch(m);
 
+                this.simulation1.Terminer.Tag = m.data._id;
+                this.simulation1.Terminer.Click += new EventHandler(terminer);
+                this.simulation1.Commencer.Click += new EventHandler(commencer);
+
+                Cursor = Cursors.Arrow;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("PARI ERROR: " + e.Message);
+            }
+        }
+
+        private async void terminer(object sender, EventArgs ev)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                /*string idjoueur = null;
+                Console.WriteLine(idjoueur);*/
+                this.simulation1.Status.BackColor = Color.Blue;
+                this.simulation1.Status.Text = "Status: Terminer";
+                await Service.MatchProgression((string)((Button)sender).Tag, "60df6680f56ae1297ca71c33");
+                Cursor = Cursors.Arrow;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("PARI ERROR: " + e.Message);
+            }
+        }
+
+        private async void commencer(object sender, EventArgs ev)
+        {
+            try
+            {
+                Cursor = Cursors.WaitCursor;
+                this.simulation1.Status.BackColor = Color.Green;
+                this.simulation1.Status.Text = "Status: En cours";
+                await Service.MatchProgression((string)((Button)sender).Tag, "60df6680f56ae1297ca71c31");
                 Cursor = Cursors.Arrow;
             }
             catch (Exception e)
