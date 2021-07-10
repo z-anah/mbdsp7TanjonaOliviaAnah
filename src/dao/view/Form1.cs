@@ -122,35 +122,64 @@ namespace pari
                 initFenetre();
                 this.pariSideBar1.Visible = true;
                 this.simulation1.Visible = true;
+
                 MatchEquipeFormationRest m = await Service.Match((string)((Button)sender).Tag);
-                CultureInfo culture = new CultureInfo("fr-CA", true);
-                this.simulation1.PariTitle.Label.TextAlign = (ContentAlignment)HorizontalAlignment.Center;
-                this.simulation1.PariTitle.Label.Text =
-                    $"{m.data.dateHeureMatch.ToString("dddd, dd MMM yyyy hh:mm", culture).ToUpper()}\n" +
-                    $"Arbitré par {m.data.arbitre_nom}\n{m.data.scoreEq1} VS {m.data.scoreEq2}";
+                titleMatch(m);
+                displayEquipesMatch(m);
+                displayComboItemEquipesMatch(m);
 
-                this.simulation1.Equipe1.PariTitle.Label.Text = m.data.equipe1.Nomequipe;
-                this.simulation1.Equipe2.PariTitle.Label.Text = m.data.equipe2.Nomequipe;
-                string url1 = $"http://localhost:5000/api/download/{m.data.equipe1.Logoequipe}";
-                var url2 = $"http://localhost:5000/api/download/{m.data.equipe2.Logoequipe}";
-
-                simulation1.Equipe1.PictureBox.ImageLocation = url1;
-                simulation1.Equipe1.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-                simulation1.Equipe2.PictureBox.ImageLocation = url2;
-                simulation1.Equipe2.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-
-                string url3 = $"http://localhost:5000/api/download/{m.data.formation1.logo_formation}";
-                var url4 = $"http://localhost:5000/api/download/{m.data.formation2.logo_formation}";
-                simulation1.Equipe1.Formation.ImageLocation = url3;
-                simulation1.Equipe1.Formation.SizeMode = PictureBoxSizeMode.Zoom;
-                simulation1.Equipe2.Formation.ImageLocation = url4;
-                simulation1.Equipe2.Formation.SizeMode = PictureBoxSizeMode.Zoom;
                 Cursor = Cursors.Arrow;
             }
             catch (Exception e)
             {
                 Console.WriteLine("PARI ERROR: " + e.Message);
             }
+        }
+
+        private void displayComboItemEquipesMatch(MatchEquipeFormationRest m)
+        {
+            var res1 = m.data.joueurs1;
+            var fpc1 = new List<Combo>();
+            foreach (JoueurModel f in res1) fpc1.Add(new Combo { Text = f.Nomjoueur, Value = f.Id });
+            simulation1.Equipe1.ComboBox.DisplayMember = "Text";
+            simulation1.Equipe1.ComboBox.ValueMember = "Value";
+            simulation1.Equipe1.ComboBox.DataSource = fpc1;
+
+            var res2 = m.data.joueurs2;
+            var fpc2 = new List<Combo>();
+            foreach (JoueurModel f in res2) fpc2.Add(new Combo { Text = f.Nomjoueur, Value = f.Id });
+            simulation1.Equipe2.ComboBox.DisplayMember = "Text";
+            simulation1.Equipe2.ComboBox.ValueMember = "Value";
+            simulation1.Equipe2.ComboBox.DataSource = fpc2;
+        }
+
+        private void displayEquipesMatch(MatchEquipeFormationRest m)
+        {
+            this.simulation1.Equipe1.PariTitle.Label.Text = m.data.equipe1.Nomequipe;
+            this.simulation1.Equipe2.PariTitle.Label.Text = m.data.equipe2.Nomequipe;
+            string url1 = $"http://localhost:5000/api/download/{m.data.equipe1.Logoequipe}";
+            var url2 = $"http://localhost:5000/api/download/{m.data.equipe2.Logoequipe}";
+
+            simulation1.Equipe1.PictureBox.ImageLocation = url1;
+            simulation1.Equipe1.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+            simulation1.Equipe2.PictureBox.ImageLocation = url2;
+            simulation1.Equipe2.PictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+
+            string url3 = $"http://localhost:5000/api/download/{m.data.formation1.logo_formation}";
+            var url4 = $"http://localhost:5000/api/download/{m.data.formation2.logo_formation}";
+            simulation1.Equipe1.Formation.ImageLocation = url3;
+            simulation1.Equipe1.Formation.SizeMode = PictureBoxSizeMode.Zoom;
+            simulation1.Equipe2.Formation.ImageLocation = url4;
+            simulation1.Equipe2.Formation.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+        private void titleMatch(MatchEquipeFormationRest m)
+        {
+            CultureInfo culture = new CultureInfo("fr-CA", true);
+            this.simulation1.PariTitle.Label.TextAlign = (ContentAlignment)HorizontalAlignment.Center;
+            this.simulation1.PariTitle.Label.Text =
+                $"{m.data.dateHeureMatch.ToString("dddd, dd MMM yyyy hh:mm", culture).ToUpper()}\n" +
+                $"Arbitré par {m.data.arbitre_nom}\n{m.data.scoreEq1} VS {m.data.scoreEq2}";
         }
 
         private void LoginInit()

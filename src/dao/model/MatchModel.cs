@@ -1,4 +1,6 @@
-﻿using System;
+﻿using pari.src.dao.service;
+using System;
+using System.Collections.Generic;
 
 namespace pari.src.dao.view.user_control.panel
 {
@@ -54,6 +56,8 @@ namespace pari.src.dao.view.user_control.panel
         public EquipeModel equipe2 { get; set; }
         public FormationModel formation1 { get; set; }
         public FormationModel formation2 { get; set; }
+        public List<JoueurModel> joueurs1 { get; set; }
+        public List<JoueurModel> joueurs2 { get; set; }
     }
 
 
