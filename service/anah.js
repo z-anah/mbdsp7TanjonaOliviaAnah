@@ -1,5 +1,6 @@
 const { ObjectId } = require("bson");
 const Mongoose = require("mongoose");
+const But = require("../model/but");
 let Competition = require("../model/Competition");
 let equipes = require("../model/equipes");
 let Formation = require("../model/Formation");
@@ -101,25 +102,20 @@ const createMatch = async (m) => {
     idEquipe,
     Equ_idEquipe,
     idCompetition,
-    idFormation,
-    For_idFormation,
-    idProgressionType,
     dateHeureMatch,
     finDateHeureMatch,
-    scoreEq1,
-    scoreEq2,
+    arbitre_nom,
   } = m;
   let d = new Matchs({
     idEquipe: ObjectId(idEquipe),
     Equ_idEquipe: ObjectId(Equ_idEquipe),
     idCompetition: ObjectId(idCompetition),
-    idFormation: ObjectId(idFormation),
-    For_idFormation: ObjectId(For_idFormation),
-    idProgressionType: ObjectId(idProgressionType),
+    idProgressionType: ObjectId("60df6680f56ae1297ca71c2f"),
     dateHeureMatch,
     finDateHeureMatch,
-    scoreEq1,
-    scoreEq2,
+    scoreEq1: 0,
+    scoreEq2: 0,
+    arbitre_nom,
   });
   await d.save();
   return d;
@@ -155,9 +151,61 @@ const createJoueurCsv = async (d) => {
     j._id = ObjectId();
     delete j["﻿_"];
   });
-  // await joueurs.insertMany(d);
+  await joueurs.insertMany(d);
   return d;
 };
+const matchs = async (idProgressionType) => {
+  const d = await Matchs.aggregate([
+    {
+      $match: {
+        idProgressionType: ObjectId(idProgressionType),
+      },
+    },
+    ...matchsEquipesFilter,
+  ]);
+  return d;
+};
+const match = async (_id) => {
+  const eff1 = equipeFormationFilter(1);
+  const eff2 = equipeFormationFilter(2);
+  const js1 = joueursFilter(1);
+  const js2 = joueursFilter(2);
+  const d = await Matchs.aggregate([
+    {
+      $match: { _id: ObjectId(_id) },
+    },
+    ...matchsEquipesFilter,
+    ...eff1,
+    ...eff2,
+    ...js1,
+    ...js2,
+  ]);
+  return d[0];
+};
+
+const playMatch = async (_id, idProgressionType) => {
+  let query = { _id };
+  let update = { idProgressionType: ObjectId(idProgressionType) };
+  await Matchs.findByIdAndUpdate(query, update);
+  return await Matchs.findById(query);
+};
+
+const butMatch = async (but) => {
+  let { id_match, id_joueur, scoreEq1, scoreEq2 } = but;
+
+  let d = {};
+  d.but = new But({
+    id_match: ObjectId(id_match),
+    id_joueur: ObjectId(id_joueur),
+  });
+  await d.but.save();
+  let query = { _id: ObjectId(id_match) };
+  let update = { scoreEq1, scoreEq2 };
+  await Matchs.findByIdAndUpdate(query, update);
+  d.match = await Matchs.findByIdAndUpdate(query);
+  return d;
+};
+
 module.exports = {
   createCompetition,
   createEquipe,
@@ -170,4 +218,62 @@ module.exports = {
   createMatch,
   createJoueurCsv,
   teste,
+  matchs,
+  match,
+  playMatch,
+  butMatch,
 };
+
+joueursFilter = (i) => {
+  return [
+    {
+      $lookup: {
+        from: "Joueurs",
+        localField: `equipe${i}._id`,
+        foreignField: "idequipe",
+        as: `joueurs${i}`,
+      },
+    },
+  ];
+};
+
+equipeFormationFilter = (i) => {
+  return [
+    {
+      $lookup: {
+        from: "Formations",
+        localField: `equipe${i}.idformation`,
+        foreignField: "_id",
+        as: `formation${i}`,
+      },
+    },
+    {
+      $unwind: `$formation${i}`,
+    },
+  ];
+};
+
+const matchsEquipesFilter = [
+  {
+    $lookup: {
+      from: "Equipes",
+      localField: "idEquipe",
+      foreignField: "_id",
+      as: "equipe1",
+    },
+  },
+  {
+    $unwind: "$equipe1",
+  },
+  {
+    $lookup: {
+      from: "Equipes",
+      localField: "Equ_idEquipe",
+      foreignField: "_id",
+      as: "equipe2",
+    },
+  },
+  {
+    $unwind: "$equipe2",
+  },
+];

@@ -4,7 +4,6 @@ function listMatchs(req, res) {
   serviceMatch
     .getMatch(req, res)
     .then((value) => {
-      console.log("ghfdk:"+value)
       if (value) res.send({ data: value, status: true });
       else res.send({ status: false });
     })

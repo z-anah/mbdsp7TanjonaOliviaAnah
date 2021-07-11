@@ -14,6 +14,7 @@ let MatchSchema = Schema({
   finDateHeureMatch: Date,
   scoreEq1: Number,
   scoreEq2: Number,
+  arbitre_nom: String,
 });
 
 MatchSchema.plugin(aggregatePaginate);
