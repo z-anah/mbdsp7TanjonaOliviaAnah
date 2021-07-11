@@ -13,18 +13,19 @@ function signUp(req, res) {
       else res.send({ status: false, message: value.message });
     })
     .catch((err) => {
-      let message = "";
-      if (
-        err.errors.emailUtilisateur !== undefined &&
-        err.errors.emailUtilisateur.properties.type === "unique"
-      )
-        message = config.msg[req.body.loc || "FR"].error.MSG_E0004;
-      else if (
-        err.errors.nomCompletUtilisateur !== undefined &&
-        err.errors.nomCompletUtilisateur.properties.type === "unique"
-      )
-        message = config.msg[req.body.loc || "FR"].error.MSG_E0005;
-      else message = config.msg[req.body.loc || "FR"].error.MSG_E0007;
+      let message = err.message;
+      if (err.errors !== undefined)
+        if (
+          err.errors.emailUtilisateur !== undefined &&
+          err.errors.emailUtilisateur.properties.type === "unique"
+        )
+          message = config.msg[req.body.loc || "FR"].error.MSG_E0004;
+        else if (
+          err.errors.nomCompletUtilisateur !== undefined &&
+          err.errors.nomCompletUtilisateur.properties.type === "unique"
+        )
+          message = config.msg[req.body.loc || "FR"].error.MSG_E0005;
+        else message = config.msg[req.body.loc || "FR"].error.MSG_E0007;
       res.send({ status: false, message: message });
     });
 }
@@ -273,5 +274,5 @@ module.exports = {
   updatePasswordByEmail,
   listModerateur,
   listClient,
-  deleteUser
+  deleteUser,
 };
