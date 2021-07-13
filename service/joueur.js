@@ -1,17 +1,18 @@
 const { aggregate } = require("../model/joueurs");
 let Joeurs = require("../model/joueurs");
+const mongoose = require("mongoose");
 
 
 // Récupérer detail equipe avec son joueur (GET)
 function getJoeurByEquipe(req, res) {
   let joeurId = parseInt(req.params.idequipe);
   let aggregate = Joeurs.aggregate([
-    { $match: { idequipe: joeurId } },
+    {$match: {'idequipe': {$in:[mongoose.Types.ObjectId(req.params.idequipe)]}} },
     {
       $lookup: {
         from: "Equipes",
         localField: "idequipe",
-        foreignField: "id",
+        foreignField: "_id",
         as: "Equipes",
       },
     },
@@ -19,7 +20,7 @@ function getJoeurByEquipe(req, res) {
       $lookup: {
         from: "Poste",
         localField: "idposte",
-        foreignField: "id",
+        foreignField: "idPoste",
         as: "Poste",
       },
     },
