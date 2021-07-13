@@ -7,6 +7,9 @@ import {
   Icon,
   Avatar,
   Datepicker,
+  Modal,
+  Card,
+  Layout,
 } from "@ui-kitten/components";
 import { SafeAreaView, StyleSheet, View } from "react-native";
 import ContainerStyle from "../../styles/ContainerStyle";
@@ -16,82 +19,148 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from "../../styles/styles";
 import { TouchableWithoutFeedback } from "@ui-kitten/components/devsupport";
 import i18n from "i18n-js";
+import { listRoles, signUp } from "../../api/api";
+import LottieView from "lottie-react-native";
 
 class InscriptionScreen extends React.Component {
   constructor() {
     super();
-    this.state = { mdp: "", secureTextEntry: true };
+    this.state = {
+      motdepasseUtilisateur: "12341234",
+      nomCompletUtilisateur: "ZAORA ZULMIANAH Anahi",
+      emailUtilisateur: "zulmianahi@gmail.com",
+      motdepasseUtilisateur: "12341234",
+      secureTextEntry: true,
+      isLoading: false,
+      visible: false,
+    };
   }
 
   render() {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
-          <View style={[styles.loginContainer]}>
-            <Avatar
-              style={styles.loginLogo}
-              source={require("../../../../assets/adaptive-icon.png")}
+          {this.state.isLoading ? (
+            <LottieView
+              autoPlay={true}
+              loop={true}
+              source={require("../../../../assets/lottie/7929-run-man-run.json")}
             />
-            <Input
-              style={styles.loginForm}
-              placeholder={i18n.t("TRL0014")}
-              label={i18n.t("TRL0014")}
-            />
-
-            <Datepicker
-              style={styles.loginForm}
-              label={i18n.t("TRL0015")}
-              placeholder={i18n.t("TRL0015")}
-              date={new Date()}
-              onSelect={(nextDate) => setDate(nextDate)}
-              accessoryRight={CalendarIcon}
-            />
-            <Input
-              style={styles.loginForm}
-              placeholder={i18n.t("TRL0009")}
-              label={i18n.t("TRL0009")}
-            />
-            <Input
-              style={styles.loginForm}
-              value={this.state.mdp}
-              label={i18n.t("TRL0010")}
-              placeholder={i18n.t("TRL0010")}
-              caption={() => this.renderCaption()}
-              accessoryRight={(props) => this.renderIcon(props)}
-              secureTextEntry={this.state.secureTextEntry}
-              onChangeText={(nextValue) => this.setState({ mdp: nextValue })}
-            />
-            <Button
-              style={styles.loginForm}
-              onPress={() => this.props.navigation.push("Identification")}
-            >
-              {i18n.t("TRL0011")}
-            </Button>
-            <Button
-              style={styles.loginForm}
-              onPress={() => this.props.navigation.push("Identification")}
-            >
-              {i18n.t("TRL0004")}
-            </Button>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.push("Recuperation")}
-            >
-              <Text style={styles.underline} status="info">
-                {i18n.t("TRL0012")}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.push("Conditions Generales")}
-            >
-              <Text style={styles.underline} status="info">
-                {i18n.t("TRL0013")}
-              </Text>
-            </TouchableOpacity>
-          </View>
+          ) : (
+            <View style={[styles.loginContainer]}>
+              <Avatar
+                style={styles.loginLogo}
+                source={require("../../../../assets/adaptive-icon.png")}
+              />
+              <Input
+                style={styles.loginForm}
+                placeholder={i18n.t("TRL0014")}
+                label={i18n.t("TRL0014")}
+                onChangeText={this.nomCompletUtilisateur}
+              />
+              <Datepicker
+                style={styles.loginForm}
+                label={i18n.t("TRL0015")}
+                placeholder={i18n.t("TRL0015")}
+                date={new Date()}
+                accessoryRight={CalendarIcon}
+                onSelect={this.dateNaissanceUtilisateur}
+                value={this.state.dateNaissanceUtilisateur}
+              />
+              <Input
+                style={styles.loginForm}
+                placeholder={i18n.t("TRL0009")}
+                label={i18n.t("TRL0009")}
+                onChangeText={this.emailUtilisateur}
+              />
+              <Input
+                style={styles.loginForm}
+                value={this.state.motdepasseUtilisateur}
+                label={i18n.t("TRL0010")}
+                placeholder={i18n.t("TRL0010")}
+                // caption={() => this.renderCaption()}
+                accessoryRight={(props) => this.renderIcon(props)}
+                secureTextEntry={this.state.secureTextEntry}
+                onChangeText={this.motdepasseUtilisateur}
+              />
+              <Button style={styles.loginForm} onPress={() => this.signUp()}>
+                {i18n.t("TRL0011")}
+              </Button>
+              <Button
+                style={styles.loginForm}
+                onPress={() => this.props.navigation.push("Identification")}
+              >
+                {i18n.t("TRL0004")}
+              </Button>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.push("Recuperation")}
+              >
+                <Text style={styles.underline} status="info">
+                  {i18n.t("TRL0012")}
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() =>
+                  this.props.navigation.push("Conditions Generales")
+                }
+              >
+                <Text style={styles.underline} status="info">
+                  {i18n.t("TRL0013")}
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </SafeAreaView>
+
+        <Modal
+          visible={this.state.visible}
+          backdropStyle={styless.backdrop}
+          onBackdropPress={() => this.setState({ visible: false })}
+        >
+          <Layout style={styles.topContainer} level="1">
+            <Card style={styles.card}>
+              <Text>Erreur: {this.state.message}</Text>
+            </Card>
+            <Card style={styles.card}>
+              <Button
+                status="danger"
+                size="small"
+                onPress={() => this.setState({ visible: false })}
+              >
+                OK
+              </Button>
+            </Card>
+          </Layout>
+        </Modal>
       </ApplicationProvider>
     );
   }
+  componentDidMount() {
+    this.setState({ loc: i18n.locale === "en-MG" ? "MLG" : "FR" });
+  }
+  nomCompletUtilisateur = (nomCompletUtilisateur) => {
+    this.setState({ nomCompletUtilisateur });
+  };
+  dateNaissanceUtilisateur = (dateNaissanceUtilisateur) => {
+    this.setState({ dateNaissanceUtilisateur });
+  };
+  emailUtilisateur = (emailUtilisateur) => {
+    this.setState({ emailUtilisateur });
+  };
+  motdepasseUtilisateur = (motdepasseUtilisateur) => {
+    this.setState({ motdepasseUtilisateur });
+  };
+  signUp = async () => {
+    this.setState({ isLoading: true });
+    try {
+      await signUp(this.state);
+      this.props.navigation.push("Identification");
+    } catch (error) {
+      this.setState({ visible: true, message: error.message });
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  };
   toggleSecureEntry = () => {
     this.setState({ secureTextEntry: !this.state.secureTextEntry });
   };
@@ -119,6 +188,9 @@ const mapStateToProps = (state) => {
 };
 
 const styless = StyleSheet.create({
+  backdrop: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
   captionContainer: {
     display: "flex",
     flexDirection: "row",
