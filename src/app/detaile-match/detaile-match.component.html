@@ -42,34 +42,35 @@
 
     <section class="schedule-section spad">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-12 left-blog-pad">
-            <div class="schedule-text">
-              <h4 class="st-title">Resultat Australia vs Qatar</h4>
+        <div class="row" *ngFor="let a of matchs">
+          <div class="col-lg-12 left-blog-pad"  *ngFor="let i of a.Equ_equipes_equipe" >
+            <div class="schedule-text"    *ngFor="let e of a.Equipes">
+              <h4 class="st-title" >Resultat {{e.nomequipe}} vs {{i.nomequipe}}</h4>
               <div class="st-table">
                 <table>
                   <tbody>
                     <tr>
                       <td class="left-team">
+                        
                         <img
                           src="../../assets/img/schedule/xflag-1.jpg.pagespeed.ic.Q7B5OnIbn0.jpg"
                           alt=""
                         />
-                        <h4>Australia</h4>
+                        <h4>{{e.nomequipe}}</h4>
                       </td>
                       <td class="st-option">
                         <div class="so-text">
-                          MetLife Stadium, Rutherford USA
+                          Arbitre : {{a.arbitre_nom}}
                         </div>
-                        <h4>1 : 2</h4>
-                        <div class="so-text">15 September 2019</div>
+                        <h4>{{a.scoreEq1}} : {{a.scoreEq2}}</h4>
+                        <div class="so-text">{{a.dateHeureMatch | date:'EEEE, MMMM d, y, h:mm:ss'}}</div>
                       </td>
                       <td class="right-team">
                         <img
                           src="../../assets/img/schedule/xflag-2.jpg.pagespeed.ic.KCG3E58keU.jpg"
                           alt=""
                         />
-                        <h4>Qatar</h4>
+                        <h4>{{i.nomequipe}}</h4>
                       </td>
                     </tr>
                   </tbody>

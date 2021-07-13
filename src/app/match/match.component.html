@@ -53,17 +53,19 @@
                       itemsPerPage: limit,
                       currentPage: page,
                       totalItems: count
-                    };" routerLink="/detailMatch">
+                    };" routerLink="/detailMatch/{{a._id}}">
+                    
                       <td *ngFor="let e of a.Equipes" class="left-team">
                         <img
                           src="../../assets/img/schedule/flag-1.jpg"
                           alt=""
                         />
+                        
                         <h4>{{e.nomequipe}}</h4>
                       </td>
                       <td class="st-option">
                         <h4>VS</h4>
-                        <div class="so-text">{{ a.dateHeureMatch}}</div>
+                        <div class="so-text">{{a.dateHeureMatch | date:'EEEE, MMMM d, y, h:mm:ss'}}</div>
                       </td>
                       <td *ngFor="let i of a.Equ_equipes_equipe" class="right-team">
                         <img

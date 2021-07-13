@@ -13,9 +13,13 @@ import { Matchs } from './Matchs.model';
 
     constructor(private http:HttpClient) { }
 
-    uri = "http://localhost:5000/api/listeMatch";
+    uri = "http://localhost:5000/api";
 
     getMatchs(page:number, limit:number):Observable<any> {
-        return this.http.get<Matchs[]>(this.uri+"?page="+page + "&limit="+limit);
-      }
+        return this.http.get<Matchs[]>(this.uri+"/listeMatch?page="+page + "&limit="+limit);
+    }
+    getMatchsByID(id:number):Observable<any> {
+      console.log(this.uri+"/listeMatchById/"+id)
+      return this.http.get<Matchs[]>(this.uri+"/listeMatchById/"+id);
+  }
 }

@@ -41,7 +41,7 @@ const routes:Routes = [
     component:DetailequipeComponent
   },
   {
-    path:"detailMatch",
+    path:"detailMatch/:id",
     component:DetaileMatchComponent
   },
 ]
