@@ -10,7 +10,7 @@ let UtilisateurSchema = Schema({
   nomCompletUtilisateur: { type: String, unique: true, required: true },
   emailUtilisateur: { type: String, unique: true, required: true },
   dateNaissanceUtilisateur: { type: Date, required: true },
-  profilUtilisateur: { type: String, unique: true },
+  profilUtilisateur: { type: String },
   motdepasseUtilisateur: { type: String, required: true },
   soldeUtilisateur: { type: Number, required: true },
   idRole: { type: Number, required: true },
