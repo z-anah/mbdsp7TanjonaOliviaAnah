@@ -92,30 +92,30 @@ function getMatchById(req, res) {
 
 // Récupérer un match par son id de competition (GET)
 function getMatchBycompetition(req, res) {
-  let matchId = parseInt(req.params.idcompetition);
+  
   let aggregate = Match.aggregate([
-    { $match: { idcompetition: matchId } },
+    {$match: {'idCompetition': {$in:[mongoose.Types.ObjectId(req.params.idcompetition)]}} },
     {
       $lookup: {
         from: "Equipes",
-        localField: "idequipe",
-        foreignField: "id",
+        localField: "idEquipe",
+        foreignField: "_id",
         as: "Equipes",
       },
     },
     {
       $lookup: {
         from: "Equipes",
-        localField: "equ_idequipe",
-        foreignField: "id",
-        as: "Equ_equipes",
+        localField: "Equ_idEquipe",
+        foreignField: "_id",
+        as: "Equ_equipes_equipe",
       },
     },
     {
       $lookup: {
         from: "Formations",
-        localField: "idformation",
-        foreignField: "id",
+        localField: "idFormation",
+        foreignField: "_id",
         as: "Formations",
       },
     },
@@ -133,5 +133,5 @@ function getMatchBycompetition(req, res) {
   });
 }
 
-module.exports = { getMatch,getMatchById };
+module.exports = { getMatch,getMatchById,getMatchBycompetition };
 

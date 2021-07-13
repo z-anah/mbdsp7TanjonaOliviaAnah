@@ -68,6 +68,7 @@ app.route(prefix + "/joueurById/:id").get(joueur.getJoeurById);
 app.route(prefix + "/listeEquipe").get(equipe.getListEquipe);
 app.route(prefix + "/listeMatch").get(match.getMatch);
 app.route(prefix + "/listeMatchById/:id").get(match.getMatchById);
+app.route(prefix + "/listeMatchByCompetition/:idcompetition").get(match.getMatchBycompetition);
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");
