@@ -4,6 +4,7 @@ var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 let Schema = mongoose.Schema;
 
 let MatchSchema = Schema({
+  _id: ObjectId,
   idEquipe: ObjectId,
   Equ_idEquipe: ObjectId,
   idCompetition: ObjectId,
