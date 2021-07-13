@@ -186,7 +186,6 @@ const createJoueur = async (req, res) => {
       message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
       desc: error.message,
     };
-    console.log(io);
     res.send(io);
   }
 };
@@ -269,6 +268,83 @@ const createJoueurCsv = async (req, res) => {
   }
 };
 
+const matchs = async (req, res) => {
+  try {
+    const { idProgressionType } = req.body;
+    const data = await service.matchs(idProgressionType);
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
+const match = async (req, res) => {
+  try {
+    const { _id } = req.body;
+    const data = await service.match(_id);
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
+const playMatch = async (req, res) => {
+  try {
+    const { _id, idProgressionType } = req.body;
+    const data = await service.playMatch(_id, idProgressionType);
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
+const butMatch = async (req, res) => {
+  try {
+    const { id_match, id_joueur, scoreEq1, scoreEq2 } = req.body;
+    const data = await service.butMatch({
+      id_match,
+      id_joueur,
+      scoreEq1,
+      scoreEq2,
+    });
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
 module.exports = {
   sendMail,
   createCompetition,
@@ -281,4 +357,8 @@ module.exports = {
   teste,
   createMatch,
   createJoueurCsv,
+  matchs,
+  match,
+  playMatch,
+  butMatch,
 };
