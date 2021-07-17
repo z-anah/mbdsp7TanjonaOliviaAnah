@@ -16,7 +16,7 @@ export default {
   TRL0015: "Date de naissance",
   TRL0016: "Récupération",
   TRL0017: "ARTICLE",
-  TRL0018: "xxx",
+  TRL0018: "Votre compte a été créé avec succès",
   TRL0019: "xxx",
   TRL0020: "xxx",
   TRL0021: "xxx",

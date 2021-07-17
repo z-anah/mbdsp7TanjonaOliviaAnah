@@ -9,6 +9,8 @@ import {
   Select,
   Layout,
   IndexPath,
+  Modal,
+  Card,
 } from "@ui-kitten/components";
 import { SafeAreaView, View } from "react-native";
 import ContainerStyle from "../../styles/ContainerStyle";
@@ -21,18 +23,20 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from "react-native-responsive-screen";
+import LottieView from "lottie-react-native";
 
 class IdentificationScreen extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       i: new IndexPath(0),
       langs: ["🇫🇷", "🇲🇬"],
       lang: "🇫🇷",
+      ok: false,
     };
   }
-
   render() {
+    const { ok } = this.state;
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={[ContainerStyle.AndroidSafeAreaClean]}>
@@ -105,8 +109,46 @@ class IdentificationScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </SafeAreaView>
+
+        <Modal
+          visible={ok}
+          backdropStyle={styles.backdrop}
+          onBackdropPress={() => this.setState({ visible: false })}
+        >
+          <Card style={styles.card}>
+            <View style={styles.cardLottie}>
+              <LottieView
+                autoPlay={true}
+                loop={false}
+                source={require("../../../../assets/lottie/972-done.json")}
+              />
+            </View>
+            <Text style={styles.textCard} status="success">
+              {i18n.t("TRL0018")}
+            </Text>
+            <Button
+              status="success"
+              size="small"
+              onPress={() => this.setState({ visible: false })}
+            >
+              OK
+            </Button>
+          </Card>
+        </Modal>
       </ApplicationProvider>
     );
+  }
+  componentDidMount() {
+    const { params } = this.props.route;
+    if (params && params.ok) {
+      this.setState({ ok: true });
+      this.timeoutHandle = setTimeout(() => {
+        this.setState({ ok: false });
+      }, 3000);
+    }
+  }
+  componentWillUnmount() {
+    clearTimeout(this.timeoutHandle);
   }
 }
 

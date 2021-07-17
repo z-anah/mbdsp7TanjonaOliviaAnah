@@ -16,7 +16,7 @@ export default {
   TRL0015: "Daty nahaterahana",
   TRL0016: "Soloana",
   TRL0017: "FEPETRA",
-  TRL0018: "xxx",
+  TRL0018: "Voaforona ny kaontinao",
   TRL0019: "xxx",
   TRL0020: "xxx",
   TRL0021: "xxx",

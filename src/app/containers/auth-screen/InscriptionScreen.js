@@ -19,24 +19,32 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from "../../styles/styles";
 import { TouchableWithoutFeedback } from "@ui-kitten/components/devsupport";
 import i18n from "i18n-js";
-import { listRoles, signUp } from "../../api/api";
 import LottieView from "lottie-react-native";
+import { signUp } from "../../api/api";
 
 class InscriptionScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      motdepasseUtilisateur: "12341234",
-      nomCompletUtilisateur: "ZAORA ZULMIANAH Anahi",
-      emailUtilisateur: "zulmianahi@gmail.com",
-      motdepasseUtilisateur: "12341234",
+      motdepasseUtilisateur: "",
+      nomCompletUtilisateur: "",
+      emailUtilisateur: "",
       secureTextEntry: true,
       isLoading: false,
       visible: false,
+      profilUtilisateur: "",
+      dateNaissanceUtilisateur: new Date(1980, 1, 1),
     };
   }
 
   render() {
+    const {
+      nomCompletUtilisateur,
+      dateNaissanceUtilisateur,
+      secureTextEntry,
+      motdepasseUtilisateur,
+      emailUtilisateur,
+    } = this.state;
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
@@ -56,31 +64,33 @@ class InscriptionScreen extends React.Component {
                 style={styles.loginForm}
                 placeholder={i18n.t("TRL0014")}
                 label={i18n.t("TRL0014")}
+                value={nomCompletUtilisateur}
                 onChangeText={this.nomCompletUtilisateur}
               />
               <Datepicker
                 style={styles.loginForm}
                 label={i18n.t("TRL0015")}
                 placeholder={i18n.t("TRL0015")}
-                date={new Date()}
+                date={dateNaissanceUtilisateur}
                 accessoryRight={CalendarIcon}
                 onSelect={this.dateNaissanceUtilisateur}
-                value={this.state.dateNaissanceUtilisateur}
+                min={new Date(1930, 1, 1)}
+                max={new Date(2003, 1, 1)}
               />
               <Input
                 style={styles.loginForm}
                 placeholder={i18n.t("TRL0009")}
                 label={i18n.t("TRL0009")}
                 onChangeText={this.emailUtilisateur}
+                value={emailUtilisateur}
               />
               <Input
                 style={styles.loginForm}
-                value={this.state.motdepasseUtilisateur}
+                value={motdepasseUtilisateur}
                 label={i18n.t("TRL0010")}
                 placeholder={i18n.t("TRL0010")}
-                // caption={() => this.renderCaption()}
                 accessoryRight={(props) => this.renderIcon(props)}
-                secureTextEntry={this.state.secureTextEntry}
+                secureTextEntry={secureTextEntry}
                 onChangeText={this.motdepasseUtilisateur}
               />
               <Button style={styles.loginForm} onPress={() => this.signUp()}>
@@ -114,23 +124,26 @@ class InscriptionScreen extends React.Component {
 
         <Modal
           visible={this.state.visible}
-          backdropStyle={styless.backdrop}
+          backdropStyle={styles.backdrop}
           onBackdropPress={() => this.setState({ visible: false })}
         >
-          <Layout style={styles.topContainer} level="1">
-            <Card style={styles.card}>
-              <Text>Erreur: {this.state.message}</Text>
-            </Card>
-            <Card style={styles.card}>
-              <Button
-                status="danger"
-                size="small"
-                onPress={() => this.setState({ visible: false })}
-              >
-                OK
-              </Button>
-            </Card>
-          </Layout>
+          <Card style={styles.card}>
+            <View style={styles.errorLottie}>
+              <LottieView
+                autoPlay={true}
+                loop={true}
+                source={require("../../../../assets/lottie/38463-error.json")}
+              />
+            </View>
+            <Text style={styles.textCard}>Erreur: {this.state.message}</Text>
+            <Button
+              status="danger"
+              size="small"
+              onPress={() => this.setState({ visible: false })}
+            >
+              OK
+            </Button>
+          </Card>
         </Modal>
       </ApplicationProvider>
     );
@@ -154,11 +167,14 @@ class InscriptionScreen extends React.Component {
     this.setState({ isLoading: true });
     try {
       await signUp(this.state);
-      this.props.navigation.push("Identification");
-    } catch (error) {
-      this.setState({ visible: true, message: error.message });
-    } finally {
+      this.props.navigation.push("Identification", { ok: true });
       this.setState({ isLoading: false });
+    } catch (error) {
+      this.setState({
+        visible: true,
+        message: error.message,
+        isLoading: false,
+      });
     }
   };
   toggleSecureEntry = () => {
@@ -188,9 +204,6 @@ const mapStateToProps = (state) => {
 };
 
 const styless = StyleSheet.create({
-  backdrop: {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  },
   captionContainer: {
     display: "flex",
     flexDirection: "row",
