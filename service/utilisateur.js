@@ -48,7 +48,10 @@ function register(req, res) {
         user.nomCompletUtilisateur = req.body.nomCompletUtilisateur;
         user.emailUtilisateur = req.body.emailUtilisateur;
         user.dateNaissanceUtilisateur = req.body.dateNaissanceUtilisateur;
-        user.profilUtilisateur = req.body.profilUtilisateur;
+        user.profilUtilisateur =
+          req.body.profilUtilisateur === null
+            ? "profil_1625506144525.png"
+            : req.body.profilUtilisateur;
         user.soldeUtilisateur = 0;
         user.idRole = req.body.idRole;
         var hashedPassword = bcrypt.hashSync(
@@ -105,32 +108,30 @@ function auth(req, res) {
   }
 }
 
-function getUserById(req, res){
+function getUserById(req, res) {
   try {
     return new Promise((resolve, reject) => {
       let id = parseInt(req.params.id);
       let aggregate = Utilisateurs.aggregate([
-        { $match: {idUtilisateur: id}},
-        { $lookup: {
-          from: "roles",
-          localField: "idRole",
-          foreignField: "idRole",
-          as: "role_utilisateur" 
-        }}
+        { $match: { idUtilisateur: id } },
+        {
+          $lookup: {
+            from: "roles",
+            localField: "idRole",
+            foreignField: "idRole",
+            as: "role_utilisateur",
+          },
+        },
       ]);
-      let options = { 
-          
-      };
-    
+      let options = {};
+
       Utilisateurs.aggregatePaginate(aggregate, options, (err, user) => {
-          if (err) {
-            resolve({status : false})
-          }
-          else {
-            resolve({status : true, userResult : user.docs[0]});
-          }
+        if (err) {
+          resolve({ status: false });
+        } else {
+          resolve({ status: true, userResult: user.docs[0] });
         }
-      );
+      });
     });
   } catch (err) {
     throw err;
@@ -141,13 +142,17 @@ function updateByIdUtilisateur(req, res) {
   try {
     return new Promise((resolve, reject) => {
       let id = parseInt(req.body.idUtilisateur);
-      Utilisateurs.findOneAndUpdate({idUtilisateur : id}, req.body,{ new: true },(err, user) => {
-        if (err) resolve({updated : false})
-        else resolve({ updated: true , result: user});
-      })
+      Utilisateurs.findOneAndUpdate(
+        { idUtilisateur: id },
+        req.body,
+        { new: true },
+        (err, user) => {
+          if (err) resolve({ updated: false });
+          else resolve({ updated: true, result: user });
+        }
+      );
     });
-  }
-  catch (err) {
+  } catch (err) {
     throw err;
   }
 }
@@ -156,160 +161,172 @@ function updatePasswordByEmail(req, res) {
   try {
     return new Promise((resolve, reject) => {
       let email = req.body.emailUtilisateur;
-      var hashedPassword = bcrypt.hashSync(req.body.motdepasseUtilisateur,10);
+      var hashedPassword = bcrypt.hashSync(req.body.motdepasseUtilisateur, 10);
       req.body.motdepasseUtilisateur = hashedPassword;
-      Utilisateurs.findOneAndUpdate({emailUtilisateur : email}, req.body,{ new: true },(err, user) => {
-        if (err) resolve({updated : false}) 
-        else resolve({ updated: true , result: user});
-      })
+      Utilisateurs.findOneAndUpdate(
+        { emailUtilisateur: email },
+        req.body,
+        { new: true },
+        (err, user) => {
+          if (err) resolve({ updated: false });
+          else resolve({ updated: true, result: user });
+        }
+      );
     });
-  }
-  catch (err) {
+  } catch (err) {
     throw err;
   }
 }
 
-function ckeckPassswordById(req,res){
-  try{
-      return new Promise((resolve, reject) => {
+function ckeckPassswordById(req, res) {
+  try {
+    return new Promise((resolve, reject) => {
       let id = parseInt(req.body.idUtilisateur);
-      let userPasssword = req.body.motdepasseUtilisateur
+      let userPasssword = req.body.motdepasseUtilisateur;
       Utilisateurs.findOne({ idUtilisateur: id }, (err, user) => {
-        if (err) resolve({ check: false});
+        if (err) resolve({ check: false });
         else {
           if (user != null) {
             var isValidPassword = bcrypt.compareSync(
               userPasssword,
               user.motdepasseUtilisateur
             );
-            if(user && isValidPassword){ // ancien mot de passe  correct
-              var hashedPassword = bcrypt.hashSync(req.body.repassword,10);
+            if (user && isValidPassword) {
+              // ancien mot de passe  correct
+              var hashedPassword = bcrypt.hashSync(req.body.repassword, 10);
               req.body.motdepasseUtilisateur = hashedPassword;
-              Utilisateurs.findOneAndUpdate({idUtilisateur : id}, req.body,{ new: true },(err, user) => {
-                if (err) resolve({updated : false})
-                else resolve({ updated: true , result: user});
-              })
-            }
-            else resolve({updated : false})
+              Utilisateurs.findOneAndUpdate(
+                { idUtilisateur: id },
+                req.body,
+                { new: true },
+                (err, user) => {
+                  if (err) resolve({ updated: false });
+                  else resolve({ updated: true, result: user });
+                }
+              );
+            } else resolve({ updated: false });
           }
         }
       });
     });
-  }
-  catch (err) {
+  } catch (err) {
     throw err;
   }
 }
 
 // Récupérer tous les assignments non_rendu(GET)
 function getListModerateur(req, res) {
-  try{
+  try {
     return new Promise((resolve, reject) => {
-      serviceRole
-      .getRoleModerateur(req, res)
-      .then((value) => {
+      serviceRole.getRoleModerateur(req, res).then((value) => {
         var idRoleValue = value.idRole;
         let aggregate = Utilisateurs.aggregate([
-          { $match: {idRole: idRoleValue}},
-          { $lookup: {
-            from: "roles",
-            localField: "idRole",
-            foreignField: "idRole",
-            as: "role_utilisateur" 
-          }},
-          { $sort : { idUtilisateur : 1} }
+          { $match: { idRole: idRoleValue } },
+          {
+            $lookup: {
+              from: "roles",
+              localField: "idRole",
+              foreignField: "idRole",
+              as: "role_utilisateur",
+            },
+          },
+          { $sort: { idUtilisateur: 1 } },
         ]);
-        let options = { 
-            page: parseInt(req.query.page) || 1,
-            limit: parseInt(req.query.limit) || 5,
+        let options = {
+          page: parseInt(req.query.page) || 1,
+          limit: parseInt(req.query.limit) || 5,
         };
         // callback
         Utilisateurs.aggregatePaginate(aggregate, options, (err, users) => {
-            if (err) resolve ({list : false})
-            else resolve({list : true, result : users});
-          });    
-      })
-    })
-  }
-  catch (err) {
+          if (err) resolve({ list: false });
+          else resolve({ list: true, result: users });
+        });
+      });
+    });
+  } catch (err) {
     throw err;
   }
 }
- 
+
 function getListClient(req, res) {
-  try{
+  try {
     return new Promise((resolve, reject) => {
-      serviceRole
-      .getRoleClient(req, res)
-      .then((value) => {
+      serviceRole.getRoleClient(req, res).then((value) => {
         var idRoleValue = value.idRole;
         let aggregate = Utilisateurs.aggregate([
-        { $match: {idRole: idRoleValue}},
-        { 
-          $lookup: {
-          from: "commentaire",
-          localField: "idUtilisateur", // id dans la classe principal
-          foreignField: "id_utilisateur", // id dans la classe jointure
-          as: "commentaire_signale" 
-          }
-        },
-        {
-          $project : {
-            idUtilisateur: 1,
-            emailUtilisateur : 1,
-            profilUtilisateur : 1,
-            idUtilisateur: 1,
-            nomCompletUtilisateur: 1,
-            emailUtilisateur: 1,
-            dateNaissanceUtilisateur: 1,
-            est_bloque: 1,
-            // ... as you need 
-            commentaire_signale: {
-              $filter: {
-                input: "$commentaire_signale",
-                as: "comm",
-                cond: {
-                  $and: [
-                    {$eq: ["$$comm.est_signale", true]}
-                  ]
-                }
-              }
-            }
-          }
-        },
-        { $sort : { dateNaissanceUtilisateur : -1} }
-      ]);
-       
-        let options = { 
-            page: parseInt(req.query.page) || 1,
-            limit: parseInt(req.query.limit) || 10,
+          { $match: { idRole: idRoleValue } },
+          {
+            $lookup: {
+              from: "commentaire",
+              localField: "idUtilisateur", // id dans la classe principal
+              foreignField: "id_utilisateur", // id dans la classe jointure
+              as: "commentaire_signale",
+            },
+          },
+          {
+            $project: {
+              idUtilisateur: 1,
+              emailUtilisateur: 1,
+              profilUtilisateur: 1,
+              idUtilisateur: 1,
+              nomCompletUtilisateur: 1,
+              emailUtilisateur: 1,
+              dateNaissanceUtilisateur: 1,
+              est_bloque: 1,
+              // ... as you need
+              commentaire_signale: {
+                $filter: {
+                  input: "$commentaire_signale",
+                  as: "comm",
+                  cond: {
+                    $and: [{ $eq: ["$$comm.est_signale", true] }],
+                  },
+                },
+              },
+            },
+          },
+          { $sort: { dateNaissanceUtilisateur: -1 } },
+        ]);
+
+        let options = {
+          page: parseInt(req.query.page) || 1,
+          limit: parseInt(req.query.limit) || 10,
         };
         // callback
         Utilisateurs.aggregatePaginate(aggregate, options, (err, users) => {
-            if (err) resolve ({list : false})
-            else resolve({list : true, result : users});
-          });  
-      })
-    })
-  }
-  catch (err) {
+          if (err) resolve({ list: false });
+          else resolve({ list: true, result: users });
+        });
+      });
+    });
+  } catch (err) {
     throw err;
   }
 }
 
-  function deleteUserById(req, res){
-    try{
-      let id = parseInt(req.params.id);
-      return new Promise((resolve, reject) => {
-        Utilisateurs.findOneAndDelete({idUtilisateur : id}, (err, user) => {
-          if (err) resolve(err)
-          else resolve ({deleted : true});
-        })
-      })
-    }
-    catch (err) {
-      throw err;
-    }
+function deleteUserById(req, res) {
+  try {
+    let id = parseInt(req.params.id);
+    return new Promise((resolve, reject) => {
+      Utilisateurs.findOneAndDelete({ idUtilisateur: id }, (err, user) => {
+        if (err) resolve(err);
+        else resolve({ deleted: true });
+      });
+    });
+  } catch (err) {
+    throw err;
+  }
 }
 
-module.exports = { register, testDoublonMail, auth, getUserById,updateByIdUtilisateur, ckeckPassswordById,updatePasswordByEmail,getListModerateur,getListClient,deleteUserById };
+module.exports = {
+  register,
+  testDoublonMail,
+  auth,
+  getUserById,
+  updateByIdUtilisateur,
+  ckeckPassswordById,
+  updatePasswordByEmail,
+  getListModerateur,
+  getListClient,
+  deleteUserById,
+};
