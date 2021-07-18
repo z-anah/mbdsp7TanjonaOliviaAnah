@@ -5,7 +5,19 @@ const DOMAIN_ORACLE = "https://tpt-spring-boot.herokuapp.com";
 const DOMAIN_NODE = "http://192.168.88.180:5000";
 const HEADER = null;
 
-export { getConditionsGenerales, signUp, listRoles };
+export { getConditionsGenerales, signUp, listRoles, authentification };
+
+const authentification = async (form) => {
+  var ans = "",
+    link = `${DOMAIN_NODE}/api/authentification`,
+    data = {
+      ...form,
+    };
+  await axios.post(link, data, HEADER).then((response) => {
+    if (response.data.auth) console.log(response.data);
+    else throw new Error(response.data.message);
+  });
+};
 
 const listRoles = async () => {
   var ans = "",
