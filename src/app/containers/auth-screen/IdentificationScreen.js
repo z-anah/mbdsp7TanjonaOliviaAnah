@@ -25,6 +25,9 @@ import {
 } from "react-native-responsive-screen";
 import LottieView from "lottie-react-native";
 import { authentification } from "../../api/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { setUser } from "../../redux/action";
+import { bindActionCreators } from "redux";
 
 class IdentificationScreen extends React.Component {
   constructor(props) {
@@ -204,7 +207,9 @@ class IdentificationScreen extends React.Component {
     try {
       if (i18n.locale !== "fr") this.setState({ loc: "MLG" });
       this.setState({ isLoading: true });
-      await authentification(this.state);
+      const data = await authentification(this.state);
+      this.props.setUser(data.user);
+      await AsyncStorage.setItem("token", data.token);
       this.props.navigation.push("NavigationBottom");
     } catch (error) {
       this.setState({ no: true, message: error.message });
@@ -226,7 +231,14 @@ class IdentificationScreen extends React.Component {
   }
 }
 
+const mdtp = (dispatch) =>
+  bindActionCreators(
+    {
+      setUser,
+    },
+    dispatch
+  );
 const mapStateToProps = (state) => {
   return state;
 };
-export default connect(mapStateToProps)(IdentificationScreen);
+export default connect(mapStateToProps, mdtp)(IdentificationScreen);

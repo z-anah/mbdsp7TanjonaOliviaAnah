@@ -1,4 +1,4 @@
-const initialState = { counter: 0 };
+const initialState = { counter: 0, dataUser: {} };
 
 export default counter = (state = initialState, action) => {
   let nextState;
@@ -15,6 +15,9 @@ export default counter = (state = initialState, action) => {
     case "DECREMENT":
       nextState = { ...state, counter: state.counter - 1 };
       return nextState;
+
+    case "SET_USER":
+      return { ...state, dataUser: action.data };
 
     default:
       return state;

@@ -14,3 +14,7 @@ export const changeLang = (lang) => {
     value: lang,
   };
 };
+export const setUser = (data) => ({
+  type: "SET_USER",
+  data,
+});

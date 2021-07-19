@@ -14,9 +14,10 @@ const authentification = async (form) => {
       ...form,
     };
   await axios.post(link, data, HEADER).then((response) => {
-    if (response.data.auth) console.log(response.data);
+    if (response.data.auth) ans = response.data;
     else throw new Error(response.data.message);
   });
+  return ans;
 };
 
 const listRoles = async () => {
