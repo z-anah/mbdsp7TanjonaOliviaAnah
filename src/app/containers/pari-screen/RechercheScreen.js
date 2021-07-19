@@ -24,6 +24,8 @@ import {
 import { Card } from "@ui-kitten/components";
 import data1 from "../../temp/dataAccueilleScreen";
 import styles from "../../styles/styles";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 class RechercheScreen extends React.Component {
   constructor(props) {
@@ -50,12 +52,14 @@ class RechercheScreen extends React.Component {
         />
       );
     } else {
+      const { nomCompletUtilisateur, soldeUtilisateur } =
+        this.props.counter.dataUser;
       return (
         <ApplicationProvider {...eva} theme={eva.light}>
           <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
             <TopNavigatorMiniProfileLayout
-              jeton={this.state.jeton}
-              nomComplet={this.state.nomComplet}
+              jeton={soldeUtilisateur}
+              nomComplet={nomCompletUtilisateur}
             />
 
             <ScrollView>
@@ -280,4 +284,11 @@ const styless = StyleSheet.create({
   },
 });
 
-export default RechercheScreen;
+const mdtp = (dispatch) => bindActionCreators({}, dispatch);
+
+const mtp = (state) => {
+  const { counter } = state;
+  return { counter };
+};
+
+export default connect(mtp, mdtp)(RechercheScreen);

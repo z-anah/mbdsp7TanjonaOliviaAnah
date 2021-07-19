@@ -18,6 +18,8 @@ import Swiper from "react-native-deck-swiper";
 import LottieView from "lottie-react-native";
 import TopNavigatorMiniProfileLayout from "../../components/layout/TopNavigatorMiniProfileLayout";
 import data from "../../temp/dataAccueilleScreen";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 class AccueilleScreen extends React.Component {
   constructor(props) {
@@ -45,12 +47,14 @@ class AccueilleScreen extends React.Component {
         />
       );
     } else {
+      const { nomCompletUtilisateur, soldeUtilisateur } =
+        this.props.counter.dataUser;
       return (
         <ApplicationProvider {...eva} theme={eva.light}>
           <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
             <TopNavigatorMiniProfileLayout
-              jeton={this.state.jeton}
-              nomComplet={this.state.nomComplet}
+              jeton={soldeUtilisateur}
+              nomComplet={nomCompletUtilisateur}
             />
 
             {/* card */}
@@ -215,4 +219,11 @@ class AccueilleScreen extends React.Component {
 const tuto =
   "Glisser la carte\n\n👆 [X] En haut pour un match nul\n👈 [X1] À gauche pour choisir l'équipe gauche\n👉 [X2] À droite pour choisir l'équipe droite\n👇 En bas pour passer\n\n✨✨Bonne chance✨✨";
 
-export default AccueilleScreen;
+const mdtp = (dispatch) => bindActionCreators({}, dispatch);
+
+const mtp = (state) => {
+  const { counter } = state;
+  return { counter };
+};
+
+export default connect(mtp, mdtp)(AccueilleScreen);

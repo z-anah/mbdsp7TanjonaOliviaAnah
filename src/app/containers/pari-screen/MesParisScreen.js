@@ -9,6 +9,8 @@ import styles from "../../styles/styles";
 import { ScrollView } from "react-native-gesture-handler";
 import { Card } from "@ui-kitten/components";
 import data from "../../temp/dataMesParisScreen";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 
 class MesParisScreen extends React.Component {
   constructor(props) {
@@ -29,12 +31,14 @@ class MesParisScreen extends React.Component {
         />
       );
     } else {
+      const { nomCompletUtilisateur, soldeUtilisateur } =
+        this.props.counter.dataUser;
       return (
         <ApplicationProvider {...eva} theme={eva.light}>
           <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
             <TopNavigatorMiniProfileLayout
-              jeton={this.state.jeton}
-              nomComplet={this.state.nomComplet}
+              jeton={soldeUtilisateur}
+              nomComplet={nomCompletUtilisateur}
             />
             <ScrollView>
               {data.mesParis.map((item, i) => (
@@ -132,4 +136,11 @@ const winIcon = require("../../../../assets/lottie/21192-premium-gold.json");
 const losseIcon = require("../../../../assets/lottie/45514-no-data.json");
 const styless = StyleSheet.create({});
 
-export default MesParisScreen;
+const mdtp = (dispatch) => bindActionCreators({}, dispatch);
+
+const mtp = (state) => {
+  const { counter } = state;
+  return { counter };
+};
+
+export default connect(mtp, mdtp)(MesParisScreen);

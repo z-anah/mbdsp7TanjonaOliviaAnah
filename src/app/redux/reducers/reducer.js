@@ -1,4 +1,4 @@
-const initialState = { counter: 0, dataUser: {} };
+const initialState = { counter: 0, dataUser: null };
 
 export default counter = (state = initialState, action) => {
   let nextState;

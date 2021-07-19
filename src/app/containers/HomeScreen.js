@@ -40,7 +40,7 @@ class HomeScreen extends React.Component {
         <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
           <TopNavigation title="Home" alignment="center" />
           <Divider />
-          <Text>{this.props.counter.counter}</Text>
+          <Text>{this.props.reducers.counter}</Text>
           <Text>{this.props.LangReducer.LangReducer}</Text>
 
           <Button onPress={() => this._increment()}>Increment</Button>
