@@ -56,7 +56,8 @@ function authentification(req, res) {
   serviceUser
     .auth(req, res)
     .then((value) => {
-      if (value.auth) res.send({ auth: true, token: value.token });
+      if (value.auth)
+        res.send({ auth: true, token: value.token, user: value.user });
       else
         res.send({
           auth: false,

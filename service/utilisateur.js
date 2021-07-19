@@ -97,7 +97,7 @@ function auth(req, res) {
                   expiresIn: 300, // expires in 300 second
                 }
               );
-              resolve({ auth: true, token: token });
+              resolve({ auth: true, token: token, user: user });
             } else resolve({ auth: false, token: null });
           } else resolve({ auth: false, token: null });
         }
