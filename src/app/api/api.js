@@ -11,6 +11,22 @@ export {
   listRoles,
   authentification,
   DOMAIN_NODE,
+  updateByIdUtilisateur,
+};
+
+const updateByIdUtilisateur = async (form, idUtilisateur) => {
+  var ans = "",
+    link = `${DOMAIN_NODE}/api/modification`,
+    data = {
+      ...form,
+      idUtilisateur,
+    };
+  console.log(data);
+  await axios.post(link, data, HEADER).then((response) => {
+    if (response.data.status) ans = response.data;
+    else throw new Error(response.data.message);
+  });
+  return ans;
 };
 
 const authentification = async (form) => {
