@@ -13,23 +13,28 @@ import {
   TopNavigationAction,
 } from "@ui-kitten/components";
 import * as React from "react";
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import { Image, SafeAreaView, StyleSheet, View } from "react-native";
 import * as eva from "@eva-design/eva";
 import ContainerStyle from "../../styles/ContainerStyle";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { DOMAIN_NODE, updateByIdUtilisateur } from "../../api/api";
+import { DOMAIN_NODE, updateByIdUtilisateur, upload } from "../../api/api";
 import { widthPercentageToDP } from "react-native-responsive-screen";
 import styles from "../../styles/styles";
 import i18n from "i18n-js";
 import LottieView from "lottie-react-native";
 import { setUser } from "../../redux/action";
+import * as Permissions from "expo-permissions";
+import * as ImagePicker from "expo-image-picker";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class MonProfilScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading: false,
+      hasCameraPermission: null,
+      isSaved: "#8F9BB3",
     };
   }
   render() {
@@ -42,11 +47,9 @@ class MonProfilScreen extends React.Component {
       dateNaissanceUtilisateur,
       emailUtilisateur,
       isLoading,
+      profile,
+      isSaved,
     } = this.state;
-    let profil = null;
-    if (profilUtilisateur === "")
-      profil = require("../../../../assets/icon.png");
-    else profil = { uri: `${DOMAIN_NODE}/api/download/${profilUtilisateur}` };
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
@@ -65,7 +68,30 @@ class MonProfilScreen extends React.Component {
               />
               <Divider />
               <View style={[styles.loginContainer]}>
-                <Avatar style={styless.avatar} source={profil} />
+                <Avatar style={styless.avatar} source={profile} />
+                <View>
+                  <TouchableOpacity onPress={() => this._getPhotoLibrary()}>
+                    <Icon
+                      name="image-outline"
+                      style={styless.icon}
+                      fill="#8F9BB3"
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => this._saveProfile()}>
+                    <Icon
+                      name="save-outline"
+                      style={styless.icon}
+                      fill={isSaved}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity onPress={() => this._getPhotoCamera()}>
+                    <Icon
+                      name="camera-outline"
+                      style={styless.icon}
+                      fill="#8F9BB3"
+                    />
+                  </TouchableOpacity>
+                </View>
                 <Input
                   style={styles.loginForm}
                   placeholder={i18n.t("TRL0014")}
@@ -164,7 +190,49 @@ class MonProfilScreen extends React.Component {
       </ApplicationProvider>
     );
   }
-  componentDidMount = () => {
+  _saveProfile = async () => {
+    try {
+      const name = await upload(this.state.profile.uri);
+      console.log(name);
+      this.setState({
+        isSaved: "green",
+      });
+    } catch (error) {
+      this.setState({ no: true, message: error.message, isLoading: false });
+    }
+  };
+  _getPhotoLibrary = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      allowsEditing: true,
+      aspect: [3, 3],
+    });
+    if (!result.cancelled) {
+      this.setState({ profile: { uri: result.uri } });
+    }
+    this.setState({
+      isSaved: "red",
+    });
+  };
+  _getPhotoCamera = async () => {
+    let result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [3, 3],
+      quality: 1,
+      base64: true,
+    });
+    if (!result.cancelled) {
+      this.setState({ profile: { uri: result.uri } });
+    }
+    this.setState({
+      isSaved: "red",
+    });
+  };
+  componentDidMount = async () => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    const permissionResult = await Permissions.askAsync(Permissions.CAMERA);
+    this.setState({ hasCameraPermission: status === "granted" });
+
     const {
       nomCompletUtilisateur,
       soldeUtilisateur,
@@ -179,6 +247,17 @@ class MonProfilScreen extends React.Component {
       dateNaissanceUtilisateur: new Date(dateNaissanceUtilisateur),
       emailUtilisateur,
     });
+
+    if (profilUtilisateur === "")
+      this.setState({
+        profile: require("../../../../assets/icon.png"),
+      });
+    else
+      this.setState({
+        profile: {
+          uri: `${DOMAIN_NODE}/api/download/${profilUtilisateur}`,
+        },
+      });
   };
   updateByIdUtilisateurView = async () => {
     try {
@@ -219,6 +298,10 @@ const styless = StyleSheet.create({
   avatar: {
     width: widthPercentageToDP("30%"),
     height: widthPercentageToDP("30%"),
+  },
+  icon: {
+    width: widthPercentageToDP("8%"),
+    height: widthPercentageToDP("8%"),
   },
 });
 

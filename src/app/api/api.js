@@ -12,6 +12,26 @@ export {
   authentification,
   DOMAIN_NODE,
   updateByIdUtilisateur,
+  upload,
+};
+
+const upload = async (profil) => {
+  console.log(profil);
+  var ans = "",
+    link = `${DOMAIN_NODE}/api/upload`,
+    header = {
+      "Content-Type": "application/x-www-form-urlencoded",
+    };
+  const formData = new FormData();
+  formData.append("profil", profil);
+  await axios.post(link, formData).then((response) => {
+    if (response.data.status) ans = response.data;
+    else {
+      console.log(response.data);
+      throw new Error(response.data.message);
+    }
+  });
+  return ans;
 };
 
 const updateByIdUtilisateur = async (form, idUtilisateur) => {
