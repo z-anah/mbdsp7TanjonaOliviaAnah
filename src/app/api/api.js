@@ -21,8 +21,7 @@ const updateByIdUtilisateur = async (form, idUtilisateur) => {
       ...form,
       idUtilisateur,
     };
-  console.log(data);
-  await axios.post(link, data, HEADER).then((response) => {
+  await axios.put(link, data, HEADER).then((response) => {
     if (response.data.status) ans = response.data;
     else throw new Error(response.data.message);
   });
