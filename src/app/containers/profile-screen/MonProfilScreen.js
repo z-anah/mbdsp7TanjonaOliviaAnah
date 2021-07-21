@@ -200,6 +200,9 @@ class MonProfilScreen extends React.Component {
       </ApplicationProvider>
     );
   }
+  signUp = () => {
+    this.props.navigation.push("Identification");
+  };
   _saveProfile = async () => {
     try {
       const profilUtilisateur = await upload(this.state.profile.uri);
