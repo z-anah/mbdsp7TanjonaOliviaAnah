@@ -134,7 +134,7 @@ class MonProfilScreen extends React.Component {
                 </Button>
                 <Button
                   style={styles.loginForm}
-                  onPress={() => this.props.navigation.push("Identification")}
+                  onPress={() => this.props.navigation.push("PointVenteScreen")}
                 >
                   {i18n.t("TRL0020")}
                 </Button>

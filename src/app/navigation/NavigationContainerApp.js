@@ -12,6 +12,7 @@ import Scan from "../containers/temp/Scan";
 import Notification from "../containers/temp/Notification";
 import RecupScreen from "../containers/auth-screen/RecupScreen";
 import CodeQR from "../containers/temp/CodeQR";
+import PointVenteScreen from "../containers/profile-screen/PointVenteScreen";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -28,6 +29,7 @@ const HomeNavigator = () => (
     <Screen name="NavigationBottom" component={NavigationBottom} />
     <Screen name="Conditions Generales" component={ConditionsGeneralesScreen} />
     <Screen name="Langage" component={LangageScreen} />
+    <Screen name="PointVenteScreen" component={PointVenteScreen} />
   </Navigator>
 );
 
