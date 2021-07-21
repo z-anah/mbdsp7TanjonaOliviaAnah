@@ -1,3 +1,4 @@
+import mime from "mime";
 import axios from "axios";
 
 const DOMAIN_ORACLE = "https://tpt-spring-boot.herokuapp.com";
@@ -16,20 +17,21 @@ export {
 };
 
 const upload = async (profil) => {
-  console.log(profil);
   var ans = "",
     link = `${DOMAIN_NODE}/api/upload`,
     header = {
       "Content-Type": "application/x-www-form-urlencoded",
     };
   const formData = new FormData();
-  formData.append("profil", profil);
+  const newImageUri = "file:///" + profil.split("file:/").join("");
+  formData.append("profil", {
+    uri: newImageUri,
+    type: mime.getType(newImageUri),
+    name: newImageUri.split("/").pop(),
+  });
   await axios.post(link, formData).then((response) => {
-    if (response.data.status) ans = response.data;
-    else {
-      console.log(response.data);
-      throw new Error(response.data.message);
-    }
+    if (response.data.status) ans = response.data.data;
+    else throw new Error(response.data.message);
   });
   return ans;
 };

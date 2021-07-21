@@ -43,7 +43,6 @@ class MonProfilScreen extends React.Component {
       no,
       message,
       nomCompletUtilisateur,
-      profilUtilisateur,
       dateNaissanceUtilisateur,
       emailUtilisateur,
       isLoading,
@@ -192,11 +191,12 @@ class MonProfilScreen extends React.Component {
   }
   _saveProfile = async () => {
     try {
-      const name = await upload(this.state.profile.uri);
-      console.log(name);
+      const profilUtilisateur = await upload(this.state.profile.uri);
       this.setState({
         isSaved: "green",
+        profilUtilisateur,
       });
+      await this.updateByIdUtilisateurView();
     } catch (error) {
       this.setState({ no: true, message: error.message, isLoading: false });
     }
