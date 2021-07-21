@@ -7,6 +7,7 @@ import {
   Divider,
   Icon,
   Input,
+  Layout,
   Modal,
   Text,
   TopNavigation,
@@ -19,7 +20,10 @@ import ContainerStyle from "../../styles/ContainerStyle";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { DOMAIN_NODE, updateByIdUtilisateur, upload } from "../../api/api";
-import { widthPercentageToDP } from "react-native-responsive-screen";
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from "react-native-responsive-screen";
 import styles from "../../styles/styles";
 import i18n from "i18n-js";
 import LottieView from "lottie-react-native";
@@ -68,28 +72,35 @@ class MonProfilScreen extends React.Component {
               <Divider />
               <View style={[styles.loginContainer]}>
                 <Avatar style={styless.avatar} source={profile} />
-                <View>
-                  <TouchableOpacity onPress={() => this._getPhotoLibrary()}>
-                    <Icon
-                      name="image-outline"
-                      style={styless.icon}
-                      fill="#8F9BB3"
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => this._saveProfile()}>
-                    <Icon
-                      name="save-outline"
-                      style={styless.icon}
-                      fill={isSaved}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => this._getPhotoCamera()}>
-                    <Icon
-                      name="camera-outline"
-                      style={styless.icon}
-                      fill="#8F9BB3"
-                    />
-                  </TouchableOpacity>
+
+                <View style={styless.containerLayout}>
+                  <View style={styless.layout} level="3">
+                    <TouchableOpacity onPress={() => this._getPhotoLibrary()}>
+                      <Icon
+                        name="image-outline"
+                        style={styless.icon}
+                        fill="#8F9BB3"
+                      />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styless.layout} level="2">
+                    <TouchableOpacity onPress={() => this._saveProfile()}>
+                      <Icon
+                        name="save-outline"
+                        style={styless.icon}
+                        fill={isSaved}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styless.layout} level="1">
+                    <TouchableOpacity onPress={() => this._getPhotoCamera()}>
+                      <Icon
+                        name="camera-outline"
+                        style={styless.icon}
+                        fill="#8F9BB3"
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </View>
                 <Input
                   style={styles.loginForm}
@@ -288,6 +299,14 @@ class MonProfilScreen extends React.Component {
 }
 
 const styless = StyleSheet.create({
+  containerLayout: {
+    marginBottom: heightPercentageToDP("2%"),
+    flexDirection: "row",
+  },
+  layout: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
   container: {
     flexDirection: "row",
     alignItems: "center",
@@ -296,12 +315,14 @@ const styless = StyleSheet.create({
     justifyContent: "center",
   },
   avatar: {
-    width: widthPercentageToDP("30%"),
-    height: widthPercentageToDP("30%"),
+    width: widthPercentageToDP("22%"),
+    height: widthPercentageToDP("22%"),
+    marginVertical: heightPercentageToDP("2%"),
   },
   icon: {
-    width: widthPercentageToDP("8%"),
-    height: widthPercentageToDP("8%"),
+    width: widthPercentageToDP("4%"),
+    height: widthPercentageToDP("4%"),
+    marginHorizontal: widthPercentageToDP("3%"),
   },
 });
 
