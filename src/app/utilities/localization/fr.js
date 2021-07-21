@@ -18,7 +18,7 @@ export default {
   TRL0017: "ARTICLE",
   TRL0018: "Votre compte a été créé avec succès",
   TRL0019: "Mettre à jour",
-  TRL0020: "Voir point de vente le plus proche",
+  TRL0020: "Points de vente les plus proches",
   TRL0021: "Se déconnecter",
   TRL0022: "xxx",
   TRL0023: "xxx",
