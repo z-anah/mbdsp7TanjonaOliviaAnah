@@ -71,7 +71,7 @@ class MonProfilScreen extends React.Component {
               />
               <Divider />
               <View style={[styles.loginContainer]}>
-                <Avatar style={styless.avatar} source={profile} />
+                <Avatar style={styles.avatar} source={profile} />
 
                 <View style={styless.containerLayout}>
                   <View style={styless.layout} level="3">
@@ -316,11 +316,6 @@ const styless = StyleSheet.create({
     flexWrap: "wrap",
     padding: 8,
     justifyContent: "center",
-  },
-  avatar: {
-    width: widthPercentageToDP("22%"),
-    height: widthPercentageToDP("22%"),
-    marginVertical: heightPercentageToDP("2%"),
   },
   icon: {
     width: widthPercentageToDP("4%"),

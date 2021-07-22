@@ -13,6 +13,7 @@ import Notification from "../containers/temp/Notification";
 import RecupScreen from "../containers/auth-screen/RecupScreen";
 import CodeQR from "../containers/temp/CodeQR";
 import PointVenteScreen from "../containers/profile-screen/PointVenteScreen";
+import BarCodeScannerScreen from "../containers/wallet-screen/BarCodeScannerScreen";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -30,6 +31,7 @@ const HomeNavigator = () => (
     <Screen name="Conditions Generales" component={ConditionsGeneralesScreen} />
     <Screen name="Langage" component={LangageScreen} />
     <Screen name="PointVenteScreen" component={PointVenteScreen} />
+    <Screen name="BarCodeScannerScreen" component={BarCodeScannerScreen} />
   </Navigator>
 );
 

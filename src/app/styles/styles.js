@@ -19,6 +19,11 @@ export default {
     white: "#ffffff",
     black: "#000000",
   },
+  avatar: {
+    width: widthPercentageToDP("22%"),
+    height: widthPercentageToDP("22%"),
+    marginVertical: heightPercentageToDP("2%"),
+  },
   controlContainer: {
     borderRadius: 4,
     margin: 4,
