@@ -206,6 +206,17 @@ const butMatch = async (but) => {
   return d;
 };
 
+const matchsForPari = async () => {
+  const d = await Matchs.aggregate([
+    {
+      $match: {
+        idProgressionType: { $ne: ObjectId("60df6680f56ae1297ca71c33") },
+      },
+    },
+  ]);
+  return d;
+};
+
 module.exports = {
   createCompetition,
   createEquipe,
@@ -222,6 +233,7 @@ module.exports = {
   match,
   playMatch,
   butMatch,
+  matchsForPari,
 };
 
 joueursFilter = (i) => {

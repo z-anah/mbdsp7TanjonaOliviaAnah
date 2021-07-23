@@ -16,12 +16,13 @@ module.exports = (app) => {
   app.post("/api/equipe/create", controller.createEquipe);
   app.get("/api/equipes", controller.equipes);
   app.post("/api/joueur/create", controller.createJoueur);
+  app.post("/api/joueur/create/csv", controller.createJoueurCsv);
   app.post("/api/postes/create", controller.createPostes);
   app.post("/api/match/create", controller.createMatch);
-  app.post("/api/joueur/create/csv", controller.createJoueurCsv);
   app.post("/api/matchs", controller.matchs);
   app.post("/api/match", controller.match);
   app.post("/api/match/progression", controller.playMatch);
   app.post("/api/match/but", controller.butMatch);
+  app.post("/api/matchs/pari", controller.matchsForPari);
   app.post("/api/teste", controller.teste);
 };

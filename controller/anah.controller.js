@@ -345,6 +345,23 @@ const butMatch = async (req, res) => {
   }
 };
 
+const matchsForPari = async (req, res) => {
+  try {
+    const data = await service.matchsForPari();
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
 module.exports = {
   sendMail,
   createCompetition,
@@ -361,4 +378,5 @@ module.exports = {
   match,
   playMatch,
   butMatch,
+  matchsForPari,
 };
