@@ -29,7 +29,12 @@ export default {
     margin: 4,
     padding: 4,
   },
-  cardLottie: { height: heightPercentageToDP("10%") },
+  cardLottie: {
+    height: heightPercentageToDP("10%"),
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   textCard: { paddingBottom: 10 },
   backdrop: {
     backgroundColor: "rgba(0, 0, 0, 0.5)",

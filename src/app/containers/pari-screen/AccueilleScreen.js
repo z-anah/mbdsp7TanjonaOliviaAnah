@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   Icon,
+  Modal,
   Text,
   Tooltip,
 } from "@ui-kitten/components";
@@ -20,6 +21,8 @@ import TopNavigatorMiniProfileLayout from "../../components/layout/TopNavigatorM
 import data from "../../temp/dataAccueilleScreen";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import QRCode from "react-native-qrcode-svg";
+import I18n from "i18n-js";
 
 class AccueilleScreen extends React.Component {
   constructor(props) {
@@ -35,6 +38,8 @@ class AccueilleScreen extends React.Component {
         directionalOffsetThreshold: 80,
       },
       visible: false,
+      isVisible: false,
+      link: "",
     };
   }
   render() {
@@ -49,6 +54,7 @@ class AccueilleScreen extends React.Component {
     } else {
       const { nomCompletUtilisateur, soldeUtilisateur } =
         this.props.counter.dataUser;
+      const { isVisible, link } = this.state;
       return (
         <ApplicationProvider {...eva} theme={eva.light}>
           <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
@@ -166,6 +172,27 @@ class AccueilleScreen extends React.Component {
             </View>
             {/* end card */}
           </SafeAreaView>
+          <Modal
+            visible={isVisible}
+            backdropStyle={styles.backdrop}
+            onBackdropPress={() => this.setState({ isVisible: false })}
+          >
+            <Card style={styles.card}>
+              <View style={styles.cardLottie}>
+                <QRCode value={link} />
+              </View>
+              <Text style={styles.textCard} status="success">
+                {I18n.t("TRL0018")}
+              </Text>
+              <Button
+                status="success"
+                size="small"
+                onPress={() => this.setState({ isVisible: false })}
+              >
+                OK
+              </Button>
+            </Card>
+          </Modal>
         </ApplicationProvider>
       );
     }
@@ -200,7 +227,11 @@ class AccueilleScreen extends React.Component {
   };
 
   afficherDetail = () => {
-    alert("Les details sont en cours de developpement");
+    this.setState({
+      isVisible: true,
+      // TODO
+      link: "http://awesome.link.qr",
+    });
   };
 
   renderToggleButton = () => (
