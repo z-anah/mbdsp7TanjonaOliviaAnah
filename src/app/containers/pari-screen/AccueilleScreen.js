@@ -23,6 +23,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import QRCode from "react-native-qrcode-svg";
 import I18n from "i18n-js";
+import { DOMAIN_NODE, matchsForPari } from "../../api/api";
 
 class AccueilleScreen extends React.Component {
   constructor(props) {
@@ -74,7 +75,9 @@ class AccueilleScreen extends React.Component {
                         <View style={styles.cardEntete}>
                           <TouchableOpacity
                             onPress={() =>
-                              this.afficherQrCode(card.linkCompetition)
+                              // TODO
+                              // this.afficherQrCode(card.linkCompetition)
+                              this.afficherQrCode("doit afficher un lien")
                             }
                           >
                             <Icon
@@ -94,22 +97,18 @@ class AccueilleScreen extends React.Component {
                           </TouchableOpacity>
                         </View>
                         <View style={styles.cardTitle}>
-                          <Text>{card.competition}</Text>
-                          <Text>{card.date}</Text>
-                          <Text>{card.heure}</Text>
+                          <Text>{card.competition.nomcompetition}</Text>
+                          {this.toLocaleDateTimeString(card.dateHeureMatch)}
                         </View>
                         <View style={styles.cardEquipe}>
-                          {card.equipes.map((equipe, i) => (
-                            <View key={i}>
-                              <Avatar
-                                style={styles.cardFootLogo}
-                                source={equipe.logo}
-                              />
-                              <Text style={styles.cardFootEquipe}>
-                                {equipe.nom}
-                              </Text>
-                            </View>
-                          ))}
+                          {this.equipe(
+                            card.equipe1.nomequipe,
+                            card.equipe1.logoequipe
+                          )}
+                          {this.equipe(
+                            card.equipe2.nomequipe,
+                            card.equipe2.logoequipe
+                          )}
                         </View>
                       </Card>
                     </View>
@@ -134,20 +133,7 @@ class AccueilleScreen extends React.Component {
                 cardIndex={0}
                 stackSize={3}
                 backgroundColor={"white"}
-                overlayLabels={{
-                  left: {
-                    title: "1X",
-                    style: styles.swipeLeft,
-                  },
-                  right: {
-                    title: "2X",
-                    style: styles.swipeRight,
-                  },
-                  top: {
-                    title: "X",
-                    style: styles.swipeTop,
-                  },
-                }}
+                overlayLabels={overlayLabels}
               />
               <View style={styles.cardSlider}>
                 <Text style={styles.sliderPay}>{this.state.pay} Jetons</Text>
@@ -198,16 +184,42 @@ class AccueilleScreen extends React.Component {
     }
   }
 
+  toLocaleDateTimeString(dateHeureMatch) {
+    <>
+      <Text>{new Date(dateHeureMatch).toLocaleDateString("en-US")}</Text>
+      <Text>{new Date(dateHeureMatch).toLocaleTimeString("en-US")}</Text>
+    </>;
+  }
+
+  equipe(nomequipe, logoequipe) {
+    return (
+      <View>
+        <Avatar
+          style={styles.cardFootLogo}
+          source={{
+            uri: `${DOMAIN_NODE}/api/download/${logoequipe}`,
+          }}
+        />
+        <Text style={styles.cardFootEquipe}>{nomequipe}</Text>
+      </View>
+    );
+  }
+
   async componentDidMount() {
-    await this.setState({
-      data: [...data.data],
-      nomComplet: data.nomComplet,
-      jeton: data.jeton,
-      pay: data.pay,
-    });
-    this.setState({
-      isLoading: false,
-    });
+    try {
+      await this.setState({
+        data: await matchsForPari(),
+        nomComplet: data.nomComplet,
+        jeton: data.jeton,
+        pay: data.pay,
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      this.setState({
+        isLoading: false,
+      });
+    }
   }
 
   onSwipedLeft = async (cardIndex) => {
@@ -249,6 +261,21 @@ class AccueilleScreen extends React.Component {
 
 const tuto =
   "Glisser la carte\n\n👆 [X] En haut pour un match nul\n👈 [X1] À gauche pour choisir l'équipe gauche\n👉 [X2] À droite pour choisir l'équipe droite\n👇 En bas pour passer\n\n✨✨Bonne chance✨✨";
+
+const overlayLabels = {
+  left: {
+    title: "1X",
+    style: styles.swipeLeft,
+  },
+  right: {
+    title: "2X",
+    style: styles.swipeRight,
+  },
+  top: {
+    title: "X",
+    style: styles.swipeTop,
+  },
+};
 
 const mdtp = (dispatch) => bindActionCreators({}, dispatch);
 

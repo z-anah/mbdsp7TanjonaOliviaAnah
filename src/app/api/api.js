@@ -14,14 +14,22 @@ export {
   DOMAIN_NODE,
   updateByIdUtilisateur,
   upload,
+  matchsForPari,
+};
+
+const matchsForPari = async () => {
+  var ans = "",
+    link = `${DOMAIN_NODE}/api/matchs/pari`,
+    data = null;
+  await axios.post(link, data, HEADER).then((res) => {
+    ans = res.data.data;
+  });
+  return ans;
 };
 
 const upload = async (profil) => {
   var ans = "",
-    link = `${DOMAIN_NODE}/api/upload`,
-    header = {
-      "Content-Type": "application/x-www-form-urlencoded",
-    };
+    link = `${DOMAIN_NODE}/api/upload`;
   const formData = new FormData();
   const newImageUri = "file:///" + profil.split("file:/").join("");
   formData.append("profil", {
@@ -64,8 +72,7 @@ const authentification = async (form) => {
 };
 
 const listRoles = async () => {
-  var ans = "",
-    link = `${DOMAIN_NODE}/api/listRoles`,
+  var link = `${DOMAIN_NODE}/api/listRoles`,
     data = {};
   await axios.get(link, data).then((response) => {
     return response;
@@ -73,8 +80,7 @@ const listRoles = async () => {
 };
 
 const signUp = async (form) => {
-  var ans = "",
-    link = `${DOMAIN_NODE}/api/inscription`,
+  var link = `${DOMAIN_NODE}/api/inscription`,
     data = {
       ...form,
       idRole: "3",
@@ -89,13 +95,8 @@ const getConditionsGenerales = async () => {
   var ans = "",
     link = `${DOMAIN_ORACLE}/conditions`,
     data = null;
-  await axios
-    .get(link, data, HEADER)
-    .then((res) => {
-      ans = res;
-    })
-    .catch(function (error) {
-      throw error;
-    });
+  await axios.get(link, data, HEADER).then((res) => {
+    ans = res;
+  });
   return ans.data;
 };
