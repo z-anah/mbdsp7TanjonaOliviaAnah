@@ -74,11 +74,7 @@ class AccueilleScreen extends React.Component {
                       <Card>
                         <View style={styles.cardEntete}>
                           <TouchableOpacity
-                            onPress={() =>
-                              // TODO
-                              // this.afficherQrCode(card.linkCompetition)
-                              this.afficherQrCode("doit afficher un lien")
-                            }
+                            onPress={() => this.afficherQrCode()}
                           >
                             <Icon
                               style={styles.icon}
@@ -87,7 +83,9 @@ class AccueilleScreen extends React.Component {
                             />
                           </TouchableOpacity>
                           <TouchableOpacity
-                            onPress={() => this.afficherDetail()}
+                            onPress={() =>
+                              this.afficherDetail("en cours de developpement")
+                            }
                           >
                             <Icon
                               style={styles.icon}
@@ -167,9 +165,7 @@ class AccueilleScreen extends React.Component {
               <View style={styles.cardLottie}>
                 <QRCode value={link} />
               </View>
-              <Text style={styles.textCard} status="success">
-                {I18n.t("TRL0018")}
-              </Text>
+              <Text />
               <Button
                 status="success"
                 size="small"
@@ -234,16 +230,16 @@ class AccueilleScreen extends React.Component {
     alert(`X ${this.state.data[cardIndex].id}`);
   };
 
-  afficherQrCode = (linkCompetition) => {
-    alert(`afficher qr code de la competition  ${linkCompetition}`);
-  };
-
-  afficherDetail = () => {
+  afficherQrCode = () => {
     this.setState({
       isVisible: true,
       // TODO
       link: "http://awesome.link.qr",
     });
+  };
+
+  afficherDetail = (linkCompetition) => {
+    alert(`afficher qr code de la competition  ${linkCompetition}`);
   };
 
   renderToggleButton = () => (
