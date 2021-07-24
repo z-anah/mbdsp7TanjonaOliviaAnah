@@ -213,6 +213,8 @@ const matchsForPari = async () => {
         idProgressionType: { $ne: ObjectId("60df6680f56ae1297ca71c33") },
       },
     },
+    ...matchsEquipesFilter,
+    ...matchsCompetitionsFilter,
   ]);
   return d;
 };
@@ -264,6 +266,20 @@ equipeFormationFilter = (i) => {
     },
   ];
 };
+
+const matchsCompetitionsFilter = [
+  {
+    $lookup: {
+      from: "Competitions",
+      localField: "idCompetition",
+      foreignField: "_id",
+      as: "competition",
+    },
+  },
+  {
+    $unwind: "$competition",
+  },
+];
 
 const matchsEquipesFilter = [
   {
