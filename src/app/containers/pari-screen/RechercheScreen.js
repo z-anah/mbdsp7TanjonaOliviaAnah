@@ -63,28 +63,8 @@ class RechercheScreen extends React.Component {
             />
 
             <ScrollView>
-              <Input
-                placeholder="Competiton"
-                accessoryRight={renderIcon}
-                value={this.state.recherche}
-                onChangeText={(value) => this.setRecherche(value)}
-              />
-
-              <Input
-                placeholder="Equipe 1"
-                accessoryRight={renderIcon}
-                value={this.state.recherche1}
-                onChangeText={(value) => this.setRecherche1(value)}
-              />
-
-              <Input
-                placeholder="Equipe 2"
-                accessoryRight={renderIcon}
-                value={this.state.recherche2}
-                onChangeText={(value) => this.setRecherche2(value)}
-              />
-
-              <Button onPress={() => this.rechercher()}>Rechercher</Button>
+              {/* {this.formulaireRecherche()} */}
+              <Button onPress={() => this.scanner()}>Scanner</Button>
               <Card>
                 <View style={styless.title}>
                   <Text>{"COMPETITIONS"}</Text>
@@ -108,49 +88,7 @@ class RechercheScreen extends React.Component {
                   </Card>
                 </Swipeable>
               ))}
-              <Card>
-                <View style={styless.title}>
-                  <Text>{"MATCHS"}</Text>
-                </View>
-              </Card>
-              {this.state.matchs.map((card, i) => (
-                <Card key={i}>
-                  <View style={styles.cardEntete}>
-                    <TouchableOpacity
-                      onPress={() => this.afficherQrCode(card.linkCompetition)}
-                    >
-                      <Icon
-                        style={styles.icon}
-                        fill="#8F9BB3"
-                        name="share-outline"
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => this.afficherDetail()}>
-                      <Icon
-                        style={styles.icon}
-                        fill="#8F9BB3"
-                        name="menu-outline"
-                      />
-                    </TouchableOpacity>
-                  </View>
-                  <View style={styles.cardTitle}>
-                    <Text>{card.competition}</Text>
-                    <Text>{card.date}</Text>
-                    <Text>{card.heure}</Text>
-                  </View>
-                  <View style={styles.cardEquipe}>
-                    {card.equipes.map((equipe, i) => (
-                      <View key={i}>
-                        <Avatar
-                          style={styles.cardFootLogo}
-                          source={equipe.logo}
-                        />
-                        <Text style={styles.cardFootEquipe}>{equipe.nom}</Text>
-                      </View>
-                    ))}
-                  </View>
-                </Card>
-              ))}
+              {/* {this.matchs()} */}
               <View style={{ height: heightPercentageToDP("3%") }} />
             </ScrollView>
           </SafeAreaView>
@@ -159,7 +97,81 @@ class RechercheScreen extends React.Component {
     }
   }
 
+  formulaireRecherche() {
+    return (
+      <>
+        <Input
+          placeholder="Competiton"
+          accessoryRight={renderIcon}
+          value={this.state.recherche}
+          onChangeText={(value) => this.setRecherche(value)}
+        />
+
+        <Input
+          placeholder="Equipe 1"
+          accessoryRight={renderIcon}
+          value={this.state.recherche1}
+          onChangeText={(value) => this.setRecherche1(value)}
+        />
+
+        <Input
+          placeholder="Equipe 2"
+          accessoryRight={renderIcon}
+          value={this.state.recherche2}
+          onChangeText={(value) => this.setRecherche2(value)}
+        />
+
+        <Button onPress={() => this.rechercher()}>Rechercher</Button>
+      </>
+    );
+  }
+
+  matchs() {
+    return (
+      <>
+        <Card>
+          <View style={styless.title}>
+            <Text>{"MATCHS"}</Text>
+          </View>
+        </Card>
+        {this.state.matchs.map((card, i) => (
+          <Card key={i}>
+            <View style={styles.cardEntete}>
+              <TouchableOpacity
+                onPress={() => this.afficherQrCode(card.linkCompetition)}
+              >
+                <Icon style={styles.icon} fill="#8F9BB3" name="share-outline" />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this.afficherDetail()}>
+                <Icon style={styles.icon} fill="#8F9BB3" name="menu-outline" />
+              </TouchableOpacity>
+            </View>
+            <View style={styles.cardTitle}>
+              <Text>{card.competition}</Text>
+              <Text>{card.date}</Text>
+              <Text>{card.heure}</Text>
+            </View>
+            <View style={styles.cardEquipe}>
+              {card.equipes.map((equipe, i) => (
+                <View key={i}>
+                  <Avatar style={styles.cardFootLogo} source={equipe.logo} />
+                  <Text style={styles.cardFootEquipe}>{equipe.nom}</Text>
+                </View>
+              ))}
+            </View>
+          </Card>
+        ))}
+      </>
+    );
+  }
+
   rechercher = async () => {};
+
+  scanner = async () => {
+    this.props.navigation.push("BarCodeScannerScreen", {
+      screen: "RechercheScreen",
+    });
+  };
 
   afficherQrCode = (linkCompetition) => {
     alert(`afficher qr code de la competition  ${linkCompetition}`);

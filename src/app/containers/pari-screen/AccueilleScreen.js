@@ -74,7 +74,7 @@ class AccueilleScreen extends React.Component {
                       <Card>
                         <View style={styles.cardEntete}>
                           <TouchableOpacity
-                            onPress={() => this.afficherQrCode()}
+                            onPress={() => this.afficherQrCode(card._id)}
                           >
                             <Icon
                               style={styles.icon}
@@ -230,11 +230,10 @@ class AccueilleScreen extends React.Component {
     alert(`X ${this.state.data[cardIndex].id}`);
   };
 
-  afficherQrCode = () => {
+  afficherQrCode = (_id) => {
     this.setState({
       isVisible: true,
-      // TODO
-      link: "http://awesome.link.qr",
+      link: `exp://192.168.88.180:19000/pari/?_id=${_id}`,
     });
   };
 

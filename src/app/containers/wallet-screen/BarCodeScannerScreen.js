@@ -14,11 +14,17 @@ function BarCodeScannerScreen(props) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [screen, setScreen] = useState("MonPorteFeuilleScreen");
 
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === "granted");
+    })();
+    (async () => {
+      if (props.route.params.screen !== undefined) {
+        setScreen("RechercheScreen");
+      }
     })();
   }, []);
 
@@ -27,7 +33,14 @@ function BarCodeScannerScreen(props) {
     console.log(
       `Bar code with type ${type} and data ${data} has been scanned!`
     );
-    credit();
+    if (screen === "MonPorteFeuilleScreen") credit();
+    else if (screen === "RechercheScreen") goToScreenPari(data);
+  };
+
+  const goToScreenPari = async (queryString) => {
+    const _id = queryString.searchParams.get("_id");
+    console.log({ _id });
+    // props.navigation.navigate("AccueilleScreen",{_id});
   };
 
   const credit = async () => {
