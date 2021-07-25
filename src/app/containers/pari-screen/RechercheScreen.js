@@ -26,6 +26,7 @@ import data1 from "../../temp/dataAccueilleScreen";
 import styles from "../../styles/styles";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { listCompetitions } from "../../api/api";
 
 class RechercheScreen extends React.Component {
   constructor(props) {
@@ -82,8 +83,8 @@ class RechercheScreen extends React.Component {
                 >
                   <Card>
                     <View style={styless.competition}>
-                      <Text>{item.nom}</Text>
-                      <Avatar size="giant" source={item.iconLink} />
+                      <Text>{item.nomcompetition}</Text>
+                      {/* <Avatar size="giant" source={item.iconLink} /> */}
                     </View>
                   </Card>
                 </Swipeable>
@@ -201,7 +202,7 @@ class RechercheScreen extends React.Component {
     return (
       <RectButton
         onPress={() => {
-          alert(competition);
+          // alert(competition);
           if (competition.isFollowing == 1) {
             animations[i].play(52, 0);
           } else {
@@ -235,7 +236,7 @@ class RechercheScreen extends React.Component {
     await this.setState({
       nomComplet: data.nomComplet,
       jeton: data.jeton,
-      competitions: data.competitions,
+      competitions: await listCompetitions(),
       matchs: data1.data,
     });
     this.animation = new Array(this.state.competitions.length);
@@ -260,21 +261,21 @@ const data = {
   jeton: "1.980",
   competitions: [
     {
-      nom: "FEMININE DIVISION 1",
+      nomcompetition: "FEMININE DIVISION 1",
       iconLink: require("../../../../assets/adaptive-icon.png"),
       year1: "2020",
       year2: "2021",
       isFollowing: 0,
     },
     {
-      nom: "MANCHESTER",
+      nomcompetition: "MANCHESTER",
       iconLink: require("../../../../assets/adaptive-icon.png"),
       year1: "2022",
       year2: "2023",
       isFollowing: 1,
     },
     {
-      nom: "FEMININE DIVISION 1",
+      nomcompetition: "FEMININE DIVISION 1",
       iconLink: require("../../../../assets/adaptive-icon.png"),
       year1: "2020",
       year2: "2021",

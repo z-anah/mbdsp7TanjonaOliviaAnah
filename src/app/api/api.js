@@ -15,6 +15,16 @@ export {
   updateByIdUtilisateur,
   upload,
   matchsForPari,
+  listCompetitions,
+};
+
+const listCompetitions = async () => {
+  var link = `${DOMAIN_NODE}/api/listeCompetition`,
+    ans = null;
+  await axios.get(link).then((response) => {
+    ans = response.data.data;
+  });
+  return ans;
 };
 
 const matchsForPari = async () => {
