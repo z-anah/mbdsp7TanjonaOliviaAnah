@@ -26,5 +26,5 @@ module.exports = (app) => {
   app.post("/api/match/but", controller.butMatch);
   app.post("/api/matchs/pari", controller.matchsForPari);
   app.post("/api/teste", controller.teste);
-  app.get("/api/notification", notification);
+  app.post("/api/notification", notification);
 };
