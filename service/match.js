@@ -103,33 +103,6 @@ function getProgressionEnCours(req,res){
       })
   });
 }
-/*function getProgressionEnAttente(req,res){
-  return new Promise((resolve, reject) => {
-    Progression.findOne(
-      { nomProgressionType: "en attente" },
-      (err, progression) => {
-        if (err) reject(err);
-        else {
-          if (role != null) resolve(progression);
-          else resolve(false);
-        }
-      })
-  });
-}
-
-function getProgressionTermine(req,res){
-  return new Promise((resolve, reject) => {
-    Progression.findOne(
-      { nomProgressionType: "terminé" },
-      (err, progression) => {
-        if (err) reject(err);
-        else {
-          if (role != null) resolve(progression);
-          else resolve(false);
-        }
-      })
-  });
-}*/
 
 // Récupérer un match par son id de competition (GET)
 function getMatchBycompetition(req, res) {
