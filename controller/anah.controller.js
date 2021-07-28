@@ -362,7 +362,25 @@ const matchsForPari = async (req, res) => {
   }
 };
 
+const createRecharge = async (req, res) => {
+  try {
+    const data = await service.createRecharge(req.body);
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0005,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
 module.exports = {
+  createRecharge,
   sendMail,
   createCompetition,
   createFormations,
@@ -379,4 +397,5 @@ module.exports = {
   playMatch,
   butMatch,
   matchsForPari,
+  createRecharge,
 };

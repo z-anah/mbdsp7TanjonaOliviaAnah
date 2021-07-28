@@ -8,7 +8,17 @@ const joueurs = require("../model/joueurs");
 const Matchs = require("../model/Matchs");
 const Postes = require("../model/Postes");
 const progression_type = require("../model/progression_type");
+const Recharge = require("../model/Recharge");
 const type_pari = require("../model/type_pari");
+const createRecharge = async (recharges) => {
+  let d = [];
+  recharges.map(async (recharge) => {
+    let c = new Recharge(recharge);
+    await c.save();
+    d.push(c);
+  });
+  return d;
+};
 const createCompetition = async (nomCompetition, dateDebut, dateFin) => {
   let c = new Competition({
     nomcompetition: nomCompetition,
@@ -220,6 +230,7 @@ const matchsForPari = async () => {
 };
 
 module.exports = {
+  createRecharge,
   createCompetition,
   createEquipe,
   createFormation,
