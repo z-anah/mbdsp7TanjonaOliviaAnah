@@ -26,7 +26,8 @@ function getJoeurByEquipe(req, res) {
     },
   ]);
   let options = {
-
+    page: parseInt(req.query.page) || 1,
+    limit: parseInt(req.query.limit) || 10,
 };
   // callback
   Joeurs.aggregatePaginate(aggregate, options, (err, joueur) => {
