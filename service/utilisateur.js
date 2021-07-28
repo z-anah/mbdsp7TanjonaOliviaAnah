@@ -304,6 +304,23 @@ function getListClient(req, res) {
   }
 }
 
+function getCompteClient(req, res) {
+  try {
+    return new Promise((resolve, reject) => {
+      serviceRole.getRoleClient(req, res).then((value) => {
+        var idRoleValue = value.idRole;
+        Utilisateurs.find({idRole : idRoleValue}, function(err,value){
+        // callback
+          if (err) resolve({ count: false });
+          else resolve({ count: true, resultCount: value.length });
+        });
+      });
+    });
+  } catch (err) {
+    throw err;
+  }
+}
+
 function deleteUserById(req, res) {
   try {
     let id = parseInt(req.params.id);
@@ -329,4 +346,5 @@ module.exports = {
   getListModerateur,
   getListClient,
   deleteUserById,
+  getCompteClient
 };

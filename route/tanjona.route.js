@@ -1,7 +1,7 @@
 const uploadController = require("../controller/upload.controller");
 const userController = require("../controller/utilisateur.controller");
 const roleController = require("../controller/role.controller");
-
+const rechargeController = require("../controller/recharge.controller");
 module.exports = (app) => {
     app.use((req, res, next) => {
       res.header(
@@ -26,4 +26,6 @@ module.exports = (app) => {
     app.get("/api/listModerateurs",userController.listModerateur);
     app.get("/api/listClients",userController.listClient);
     app.delete("/api/suppressionModerateur/:id",userController.deleteUser);
+    app.get("/api/compteClient",userController.compteClient);
+    app.get("/api/recharge",rechargeController.getRecharge);
 };
