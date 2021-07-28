@@ -144,6 +144,8 @@ namespace pari.src.dao.view.user_control.panel
             pariTextBox1.LabelError.Text = "";
             pariDate1.PariTitle.Label.Text = "Date et heure";
             pariDate1.PariLabelError.Label.Text = "";
+            pariDate2.PariTitle.Label.Text = "Date et heure";
+            pariDate2.PariLabelError.Label.Text = "";
             button2.Text = "Ajouter";
 
             pariDate1.DateTimePicker.Format = DateTimePickerFormat.Custom;
@@ -167,9 +169,11 @@ namespace pari.src.dao.view.user_control.panel
             pariComboItem2.ComboBox.ValueMember = "Value";
             pariComboItem2.ComboBox.DataSource = fpc2;
 
+            var fpc3 = new List<Combo>();
+            foreach (EquipeModel f in res2.Data) fpc3.Add(new Combo { Text = f.Nomequipe, Value = f.Id });
             pariComboItem3.ComboBox.DisplayMember = "Text";
             pariComboItem3.ComboBox.ValueMember = "Value";
-            pariComboItem3.ComboBox.DataSource = fpc2;
+            pariComboItem3.ComboBox.DataSource = fpc3;
             Cursor = Cursors.Arrow;
         }
 
@@ -185,14 +189,14 @@ namespace pari.src.dao.view.user_control.panel
             var c = (Combo)pariComboItem1.ComboBox.SelectedItem;
             var idcompetition = c.Value;
             var c1 = (Combo)pariComboItem2.ComboBox.SelectedItem;
-            var ide1 = c.Value;
+            var ide1 = c1.Value;
             var c2 = (Combo)pariComboItem3.ComboBox.SelectedItem;
-            var ide2 = c.Value;
+            var ide2 = c2.Value;
             var arbitreNom = pariTextBox1.TextBox.Text;
             var date1 = pariDate1.DateTimePicker.Text;
             DateTime d1 = DateTime.Parse(date1);
             var date2 = pariDate1.DateTimePicker.Text;
-            DateTime d2 = DateTime.Parse(date1);
+            DateTime d2 = DateTime.Parse(date2);
 
             Task<MatchRest> da = Service.createMatch(
                 idcompetition, ide1, ide2, arbitreNom, d1, d2
