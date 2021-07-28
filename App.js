@@ -8,6 +8,7 @@ import NavigationContainerApp from "./src/app/navigation/NavigationContainerApp"
 import store from "./src/app/redux/store";
 import { IconRegistry } from "@ui-kitten/components";
 import * as Notifications from "expo-notifications";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 i18n.translations = localization;
 i18n.locale = "fr";
@@ -83,7 +84,7 @@ async function registerForPushNotificationsAsync() {
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
+    await AsyncStorage.setItem("ExpoPushToken", token);
   } else {
     alert("Must use physical device for Push Notifications");
   }

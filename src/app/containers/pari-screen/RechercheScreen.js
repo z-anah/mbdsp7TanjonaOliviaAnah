@@ -26,7 +26,8 @@ import data1 from "../../temp/dataAccueilleScreen";
 import styles from "../../styles/styles";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { listCompetitions } from "../../api/api";
+import { listCompetitions, notification } from "../../api/api";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 class RechercheScreen extends React.Component {
   constructor(props) {
@@ -201,12 +202,24 @@ class RechercheScreen extends React.Component {
     });
     return (
       <RectButton
-        onPress={() => {
-          // alert(competition);
+        onPress={async () => {
           if (competition.isFollowing == 1) {
-            animations[i].play(52, 0);
-          } else {
+            competition.isFollowing = 0;
             animations[i].play(89, 52);
+          } else {
+            competition.isFollowing = 1;
+            animations[i].play(89, 52);
+            let tokens = [await AsyncStorage.getItem("ExpoPushToken")];
+            try {
+              await notification({
+                tokens,
+                body: `Notification sur ${competition.nomcompetition}`,
+                title: "notification",
+                data: {},
+              });
+            } catch (error) {
+              console.log(error);
+            }
           }
         }}
       >
