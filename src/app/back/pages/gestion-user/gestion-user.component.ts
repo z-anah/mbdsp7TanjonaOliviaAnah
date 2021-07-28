@@ -75,7 +75,7 @@ export class GestionUserComponent implements OnInit {
       newUser.est_bloque = est_bloque;
       this.service.updateUser(newUser).subscribe((value) => {
         if(value.status) this.router.navigate(["/gestionUtilisateur"]).then(() => {
-          window.location.reload();
+           window.location.reload();
         });
       })
     })

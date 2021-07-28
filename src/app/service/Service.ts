@@ -12,8 +12,8 @@ var helper = new JwtHelperService();
   providedIn: 'root'
 })
 export class Service {
-  //private baseUrl = "http://localhost:5000/api";
-  private baseUrl = "https://tpt-node.herokuapp.com/api";
+ // private baseUrl = "http://localhost:5000/api";
+   private baseUrl = "https://tpt-node.herokuapp.com/api";
 
   constructor(private http: HttpClient, private router:Router) { }
 
@@ -125,5 +125,15 @@ export class Service {
 
   deleteModerateur(user : Utilisateurs): Observable<any>{
     return this.http.delete(this.baseUrl+"/suppressionModerateur/"+user.idUtilisateur);
+  }
+
+  compteClient():Observable<any>{
+    return this.http.get(this.baseUrl+"/compteClient");
+  }
+  compteProgressionMatch():Observable<any>{
+    return this.http.get(this.baseUrl+"/compteProgressionMatch");
+  }
+  statRecharge():Observable<any>{
+    return this.http.get(this.baseUrl+"/recharge");
   }
 }
