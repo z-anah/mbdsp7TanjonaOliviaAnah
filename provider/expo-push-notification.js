@@ -3,25 +3,25 @@ const config = require("../config/index");
 
 let notification = (req, res) => {
   try {
-    console.log(req.body);
+    const { tokens, title, body, data } = req.body;
     let expo = new Expo({
       // accessToken: process.env.EXPO_ACCESS_TOKEN
     });
     let messages = [];
-    let somePushTokens = ["ExponentPushToken[nbH_L4P3amu6AbiSNbwSrr]"];
+    let somePushTokens = tokens;
     for (let pushToken of somePushTokens) {
       // Each push token looks like ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]
-      if (!Expo.isExpoPushToken(pushToken)) {
-        console.error(`Push token ${pushToken} is not a valid Expo push token`);
-        continue;
-      }
+      if (!Expo.isExpoPushToken(pushToken))
+        throw new Error(
+          `Push token ${pushToken} is not a valid Expo push token`
+        );
+
       messages.push({
         to: pushToken,
         sound: "default",
-        title: "notification",
-        body: "Notification sur la competition est activée",
-        // TODO
-        // data: { withSome: "data" },
+        title,
+        body,
+        data,
       });
     }
     let chunks = expo.chunkPushNotifications(messages);
@@ -65,7 +65,6 @@ let notification = (req, res) => {
       }
     })();
 
-    const data = "OK";
     res.send({
       status: true,
       message: config.msg[req.body.loc || "FR"].info.MSG_I0006,
