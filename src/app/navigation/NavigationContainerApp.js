@@ -9,7 +9,6 @@ import AccueilleScreen from "../containers/pari-screen/AccueilleScreen";
 import NavigationBottom from "./NavigationBottom";
 import Test from "../containers/temp/Test";
 import Scan from "../containers/temp/Scan";
-import Notification from "../containers/temp/Notification";
 import RecupScreen from "../containers/auth-screen/RecupScreen";
 import CodeQR from "../containers/temp/CodeQR";
 import PointVenteScreen from "../containers/profile-screen/PointVenteScreen";
@@ -19,7 +18,6 @@ const { Navigator, Screen } = createStackNavigator();
 
 const HomeNavigator = () => (
   <Navigator headerMode="none">
-    <Screen name="TestNotification" component={Notification} />
     <Screen name="Identification" component={IdentificationScreen} />
     <Screen name="TestCodeQR" component={CodeQR} />
     <Screen name="TestScan" component={Scan} />
