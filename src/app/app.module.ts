@@ -23,6 +23,7 @@ import { ModifModeratorComponent } from './back/pages/gestion-moderator/modif-mo
 import { DialogDeleteComponent } from './back/pages/dialog-delete/dialog-delete.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogBloqueComponent } from './back/pages/dialog-bloque/dialog-bloque.component';
+import { ChartsModule, WavesModule } from 'angular-bootstrap-md'
 const routes:Routes = [
   { path: '', component: BackComponent,children: [
     {
@@ -113,7 +114,8 @@ const routes:Routes = [
     HttpClientModule,
     JwtModule,
     NgxPaginationModule,
-    NgbModule
+    NgbModule,
+    ChartsModule,WavesModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
