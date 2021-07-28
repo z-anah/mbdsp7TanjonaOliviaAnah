@@ -291,6 +291,6 @@ function compteProgression(req, res){
     })
 }
 //module.exports = { getMatch,getMatchById,getMatchBycompetition,getCompteMatchEnattente,getCompteMatchEncours,getCompteMatchTermine,getCompteMatch,compteProgression };
-module.exports = { getMatch,getMatchById,getMatchBycompetition,TopMatch};
+module.exports = { getMatch,getMatchById,getMatchBycompetition,TopMatch,getCompteMatchEnattente,getCompteMatchEncours,getCompteMatchTermine,getCompteMatch,compteProgression};
 
 
