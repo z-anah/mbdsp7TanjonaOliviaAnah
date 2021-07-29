@@ -5,13 +5,14 @@ const mongooseUniqueValidator = require("mongoose-unique-validator");
 let Schema = mongoose.Schema;
 
 let pari = Schema({
-  idUtilisateurs: ObjectId,
+  idUtilisateur: Number,
   idMatch: ObjectId,
   idTypePari: ObjectId,
   // -1   non correcte
   // 0    pas de resultat
   // 1    correcte
-  estCorrecte: [-1, 0, 1],
+  // estCorrecte: [-1, 0, 1],
+  estCorrecte: Number,
   montantMise: Decimal128,
 });
 
