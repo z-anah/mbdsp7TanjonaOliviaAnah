@@ -10,6 +10,24 @@ const Postes = require("../model/Postes");
 const progression_type = require("../model/progression_type");
 const Recharge = require("../model/Recharge");
 const type_pari = require("../model/type_pari");
+const pari = require("../model/pari");
+const Utilisateurs = require("../model/Utilisateurs");
+
+const createPari = async (form) => {
+  let { idUtilisateur, idMatch, idTypePari } = form;
+  let query = { idUtilisateur, idMatch, idTypePari };
+  let query2 = { idUtilisateur };
+  let options = { upsert: true, new: true, setDefaultsOnInsert: true };
+
+  await pari.findOneAndUpdate(query, form, options);
+  let u = await Utilisateurs.findOne(query2);
+  let uN = await Utilisateurs.findOneAndUpdate(
+    query2,
+    { soldeUtilisateur: u.soldeUtilisateur - form.montantMise },
+    options
+  );
+  return { pari: form, utilisateur: uN };
+};
 const createRecharge = async (recharges) => {
   let d = [];
   recharges.map(async (recharge) => {
@@ -230,6 +248,7 @@ const matchsForPari = async () => {
 };
 
 module.exports = {
+  createPari,
   createRecharge,
   createCompetition,
   createEquipe,

@@ -28,4 +28,5 @@ module.exports = (app) => {
   app.post("/api/teste", controller.teste);
   app.post("/api/notification", notification);
   app.post("/api/recharge", controller.createRecharge);
+  app.post("/api/pari/create", controller.createPari);
 };

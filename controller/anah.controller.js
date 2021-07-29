@@ -379,7 +379,25 @@ const createRecharge = async (req, res) => {
   }
 };
 
+const createPari = async (req, res) => {
+  try {
+    const data = await service.createPari(req.body);
+    res.send({
+      status: true,
+      message: config.msg[req.body.loc || "FR"].info.MSG_I0005,
+      data,
+    });
+  } catch (error) {
+    res.send({
+      status: false,
+      message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      desc: error.message,
+    });
+  }
+};
+
 module.exports = {
+  createPari,
   createRecharge,
   sendMail,
   createCompetition,
