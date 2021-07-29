@@ -29,5 +29,9 @@ function listMatchsCompetition(req, res) {
       })
     );
 }
+function getCompteMatchByProgressionType(req, res){
+  serviceMatch
+    .getCompteMatchByProgressionType(req, res);
+}
 
-module.exports = { listMatchsCompetition, listMatchs };
+module.exports = { listMatchsCompetition, listMatchs,getCompteMatchByProgressionType };

@@ -241,6 +241,23 @@ function listClient(req, res) {
     );
 }
 
+function compteClient(req, res) {
+  serviceUser
+    .getCompteClient(req, res)
+    .then((value) => {
+      if (value.count)
+        res.send({
+          count: value.resultCount,
+        });
+    })
+    .catch((err) =>
+      res.send({
+        list: false,
+        message: config.msg[req.body.loc || "FR"].error.MSG_E0007,
+      })
+    );
+}
+
 function deleteUser(req, res) {
   serviceUser
     .deleteUserById(req, res)
@@ -276,4 +293,5 @@ module.exports = {
   listModerateur,
   listClient,
   deleteUser,
+  compteClient
 };
