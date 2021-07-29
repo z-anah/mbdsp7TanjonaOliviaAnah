@@ -83,6 +83,7 @@ function getMatch(req, res) {
         as: "Formations",
       },
     },
+   
   ]);
 
   let options = {
@@ -127,6 +128,7 @@ function getMatchById(req, res) {
         as: "Formations",
       },
     },
+    
   ]);
 
   let options = {
@@ -163,6 +165,14 @@ function getMatchBycompetition(req, res) {
     {$match: {'idCompetition': {$in:[mongoose.Types.ObjectId(req.params.idcompetition)]}} },
     {
       $lookup: {
+        from: "Competitions",
+        localField: "idCompetition",
+        foreignField: "_id",
+        as: "competition",
+      },
+    },
+    {
+      $lookup: {
         from: "Equipes",
         localField: "idEquipe",
         foreignField: "_id",
@@ -185,10 +195,12 @@ function getMatchBycompetition(req, res) {
         as: "Formations",
       },
     },
+  
   ]);
   
   let options = {
-
+    page: parseInt(req.query.page) || 1,
+    limit: parseInt(req.query.limit) || 10,
   };
   // callback
   Match.aggregatePaginate(aggregate, options, (err, match) => {
