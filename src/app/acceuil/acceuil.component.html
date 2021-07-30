@@ -57,162 +57,37 @@
   <section class="match-section set-bg">
     <div class="container">
       <div class="row">
-        <div class="col-lg-2">
-          <div class="section-title">
-            <h3 style="color: white;"> Compétitions</h3>
-          </div>
-          <div class="points-table">
-            <table>
-              <thead>
-                <tr>
-                  <th class="th-o"></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let competit of competition">
-                  <td class="team-name">
-                    <span> {{competit.nomcompetition}}</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <a href="#" class="p-all"></a>
-          </div>
-        </div>
-        <div class="col-lg-5">
+        
+        <div class="col-lg-12">
           <div class="ms-content">
             <h4>Prochain Match</h4>
-            <div class="mc-table">
+            <div class="mc-table" *ngFor="let a of matchs | paginate : {
+              itemsPerPage: limit,
+              currentPage: page,
+              totalItems: count
+            };">
               <table>
                 <tbody>
                   <tr>
-                    <td class="left-team">
-                      <img src="../assets/img/match/tf-1.jpg" alt="">
-                      <h6>Cambodia</h6>
+                    <td class="left-team" *ngFor="let e of a.Equipes">
+                      <img    src="http://localhost:5000/api/download/{{e.logoequipe}}" alt="">
+                      <h6>{{e.nomequipe}}</h6>
                     </td>
                     <td class="mt-content">
                       <div class="mc-op">Ucraina vs England</div>
                       <h4>VS</h4>
-                      <div class="mc-op">15 September 2019</div>
+                      <div class="mc-op">{{a.dateHeureMatch | date:'EEEE, MMMM d, y, h:mm:ss'}}</div>
                     </td>
-                    <td class="right-team">
-                      <img src="../assets/img/match/tf-2.jpg" alt="">
-                      <h6>Qatar</h6>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="mc-table">
-              <table>
-                <tbody>
-                  <tr>
-                    <td class="left-team">
-                      <img src="../assets/img/match/tf-3.jpg" alt="">
-                      <h6>Australia</h6>
-                    </td>
-                    <td class="mt-content">
-                      <div class="mc-op">Ucraina vs England</div>
-                      <h4>VS</h4>
-                      <div class="mc-op">15 September 2019</div>
-                    </td>
-                    <td class="right-team">
-                      <img src="../assets/img/match/tf-4.jpg" alt="">
-                      <h6>Iraq</h6>
+                    <td class="right-team" *ngFor="let i of a.Equ_equipes_equipe">
+                      <img src="http://localhost:5000/api/download/{{i.logoequipe}}" alt="">
+                      <h6>{{i.nomequipe}}</h6>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div class="mc-table">
-              <table>
-                <tbody>
-                  <tr>
-                    <td class="left-team">
-                      <img src="../assets/img/match/tf-5.jpg" alt="">
-                      <h6>Ucraina</h6>
-                    </td>
-                    <td class="mt-content">
-                      <div class="mc-op">Ucraina vs England</div>
-                      <h4>VS</h4>
-                      <div class="mc-op">15 September 2019</div>
-                    </td>
-                    <td class="right-team">
-                      <img src="../assets/img/match/tf-6.jpg" alt="">
-                      <h6>Jordan</h6>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-5">
-          <div class="ms-content">
-            <h4>Recent Results</h4>
-            <div class="mc-table">
-              <table>
-                <tbody>
-                  <tr>
-                    <td class="left-team">
-                      <img src="../assets/img/match/tf-1.jpg" alt="">
-                      <h6>Darussalam</h6>
-                    </td>
-                    <td class="mt-content">
-                      <div class="mc-op">Ucraina vs England</div>
-                      <h4>1 : 2</h4>
-                      <div class="mc-op">15 September 2019</div>
-                    </td>
-                    <td class="right-team">
-                      <img src="../assets/img/match/tf-2.jpg" alt="">
-                      <h6>Ucraina</h6>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="mc-table">
-              <table>
-                <tbody>
-                  <tr>
-                    <td class="left-team">
-                      <img src="../assets/img/match/tf-3.jpg" alt="">
-                      <h6>Japan</h6>
-                    </td>
-                    <td class="mt-content">
-                      <div class="mc-op">Ucraina vs England</div>
-                      <h4>1 : 2</h4>
-                      <div class="mc-op">15 September 2019</div>
-                    </td>
-                    <td class="right-team">
-                      <img src="../assets/img/match/tf-4.jpg" alt="">
-                      <h6>Philippines</h6>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="mc-table">
-              <table>
-                <tbody>
-                  <tr>
-                    <td class="left-team">
-                      <img src="../assets/img/match/tf-5.jpg" alt="">
-                      <h6>Kyrgyz</h6>
-                    </td>
-                    <td class="mt-content">
-                      <div class="mc-op">Ucraina vs England</div>
-                      <h4>1 : 2</h4>
-                      <div class="mc-op">15 September 2019</div>
-                    </td>
-                    <td class="right-team">
-                      <img src="../assets/img/match/tf-6.jpg" alt="">
-                      <h6 class="mi-right">Pakistan</h6>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+            <pagination-controls responsive="true"  previousLabel="<"
+            nextLabel=">" (pageChange)="tabSize($event)"></pagination-controls>
           </div>
         </div>
       </div>

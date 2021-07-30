@@ -55,8 +55,8 @@
                       totalItems: count
                     };">
                     <td *ngFor="let e of a.Equipes" class="left-team">
-                      <img
-                          src="../../assets/img/schedule/xflag-7.jpg.pagespeed.ic.g421X72lB8.jpg"
+                      <img style="width: 50px; height: 50px;"
+                          src="http://localhost:5000/api/download/{{e.logoequipe}}"
                           alt=""
                         />
                         <h4>{{e.nomequipe}}</h4>
@@ -66,8 +66,8 @@
                         <div class="so-text">{{a.dateHeureMatch}}</div>
                       </td>
                       <td *ngFor="let i of a.Equ_equipes_equipe" class="right-team">
-                        <img
-                          src="../../assets/img/schedule/xflag-8.jpg.pagespeed.ic.kV0kJu-eqL.jpg"
+                        <img  style="width: 50px; height: 50px;"
+                          src="http://localhost:5000/api/download/{{i.logoequipe}}"
                           alt=""
                         />
                         <h4>{{i.nomequipe}}</h4>

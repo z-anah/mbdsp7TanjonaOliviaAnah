@@ -11,8 +11,9 @@ export class CompetitionService {
   competitions: Competition[];
 
   constructor(private http: HttpClient) {}
-
-  uri = "https://tpt-node.herokuapp.com/api/listeCompetition";
+ 
+  //uri = "https://tpt-node.herokuapp.com/api/listeCompetition";
+  uri = " http://localhost:5000/api/listeCompetition";
 
   getCompetitions(): Observable<Competition[]> {
     //return of(this.Competition);

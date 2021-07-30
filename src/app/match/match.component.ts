@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MatchService} from "../Function/Match.service";
 import { Matchs } from '../Function/Matchs.model';
+import {CompetitionService} from "../Function/Competition.service";
+import { Competition } from '../Function/Competition.model';
 import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-match',
@@ -10,6 +12,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MatchComponent implements OnInit {
 
   matchs : Matchs[];
+  competition : Competition[];
   errorMessage:string;
   page: number=1;
   limit: number = 4;
@@ -24,6 +27,7 @@ export class MatchComponent implements OnInit {
 
    constructor(private matchService:MatchService,
     private route:ActivatedRoute,
+    private competitionService:CompetitionService,
     private router:Router) {}
 
   ngOnInit() {
@@ -32,7 +36,11 @@ export class MatchComponent implements OnInit {
           this.page = +queryParams.page || 1;
           this.limit = +queryParams.limit || 4;
       });
+      const id: Number = this.route.snapshot.params.idCompetition;
+    
       this.getMatch()
+     
+      this.getCompetition()
   }
   getMatch() {
     this.matchService.getMatchs(this.page, this.limit).subscribe(
@@ -55,4 +63,12 @@ export class MatchComponent implements OnInit {
     console.log(this.page);
     this.getMatch();
   } 
+  getCompetition(){
+    this.competitionService.getCompetitions() .subscribe(
+      donner => {
+        console.log(donner["data"]);
+        this.competition = donner["data"];
+        console.log(this.competition);
+      }, error => this.errorMessage = <any> error);
+  }
 }

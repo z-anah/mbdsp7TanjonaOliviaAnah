@@ -17,6 +17,7 @@ import { AcceuilComponent } from './acceuil/acceuil.component';
 import { DetailequipeComponent } from './detailequipe/detailequipe.component';
 import { DetaileMatchComponent } from './detaile-match/detaile-match.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatchCompetitionComponent } from './match-competition/match-competition.component';
 
 const routes:Routes = [
    
@@ -37,12 +38,16 @@ const routes:Routes = [
     component:ClubComponent
   },
   {
-    path:"detaillequipe",
+    path:"detaillequipe/:idequipe",
     component:DetailequipeComponent
   },
   {
     path:"detailMatch/:id",
     component:DetaileMatchComponent
+  },
+  {
+    path:"matchC/:idCompetition",
+    component:MatchCompetitionComponent
   },
 ]
 @NgModule({
@@ -56,7 +61,9 @@ const routes:Routes = [
     ClubComponent,
     AcceuilComponent,
     DetailequipeComponent,
-    DetaileMatchComponent
+    DetaileMatchComponent,
+    MatchCompetitionComponent,
+
   ],
   imports: [
     BrowserModule,

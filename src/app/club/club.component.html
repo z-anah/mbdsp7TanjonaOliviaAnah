@@ -65,10 +65,10 @@
                     itemsPerPage: limit,
                     currentPage: page,
                     totalItems: count
-                  };">
+                  };" routerLink="/detaillequipe/{{a._id}}">
                     <td>{{a.nomequipe}}</td>
-                    <td class="team-name">
-                      <img src="../../assets/img/flag/flag-1.jpg" alt="" />
+                    <td >
+                      <img style="width: 70px; height: 70px;" src="http://localhost:5000/api/download/{{a.logoequipe}}" alt="" />
                       <span></span>
                     </td>
                     <td>22</td>
@@ -76,6 +76,7 @@
                   </tr>
                 </tbody>
               </table>
+              <br>
               <pagination-controls responsive="true"  previousLabel="<"
               nextLabel=">" (pageChange)="tabSize($event)"></pagination-controls>
             </div>

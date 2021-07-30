@@ -20,6 +20,7 @@ export class DetaileMatchComponent implements OnInit {
 
   ngOnInit() {
     const id: number = this.route.snapshot.params.id;
+    console.log(id)
     this.matchService.getMatchsByID(id).subscribe(
       donner => {
         this.matchs = donner.docs;

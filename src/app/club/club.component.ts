@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {EquipeService} from "../Function/Equipe.service";
 import { Equipe } from '../Function/Equipe.model';
+
 @Component({
   selector: 'app-club',
   templateUrl: './club.component.html',
@@ -31,7 +32,7 @@ export class ClubComponent implements OnInit {
     this.route.queryParams.subscribe(queryParams => {
       // console.log("Dans le subscribe des queryParams")
           this.page = +queryParams.page || 1;
-          this.limit = +queryParams.limit || 2;
+          this.limit = +queryParams.limit || 4;
       });
     this.getEquipe()
   }
@@ -51,6 +52,7 @@ export class ClubComponent implements OnInit {
         this.nextPage = donner.nextPage;
       }, error => this.errorMessage = <any> error);
   }
+
   tabSize(event){
     
     this.page = event;
