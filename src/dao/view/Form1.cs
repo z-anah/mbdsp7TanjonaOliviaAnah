@@ -29,8 +29,8 @@ namespace pari
         }
         private void temp()
         {
-            this.login1.TextBox.TextBox.Text = "zulmianah@gmail.com";
-            this.login1.MotPasse.TextBox.Text = "fahmi230995";
+            this.login1.TextBox.TextBox.Text = "jean.arnold@gmail.com";
+            this.login1.MotPasse.TextBox.Text = "Jean123#";
         }
         private void init()
         {

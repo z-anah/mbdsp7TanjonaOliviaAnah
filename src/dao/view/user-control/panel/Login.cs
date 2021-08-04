@@ -33,11 +33,12 @@ namespace pari.src.dao.view
 
         public bool isValide()
         {
+            textBoxEmail.LabelError.Text = "";
+            textBoxPassword.LabelError.Text = "";
+            String email = textBoxEmail.TextBox.Text;
+            String mdp = textBoxPassword.TextBox.Text;
             try
             {
-                textBoxEmail.LabelError.Text = "";
-                textBoxPassword.LabelError.Text = "";
-                String email = textBoxEmail.TextBox.Text;
                 MyRegex.isEmail(email);
             }
             catch (Exception e)
@@ -47,8 +48,19 @@ namespace pari.src.dao.view
             }
             try
             {
-                String mdp = textBoxPassword.TextBox.Text;
                 MyRegex.isEmpty(mdp);
+            }
+            catch (Exception e)
+            {
+                textBoxPassword.LabelError.Text = e.Message;
+                throw e;
+            }
+            try
+            {
+                if (email.CompareTo("jean.arnold@gmail.com") != 0 || mdp.CompareTo("Jean123#") != 0)
+                {
+                    throw new Exception("Authentification non valide");
+                }
                 return true;
             }
             catch (Exception e)
