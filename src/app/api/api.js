@@ -3,10 +3,11 @@ import axios from "axios";
 
 const DOMAIN_ORACLE = "https://tpt-spring-boot.herokuapp.com";
 // const DOMAIN_NODE = "https://tpt-node.herokuapp.com";
-const DOMAIN_NODE = "http://192.168.0.130:5000";
+const DOMAIN_NODE = "http://192.168.88.180:5000";
 const HEADER = null;
 
 export {
+  createPari,
   getConditionsGenerales,
   signUp,
   listRoles,
@@ -17,6 +18,23 @@ export {
   matchsForPari,
   listCompetitions,
   notification,
+};
+
+const createPari = async (form) => {
+  const { tokens, body, title, data } = form;
+  var link = `${DOMAIN_NODE}/api/notification`,
+    d = {
+      tokens,
+      body,
+      title,
+      data,
+    },
+    ans = null;
+  await axios.post(link, d, HEADER).then((response) => {
+    // ans = response.data.data;
+    console.log(response);
+  });
+  return ans;
 };
 
 const notification = async (form) => {
