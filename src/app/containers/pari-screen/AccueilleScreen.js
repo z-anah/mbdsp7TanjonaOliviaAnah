@@ -23,6 +23,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import QRCode from "react-native-qrcode-svg";
 import I18n from "i18n-js";
+import { setUser } from "../../redux/action";
 import { createPari, DOMAIN_NODE, matchsForPari } from "../../api/api";
 
 class AccueilleScreen extends React.Component {
@@ -236,7 +237,8 @@ class AccueilleScreen extends React.Component {
       monpari,
       montantMise: this.state.pay,
     };
-    await createPari(form);
+    let pari = await createPari(form);
+    this.props.setUser(pari.utilisateur);
     this.setState({ isLoading: false });
   };
 
@@ -296,7 +298,13 @@ const overlayLabels = {
   },
 };
 
-const mdtp = (dispatch) => bindActionCreators({}, dispatch);
+const mdtp = (dispatch) =>
+  bindActionCreators(
+    {
+      setUser,
+    },
+    dispatch
+  );
 
 const mtp = (state) => {
   const { counter } = state;

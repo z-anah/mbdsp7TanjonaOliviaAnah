@@ -35,18 +35,6 @@ const createPari = async (form) => {
   //     "monpari": 1,
   //     "montantMise": 340,
   //   },
-  //   "utilisateur": Object {
-  //     "__v": 0,
-  //     "_id": "60f2e6f03b435a292052c589",
-  //     "dateNaissanceUtilisateur": "1999-12-02T21:00:00.000Z",
-  //     "emailUtilisateur": "teste@gmail.com",
-  //     "idRole": 3,
-  //     "idUtilisateur": 13,
-  //     "motdepasseUtilisateur": "$2a$10$PFnsTBhEcND3e1AyoAhemOJHeTaba4.UEaRWbdPPAGdWXfmVn9606",
-  //     "nomCompletUtilisateur": "testes",
-  //     "profilUtilisateur": "profil_1626838394780.png",
-  //     "soldeUtilisateur": 5380,
-  //   },
   // }
   return ans;
 };
