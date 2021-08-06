@@ -21,20 +21,28 @@ export {
 };
 
 const createPari = async (form) => {
-  const { tokens, body, title, data } = form;
-  var link = `${DOMAIN_NODE}/api/notification`,
-    d = {
-      tokens,
-      body,
-      title,
-      data,
-    },
-    ans = null;
-  await axios.post(link, d, HEADER).then((response) => {
-    // ans = response.data.data;
-    console.log(response);
-  });
-  return ans;
+  const {
+    idUtilisateur,
+    idMatch,
+    idTypePari,
+    estCorrecte,
+    monpari,
+    montantMise,
+  } = form;
+  console.log(form);
+  // var link = `${DOMAIN_NODE}/api/notification`,
+  //   d = {
+  //     tokens,
+  //     body,
+  //     title,
+  //     data,
+  //   },
+  //   ans = null;
+  // await axios.post(link, d, HEADER).then((response) => {
+  //   // ans = response.data.data;
+  //   console.log(response);
+  // });
+  // return ans;
 };
 
 const notification = async (form) => {

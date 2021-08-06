@@ -23,7 +23,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import QRCode from "react-native-qrcode-svg";
 import I18n from "i18n-js";
-import { DOMAIN_NODE, matchsForPari } from "../../api/api";
+import { createPari, DOMAIN_NODE, matchsForPari } from "../../api/api";
 
 class AccueilleScreen extends React.Component {
   constructor(props) {
@@ -126,7 +126,7 @@ class AccueilleScreen extends React.Component {
                   alert(`card index ${cardIndex}`);
                 }}
                 onSwipedAll={() => {
-                  alert("all swiped");
+                  alert("Plus de pari, refaire?");
                 }}
                 cardIndex={0}
                 stackSize={3}
@@ -219,15 +219,38 @@ class AccueilleScreen extends React.Component {
   }
 
   onSwipedLeft = async (cardIndex) => {
-    alert(`1X ${this.state.data[cardIndex].id}`);
+    await this.createPariView({
+      idMatch: this.state.data[cardIndex]._id,
+      monpari: 1,
+    });
+  };
+
+  createPariView = async (form1) => {
+    const { _id } = this.props.counter.dataUser;
+    let { monpari, idMatch } = form1;
+    let form = {
+      idMatch,
+      idUtilisateur: _id,
+      idTypePari: "60df67d6e4541c2b24ead8db",
+      monpari,
+      montantMise: "",
+    };
+    console.log(form);
+    // createPari(form);
   };
 
   onSwipedRight = async (cardIndex) => {
-    alert(`2X ${this.state.data[cardIndex].id}`);
+    await this.createPariView({
+      idMatch: this.state.data[cardIndex]._id,
+      monpari: -1,
+    });
   };
 
   onSwipedTop = async (cardIndex) => {
-    alert(`X ${this.state.data[cardIndex].id}`);
+    await this.createPariView({
+      idMatch: this.state.data[cardIndex]._id,
+      monpari: 0,
+    });
   };
 
   afficherQrCode = (_id) => {
