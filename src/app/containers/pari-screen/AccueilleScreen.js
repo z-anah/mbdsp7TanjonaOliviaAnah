@@ -226,17 +226,18 @@ class AccueilleScreen extends React.Component {
   };
 
   createPariView = async (form1) => {
-    const { _id } = this.props.counter.dataUser;
+    this.setState({ isLoading: true });
+    const { idUtilisateur } = this.props.counter.dataUser;
     let { monpari, idMatch } = form1;
     let form = {
       idMatch,
-      idUtilisateur: _id,
+      idUtilisateur,
       idTypePari: "60df67d6e4541c2b24ead8db",
       monpari,
-      montantMise: "",
+      montantMise: this.state.pay,
     };
-    console.log(form);
-    // createPari(form);
+    await createPari(form);
+    this.setState({ isLoading: false });
   };
 
   onSwipedRight = async (cardIndex) => {

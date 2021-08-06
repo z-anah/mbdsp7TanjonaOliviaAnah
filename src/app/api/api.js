@@ -21,28 +21,34 @@ export {
 };
 
 const createPari = async (form) => {
-  const {
-    idUtilisateur,
-    idMatch,
-    idTypePari,
-    estCorrecte,
-    monpari,
-    montantMise,
-  } = form;
-  console.log(form);
-  // var link = `${DOMAIN_NODE}/api/notification`,
-  //   d = {
-  //     tokens,
-  //     body,
-  //     title,
-  //     data,
+  var link = `${DOMAIN_NODE}/api/pari/create`,
+    ans = null;
+  console.log("response");
+  await axios.post(link, form, HEADER).then((response) => {
+    ans = response.data.data;
+  });
+  // Object {
+  //   "pari": Object {
+  //     "idMatch": "60e963b8296c172484906bbb",
+  //     "idTypePari": "60df67d6e4541c2b24ead8db",
+  //     "idUtilisateur": 13,
+  //     "monpari": 1,
+  //     "montantMise": 340,
   //   },
-  //   ans = null;
-  // await axios.post(link, d, HEADER).then((response) => {
-  //   // ans = response.data.data;
-  //   console.log(response);
-  // });
-  // return ans;
+  //   "utilisateur": Object {
+  //     "__v": 0,
+  //     "_id": "60f2e6f03b435a292052c589",
+  //     "dateNaissanceUtilisateur": "1999-12-02T21:00:00.000Z",
+  //     "emailUtilisateur": "teste@gmail.com",
+  //     "idRole": 3,
+  //     "idUtilisateur": 13,
+  //     "motdepasseUtilisateur": "$2a$10$PFnsTBhEcND3e1AyoAhemOJHeTaba4.UEaRWbdPPAGdWXfmVn9606",
+  //     "nomCompletUtilisateur": "testes",
+  //     "profilUtilisateur": "profil_1626838394780.png",
+  //     "soldeUtilisateur": 5380,
+  //   },
+  // }
+  return ans;
 };
 
 const notification = async (form) => {
