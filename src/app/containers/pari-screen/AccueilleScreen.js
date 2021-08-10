@@ -42,6 +42,8 @@ class AccueilleScreen extends React.Component {
       visible: false,
       isVisible: false,
       link: "",
+      error: "",
+      isSwipable: true,
     };
   }
   render() {
@@ -56,7 +58,7 @@ class AccueilleScreen extends React.Component {
     } else {
       const { nomCompletUtilisateur, soldeUtilisateur } =
         this.props.counter.dataUser;
-      const { isVisible, link } = this.state;
+      const { isVisible, link, isSwipable } = this.state;
       return (
         <ApplicationProvider {...eva} theme={eva.light}>
           <SafeAreaView style={[ContainerStyle.AndroidSafeArea]}>
@@ -68,6 +70,8 @@ class AccueilleScreen extends React.Component {
             {/* card */}
             <View style={styles.contentUnderTopNav}>
               <Swiper
+                horizontalSwipe={isSwipable}
+                verticalSwipe={isSwipable}
                 cards={this.state.data}
                 renderCard={(card) => {
                   return (
@@ -136,6 +140,7 @@ class AccueilleScreen extends React.Component {
               />
               <View style={styles.cardSlider}>
                 <Text style={styles.sliderPay}>{this.state.pay} Jetons</Text>
+                <Text style={{ color: "red" }}>{this.state.error}</Text>
                 <Slider
                   style={{ width: 200, height: 40 }}
                   minimumValue={100}
@@ -210,7 +215,15 @@ class AccueilleScreen extends React.Component {
         jeton: data.jeton,
         pay: data.pay,
       });
+      const { soldeUtilisateur } = this.props.counter.dataUser;
+      if (this.state.pay > soldeUtilisateur) {
+        this.setState({
+          isSwipable: false,
+        });
+        throw new Error("Montant insuffisant");
+      }
     } catch (error) {
+      this.setState({ error: error.message });
       console.log(error);
     } finally {
       this.setState({
@@ -227,19 +240,23 @@ class AccueilleScreen extends React.Component {
   };
 
   createPariView = async (form1) => {
-    this.setState({ isLoading: true });
-    const { idUtilisateur } = this.props.counter.dataUser;
-    let { monpari, idMatch } = form1;
-    let form = {
-      idMatch,
-      idUtilisateur,
-      idTypePari: "60df67d6e4541c2b24ead8db",
-      monpari,
-      montantMise: this.state.pay,
-    };
-    let pari = await createPari(form);
-    this.props.setUser(pari.utilisateur);
-    this.setState({ isLoading: false });
+    try {
+      this.setState({ isLoading: true });
+      const { idUtilisateur } = this.props.counter.dataUser;
+      let { monpari, idMatch } = form1;
+      let form = {
+        idMatch,
+        idUtilisateur,
+        idTypePari: "60df67d6e4541c2b24ead8db",
+        monpari,
+        montantMise: this.state.pay,
+      };
+      let pari = await createPari(form);
+      this.props.setUser(pari.utilisateur);
+      this.setState({ isLoading: false });
+    } catch (error) {
+      this.setState({ error: error.message });
+    }
   };
 
   onSwipedRight = async (cardIndex) => {
