@@ -19,4 +19,5 @@ export class EquipeService {
       this.uri + "?page=" + page + "&limit=" + limit
     );
   }
+
 }

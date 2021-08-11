@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {JoueurService} from "../Function/Joueur.service";
+import {EquipeService} from "../Function/Equipe.service";
 import { Joueur } from '../Function/Joueur.model';
 import { Equipe } from '../Function/Equipe.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,10 +13,15 @@ import {Formation} from "../Function/Formation.model";
 export class DetailequipeComponent implements OnInit {
 
   joueur : Joueur[];
-  equipe: Equipe[];
+  equipe: Joueur[];
+  logo : string;
+  nom : string;
+  coach : string;
+  equipes: Equipe[];
   formation: Formation[];
   errorMessage:string;
   constructor(private joueurService:JoueurService,
+  private equipeService:EquipeService,
   private route:ActivatedRoute,
   private router:Router) {}
 
@@ -27,12 +33,21 @@ export class DetailequipeComponent implements OnInit {
   getJoueurByEquipe(id: Number){
     this.joueurService.getJoueurByEquipe(id).subscribe(
       donner => {
-       
         this.joueur = donner.docs;
         this.equipe = donner.docs[0]["Equipes"][0];
-        this.formation = donner.docs[0]["Equipes"][0];
-        console.log(this.formation)
+        this.logo = this.equipe["logoequipe"];
+        this.nom = this.equipe["nomequipe"];
+        this.coach = this.equipe["nomcoachequipe"];
+        console.log(this.logo)
       }, error => this.errorMessage = <any> error
     )
   }
+  // getEquipe(id: Number){
+  //   this.equipeService.getEquipeByID(id).subscribe(
+  //     donner => {
+  //       this.equipes = donner.docs;
+       
+  //     }
+  //   )
+  // }
 }
