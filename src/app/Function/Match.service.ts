@@ -12,7 +12,7 @@ export class MatchService {
 
   constructor(private http: HttpClient) {}
 
-  uri = "http://localhost:5000/api";
+  uri = "https://tpt-node.herokuapp.com/api";
 
   getMatchs(page: number, limit: number): Observable<any> {
     return this.http.get<Matchs[]>(

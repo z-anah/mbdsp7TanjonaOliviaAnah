@@ -13,7 +13,7 @@ import { Joueur } from './Joueur.model';
 
     constructor(private http:HttpClient) { }
 
-    uri = "http://localhost:5000/api/listeJoueurByEquipe";
+    uri = "https://tpt-node.herokuapp.com/api/listeJoueurByEquipe";
 
     getJoueurByEquipe(id:Number):Observable<any> {
         return this.http.get<Joueur[]>(this.uri+"/"+id);

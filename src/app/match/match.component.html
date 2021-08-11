@@ -2,20 +2,6 @@
 <html lang="zxx">
 <!-- Mirrored from preview.colorlib.com/theme/specer/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 11 Jun 2021 12:37:22 GMT -->
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="description" content="Specer Template" />
-  <meta name="keywords" content="Specer, unica, creative, html" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>M2 | TPT</title>
-
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet"
-    href="/../assets/css/bootstrap.min.css+font-awesome.min.css+owl.carousel.min.css+magnific-popup.css+slicknav.min.css+style.css.pagespeed.cc.w0Ubuvfryu.css"
-    type="text/css" />
-</head>
 
 <body>
   <app-menus></app-menus>
@@ -70,7 +56,7 @@
                     };" routerLink="/detailMatch/{{a._id}}">
 
                     <td *ngFor="let e of a.Equipes" class="left-team">
-                      <img style="width: 50px; height: 50px;" src="http://localhost:5000/api/download/{{e.logoequipe}}"
+                      <img style="width: 50px; height: 50px;" src="https://tpt-node.herokuapp.com/api/download/{{e.logoequipe}}"
                         alt="" />
 
                       <h4>{{e.nomequipe}}</h4>
@@ -80,7 +66,7 @@
                       <div class="so-text">{{a.dateHeureMatch | date:'EEEE, MMMM d, y, h:mm:ss'}}</div>
                     </td>
                     <td *ngFor="let i of a.Equ_equipes_equipe" class="right-team">
-                      <img style="width: 50px; height: 50px;" src="http://localhost:5000/api/download/{{i.logoequipe}}"
+                      <img style="width: 50px; height: 50px;" src="https://tpt-node.herokuapp.com/api/download/{{i.logoequipe}}"
                         alt="" />
                       <h4>{{i.nomequipe}}</h4>
                     </td>
