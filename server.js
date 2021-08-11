@@ -63,7 +63,7 @@ app
 app.route(prefix + "/listeJoueurByEquipe/:idequipe").get(joueur.getJoeurByEquipe);
 app.route(prefix + "/joueurById/:id").get(joueur.getJoeurById);
 app.route(prefix + "/listeEquipe").get(equipe.getListEquipe);
-app.route(prefix + "/listeEquipeby/:idequipe").get(equipe.getEquipeById);
+app.route(prefix + "/listeEquipeby/:idequipe2").get(equipe.getEquipeById);
 app.route(prefix + "/listeMatch").get(match.getMatch);
 app.route(prefix + "/topMatch").get(match.TopMatch);
 app.route(prefix + "/listeMatchById/:id").get(match.getMatchById);

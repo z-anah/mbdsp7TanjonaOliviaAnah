@@ -28,9 +28,9 @@ function getListEquipe(req, res) {
 }
 
 function getEquipeById(req, res) {
-  let id = parseInt(req.params.idequipe);
+  let id = parseInt(req.params.idequipe2);
   let aggregate = Equipe.aggregate([
-    { $match: { _id: { $in: [mongoose.Types.ObjectId(req.params.idequipe)] } } },
+    { $match: { _id: { $in: [mongoose.Types.ObjectId(req.params.idequipe2)] } } },
     {
       $lookup: {
         from: "formation",
