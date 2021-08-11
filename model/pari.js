@@ -14,6 +14,11 @@ let pari = Schema({
   // estCorrecte: [-1, 0, 1],
   estCorrecte: Number,
   montantMise: Decimal128,
+  // -1   Equ_idEquipe
+  // 0    match nul
+  // 1    idEquipe
+  // monpari: [-1, 0, 1],
+  monpari: Number,
 });
 
 pari.plugin(aggregatePaginate);
