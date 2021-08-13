@@ -138,6 +138,7 @@ const createMatch = async (m) => {
     idEquipe: ObjectId(idEquipe),
     Equ_idEquipe: ObjectId(Equ_idEquipe),
     idCompetition: ObjectId(idCompetition),
+    // en attente
     idProgressionType: ObjectId("60df6680f56ae1297ca71c2f"),
     dateHeureMatch,
     finDateHeureMatch,
@@ -213,6 +214,7 @@ const match = async (_id) => {
 
 const playMatch = async (_id, idProgressionType) => {
   let query = { _id };
+  // en cours
   let update = { idProgressionType: ObjectId(idProgressionType) };
   await Matchs.findByIdAndUpdate(query, update);
   return await Matchs.findById(query);

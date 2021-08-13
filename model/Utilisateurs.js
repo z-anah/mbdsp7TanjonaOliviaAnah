@@ -5,7 +5,6 @@ var aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 let Schema = mongoose.Schema;
 
 let UtilisateurSchema = Schema({
-  _id: { type: ObjectId, unique: true, required: true, default: ObjectId() },
   idUtilisateur: { type: Number, unique: true, required: true },
   nomCompletUtilisateur: { type: String, unique: true, required: true },
   emailUtilisateur: { type: String, unique: true, required: true },
