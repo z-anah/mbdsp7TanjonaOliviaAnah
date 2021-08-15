@@ -41,7 +41,7 @@ class IdentificationScreen extends React.Component {
       message: "",
       // emailUtilisateur: "admin@admin.com",
       // motdepasseUtilisateur: "admin",
-      emailUtilisateur: "teste@gmail.com",
+      emailUtilisateur: "zulmianah@gmail.com",
       motdepasseUtilisateur: "testestes",
       isLoading: false,
     };
@@ -84,6 +84,7 @@ class IdentificationScreen extends React.Component {
                   placeholder={i18n.t("TRL0010")}
                   value={motdepasseUtilisateur}
                   onChange={this.motdepasseUtilisateur}
+                  secureTextEntry={true}
                 />
                 <Button
                   style={styles.loginForm}

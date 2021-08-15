@@ -2,8 +2,11 @@ import mime from "mime";
 import axios from "axios";
 
 const DOMAIN_ORACLE = "https://tpt-spring-boot.herokuapp.com";
-// const DOMAIN_NODE = "https://tpt-node.herokuapp.com";
-const DOMAIN_NODE = "http://192.168.88.180:5000";
+const DOMAIN_NODE = "https://tpt-node.herokuapp.com";
+// const DOMAIN_NODE =
+  //
+  // "http://192.168.88.180:5000";
+// "http://192.168.0.151:5000";
 const HEADER = null;
 
 export {

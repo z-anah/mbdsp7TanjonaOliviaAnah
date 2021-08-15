@@ -128,10 +128,10 @@ class AccueilleScreen extends React.Component {
                 }}
                 onSwipedBottom={() => {}}
                 onSwiped={(cardIndex) => {
-                  alert(`card index ${cardIndex}`);
+                  // alert(`card index ${cardIndex}`);
                 }}
                 onSwipedAll={() => {
-                  alert("Plus de pari, refaire?");
+                  // alert("Plus de pari, refaire?");
                 }}
                 cardIndex={0}
                 stackSize={3}
@@ -281,7 +281,7 @@ class AccueilleScreen extends React.Component {
   };
 
   afficherDetail = (linkCompetition) => {
-    alert(`afficher qr code de la competition  ${linkCompetition}`);
+    // alert(`afficher qr code de la competition  ${linkCompetition}`);
   };
 
   renderToggleButton = () => (
